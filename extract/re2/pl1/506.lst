@@ -1,0 +1,214 @@
+.version 2
+.init
+.proc init_00
+0D32:   3B0001310B00B8C086AA780AD00772A30000A7B2580304030000070000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 11, 0, -16200, -21882, 2680, 2000, -23694, 0, -19801, 856, 4, 3, 0, 0, 7, 0, 0, 0, UNLOCKED, 0
+0D52:   3B010131080058024E928E080807DFB7C0C731E1000404070008190100000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 8, 0, 600, -28082, 2190, 1800, -18465, -14400, -7887, 1024, 4, 7, 0, 8, 25, 1, 0, 0, UNLOCKED, 0
+0D72:   0100                                                                                    evt_end                 0
+
+.main
+.proc main_00
+0D7E:   2C0405518000B9E5B5C81A042E04FF0018030000                                                aot_set                 4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_UNDER, 128, 0, -6727, -14155, 1050, 1070, 255, 0, I_GOSUB, main_03, 0, 0
+0D92:   2D0000000000000000000A001000AAE710B44ACA000000000000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -6230, -19440, -13750, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+0DB8:   06004400                                                                                if                      0, off_0E00
+0DBC:   21001900                                                                                ck                      0, 25, 0
+0DC0:   4E0202310B00589CD6C50807080714000F0044000100                                            item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 11, 0, -25512, -14890, 1800, 1800, ITEM_HANDGUNAMMO, 15, 68, 1, 0
+0DD6:   2D01000000000B0000000A001000DC9F54AC5AC9000000000000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 11, 0, 10, 16, -24612, -21420, -13990, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+0DFC:   07001C00                                                                                else                    0, off_0E18
+
+off_0E00:
+0E00:   4E0202310B00589C48B80807100914000F004400FF01                                            item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 11, 0, -25512, -18360, 1800, 2320, ITEM_HANDGUNAMMO, 15, 68, 255, 1
+0E16:   00                                                                                      nop
+0E17:   00                                                                                      nop
+
+off_0E18:
+0E18:   06004000                                                                                if                      0, off_0E5C
+0E1C:   21221900                                                                                ck                      34, 25, 0
+0E20:   2D0200000000000000000A0010002FD7D8AA04AE0000000400FC000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -10449, -21800, -20988, 0, 1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0
+0E46:   2C0305310B0027D054A9D007D007FF0018040000                                                aot_set                 3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 11, 0, -12249, -22188, 2000, 2000, 255, 0, I_GOSUB, main_04, 0, 0
+0E5A:   08                                                                                      endif
+0E5B:   00                                                                                      nop
+
+off_0E5C:
+0E5C:   06001400                                                                                if                      0, off_0E74
+0E60:   23001B000705                                                                            cmp                     0, 27, CMP_EQ, 1287
+0E66:   22050001                                                                                set                     5, 0, 1
+0E6A:   2E0400                                                                                  work_set                WK_OBJECT, 0
+0E6D:   00                                                                                      nop
+0E6E:   340C28C9                                                                                member_set              12, 40, 201
+0E72:   08                                                                                      endif
+0E73:   00                                                                                      nop
+
+off_0E74:
+0E74:   1802                                                                                    gosub                   2
+0E76:   0100                                                                                    evt_end                 0
+
+.proc main_01
+0E78:   06000800                                                                                if                      0, off_0E84
+0E7C:   21010B01                                                                                ck                      1, 11, 1
+0E80:   1802                                                                                    gosub                   2
+0E82:   08                                                                                      endif
+0E83:   00                                                                                      nop
+
+off_0E84:
+0E84:   0100                                                                                    evt_end                 0
+
+.proc main_02
+0E86:   131A8E00                                                                                switch                  26, off_0F18
+0E8A:   14000E000000                                                                            case                    0, off_0E9E, 0
+0E90:   510100013D40                                                                            sce_bgm_control         1, 0, 1, 61, 64
+0E96:   510100021F40                                                                            sce_bgm_control         1, 0, 2, 31, 64
+0E9C:   1A00                                                                                    break                   0
+
+off_0E9E:
+0E9E:   14000E000100                                                                            case                    0, off_0EB2, 1
+0EA4:   510100014740                                                                            sce_bgm_control         1, 0, 1, 71, 64
+0EAA:   510100023D40                                                                            sce_bgm_control         1, 0, 2, 61, 64
+0EB0:   1A00                                                                                    break                   0
+
+off_0EB2:
+0EB2:   14000E000200                                                                            case                    0, off_0EC6, 2
+0EB8:   510100016540                                                                            sce_bgm_control         1, 0, 1, 101, 64
+0EBE:   510100025B40                                                                            sce_bgm_control         1, 0, 2, 91, 64
+0EC4:   1A00                                                                                    break                   0
+
+off_0EC6:
+0EC6:   14000E000300                                                                            case                    0, off_0EDA, 3
+0ECC:   510100016540                                                                            sce_bgm_control         1, 0, 1, 101, 64
+0ED2:   510100025B40                                                                            sce_bgm_control         1, 0, 2, 91, 64
+0ED8:   1A00                                                                                    break                   0
+
+off_0EDA:
+0EDA:   14000E000400                                                                            case                    0, off_0EEE, 4
+0EE0:   510100016540                                                                            sce_bgm_control         1, 0, 1, 101, 64
+0EE6:   510100026F40                                                                            sce_bgm_control         1, 0, 2, 111, 64
+0EEC:   1A00                                                                                    break                   0
+
+off_0EEE:
+0EEE:   14000E000500                                                                            case                    0, off_0F02, 5
+0EF4:   510100016540                                                                            sce_bgm_control         1, 0, 1, 101, 64
+0EFA:   510100025B40                                                                            sce_bgm_control         1, 0, 2, 91, 64
+0F00:   1A00                                                                                    break                   0
+
+off_0F02:
+0F02:   14000E000600                                                                            case                    0, off_0F16, 6
+0F08:   510100013340                                                                            sce_bgm_control         1, 0, 1, 51, 64
+0F0E:   510100020040                                                                            sce_bgm_control         1, 0, 2, 0, 64
+0F14:   1A00                                                                                    break                   0
+
+off_0F16:
+0F16:   1600                                                                                    eswitch                 0
+
+off_0F18:
+0F18:   0100                                                                                    evt_end                 0
+
+.proc main_03
+0F1A:   22020701                                                                                set                     2, 7, 1
+0F1E:   46040000000000000000                                                                    aot_reset               4, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+0F28:   2E0100                                                                                  work_set                WK_PLAYER, 0
+0F2B:   42                                                                                      plc_ret
+0F2C:   06001800                                                                                if                      0, off_0F48
+0F30:   21050000                                                                                ck                      5, 0, 0
+0F34:   22050001                                                                                set                     5, 0, 1
+0F38:   24043200                                                                                save                    4, 50
+0F3C:   24050300                                                                                save                    5, 3
+0F40:   34110800                                                                                member_set              17, 8, 0
+0F44:   07001600                                                                                else                    0, off_0F5A
+
+off_0F48:
+0F48:   22050000                                                                                set                     5, 0, 0
+0F4C:   2404CEFF                                                                                save                    4, -50
+0F50:   24050200                                                                                save                    5, 2
+0F54:   34110B00                                                                                member_set              17, 11, 0
+0F58:   00                                                                                      nop
+0F59:   00                                                                                      nop
+
+off_0F5A:
+0F5A:   2E0100                                                                                  work_set                WK_PLAYER, 0
+0F5D:   00                                                                                      nop
+0F5E:   3D1000                                                                                  member_copy             16, 0
+0F61:   00                                                                                      nop
+0F62:   260005100004                                                                            calc                    0, OP_OR, 16, 1024
+0F68:   350010                                                                                  member_set2             0, 16
+0F6B:   00                                                                                      nop
+0F6C:   8A0004000000                                                                            nop_8a                  0, 4, 0, 0, 0
+0F72:   8B960A000000                                                                            nop_8b                  150, 10, 0, 0, 0
+0F78:   8A0002002C00                                                                            nop_8a                  0, 2, 0, 44, 0
+0F7E:   8B506C000000                                                                            nop_8b                  80, 108, 0, 0, 0
+0F84:   36020B010400000000000000                                                                se_on                   2, 267, 4, 0, 0, 0
+0F90:   0D0024003600                                                                            for                     0, off_0FBA, 54
+0F96:   2E0100                                                                                  work_set                WK_PLAYER, 0
+0F99:   00                                                                                      nop
+0F9A:   3D100C                                                                                  member_copy             16, 12
+0F9D:   00                                                                                      nop
+0F9E:   27001004                                                                                calc2                   OP_ADD, 16, 4
+0FA2:   350C10                                                                                  member_set2             12, 16
+0FA5:   00                                                                                      nop
+0FA6:   2E0400                                                                                  work_set                WK_OBJECT, 0
+0FA9:   00                                                                                      nop
+0FAA:   3D100C                                                                                  member_copy             16, 12
+0FAD:   00                                                                                      nop
+0FAE:   27001004                                                                                calc2                   OP_ADD, 16, 4
+0FB2:   350C10                                                                                  member_set2             12, 16
+0FB5:   00                                                                                      nop
+0FB6:   02                                                                                      evt_next
+0FB7:   00                                                                                      nop
+0FB8:   0E00                                                                                    next                    0
+
+off_0FBA:
+0FBA:   1D050100                                                                                work_copy               5, 1, 0
+0FBE:   2900                                                                                    cut_chg                 0
+0FC0:   3C01                                                                                    cut_auto                1
+0FC2:   8A0004003600                                                                            nop_8a                  0, 4, 0, 54, 0
+0FC8:   8BC808003600                                                                            nop_8b                  200, 8, 0, 54, 0
+0FCE:   0D0024003600                                                                            for                     0, off_0FF8, 54
+0FD4:   2E0100                                                                                  work_set                WK_PLAYER, 0
+0FD7:   00                                                                                      nop
+0FD8:   3D100C                                                                                  member_copy             16, 12
+0FDB:   00                                                                                      nop
+0FDC:   27001004                                                                                calc2                   OP_ADD, 16, 4
+0FE0:   350C10                                                                                  member_set2             12, 16
+0FE3:   00                                                                                      nop
+0FE4:   2E0400                                                                                  work_set                WK_OBJECT, 0
+0FE7:   00                                                                                      nop
+0FE8:   3D100C                                                                                  member_copy             16, 12
+0FEB:   00                                                                                      nop
+0FEC:   27001004                                                                                calc2                   OP_ADD, 16, 4
+0FF0:   350C10                                                                                  member_set2             12, 16
+0FF3:   00                                                                                      nop
+0FF4:   02                                                                                      evt_next
+0FF5:   00                                                                                      nop
+0FF6:   0E00                                                                                    next                    0
+
+off_0FF8:
+0FF8:   2E0100                                                                                  work_set                WK_PLAYER, 0
+0FFB:   00                                                                                      nop
+0FFC:   3D1000                                                                                  member_copy             16, 0
+0FFF:   00                                                                                      nop
+1000:   26000610FFFB                                                                            calc                    0, OP_AND, 16, -1025
+1006:   350010                                                                                  member_set2             0, 16
+1009:   00                                                                                      nop
+100A:   46040551FF0018030000                                                                    aot_reset               4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_UNDER, 255, 0, I_GOSUB, main_03, 0, 0
+1014:   22020700                                                                                set                     2, 7, 0
+1018:   0100                                                                                    evt_end                 0
+
+.proc main_04
+101A:   2B000100FFFF                                                                            message_on              0, 1, 0, 255, 255
+1020:   02                                                                                      evt_next
+1021:   00                                                                                      nop
+1022:   06002E00                                                                                if                      0, off_1054
+1026:   210B1F00                                                                                ck                      11, 31, 0
+102A:   2E0402                                                                                  work_set                WK_OBJECT, 2
+102D:   00                                                                                      nop
+102E:   340C0083                                                                                member_set              12, 0, 131
+1032:   22210901                                                                                set                     33, 9, 1
+1036:   22210A01                                                                                set                     33, 10, 1
+103A:   22210B01                                                                                set                     33, 11, 1
+103E:   22221901                                                                                set                     34, 25, 1
+1042:   46030000000000000000                                                                    aot_reset               3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+104C:   2B000200FFFF                                                                            message_on              0, 2, 0, 255, 255
+1052:   08                                                                                      endif
+1053:   00                                                                                      nop
+
+off_1054:
+1054:   0100                                                                                    evt_end                 0
+1056:   2000                                                                                    db                      0x20, 0x00

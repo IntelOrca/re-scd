@@ -1,0 +1,136 @@
+.version 2
+.init
+.proc init_00
+    door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9460, -21300, 1390, 2700, -19955, 0, 9004, 400, 0, 10, 15, 0, 0, 1, 0, 0, UNLOCKED, 0
+    door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -11460, -27700, 1800, 1400, -11209, 0, -9716, 1360, 0, 13, 0, 0, 5, 129, 0, 0, UNLOCKED, 0
+    door_aot_se             2, SCE_DOOR, SAT_AUTO, 0, 0, 0, 0, 1, 1, 1528, 0, -15137, 1472, 2, 8, 0, 0, 16, 0, 0, 0, UNLOCKED, 0
+    door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27160, -18500, 3800, 930, 24730, 0, -15507, 5344, 1, 27, 15, 0, 16, 1, 0, 0, UNLOCKED, 0
+    door_aot_se             4, SCE_DOOR, SAT_AUTO, 0, 0, 0, 0, 1, 1, -25191, 0, -18885, 1008, 1, 27, 6, 0, 16, 0, 0, 0, UNLOCKED, 0
+    evt_end                 0
+
+.main
+.proc main_00
+    gosub                   2
+    item_aot_set            5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21170, -23600, 1160, 1700, ITEM_HANDGUNAMMO, 15, 2, 255, 0
+    sca_id_set              12, 0, 0
+    work_set                WK_OBJECT, 0
+    nop
+    pos_set                 0, -21500, -180, -20500
+    member_set              15, 64, 1
+    if                      0, off_2560
+    ck                      4, 62, 0
+    set                     20, 1, 0
+    else                    0, off_2592
+
+off_2560:
+    work_set                WK_OBJECT, 2
+    nop
+    member_set              13, 124, 167
+    work_set                WK_OBJECT, 3
+    nop
+    member_set              12, 53, 244
+    work_set                WK_OBJECT, 4
+    nop
+    member_set              12, 121, 245
+    work_set                WK_OBJECT, 5
+    nop
+    member_set              12, 180, 246
+    work_set                WK_OBJECT, 1
+    nop
+    member_set              12, 216, 170
+    sca_id_set              13, 0, 0
+    set                     16, 4, 0
+    nop
+    nop
+
+off_2592:
+    if                      0, off_25B2
+    cmp                     0, 26, CMP_EQ, 15
+    if                      0, off_25AC
+    cmp                     0, 27, CMP_EQ, 539
+    gosub                   3
+    else                    0, off_25B0
+
+off_25AC:
+    gosub                   4
+    nop
+    nop
+
+off_25B0:
+    endif
+    nop
+
+off_25B2:
+    evt_end                 0
+
+.proc main_01
+    evt_end                 0
+
+.proc main_02
+    aot_set                 17, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19624, -20356, 2600, 1800, 26, 0, 0, 0, 255, 255
+    obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 0, -21900, -180, -21801, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -23210, -1800, -24840, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -22995, -2700, -21410, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           3, 0, 0, 0, 0, 0, 0, 10, 16, -22968, -23019, -21559, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           4, 0, 0, 0, 0, 0, 0, 10, 16, -22968, -22695, -21064, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           5, 0, 0, 0, 0, 0, 0, 10, 16, -22968, -22380, -20569, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0
+    item_aot_set            7, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22270, -21300, 1680, 1700, ITEM_120, 1, 200, 7, 0
+    obj_model_set           7, 0, 0, 0, 0, 0, 0, 10, 16, -21300, -1140, -20550, 896, 960, -192, 0, 0, 0, 0, 0, 0, 0, 0
+    evt_end                 0
+
+.proc main_03
+    gosub                   5
+    aot_on                  2
+    evt_end                 0
+
+.proc main_04
+    gosub                   5
+    aot_on                  4
+    evt_end                 0
+
+.proc main_05
+    set                     2, 7, 1
+    set                     1, 27, 1
+    cut_chg                 15
+    if                      0, off_272E
+    ck                      1, 3, 1
+    work_set                WK_PLAYER, 0
+    plc_ret
+    pos_set                 0, -24579, 0, -15932
+    member_set              15, 8, 5
+    work_set                WK_SPLAYER, 0
+    nop
+    pos_set                 0, -25642, 0, -15808
+    member_set              15, 216, 2
+    else                    0, off_2740
+
+off_272E:
+    work_set                WK_PLAYER, 0
+    plc_ret
+    pos_set                 0, -25227, 0, -15802
+    member_set              15, 24, 4
+    nop
+    nop
+
+off_2740:
+    sleep                   10, 20
+    nop_8a                  0, 4, 0, 0, 0
+    nop_8b                  200, 8, 0, 0, 0
+    nop_8b                  70, 90, 0, 8, 0
+    se_on                   2, 273, 1, 0, 0, 0
+    set                     1, 28, 1
+    sleep                   10, 8
+    set                     1, 28, 0
+    sleep                   10, 90
+    nop_8a                  0, 4, 0, 0, 0
+    nop_8b                  200, 10, 0, 0, 0
+    nop_8b                  100, 10, 0, 10, 0
+    se_on                   2, 274, 1, 0, 0, 0
+    set                     1, 28, 1
+    sleep                   10, 8
+    set                     1, 28, 0
+    sleep                   10, 20
+    set                     2, 7, 0
+    set                     1, 27, 0
+    evt_end                 0
+    db                      0x00, 0x00

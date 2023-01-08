@@ -1,0 +1,376 @@
+.version 2
+init
+{
+    init_00()
+    {
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27872, -13809, 1800, 4250, -20453, 0, -23932, -2028, 5, 20, 6, 0, 38, 0, 0, 0, UNLOCKED, 0);
+        return 0;
+    }
+}
+
+main
+{
+    main_00()
+    {
+        main_03();
+        main_04();
+        item_aot_set(7, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 0, 0, 1, 1, ITEM_MAGNUMPARTS, 1, 41, 4, 0);
+        aot_set(12, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -1130, -26260, 2850, 1600, 7, 0, 0, 0, 255, 239);
+        obj_model_set(4, 0, 0, 0, 0, 0, 0, 10, 16, -21416, -144, -8056, -320, -5184, -896, 0, 0, 0, 0, 0, 0, 0, 0);
+        if (game.scenario == 1)
+        {
+            if (game.difficult == 1)
+            {
+                item_aot_set(13, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22900, -17000, 2210, 1720, ITEM_FAIDSPRAY, 1, 55, 255, 0);
+            }
+            else
+            {
+                item_aot_set(13, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22900, -17000, 2210, 1720, ITEM_FAIDSPRAY, 1, 55, 9, 0);
+                obj_model_set(9, 0, 0, 0, 0, 0, 0, 0, 16, -21780, -1800, -16168, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            }
+        }
+        if (game.scenario == 1)
+        {
+            obj_model_set(8, 0, 0, 0, 0, 0, 0, 0, 16, -3654, -1872, -17226, -64, 1792, 1536, 0, 0, 0, 0, 0, 0, 0, 0);
+            item_aot_set(5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -4210, -18100, 1510, 2120, ITEM_POWERROOMKEY, 1, 43, 8, 128);
+        }
+        else
+        {
+            obj_model_set(3, 0, 0, 0, 0, 0, 0, 0, 16, -3654, -1872, -17226, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            item_aot_set(5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -4210, -18100, 1510, 2120, ITEM_UMBRELLAKEYCARD, 2, 43, 3, 224);
+        }
+        return 0;
+    }
+
+    main_01()
+    {
+        if (bits[34][41] == 1)
+        {
+            aot_reset(3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        }
+        main_05();
+        return 0;
+    }
+
+    main_02()
+    {
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        if (bits[4][159] == 1)
+        {
+            cut_chg(13);
+            se_on(2, 296, 0, -21472, 0, -9700);
+            sce_item_lost(63);
+            sleep(10, 30);
+            aot_on(7);
+            sleep(10, 1);
+            cut_chg(0);
+        }
+        else
+        {
+            if ()
+            {
+                keep_item_ck(63);
+                message_on(0, 10, 0, 255, 255);
+                sleep(10, 1);
+                if (input.question == 0)
+                {
+                    bits[4][159] = 1;
+                    se_on(2, 295, 0, -21472, 0, -9700);
+                    sce_item_lost(63);
+                    sleep(10, 30);
+                    cut_chg(13);
+                    se_on(2, 296, 0, -21472, 0, -9700);
+                    sleep(10, 30);
+                    aot_on(7);
+                    sleep(10, 1);
+                    cut_chg(0);
+                }
+            }
+            else
+            {
+                message_on(0, 0, 0, 255, 255);
+                sleep(10, 1);
+            }
+        }
+        bits[2][7] = 0;
+        bits[2][2] = 0;
+        cut_auto(1);
+        return 0;
+    }
+
+    main_03()
+    {
+        if (game.scenario == 1)
+        {
+            sce_em_set(0, 0, ENEMY_ZOMBIENAKED, 0, 0, 0, 46, 0, 41, -13314, 0, -19983, 794, 0, 0);
+            sce_em_set(0, 1, ENEMY_ZOMBIENAKED, 0, 0, 0, 46, 0, 42, -16368, 0, -26010, 1914, 0, 0);
+            sce_em_set(0, 2, ENEMY_ZOMBIENAKED, 0, 0, 0, 46, 0, 43, -15922, 0, -18638, 1402, 0, 0);
+            sce_em_set(0, 3, ENEMY_ZOMBIENAKED, 0, 0, 0, 46, 0, 44, -11744, 0, -16563, 1887, 0, 0);
+            sce_em_set(0, 4, ENEMY_ZOMBIENAKED, 0, 0, 0, 46, 0, 45, -10262, 0, -23833, 2426, 0, 0);
+        }
+        else
+        {
+            sce_em_set(0, 0, ENEMY_ZOMBIESCIENTIST, 0, 0, 0, 47, 0, 41, -24178, 0, -23986, 2554, 0, 0);
+            sce_em_set(0, 1, ENEMY_ZOMBIESCIENTIST, 0, 0, 0, 47, 0, 42, -16368, 0, -26010, 1914, 0, 0);
+            sce_em_set(0, 2, ENEMY_ZOMBIESCIENTIST, 0, 0, 0, 47, 0, 43, -13522, 0, -15438, 2402, 0, 0);
+            sce_em_set(0, 3, ENEMY_ZOMBIESCIENTIST, 0, 0, 0, 47, 0, 44, -8104, 0, -14471, 1031, 0, 0);
+            sce_em_set(0, 4, ENEMY_ZOMBIESCIENTIST, 0, 0, 0, 47, 0, 45, -381, 0, -17119, 1530, 0, 0);
+        }
+        return 0;
+    }
+
+    main_04()
+    {
+        obj_model_set(0, 0, 0, 0, 0, 0, 0, 8, 16, -26386, 0, -17496, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(1, 0, 0, 0, 0, 0, 0, 0, 16, -19586, 0, -26446, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        aot_set(9, SCE_FLAG_CHG, SAT_PL | SAT_EM | SAT_UNDER, 0, 0, -26350, -19100, 2600, 3120, 5, 0, 32, 0, 1, 0);
+        aot_set(10, SCE_FLAG_CHG, SAT_PL | SAT_EM | SAT_UNDER, 0, 0, -21000, -26510, 3580, 2000, 5, 0, 33, 0, 1, 0);
+        sce_espr_on2(7, 22, 10, 0, 0, 0, 16, 160, 171, 120, 236, 52, 214, 0, 0);
+        sce_espr_on2(8, 22, 10, 0, 0, 0, 16, 216, 170, 120, 236, 52, 214, 0, 0);
+        aot_set(3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21840, -9860, 1750, 1700, 255, 0, I_GOSUB, main_02, 0, 0);
+        aot_set(11, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25640, -9870, 3330, 1380, 1, 0, 0, 0, 255, 239);
+        aot_set(15, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19440, -14570, 1160, 1380, 2, 0, 0, 0, 255, 239);
+        aot_set(16, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19440, -18770, 1160, 1380, 2, 0, 0, 0, 255, 239);
+        aot_set(17, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19440, -22970, 1160, 1380, 2, 0, 0, 0, 255, 239);
+        aot_set(18, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18850, -8300, 3000, 3120, 2, 0, 0, 0, 255, 239);
+        aot_set(19, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 250, -20600, 3000, 6020, 2, 0, 0, 0, 255, 239);
+        if (game.difficult == 1)
+        {
+            item_aot_set(20, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -10110, -11600, 1510, 1020, ITEM_INKRIBBON, 3, 82, 255, 0);
+        }
+        return 0;
+    }
+
+    main_05()
+    {
+        if (bits[5][32] == 1)
+        {
+            if (bits[5][0] == 0)
+            {
+                if (bits[5][3] == 0)
+                {
+                    bits[5][3] = 1;
+                    se_on(2, 522, 0, -25527, 0, -17230);
+                }
+                evt_exec(6, I_GOSUB, main_06);
+            }
+        }
+        else
+        {
+            if (bits[5][0] == 1)
+            {
+                if (bits[5][3] == 0)
+                {
+                    bits[5][3] = 1;
+                    se_on(2, 522, 0, -25527, 0, -17230);
+                }
+                evt_exec(7, I_GOSUB, main_07);
+            }
+        }
+        if (bits[5][33] == 1)
+        {
+            if (bits[5][2] == 0)
+            {
+                if (bits[5][4] == 0)
+                {
+                    bits[5][4] = 1;
+                    se_on(2, 522, 0, -19690, 0, -25665);
+                }
+                evt_exec(8, I_GOSUB, main_08);
+            }
+        }
+        else
+        {
+            if (bits[5][2] == 1)
+            {
+                if (bits[5][4] == 0)
+                {
+                    bits[5][4] = 1;
+                    se_on(2, 522, 0, -19690, 0, -25665);
+                }
+                evt_exec(9, I_GOSUB, main_09);
+            }
+        }
+        main_0A();
+        return 0;
+    }
+
+    main_06()
+    {
+        evt_kill(7);
+        work_set(WK_OBJECT, 0);
+        member_copy(4, 12);
+        save(5, 10);
+        while (
+        {
+            member_copy(16, 12);
+            var_10 -= B4;
+            member_set2(12, 16);
+            member_copy(4, 12);
+            copy(16, 5);
+            var_10 -= 01;
+            copy(5, 16);
+            if (arr[4] < -2800)
+            {
+                sca_id_set(19, 0, 0);
+            }
+            evt_next();
+        }
+        bits[5][0] = 1;
+        bits[5][3] = 0;
+        return 0;
+    }
+
+    main_07()
+    {
+        evt_kill(6);
+        sca_id_set(19, 128, 252);
+        work_set(WK_OBJECT, 0);
+        member_copy(4, 12);
+        while (
+        {
+            member_copy(16, 12);
+            var_10 += B4;
+            member_set2(12, 16);
+            member_copy(4, 12);
+            evt_next();
+        }
+        member_set(12, 0, 0);
+        bits[5][0] = 0;
+        bits[5][3] = 0;
+        return 0;
+    }
+
+    main_08()
+    {
+        evt_kill(9);
+        work_set(WK_OBJECT, 1);
+        member_copy(4, 12);
+        save(5, 10);
+        while (
+        {
+            member_copy(16, 12);
+            var_10 -= B4;
+            member_set2(12, 16);
+            member_copy(4, 12);
+            copy(16, 5);
+            var_10 -= 01;
+            copy(5, 16);
+            if (arr[4] < -2800)
+            {
+                sca_id_set(20, 0, 0);
+            }
+            evt_next();
+        }
+        bits[5][2] = 1;
+        bits[5][4] = 0;
+        return 0;
+    }
+
+    main_09()
+    {
+        evt_kill(8);
+        sca_id_set(20, 128, 252);
+        work_set(WK_OBJECT, 1);
+        member_copy(4, 12);
+        while (
+        {
+            member_copy(16, 12);
+            var_10 += B4;
+            member_set2(12, 16);
+            member_copy(4, 12);
+            evt_next();
+        }
+        member_set(12, 0, 0);
+        bits[5][2] = 0;
+        bits[5][4] = 0;
+        return 0;
+    }
+
+    main_0A()
+    {
+
+off_31DA:
+        switch (var_1A)
+        {
+        case 0:
+            sce_bgm_control(1, 0, 1, 30, 64);
+            break;
+        case 1:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 2:
+            sce_bgm_control(1, 0, 1, 40, 64);
+            break;
+        case 3:
+            sce_bgm_control(1, 0, 1, 40, 64);
+            break;
+        case 4:
+            sce_bgm_control(1, 0, 1, 40, 64);
+            break;
+        case 5:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 6:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 7:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 8:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 9:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 10:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 11:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 12:
+            sce_bgm_control(1, 0, 1, 50, 64);
+            break;
+        case 13:
+            sce_bgm_control(1, 0, 1, 30, 64);
+            break;
+        }
+        do
+        {
+            sleep(10, 1);
+        } while (bits[1][11] == 0);
+        goto off_31DA;
+        return 0;
+    }
+
+    main_0B()
+    {
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        aot_on(5);
+        if (bits[34][43] == 0)
+        {
+            sleep(10, 1);
+        }
+        bits[2][7] = 0;
+        bits[2][2] = 0;
+        return 0;
+    }
+
+    main_0C()
+    {
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        aot_on(5);
+        if (bits[34][43] == 0)
+        {
+            sleep(10, 1);
+        }
+        bits[2][7] = 0;
+        bits[2][2] = 0;
+        return 0;
+        db(0x00, 0x00);
+    }
+}

@@ -1,0 +1,188 @@
+.version 2
+.init
+.proc init_00
+1052:   3B000131000024EEC9D8F604700812CB000060C12038020D0000080100000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -4572, -10039, 1270, 2160, -13550, 0, -16032, 14368, 2, 13, 0, 0, 8, 1, 0, 0, UNLOCKED, 0
+1072:   3B0101310700CAF216B73E08E803D09E000074D6081001120400160400000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 7, 0, -3382, -18666, 2110, 1000, -24880, 0, -10636, 4104, 1, 18, 4, 0, 22, 4, 0, 0, UNLOCKED, 0
+1092:   3B0201510000FCB8C21A06098C0A9808E8EA529ED81702050003280400000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -18180, 6850, 2310, 2700, 2200, -5400, -25006, 6104, 2, 5, 0, 3, 40, 4, 0, 0, UNLOCKED, 0
+10B2:   0100                                                                                    evt_end                 0
+
+.main
+.proc main_00
+10C8:   1802                                                                                    gosub                   2
+10CA:   2D0200000000000000000A0010007BC2000055140000F0000000000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -15749, 0, 5205, 0, 240, 0, 0, 0, 0, 0, 0, 0, 0, 0
+10F0:   4E030231000006C1EB11E8038C0515000700C2000201                                            item_aot_set            3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16122, 4587, 1000, 1420, ITEM_SHOTGUNAMMO, 7, 194, 2, 1
+1106:   0100                                                                                    evt_end                 0
+
+.proc main_01
+1108:   0100                                                                                    evt_end                 0
+
+.proc main_02
+110A:   2D0100000000000000000A00100034BD00001A1D000000E80000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -17100, 0, 7450, 0, -6144, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1130:   06002000                                                                                if                      0, off_1154
+1134:   23001B000503                                                                            cmp                     0, 27, CMP_EQ, 773
+113A:   06001000                                                                                if                      0, off_114E
+113E:   21038201                                                                                ck                      3, 130, 1
+1142:   21038300                                                                                ck                      3, 131, 0
+1146:   17FFFF000E00                                                                            goto                    255, 255, 0, off_1154 + 4
+114C:   08                                                                                      endif
+114D:   00                                                                                      nop
+
+off_114E:
+114E:   04051803                                                                                evt_exec                5, I_GOSUB, main_03
+1152:   08                                                                                      endif
+1153:   00                                                                                      nop
+
+off_1154:
+1154:   2C060431000088C376E44C04280A13000000FFFF                                                aot_set                 6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -15480, -7050, 1100, 2600, 19, 0, 0, 0, 255, 255
+1168:   22100100                                                                                set                     16, 1, 0
+116C:   2C070431000050C9B8F2C2014C0414000000FFFF                                                aot_set                 7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14000, -3400, 450, 1100, 20, 0, 0, 0, 255, 255
+1180:   2C0805310000CAF216B73E08E803FF0018090000                                                aot_set                 8, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -3382, -18666, 2110, 1000, 255, 0, I_GOSUB, main_09, 0, 0
+1194:   0100                                                                                    evt_end                 0
+
+.proc main_03
+1196:   22020701                                                                                set                     2, 7, 1
+119A:   04FF1804                                                                                evt_exec                255, I_GOSUB, main_04
+119E:   04FF1805                                                                                evt_exec                255, I_GOSUB, main_05
+11A2:   1808                                                                                    gosub                   8
+11A4:   090A0500                                                                                sleep                   10, 5
+11A8:   22020700                                                                                set                     2, 7, 0
+11AC:   0100                                                                                    evt_end                 0
+
+.proc main_04
+11AE:   2E0401                                                                                  work_set                WK_OBJECT, 1
+11B1:   00                                                                                      nop
+11B2:   340B34BD                                                                                member_set              11, 52, 189
+11B6:   340CA0F6                                                                                member_set              12, 160, 246
+11BA:   340D1A1D                                                                                member_set              13, 26, 29
+11BE:   340F00E8                                                                                member_set              15, 0, 232
+11C2:   1806                                                                                    gosub                   6
+11C4:   0100                                                                                    evt_end                 0
+
+.proc main_05
+11C6:   2E0100                                                                                  work_set                WK_PLAYER, 0
+11C9:   00                                                                                      nop
+11CA:   3D1000                                                                                  member_copy             16, 0
+11CD:   00                                                                                      nop
+11CE:   260005100004                                                                            calc                    0, OP_OR, 16, 1024
+11D4:   350010                                                                                  member_set2             0, 16
+11D7:   00                                                                                      nop
+11D8:   340BAEBD                                                                                member_set              11, 174, 189
+11DC:   340CA0F6                                                                                member_set              12, 160, 246
+11E0:   340D201E                                                                                member_set              13, 32, 30
+11E4:   340F2F14                                                                                member_set              15, 47, 20
+11E8:   1806                                                                                    gosub                   6
+11EA:   06001400                                                                                if                      0, off_1202
+11EE:   21050101                                                                                ck                      5, 1, 1
+11F2:   3D1000                                                                                  member_copy             16, 0
+11F5:   00                                                                                      nop
+11F6:   260001100004                                                                            calc                    0, OP_SUB, 16, 1024
+11FC:   350010                                                                                  member_set2             0, 16
+11FF:   00                                                                                      nop
+1200:   08                                                                                      endif
+1201:   00                                                                                      nop
+
+off_1202:
+1202:   0100                                                                                    evt_end                 0
+
+.proc main_06
+1204:   2F012800                                                                                speed_set               1, 40
+1208:   0D0004000200                                                                            for                     0, off_1212, 2
+120E:   30                                                                                      add_speed
+120F:   02                                                                                      evt_next
+1210:   0E00                                                                                    next                    0
+
+off_1212:
+1212:   8B645A000000                                                                            nop_8b                  100, 90, 0, 0, 0
+1218:   8C00A05014005700                                                                        nop_8c                  0, 160, 80, 20, 0, 87, 0
+1220:   8A0003005500                                                                            nop_8a                  0, 3, 0, 85, 0
+1226:   360001000000000000000000                                                                se_on                   0, 1, 0, 0, 0, 0
+1232:   0D0004000800                                                                            for                     0, off_123C, 8
+1238:   30                                                                                      add_speed
+1239:   02                                                                                      evt_next
+123A:   0E00                                                                                    next                    0
+
+off_123C:
+123C:   2F012300                                                                                speed_set               1, 35
+1240:   0D0004001400                                                                            for                     0, off_124A, 20
+1246:   30                                                                                      add_speed
+1247:   02                                                                                      evt_next
+1248:   0E00                                                                                    next                    0
+
+off_124A:
+124A:   2F011E00                                                                                speed_set               1, 30
+124E:   0D0004000F00                                                                            for                     0, off_1258, 15
+1254:   30                                                                                      add_speed
+1255:   02                                                                                      evt_next
+1256:   0E00                                                                                    next                    0
+
+off_1258:
+1258:   2F011900                                                                                speed_set               1, 25
+125C:   0D0004000F00                                                                            for                     0, off_1266, 15
+1262:   30                                                                                      add_speed
+1263:   02                                                                                      evt_next
+1264:   0E00                                                                                    next                    0
+
+off_1266:
+1266:   2F011400                                                                                speed_set               1, 20
+126A:   0D0004000F00                                                                            for                     0, off_1274, 15
+1270:   30                                                                                      add_speed
+1271:   02                                                                                      evt_next
+1272:   0E00                                                                                    next                    0
+
+off_1274:
+1274:   2F010F00                                                                                speed_set               1, 15
+1278:   0D0004000A00                                                                            for                     0, off_1282, 10
+127E:   30                                                                                      add_speed
+127F:   02                                                                                      evt_next
+1280:   0E00                                                                                    next                    0
+
+off_1282:
+1282:   3D100C                                                                                  member_copy             16, 12
+1285:   00                                                                                      nop
+1286:   260001100A00                                                                            calc                    0, OP_SUB, 16, 10
+128C:   350C10                                                                                  member_set2             12, 16
+128F:   00                                                                                      nop
+1290:   090A0500                                                                                sleep                   10, 5
+1294:   3D100C                                                                                  member_copy             16, 12
+1297:   00                                                                                      nop
+1298:   260000102300                                                                            calc                    0, OP_ADD, 16, 35
+129E:   350C10                                                                                  member_set2             12, 16
+12A1:   00                                                                                      nop
+12A2:   22050101                                                                                set                     5, 1, 1
+12A6:   0100                                                                                    evt_end                 0
+
+.proc main_07
+12A8:   11000800                                                                                do                      0, off_12B4
+12AC:   02                                                                                      evt_next
+12AD:   00                                                                                      nop
+12AE:   1204                                                                                    edwhile                 off_12B4
+12B0:   21050000                                                                                ck                      5, 0, 0
+
+off_12B4:
+12B4:   22050000                                                                                set                     5, 0, 0
+12B8:   0100                                                                                    evt_end                 0
+
+.proc main_08
+12BA:   11000800                                                                                do                      0, off_12C6
+12BE:   02                                                                                      evt_next
+12BF:   00                                                                                      nop
+12C0:   1204                                                                                    edwhile                 off_12C6
+12C2:   21050100                                                                                ck                      5, 1, 0
+
+off_12C6:
+12C6:   22050100                                                                                set                     5, 1, 0
+12CA:   0100                                                                                    evt_end                 0
+
+.proc main_09
+12CC:   2B001600FFEF                                                                            message_on              0, 22, 0, 255, 239
+12D2:   02                                                                                      evt_next
+12D3:   00                                                                                      nop
+12D4:   06000800                                                                                if                      0, off_12E0
+12D8:   210B1F00                                                                                ck                      11, 31, 0
+12DC:   4701                                                                                    aot_on                  1
+12DE:   08                                                                                      endif
+12DF:   00                                                                                      nop
+
+off_12E0:
+12E0:   0100                                                                                    evt_end                 0
+12E2:   0000                                                                                    db                      0x00, 0x00

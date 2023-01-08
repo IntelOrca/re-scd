@@ -1,0 +1,493 @@
+.version 2
+init
+{
+    init_00()
+    {
+        bits[19][2] = 0;
+        if (game.bonus == 1)
+        {
+            return 0;
+        }
+        if (bits[4][254] == 1)
+        {
+            bits[8][119] = 1;
+            bits[4][148] = 0;
+        }
+        door_aot_se(2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -15189, 5901, 2600, 2390, -13956, -1800, 6456, 1024, 1, 0, 5, 1, 22, 5, 0, 0, UNLOCKED, 0);
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, 622, -24130, 1650, 2890, -24013, 0, -21286, 0, 0, 15, 1, 0, 13, 1, 0, 0, UNLOCKED, 0);
+        door_aot_se(4, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -30334, -9880, 2120, 3900, -8304, 0, -18865, 2096, 0, 18, 0, 0, 13, 3, 0, 0, UNLOCKED, 0);
+        if (game.scenario == 1)
+        {
+            item_aot_set(3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -25500, -28042, 1990, 2040, ITEM_UNICORNMEDAL, 1, 17, 3, 0);
+            obj_model_set(3, 0, 0, 0, 0, 4, 0, 10, 16, -24633, -10122, -26502, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        obj_model_set(0, 0, 0, 0, 0, 4, 0, 10, 16, -13160, -7200, 7080, -2048, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        if (game.scenario == 0)
+        {
+            if (bits[8][119] == 0)
+            {
+                if (game.difficult == 0)
+                {
+                    sce_em_set(0, 0, ENEMY_ZOMBIECOP, 0, 0, 4, 3, 3, 21, -26023, -7200, -12482, -4795, 0, 0);
+                    sce_em_set(0, 1, ENEMY_ZOMBIECOP, 0, 0, 4, 3, 3, 22, -3664, -7200, -7618, -2391, 0, 0);
+                    sce_em_set(0, 2, ENEMY_ZOMBIECOP, 6, 0, 4, 4, 3, 23, -19976, -7200, 10825, 1248, 0, 0);
+                }
+                else
+                {
+                    sce_em_set(0, 0, ENEMY_ZOMBIECOP, 6, 0, 4, 3, 3, 21, -25599, -7200, -11750, 3843, 0, 0);
+                    sce_em_set(0, 1, ENEMY_ZOMBIECOP, 6, 0, 4, 3, 3, 22, -3075, -7200, -7953, 267, 0, 0);
+                    sce_em_set(0, 2, ENEMY_ZOMBIECOP, 6, 0, 4, 4, 3, 23, -22773, -7200, 10899, 3233, 0, 0);
+                    sce_em_set(0, 3, ENEMY_ZOMBIECOP, 6, 0, 4, 4, 3, 209, -3551, -7200, -25272, 3573, 0, 0);
+                }
+            }
+            else
+            {
+                sce_em_set(0, 0, ENEMY_LICKERRED, 0, 0, 4, 14, 3, 112, -13885, -7200, 10620, 2175, 0, 0);
+            }
+        }
+        else
+        {
+            if (bits[8][119] == 0)
+            {
+                if (game.difficult == 0)
+                {
+                    sce_em_set(0, 0, ENEMY_ZOMBIECOP, 0, 0, 4, 3, 3, 21, -23441, -7200, -7087, 2437, 0, 0);
+                    sce_em_set(0, 1, ENEMY_ZOMBIECOP, 0, 0, 4, 3, 3, 22, -24885, -7200, -24890, 2705, 0, 0);
+                    sce_em_set(0, 2, ENEMY_ZOMBIECOP, 0, 0, 4, 4, 3, 23, -26304, -7200, -22809, 2895, 0, 0);
+                }
+                else
+                {
+                    sce_em_set(0, 0, ENEMY_ZOMBIERANDOM, 6, 0, 4, 3, 3, 21, -23551, -7200, -7056, 2437, 0, 0);
+                    sce_em_set(0, 1, ENEMY_ZOMBIERANDOM, 0, 0, 4, 3, 3, 22, -24146, -7200, -25908, 2519, 0, 0);
+                    sce_em_set(0, 2, ENEMY_ZOMBIERANDOM, 0, 0, 4, 4, 3, 23, -25460, -7200, -22636, 2841, 0, 0);
+                    sce_em_set(0, 3, ENEMY_ZOMBIERANDOM, 6, 0, 4, 4, 3, 209, -25488, -7200, -13767, 3024, 0, 0);
+                    sce_em_set(0, 4, ENEMY_ZOMBIERANDOM, 0, 0, 4, 4, 3, 210, -26223, -7200, -24975, -848, 0, 0);
+                }
+            }
+            else
+            {
+                sce_em_set(0, 0, ENEMY_LICKERRED, 0, 0, 4, 14, 3, 112, -13885, -7200, 10620, 2175, 0, 0);
+            }
+        }
+        return 0;
+        db(0x00, 0x00);
+    }
+}
+
+main
+{
+    main_00()
+    {
+        if (game.bonus == 1)
+        {
+            main_06();
+            return 0;
+        }
+        aot_set(1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -15189, 5901, 2600, 2390, 255, 0, I_GOSUB, main_02, 0, 0);
+        if (bits[4][148] == 0)
+        {
+            work_set(WK_OBJECT, 0);
+            pos_set(0, 11550, -1800, 6039);
+            obj_model_set(1, 0, 0, 0, 0, 4, 0, 10, 16, 27600, 7200, 23800, -2048, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            obj_model_set(2, 0, 0, 0, 0, 4, 0, 10, 16, 27600, 7200, 23800, -2048, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        if (bits[4][70] == 0)
+        {
+            aot_reset(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_05, 0, 0);
+        }
+        return 0;
+    }
+
+    main_01()
+    {
+        if (game.bonus == 1)
+        {
+            return 0;
+        }
+        return 0;
+    }
+
+    main_02()
+    {
+        if (bits[4][148] == 0)
+        {
+            message_on(0, 2, 0, 255, 255);
+            evt_next();
+            if (input.question == 0)
+            {
+                bits[2][7] = 1;
+                bits[2][2] = 1;
+                bits[2][3] = 1;
+                game.cutscene = 1;
+                work_set(WK_PLAYER, 0);
+                member_copy(4, 11);
+                member_copy(5, 13);
+                member_copy(6, 15);
+                main_03();
+                bits[4][148] = 1;
+                aot_reset(2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 124, 201, 248, 248, 56, 25);
+                cut_chg(14);
+                work_set(WK_OBJECT, 0);
+                pos_set(0, -13160, -15000, 7080);
+                work_set(WK_OBJECT, 1);
+                pos_set(0, -13160, -15000, 7080);
+                work_set(WK_OBJECT, 2);
+                pos_set(0, -13160, -15000, 7080);
+                work_set(WK_PLAYER, 0);
+                pos_set(0, -12294, -8000, 9323);
+                dir_set(0, 0, 1024, 0);
+                se_on(2, 266, 0, -15508, -1800, 6039);
+                sleep(10, 30);
+                se_on(2, 267, 0, -15508, -1800, 6039);
+                nop_8a(0, 3, 0, 0, 0);
+                nop_8b(250, 3, 0, 0, 0);
+                nop_8b(100, 51, 0, 3, 0);
+                nop_8c(0, 255, 50, 9, 0, 54, 0);
+                for 55 times
+                {
+                    work_set(WK_OBJECT, 0);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    work_set(WK_OBJECT, 1);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    work_set(WK_OBJECT, 2);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    evt_next();
+                }
+                work_set(WK_OBJECT, 0);
+                for 5 times
+                {
+                    member_copy(16, 15);
+                    var_10 -= 05;
+                    member_set2(15, 16);
+                    evt_next();
+                    member_copy(16, 15);
+                    var_10 += 05;
+                    member_set2(15, 16);
+                    evt_next();
+                }
+                for 4 times
+                {
+                    work_set(WK_OBJECT, 1);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    work_set(WK_OBJECT, 2);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    evt_next();
+                }
+                se_on(2, 267, 0, -15508, -1800, 6039);
+                nop_8a(0, 3, 0, 0, 0);
+                nop_8b(250, 3, 0, 0, 0);
+                nop_8b(100, 51, 0, 3, 0);
+                nop_8c(0, 255, 50, 9, 0, 54, 0);
+                for 55 times
+                {
+                    work_set(WK_OBJECT, 1);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    work_set(WK_OBJECT, 2);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    evt_next();
+                }
+                work_set(WK_OBJECT, 2);
+                member_set(12, 124, 215);
+                work_set(WK_OBJECT, 1);
+                member_set(12, 124, 215);
+                for 5 times
+                {
+                    member_copy(16, 15);
+                    var_10 -= 05;
+                    member_set2(15, 16);
+                    evt_next();
+                    member_copy(16, 15);
+                    var_10 += 05;
+                    member_set2(15, 16);
+                    evt_next();
+                }
+                for 4 times
+                {
+                    work_set(WK_OBJECT, 2);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    evt_next();
+                }
+                se_on(2, 267, 0, -15508, -1800, 6039);
+                nop_8a(0, 3, 0, 0, 0);
+                nop_8b(250, 3, 0, 0, 0);
+                nop_8b(100, 51, 0, 3, 0);
+                nop_8c(0, 255, 50, 9, 0, 54, 0);
+                for 55 times
+                {
+                    work_set(WK_OBJECT, 2);
+                    member_copy(16, 12);
+                    var_10 += 28;
+                    member_set2(12, 16);
+                    evt_next();
+                }
+                work_set(WK_OBJECT, 2);
+                member_set(12, 248, 224);
+                for 5 times
+                {
+                    member_copy(16, 15);
+                    var_10 -= 05;
+                    member_set2(15, 16);
+                    evt_next();
+                    member_copy(16, 15);
+                    var_10 += 05;
+                    member_set2(15, 16);
+                    evt_next();
+                }
+                work_set(WK_OBJECT, 0);
+                pos_set(0, -13160, -7200, 7080);
+                work_set(WK_OBJECT, 1);
+                pos_set(0, 13160, -7200, -7080);
+                work_set(WK_OBJECT, 2);
+                pos_set(0, 13160, -7200, -7080);
+                work_set(WK_PLAYER, 0);
+                member_set2(11, 4);
+                member_set(12, 224, 227);
+                member_set2(13, 5);
+                member_set2(15, 6);
+                cut_chg(13);
+                cut_auto(1);
+                main_04();
+                game.cutscene = 0;
+                bits[2][7] = 0;
+                bits[2][2] = 0;
+                bits[2][3] = 0;
+            }
+        }
+        else
+        {
+            message_on(0, 3, 0, 255, 255);
+            evt_next();
+            if (input.question == 0)
+            {
+                aot_on(2);
+            }
+        }
+        return 0;
+    }
+
+    main_03()
+    {
+        if (bits[8][119] == 0)
+        {
+            if (bits[6][21] == 0)
+            {
+                work_set(WK_ENEMY, 0);
+                member_copy(16, 0);
+                var_10 |= 02;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 |= 08;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 |= 8000;
+                member_set2(7, 16);
+            }
+            if (bits[6][22] == 0)
+            {
+                work_set(WK_ENEMY, 1);
+                member_copy(16, 0);
+                var_10 |= 02;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 |= 08;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 |= 8000;
+                member_set2(7, 16);
+            }
+            if (bits[6][23] == 0)
+            {
+                work_set(WK_ENEMY, 2);
+                member_copy(16, 0);
+                var_10 |= 02;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 |= 08;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 |= 8000;
+                member_set2(7, 16);
+            }
+            if (game.difficult == 1)
+            {
+                if (bits[6][209] == 0)
+                {
+                    work_set(WK_ENEMY, 3);
+                    member_copy(16, 0);
+                    var_10 |= 02;
+                    member_set2(0, 16);
+                    member_copy(16, 1);
+                    var_10 |= 08;
+                    member_set2(1, 16);
+                    member_copy(16, 7);
+                    var_10 |= 8000;
+                    member_set2(7, 16);
+                }
+                if (game.scenario == 1)
+                {
+                    if (bits[6][210] == 0)
+                    {
+                        work_set(WK_ENEMY, 4);
+                        member_copy(16, 0);
+                        var_10 |= 02;
+                        member_set2(0, 16);
+                        member_copy(16, 1);
+                        var_10 |= 08;
+                        member_set2(1, 16);
+                        member_copy(16, 7);
+                        var_10 |= 8000;
+                        member_set2(7, 16);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (bits[6][112] == 0)
+            {
+                work_set(WK_ENEMY, 0);
+                member_copy(16, 0);
+                var_10 |= 02;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 |= 08;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 |= 8000;
+                member_set2(7, 16);
+            }
+        }
+        return 0;
+    }
+
+    main_04()
+    {
+        if (bits[8][119] == 0)
+        {
+            if (bits[6][21] == 0)
+            {
+                work_set(WK_ENEMY, 0);
+                member_copy(16, 0);
+                var_10 &= FFFD;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 &= FFF7;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 &= 7FFF;
+                member_set2(7, 16);
+            }
+            if (bits[6][22] == 0)
+            {
+                work_set(WK_ENEMY, 1);
+                member_copy(16, 0);
+                var_10 &= FFFD;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 &= FFF7;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 &= 7FFF;
+                member_set2(7, 16);
+            }
+            if (bits[6][23] == 0)
+            {
+                work_set(WK_ENEMY, 2);
+                member_copy(16, 0);
+                var_10 &= FFFD;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 &= FFF7;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 &= 7FFF;
+                member_set2(7, 16);
+            }
+            if (game.difficult == 1)
+            {
+                if (bits[6][209] == 0)
+                {
+                    work_set(WK_ENEMY, 3);
+                    member_copy(16, 0);
+                    var_10 &= FFFD;
+                    member_set2(0, 16);
+                    member_copy(16, 1);
+                    var_10 &= FFF7;
+                    member_set2(1, 16);
+                    member_copy(16, 7);
+                    var_10 &= 7FFF;
+                    member_set2(7, 16);
+                }
+                if (game.scenario == 1)
+                {
+                    if (bits[6][210] == 0)
+                    {
+                        work_set(WK_ENEMY, 4);
+                        member_copy(16, 0);
+                        var_10 &= FFFD;
+                        member_set2(0, 16);
+                        member_copy(16, 1);
+                        var_10 &= FFF7;
+                        member_set2(1, 16);
+                        member_copy(16, 7);
+                        var_10 &= 7FFF;
+                        member_set2(7, 16);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (bits[6][112] == 0)
+            {
+                work_set(WK_ENEMY, 0);
+                member_copy(16, 0);
+                var_10 &= FFFD;
+                member_set2(0, 16);
+                member_copy(16, 1);
+                var_10 &= FFF7;
+                member_set2(1, 16);
+                member_copy(16, 7);
+                var_10 &= 7FFF;
+                member_set2(7, 16);
+            }
+        }
+        return 0;
+    }
+
+    main_05()
+    {
+        bits[2][7] = 1;
+        se_on(2, 22, 0, -28237, -7200, -8048);
+        message_on(0, 1, 0, 255, 255);
+        evt_next();
+        bits[2][7] = 0;
+        return 0;
+    }
+
+    main_06()
+    {
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, 622, -24130, 1650, 2890, -24013, 0, -21286, 0, 0, 15, 1, 0, 13, 1, 0, 0, UNLOCKED, 0);
+        door_aot_se(4, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -30334, -9880, 2120, 3900, -8304, 0, -18865, 2096, 0, 18, 0, 0, 13, 3, 0, 0, UNLOCKED, 0);
+        sce_em_set(0, 0, ENEMY_IVYPURPLE, 17, 0, 0, 19, 0, 133, -14955, -7200, 10835, 2109, 0, 0);
+        sce_em_set(0, 1, ENEMY_IVYPURPLE, 17, 0, 0, 19, 0, 134, -1881, -7250, -7592, 3017, 0, 0);
+        sce_em_set(0, 2, ENEMY_VINES, 0, 32, 0, 0, 0, 255, -20285, -7200, 10210, 1016, 0, 0);
+        return 0;
+    }
+}

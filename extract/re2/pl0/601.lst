@@ -1,0 +1,1034 @@
+.version 2
+.init
+.proc init_00
+04C2:   3B00013100007AAE5E9D08073C0F26B700003CFB000005020400270000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -18650, 0, -1220, 0, 5, 2, 4, 0, 39, 0, 0, 0, UNLOCKED, 0
+04E2:   3B01013100007AAE5E9D08073C0F48AE000020B8000005060600270000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -20920, 0, -18400, 0, 5, 6, 6, 0, 39, 0, 0, 0, UNLOCKED, 0
+0502:   3B02013100007AAE5E9D08073C0F6AFA0000F0E7000406000500270000000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -1430, 0, -6160, 1024, 6, 0, 5, 0, 39, 0, 0, 0, UNLOCKED, 0
+0522:   0100                                                                                    evt_end                 0
+
+.main
+.proc main_00
+055C:   06000A00                                                                                if                      0, off_056A
+0560:   21048201                                                                                ck                      4, 130, 1
+0564:   22049A01                                                                                set                     4, 154, 1
+0568:   08                                                                                      endif
+0569:   00                                                                                      nop
+
+off_056A:
+056A:   0600BA00                                                                                if                      0, off_0628
+056E:   2103C100                                                                                ck                      3, 193, 0
+0572:   2C0305310000A6AF0E980807DC05090018060000                                                aot_set                 3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20570, -26610, 1800, 1500, 9, 0, I_GOSUB, main_06, 0, 0
+0586:   06005400                                                                                if                      0, off_05DE
+058A:   5E62                                                                                    keep_item_ck            98
+058C:   06003400                                                                                if                      0, off_05C4
+0590:   21048B00                                                                                ck                      4, 139, 0
+0594:   2C040531000007957EA078056C070800181A0000                                                aot_set                 4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_1A, 0, 0
+05A8:   2C060621000007957EA078056C070A0062000100                                                aot_set                 6, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 10, 0, 98, 0, 1, 0
+05BC:   0403181B                                                                                evt_exec                3, I_GOSUB, main_1B
+05C0:   07001A00                                                                                else                    0, off_05DA
+
+off_05C4:
+05C4:   2C040531000007957EA078056C07080018140000                                                aot_set                 4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_14, 0, 0
+05D8:   00                                                                                      nop
+05D9:   00                                                                                      nop
+
+off_05DA:
+05DA:   07001A00                                                                                else                    0, off_05F4
+
+off_05DE:
+05DE:   2C040531000007957EA078056C070800180D0000                                                aot_set                 4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_0D, 0, 0
+05F2:   00                                                                                      nop
+05F3:   00                                                                                      nop
+
+off_05F4:
+05F4:   06001400                                                                                if                      0, off_060C
+05F8:   23001B000606                                                                            cmp                     0, 27, CMP_EQ, 1542
+05FE:   46000031000000000000                                                                    aot_reset               0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+0608:   07001000                                                                                else                    0, off_0618
+
+off_060C:
+060C:   46010031000000000000                                                                    aot_reset               1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+0616:   00                                                                                      nop
+0617:   00                                                                                      nop
+
+off_0618:
+0618:   46020031000000000000                                                                    aot_reset               2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+0622:   1807                                                                                    gosub                   7
+0624:   0700B600                                                                                else                    0, off_06DA
+
+off_0628:
+0628:   2C0304310000A6AF0E980807DC0501000000FFFF                                                aot_set                 3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20570, -26610, 1800, 1500, 1, 0, 0, 0, 255, 255
+063C:   06003400                                                                                if                      0, off_0674
+0640:   21048B00                                                                                ck                      4, 139, 0
+0644:   2C040531000007957EA078056C070900181A0000                                                aot_set                 4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 9, 0, I_GOSUB, main_1A, 0, 0
+0658:   2C060621000007957EA078056C070A0062000100                                                aot_set                 6, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 10, 0, 98, 0, 1, 0
+066C:   0403181B                                                                                evt_exec                3, I_GOSUB, main_1B
+0670:   07001A00                                                                                else                    0, off_068A
+
+off_0674:
+0674:   2C040531000007957EA078056C07090018170000                                                aot_set                 4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 9, 0, I_GOSUB, main_17, 0, 0
+0688:   00                                                                                      nop
+0689:   00                                                                                      nop
+
+off_068A:
+068A:   2C05043100007AAE5E9D08073C0F06000000FFFF                                                aot_set                 5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, 6, 0, 0, 0, 255, 255
+069E:   46000031000000000000                                                                    aot_reset               0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+06A8:   46010031000000000000                                                                    aot_reset               1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+06B2:   46020031000000000000                                                                    aot_reset               2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+06BC:   4400FF4F0000000000FF20A48403A3AE000C01015400                                            sce_em_set              0, 255, ENEMY_SHERRYWITHCLAIRESJACKET, 0, 0, 0, 0, 0, 255, -23520, 900, -20829, 3072, 257, 84
+06D2:   1807                                                                                    gosub                   7
+06D4:   04081819                                                                                evt_exec                8, I_GOSUB, main_19
+06D8:   00                                                                                      nop
+06D9:   00                                                                                      nop
+
+off_06DA:
+06DA:   540016020000002054C0A00FEC960000000440060000                                            sce_espr3d_on           0, 534, 0, 8192, -16300, 4000, -26900, 0, 1024, 1600, 0
+06F0:   0100                                                                                    evt_end                 0
+
+.proc main_01
+06F2:   180C                                                                                    gosub                   12
+06F4:   0100                                                                                    evt_end                 0
+
+.proc main_02
+06F6:   22020701                                                                                set                     2, 7, 1
+06FA:   22011B01                                                                                set                     1, 27, 1
+06FE:   2903                                                                                    cut_chg                 3
+0700:   2E0100                                                                                  work_set                WK_PLAYER, 0
+0703:   00                                                                                      nop
+0704:   32001CA3000052A4                                                                        pos_set                 0, -23780, 0, -23470
+070C:   3300000000000000                                                                        dir_set                 0, 0, 0, 0
+0714:   1815                                                                                    gosub                   21
+0716:   06001000                                                                                if                      0, off_072A
+071A:   23001B000606                                                                            cmp                     0, 27, CMP_EQ, 1542
+0720:   04FF180F                                                                                evt_exec                255, I_GOSUB, main_0F
+0724:   1803                                                                                    gosub                   3
+0726:   07000C00                                                                                else                    0, off_0732
+
+off_072A:
+072A:   04FF1810                                                                                evt_exec                255, I_GOSUB, main_10
+072E:   1804                                                                                    gosub                   4
+0730:   00                                                                                      nop
+0731:   00                                                                                      nop
+
+off_0732:
+0732:   090A1400                                                                                sleep                   10, 20
+0736:   06001400                                                                                if                      0, off_074E
+073A:   23001B000606                                                                            cmp                     0, 27, CMP_EQ, 1542
+0740:   4600012126B700003CFB                                                                    aot_reset               0, SCE_DOOR, SAT_PL | SAT_FRONT, 38, 183, 0, 0, 60, 251
+074A:   07001000                                                                                else                    0, off_075A
+
+off_074E:
+074E:   4601012148AE000020B8                                                                    aot_reset               1, SCE_DOOR, SAT_PL | SAT_FRONT, 72, 174, 0, 0, 32, 184
+0758:   00                                                                                      nop
+0759:   00                                                                                      nop
+
+off_075A:
+075A:   40000420E0B152A4                                                                        plc_dest                0, 4, 32, -20000, -23470
+0762:   0100                                                                                    evt_end                 0
+
+.proc main_03
+0764:   5C00FF                                                                                  sce_shake_on            0, 255
+0767:   02                                                                                      evt_next
+0768:   5C00FE                                                                                  sce_shake_on            0, 254
+076B:   02                                                                                      evt_next
+076C:   5C00FD                                                                                  sce_shake_on            0, 253
+076F:   02                                                                                      evt_next
+0770:   5C00FC                                                                                  sce_shake_on            0, 252
+0773:   02                                                                                      evt_next
+0774:   5C00FD                                                                                  sce_shake_on            0, 253
+0777:   02                                                                                      evt_next
+0778:   5C00FE                                                                                  sce_shake_on            0, 254
+077B:   02                                                                                      evt_next
+077C:   5C00FF                                                                                  sce_shake_on            0, 255
+077F:   02                                                                                      evt_next
+0780:   36020D000100000000000000                                                                se_on                   2, 13, 1, 0, 0, 0
+078C:   02                                                                                      evt_next
+078D:   5C0001                                                                                  sce_shake_on            0, 1
+0790:   02                                                                                      evt_next
+0791:   5C0002                                                                                  sce_shake_on            0, 2
+0794:   02                                                                                      evt_next
+0795:   5C0003                                                                                  sce_shake_on            0, 3
+0798:   02                                                                                      evt_next
+0799:   5C0004                                                                                  sce_shake_on            0, 4
+079C:   02                                                                                      evt_next
+079D:   5C0005                                                                                  sce_shake_on            0, 5
+07A0:   02                                                                                      evt_next
+07A1:   00                                                                                      nop
+07A2:   0D0006006400                                                                            for                     0, off_07AE, 100
+07A8:   5C0006                                                                                  sce_shake_on            0, 6
+07AB:   02                                                                                      evt_next
+07AC:   0E00                                                                                    next                    0
+
+off_07AE:
+07AE:   0D0012000300                                                                            for                     0, off_07C6, 3
+07B4:   5C0107                                                                                  sce_shake_on            1, 7
+07B7:   02                                                                                      evt_next
+07B8:   5C0007                                                                                  sce_shake_on            0, 7
+07BB:   02                                                                                      evt_next
+07BC:   5C0006                                                                                  sce_shake_on            0, 6
+07BF:   02                                                                                      evt_next
+07C0:   5C0106                                                                                  sce_shake_on            1, 6
+07C3:   02                                                                                      evt_next
+07C4:   0E00                                                                                    next                    0
+
+off_07C6:
+07C6:   5C0007                                                                                  sce_shake_on            0, 7
+07C9:   02                                                                                      evt_next
+07CA:   5C0008                                                                                  sce_shake_on            0, 8
+07CD:   02                                                                                      evt_next
+07CE:   5C0009                                                                                  sce_shake_on            0, 9
+07D1:   02                                                                                      evt_next
+07D2:   36020E000100000000000000                                                                se_on                   2, 14, 1, 0, 0, 0
+07DE:   5C000A                                                                                  sce_shake_on            0, 10
+07E1:   02                                                                                      evt_next
+07E2:   5C0009                                                                                  sce_shake_on            0, 9
+07E5:   02                                                                                      evt_next
+07E6:   5C0008                                                                                  sce_shake_on            0, 8
+07E9:   02                                                                                      evt_next
+07EA:   5C0007                                                                                  sce_shake_on            0, 7
+07ED:   02                                                                                      evt_next
+07EE:   5C0006                                                                                  sce_shake_on            0, 6
+07F1:   02                                                                                      evt_next
+07F2:   5C0005                                                                                  sce_shake_on            0, 5
+07F5:   02                                                                                      evt_next
+07F6:   5C0004                                                                                  sce_shake_on            0, 4
+07F9:   02                                                                                      evt_next
+07FA:   5C0003                                                                                  sce_shake_on            0, 3
+07FD:   02                                                                                      evt_next
+07FE:   5C0002                                                                                  sce_shake_on            0, 2
+0801:   02                                                                                      evt_next
+0802:   5C0001                                                                                  sce_shake_on            0, 1
+0805:   02                                                                                      evt_next
+0806:   0100                                                                                    evt_end                 0
+
+.proc main_04
+0808:   5C0001                                                                                  sce_shake_on            0, 1
+080B:   02                                                                                      evt_next
+080C:   5C0002                                                                                  sce_shake_on            0, 2
+080F:   02                                                                                      evt_next
+0810:   5C0003                                                                                  sce_shake_on            0, 3
+0813:   02                                                                                      evt_next
+0814:   5C0004                                                                                  sce_shake_on            0, 4
+0817:   02                                                                                      evt_next
+0818:   5C0003                                                                                  sce_shake_on            0, 3
+081B:   02                                                                                      evt_next
+081C:   5C0002                                                                                  sce_shake_on            0, 2
+081F:   02                                                                                      evt_next
+0820:   5C0001                                                                                  sce_shake_on            0, 1
+0823:   02                                                                                      evt_next
+0824:   36020D000100000000000000                                                                se_on                   2, 13, 1, 0, 0, 0
+0830:   02                                                                                      evt_next
+0831:   5C00FF                                                                                  sce_shake_on            0, 255
+0834:   02                                                                                      evt_next
+0835:   5C00FE                                                                                  sce_shake_on            0, 254
+0838:   02                                                                                      evt_next
+0839:   5C00FD                                                                                  sce_shake_on            0, 253
+083C:   02                                                                                      evt_next
+083D:   5C00FC                                                                                  sce_shake_on            0, 252
+0840:   02                                                                                      evt_next
+0841:   5C00FB                                                                                  sce_shake_on            0, 251
+0844:   02                                                                                      evt_next
+0845:   00                                                                                      nop
+0846:   0D0006006400                                                                            for                     0, off_0852, 100
+084C:   5C00FA                                                                                  sce_shake_on            0, 250
+084F:   02                                                                                      evt_next
+0850:   0E00                                                                                    next                    0
+
+off_0852:
+0852:   0D0012000300                                                                            for                     0, off_086A, 3
+0858:   5C01F9                                                                                  sce_shake_on            1, 249
+085B:   02                                                                                      evt_next
+085C:   5C00F9                                                                                  sce_shake_on            0, 249
+085F:   02                                                                                      evt_next
+0860:   5C00FA                                                                                  sce_shake_on            0, 250
+0863:   02                                                                                      evt_next
+0864:   5C01FA                                                                                  sce_shake_on            1, 250
+0867:   02                                                                                      evt_next
+0868:   0E00                                                                                    next                    0
+
+off_086A:
+086A:   5C00F9                                                                                  sce_shake_on            0, 249
+086D:   02                                                                                      evt_next
+086E:   5C00F8                                                                                  sce_shake_on            0, 248
+0871:   02                                                                                      evt_next
+0872:   5C00F7                                                                                  sce_shake_on            0, 247
+0875:   02                                                                                      evt_next
+0876:   5C00F6                                                                                  sce_shake_on            0, 246
+0879:   00                                                                                      nop
+087A:   36020E000100000000000000                                                                se_on                   2, 14, 1, 0, 0, 0
+0886:   02                                                                                      evt_next
+0887:   5C00F7                                                                                  sce_shake_on            0, 247
+088A:   02                                                                                      evt_next
+088B:   5C00F8                                                                                  sce_shake_on            0, 248
+088E:   02                                                                                      evt_next
+088F:   5C00F9                                                                                  sce_shake_on            0, 249
+0892:   02                                                                                      evt_next
+0893:   5C00FA                                                                                  sce_shake_on            0, 250
+0896:   02                                                                                      evt_next
+0897:   5C00FB                                                                                  sce_shake_on            0, 251
+089A:   02                                                                                      evt_next
+089B:   5C00FC                                                                                  sce_shake_on            0, 252
+089E:   02                                                                                      evt_next
+089F:   5C00FD                                                                                  sce_shake_on            0, 253
+08A2:   02                                                                                      evt_next
+08A3:   5C00FE                                                                                  sce_shake_on            0, 254
+08A6:   02                                                                                      evt_next
+08A7:   5C00FF                                                                                  sce_shake_on            0, 255
+08AA:   02                                                                                      evt_next
+08AB:   00                                                                                      nop
+08AC:   0100                                                                                    evt_end                 0
+
+.proc main_05
+08AE:   5C0001                                                                                  sce_shake_on            0, 1
+08B1:   02                                                                                      evt_next
+08B2:   5C0002                                                                                  sce_shake_on            0, 2
+08B5:   02                                                                                      evt_next
+08B6:   5C0003                                                                                  sce_shake_on            0, 3
+08B9:   02                                                                                      evt_next
+08BA:   5C0004                                                                                  sce_shake_on            0, 4
+08BD:   02                                                                                      evt_next
+08BE:   5C0003                                                                                  sce_shake_on            0, 3
+08C1:   02                                                                                      evt_next
+08C2:   5C0002                                                                                  sce_shake_on            0, 2
+08C5:   02                                                                                      evt_next
+08C6:   5C0001                                                                                  sce_shake_on            0, 1
+08C9:   02                                                                                      evt_next
+08CA:   36020D000100000000000000                                                                se_on                   2, 13, 1, 0, 0, 0
+08D6:   02                                                                                      evt_next
+08D7:   5C00FF                                                                                  sce_shake_on            0, 255
+08DA:   02                                                                                      evt_next
+08DB:   5C00FE                                                                                  sce_shake_on            0, 254
+08DE:   02                                                                                      evt_next
+08DF:   5C00FD                                                                                  sce_shake_on            0, 253
+08E2:   02                                                                                      evt_next
+08E3:   5C00FC                                                                                  sce_shake_on            0, 252
+08E6:   02                                                                                      evt_next
+08E7:   5C00FB                                                                                  sce_shake_on            0, 251
+08EA:   02                                                                                      evt_next
+08EB:   5C00FA                                                                                  sce_shake_on            0, 250
+08EE:   02                                                                                      evt_next
+08EF:   5C00F9                                                                                  sce_shake_on            0, 249
+08F2:   02                                                                                      evt_next
+08F3:   5C00F8                                                                                  sce_shake_on            0, 248
+08F6:   02                                                                                      evt_next
+08F7:   00                                                                                      nop
+08F8:   0D0006006400                                                                            for                     0, off_0904, 100
+08FE:   5C00F7                                                                                  sce_shake_on            0, 247
+0901:   02                                                                                      evt_next
+0902:   0E00                                                                                    next                    0
+
+off_0904:
+0904:   5C00F6                                                                                  sce_shake_on            0, 246
+0907:   02                                                                                      evt_next
+0908:   5C00F5                                                                                  sce_shake_on            0, 245
+090B:   02                                                                                      evt_next
+090C:   5C00F4                                                                                  sce_shake_on            0, 244
+090F:   02                                                                                      evt_next
+0910:   5C00F3                                                                                  sce_shake_on            0, 243
+0913:   02                                                                                      evt_next
+0914:   5C00F4                                                                                  sce_shake_on            0, 244
+0917:   02                                                                                      evt_next
+0918:   5C00F5                                                                                  sce_shake_on            0, 245
+091B:   02                                                                                      evt_next
+091C:   5C00F6                                                                                  sce_shake_on            0, 246
+091F:   00                                                                                      nop
+0920:   36020E000100000000000000                                                                se_on                   2, 14, 1, 0, 0, 0
+092C:   02                                                                                      evt_next
+092D:   5C00F7                                                                                  sce_shake_on            0, 247
+0930:   02                                                                                      evt_next
+0931:   5C00F8                                                                                  sce_shake_on            0, 248
+0934:   02                                                                                      evt_next
+0935:   5C00F9                                                                                  sce_shake_on            0, 249
+0938:   02                                                                                      evt_next
+0939:   5C00FA                                                                                  sce_shake_on            0, 250
+093C:   02                                                                                      evt_next
+093D:   5C00FB                                                                                  sce_shake_on            0, 251
+0940:   02                                                                                      evt_next
+0941:   5C00FC                                                                                  sce_shake_on            0, 252
+0944:   02                                                                                      evt_next
+0945:   5C00FD                                                                                  sce_shake_on            0, 253
+0948:   02                                                                                      evt_next
+0949:   5C00FE                                                                                  sce_shake_on            0, 254
+094C:   02                                                                                      evt_next
+094D:   5C00FF                                                                                  sce_shake_on            0, 255
+0950:   02                                                                                      evt_next
+0951:   00                                                                                      nop
+0952:   090A1400                                                                                sleep                   10, 20
+0956:   36020E000100000000000000                                                                se_on                   2, 14, 1, 0, 0, 0
+0962:   5C0002                                                                                  sce_shake_on            0, 2
+0965:   00                                                                                      nop
+0966:   090A0100                                                                                sleep                   10, 1
+096A:   5C0100                                                                                  sce_shake_on            1, 0
+096D:   00                                                                                      nop
+096E:   090A0100                                                                                sleep                   10, 1
+0972:   5C0001                                                                                  sce_shake_on            0, 1
+0975:   00                                                                                      nop
+0976:   090A0100                                                                                sleep                   10, 1
+097A:   090A1400                                                                                sleep                   10, 20
+097E:   0D001E000300                                                                            for                     0, off_09A2, 3
+0984:   36020E000100000000000000                                                                se_on                   2, 14, 1, 0, 0, 0
+0990:   5C0100                                                                                  sce_shake_on            1, 0
+0993:   02                                                                                      evt_next
+0994:   5C0000                                                                                  sce_shake_on            0, 0
+0997:   02                                                                                      evt_next
+0998:   5C0001                                                                                  sce_shake_on            0, 1
+099B:   02                                                                                      evt_next
+099C:   5C0101                                                                                  sce_shake_on            1, 1
+099F:   02                                                                                      evt_next
+09A0:   0E00                                                                                    next                    0
+
+off_09A2:
+09A2:   090A1E00                                                                                sleep                   10, 30
+09A6:   1804                                                                                    gosub                   4
+09A8:   0100                                                                                    evt_end                 0
+
+.proc main_06
+09AA:   3C00                                                                                    cut_auto                0
+09AC:   4C16020000                                                                              sce_espr_kill           22, 2, 0, 0
+09B1:   00                                                                                      nop
+09B2:   5400160400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+09C8:   5400160400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+09DE:   5400160400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+09F4:   5400160400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0A0A:   5400160400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0A20:   5400160400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0A36:   2901                                                                                    cut_chg                 1
+0A38:   2B000000FFEF                                                                            message_on              0, 0, 0, 255, 239
+0A3E:   02                                                                                      evt_next
+0A3F:   00                                                                                      nop
+0A40:   06004C01                                                                                if                      0, off_0B90
+0A44:   210B1F00                                                                                ck                      11, 31, 0
+0A48:   46030031000000000000                                                                    aot_reset               3, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+0A52:   22020701                                                                                set                     2, 7, 1
+0A56:   36020C000100000000000000                                                                se_on                   2, 12, 1, 0, 0, 0
+0A62:   4C16040000                                                                              sce_espr_kill           22, 4, 0, 0
+0A67:   00                                                                                      nop
+0A68:   06008E00                                                                                if                      0, off_0AFA
+0A6C:   23001B000606                                                                            cmp                     0, 27, CMP_EQ, 1542
+0A72:   5400160400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0A88:   5400160400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0A9E:   5400160400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0AB4:   5400161400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 5142, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+0ACA:   5400161400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 5142, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+0AE0:   5400161400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 5142, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+0AF6:   07008A00                                                                                else                    0, off_0B80
+
+off_0AFA:
+0AFA:   5400161400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 5142, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0B10:   5400161400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 5142, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0B26:   5400161400000008D8AFE0F5989B0000000400000000                                            sce_espr3d_on           0, 5142, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0
+0B3C:   5400160400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+0B52:   5400160400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+0B68:   5400160400000008D8AF3EF5989B0000000400000000                                            sce_espr3d_on           0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0
+0B7E:   00                                                                                      nop
+0B7F:   00                                                                                      nop
+
+off_0B80:
+0B80:   22020700                                                                                set                     2, 7, 0
+0B84:   090A1400                                                                                sleep                   10, 20
+0B88:   04021802                                                                                evt_exec                2, I_GOSUB, main_02
+0B8C:   07002600                                                                                else                    0, off_0BB2
+
+off_0B90:
+0B90:   4C16040000                                                                              sce_espr_kill           22, 4, 0, 0
+0B95:   00                                                                                      nop
+0B96:   540016020000002054C0A00FEC960000000440060000                                            sce_espr3d_on           0, 534, 0, 8192, -16300, 4000, -26900, 0, 1024, 1600, 0
+0BAC:   2900                                                                                    cut_chg                 0
+0BAE:   3C01                                                                                    cut_auto                1
+0BB0:   00                                                                                      nop
+0BB1:   00                                                                                      nop
+
+off_0BB2:
+0BB2:   0100                                                                                    evt_end                 0
+
+.proc main_07
+0BB4:   3A002C0100002902FE98E2F5CFA40000                                                        sce_espr_on             0, 300, 0, 553, -26370, -2590, -23345, 0
+0BC4:   3A002C0100002902FE986AF5CFA40000                                                        sce_espr_on             0, 300, 0, 553, -26370, -2710, -23345, 0
+0BD4:   3A002C030000D302FE98E2F5DFA30000                                                        sce_espr_on             0, 812, 0, 723, -26370, -2590, -23585, 0
+0BE4:   3A002D0000008005FE98CAF4D5A30000                                                        sce_espr_on             0, 45, 0, 1408, -26370, -2870, -23595, 0
+0BF4:   0100                                                                                    evt_end                 0
+
+.proc main_08
+0BF6:   4C2C010000                                                                              sce_espr_kill           44, 1, 0, 0
+0BFB:   4C2C030000                                                                              sce_espr_kill           44, 3, 0, 0
+0C00:   4C2D000000                                                                              sce_espr_kill           45, 0, 0, 0
+0C05:   00                                                                                      nop
+0C06:   0100                                                                                    evt_end                 0
+
+.proc main_09
+0C08:   3A002C0800005402FE987DF4D4A40000                                                        sce_espr_on             0, 2092, 0, 596, -26370, -2947, -23340, 0
+0C18:   3A002C0200005402FE9810F5D9A40000                                                        sce_espr_on             0, 556, 0, 596, -26370, -2800, -23335, 0
+0C28:   3A002C030000D302FE98E2F5DFA30000                                                        sce_espr_on             0, 812, 0, 723, -26370, -2590, -23585, 0
+0C38:   3A002D0000008005FE98CAF4D5A30000                                                        sce_espr_on             0, 45, 0, 1408, -26370, -2870, -23595, 0
+0C48:   3A002D0200008005FE98C4F557A40000                                                        sce_espr_on             0, 557, 0, 1408, -26370, -2620, -23465, 0
+0C58:   0100                                                                                    evt_end                 0
+
+.proc main_0A
+0C5A:   4C2C080000                                                                              sce_espr_kill           44, 8, 0, 0
+0C5F:   4C2C020000                                                                              sce_espr_kill           44, 2, 0, 0
+0C64:   4C2C030000                                                                              sce_espr_kill           44, 3, 0, 0
+0C69:   4C2D000000                                                                              sce_espr_kill           45, 0, 0, 0
+0C6E:   4C2D010000                                                                              sce_espr_kill           45, 1, 0, 0
+0C73:   4C2D020000                                                                              sce_espr_kill           45, 2, 0, 0
+0C78:   0100                                                                                    evt_end                 0
+
+.proc main_0B
+0C7A:   22048B01                                                                                set                     4, 139, 1
+0C7E:   4C2C010000                                                                              sce_espr_kill           44, 1, 0, 0
+0C83:   00                                                                                      nop
+0C84:   090A1400                                                                                sleep                   10, 20
+0C88:   3A002C0800005402FE987DF4D4A40000                                                        sce_espr_on             0, 2092, 0, 596, -26370, -2947, -23340, 0
+0C98:   36020F000100000000000000                                                                se_on                   2, 15, 1, 0, 0, 0
+0CA4:   090A2800                                                                                sleep                   10, 40
+0CA8:   3A002C0200005402FE9810F5D9A40000                                                        sce_espr_on             0, 556, 0, 596, -26370, -2800, -23335, 0
+0CB8:   36020F000100000000000000                                                                se_on                   2, 15, 1, 0, 0, 0
+0CC4:   090A1E00                                                                                sleep                   10, 30
+0CC8:   3A002D0100008005FE98C4F557A40000                                                        sce_espr_on             0, 301, 0, 1408, -26370, -2620, -23465, 0
+0CD8:   36020F000100000000000000                                                                se_on                   2, 15, 1, 0, 0, 0
+0CE4:   090A0A00                                                                                sleep                   10, 10
+0CE8:   0100                                                                                    evt_end                 0
+
+.proc main_0C
+0CEA:   06002000                                                                                if                      0, off_0D0E
+0CEE:   23001A000000                                                                            cmp                     0, 26, CMP_EQ, 0
+0CF4:   06000A00                                                                                if                      0, off_0D02
+0CF8:   21050000                                                                                ck                      5, 0, 0
+0CFC:   1808                                                                                    gosub                   8
+0CFE:   07000800                                                                                else                    0, off_0D06
+
+off_0D02:
+0D02:   180A                                                                                    gosub                   10
+0D04:   00                                                                                      nop
+0D05:   00                                                                                      nop
+
+off_0D06:
+0D06:   22050000                                                                                set                     5, 0, 0
+0D0A:   07002600                                                                                else                    0, off_0D30
+
+off_0D0E:
+0D0E:   06001C00                                                                                if                      0, off_0D2E
+0D12:   21050000                                                                                ck                      5, 0, 0
+0D16:   06000A00                                                                                if                      0, off_0D24
+0D1A:   21048B00                                                                                ck                      4, 139, 0
+0D1E:   1807                                                                                    gosub                   7
+0D20:   07000800                                                                                else                    0, off_0D28
+
+off_0D24:
+0D24:   1809                                                                                    gosub                   9
+0D26:   00                                                                                      nop
+0D27:   00                                                                                      nop
+
+off_0D28:
+0D28:   22050001                                                                                set                     5, 0, 1
+0D2C:   08                                                                                      endif
+0D2D:   00                                                                                      nop
+
+off_0D2E:
+0D2E:   00                                                                                      nop
+0D2F:   00                                                                                      nop
+
+off_0D30:
+0D30:   0100                                                                                    evt_end                 0
+
+.proc main_0D
+0D32:   3C00                                                                                    cut_auto                0
+0D34:   2902                                                                                    cut_chg                 2
+0D36:   02                                                                                      evt_next
+0D37:   00                                                                                      nop
+0D38:   2B000200FFEF                                                                            message_on              0, 2, 0, 255, 239
+0D3E:   02                                                                                      evt_next
+0D3F:   2904                                                                                    cut_chg                 4
+0D41:   3C01                                                                                    cut_auto                1
+0D43:   00                                                                                      nop
+0D44:   0100                                                                                    evt_end                 0
+
+.proc main_0E
+0D46:   24074A00                                                                                save                    7, 74
+0D4A:   77010100                                                                                sce_line_start          1, 1, 0
+
+off_0D4E:
+0D4E:   1D070100                                                                                work_copy               7, 1, 0
+0D52:   7800FFFF0000                                                                            sce_line_main           0, 255, 255, 0, 0
+0D58:   251007                                                                                  copy                    16, 7
+0D5B:   00                                                                                      nop
+0D5C:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0D62:   250710                                                                                  copy                    7, 16
+0D65:   00                                                                                      nop
+0D66:   1D070100                                                                                work_copy               7, 1, 0
+0D6A:   7800FFFF0000                                                                            sce_line_main           0, 255, 255, 0, 0
+0D70:   251007                                                                                  copy                    16, 7
+0D73:   00                                                                                      nop
+0D74:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0D7A:   250710                                                                                  copy                    7, 16
+0D7D:   00                                                                                      nop
+0D7E:   1D070100                                                                                work_copy               7, 1, 0
+0D82:   7800FEFF0000                                                                            sce_line_main           0, 254, 255, 0, 0
+0D88:   251007                                                                                  copy                    16, 7
+0D8B:   00                                                                                      nop
+0D8C:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0D92:   250710                                                                                  copy                    7, 16
+0D95:   00                                                                                      nop
+0D96:   1D070100                                                                                work_copy               7, 1, 0
+0D9A:   7800FEFF0000                                                                            sce_line_main           0, 254, 255, 0, 0
+0DA0:   251007                                                                                  copy                    16, 7
+0DA3:   00                                                                                      nop
+0DA4:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0DAA:   250710                                                                                  copy                    7, 16
+0DAD:   00                                                                                      nop
+0DAE:   1D070100                                                                                work_copy               7, 1, 0
+0DB2:   7800FEFF0000                                                                            sce_line_main           0, 254, 255, 0, 0
+0DB8:   251007                                                                                  copy                    16, 7
+0DBB:   00                                                                                      nop
+0DBC:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0DC2:   250710                                                                                  copy                    7, 16
+0DC5:   00                                                                                      nop
+0DC6:   1D070100                                                                                work_copy               7, 1, 0
+0DCA:   7800FEFF0000                                                                            sce_line_main           0, 254, 255, 0, 0
+0DD0:   251007                                                                                  copy                    16, 7
+0DD3:   00                                                                                      nop
+0DD4:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0DDA:   250710                                                                                  copy                    7, 16
+0DDD:   00                                                                                      nop
+0DDE:   1D070100                                                                                work_copy               7, 1, 0
+0DE2:   7800FEFF0000                                                                            sce_line_main           0, 254, 255, 0, 0
+0DE8:   251007                                                                                  copy                    16, 7
+0DEB:   00                                                                                      nop
+0DEC:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0DF2:   250710                                                                                  copy                    7, 16
+0DF5:   00                                                                                      nop
+0DF6:   1D070100                                                                                work_copy               7, 1, 0
+0DFA:   7800FEFF0000                                                                            sce_line_main           0, 254, 255, 0, 0
+0E00:   251007                                                                                  copy                    16, 7
+0E03:   00                                                                                      nop
+0E04:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0E0A:   250710                                                                                  copy                    7, 16
+0E0D:   00                                                                                      nop
+0E0E:   1D070100                                                                                work_copy               7, 1, 0
+0E12:   7800FEFF0000                                                                            sce_line_main           0, 254, 255, 0, 0
+0E18:   251007                                                                                  copy                    16, 7
+0E1B:   00                                                                                      nop
+0E1C:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0E22:   250710                                                                                  copy                    7, 16
+0E25:   00                                                                                      nop
+0E26:   1D070100                                                                                work_copy               7, 1, 0
+0E2A:   7800FFFF0000                                                                            sce_line_main           0, 255, 255, 0, 0
+0E30:   251007                                                                                  copy                    16, 7
+0E33:   00                                                                                      nop
+0E34:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0E3A:   250710                                                                                  copy                    7, 16
+0E3D:   00                                                                                      nop
+0E3E:   1D070100                                                                                work_copy               7, 1, 0
+0E42:   7800FFFF0000                                                                            sce_line_main           0, 255, 255, 0, 0
+0E48:   251007                                                                                  copy                    16, 7
+0E4B:   00                                                                                      nop
+0E4C:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0E52:   250710                                                                                  copy                    7, 16
+0E55:   00                                                                                      nop
+0E56:   79                                                                                      sce_line_end
+0E57:   00                                                                                      nop
+0E58:   251007                                                                                  copy                    16, 7
+0E5B:   00                                                                                      nop
+0E5C:   260001100800                                                                            calc                    0, OP_SUB, 16, 8
+0E62:   250710                                                                                  copy                    7, 16
+0E65:   00                                                                                      nop
+0E66:   06000C00                                                                                if                      0, off_0E76
+0E6A:   230007029A00                                                                            cmp                     0, 7, CMP_GE, 154
+0E70:   24073000                                                                                save                    7, 48
+0E74:   08                                                                                      endif
+0E75:   00                                                                                      nop
+
+off_0E76:
+0E76:   02                                                                                      evt_next
+0E77:   00                                                                                      nop
+0E78:   17FFFF00D2FE                                                                            goto                    255, 255, 0, off_0D4E
+0E7E:   0100                                                                                    evt_end                 0
+
+.proc main_0F
+0E80:   24090D00                                                                                save                    9, 13
+0E84:   1811                                                                                    gosub                   17
+0E86:   090A0D00                                                                                sleep                   10, 13
+0E8A:   0D0016000C00                                                                            for                     0, off_0EA6, 12
+0E90:   251009                                                                                  copy                    16, 9
+0E93:   00                                                                                      nop
+0E94:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
+0E9A:   250910                                                                                  copy                    9, 16
+0E9D:   00                                                                                      nop
+0E9E:   1811                                                                                    gosub                   17
+0EA0:   090A0A00                                                                                sleep                   10, 10
+0EA4:   0E00                                                                                    next                    0
+
+off_0EA6:
+0EA6:   0100                                                                                    evt_end                 0
+
+.proc main_10
+0EA8:   24090100                                                                                save                    9, 1
+0EAC:   1811                                                                                    gosub                   17
+0EAE:   090A0D00                                                                                sleep                   10, 13
+0EB2:   0D0016000C00                                                                            for                     0, off_0ECE, 12
+0EB8:   251009                                                                                  copy                    16, 9
+0EBB:   00                                                                                      nop
+0EBC:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0EC2:   250910                                                                                  copy                    9, 16
+0EC5:   00                                                                                      nop
+0EC6:   1811                                                                                    gosub                   17
+0EC8:   090A0A00                                                                                sleep                   10, 10
+0ECC:   0E00                                                                                    next                    0
+
+off_0ECE:
+0ECE:   0100                                                                                    evt_end                 0
+
+.proc main_11
+0ED0:   240816A9                                                                                save                    8, -22250
+0ED4:   240A0D00                                                                                save                    10, 13
+0ED8:   4C16000000                                                                              sce_espr_kill           22, 0, 0, 0
+0EDD:   4C16100000                                                                              sce_espr_kill           22, 16, 0, 0
+0EE2:   0D00CA000D00                                                                            for                     0, off_0FB2, 13
+0EE8:   06005A00                                                                                if                      0, off_0F46
+0EEC:   1D0A0401                                                                                work_copy               10, 4, 1
+0EF0:   230009050000                                                                            cmp                     0, 9, CMP_NE, 0
+0EF6:   130A4800                                                                                switch                  10, off_0F42
+0EFA:   140000000100                                                                            case                    0, off_0F00, 1
+
+off_0F00:
+0F00:   14001C000D00                                                                            case                    0, off_0F22, 13
+0F06:   1D080C01                                                                                work_copy               8, 12, 1
+0F0A:   540016100000000A50B0FCEF00000004000400000000                                            sce_espr3d_on           0, 4118, 0, 2560, -20400, -4100, 0, 1024, 1024, 0, 0
+0F20:   1A00                                                                                    break                   0
+
+off_0F22:
+0F22:   1500                                                                                    default                 0
+0F24:   1D080C01                                                                                work_copy               8, 12, 1
+0F28:   540016100000000850B0FCEF00000004000400000000                                            sce_espr3d_on           0, 4118, 0, 2048, -20400, -4100, 0, 1024, 1024, 0, 0
+0F3E:   1A00                                                                                    break                   0
+0F40:   1600                                                                                    eswitch                 0
+
+off_0F42:
+0F42:   07005200                                                                                else                    0, off_0F94
+
+off_0F46:
+0F46:   130A4800                                                                                switch                  10, off_0F92
+0F4A:   140000000100                                                                            case                    0, off_0F50, 1
+
+off_0F50:
+0F50:   14001C000D00                                                                            case                    0, off_0F72, 13
+0F56:   1D080C01                                                                                work_copy               8, 12, 1
+0F5A:   540016000000000A50B0FCEF00000004000400000000                                            sce_espr3d_on           0, 22, 0, 2560, -20400, -4100, 0, 1024, 1024, 0, 0
+0F70:   1A00                                                                                    break                   0
+
+off_0F72:
+0F72:   1500                                                                                    default                 0
+0F74:   1D080C01                                                                                work_copy               8, 12, 1
+0F78:   540016000000000850B0FCEF00000004000400000000                                            sce_espr3d_on           0, 22, 0, 2048, -20400, -4100, 0, 1024, 1024, 0, 0
+0F8E:   1A00                                                                                    break                   0
+0F90:   1600                                                                                    eswitch                 0
+
+off_0F92:
+0F92:   00                                                                                      nop
+0F93:   00                                                                                      nop
+
+off_0F94:
+0F94:   251008                                                                                  copy                    16, 8
+0F97:   00                                                                                      nop
+0F98:   26000110C800                                                                            calc                    0, OP_SUB, 16, 200
+0F9E:   250810                                                                                  copy                    8, 16
+0FA1:   00                                                                                      nop
+0FA2:   25100A                                                                                  copy                    16, 10
+0FA5:   00                                                                                      nop
+0FA6:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
+0FAC:   250A10                                                                                  copy                    10, 16
+0FAF:   00                                                                                      nop
+0FB0:   0E00                                                                                    next                    0
+
+off_0FB2:
+0FB2:   0100                                                                                    evt_end                 0
+
+.proc main_12
+0FB4:   24090100                                                                                save                    9, 1
+0FB8:   1813                                                                                    gosub                   19
+0FBA:   090A0D00                                                                                sleep                   10, 13
+0FBE:   0D0016000600                                                                            for                     0, off_0FDA, 6
+0FC4:   251009                                                                                  copy                    16, 9
+0FC7:   00                                                                                      nop
+0FC8:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0FCE:   250910                                                                                  copy                    9, 16
+0FD1:   00                                                                                      nop
+0FD2:   1813                                                                                    gosub                   19
+0FD4:   090A1400                                                                                sleep                   10, 20
+0FD8:   0E00                                                                                    next                    0
+
+off_0FDA:
+0FDA:   090A0400                                                                                sleep                   10, 4
+0FDE:   090A5A00                                                                                sleep                   10, 90
+0FE2:   090A0400                                                                                sleep                   10, 4
+0FE6:   0D0016000600                                                                            for                     0, off_1002, 6
+0FEC:   251009                                                                                  copy                    16, 9
+0FEF:   00                                                                                      nop
+0FF0:   260000100100                                                                            calc                    0, OP_ADD, 16, 1
+0FF6:   250910                                                                                  copy                    9, 16
+0FF9:   00                                                                                      nop
+0FFA:   1813                                                                                    gosub                   19
+0FFC:   090A1400                                                                                sleep                   10, 20
+1000:   0E00                                                                                    next                    0
+
+off_1002:
+1002:   0100                                                                                    evt_end                 0
+
+.proc main_13
+1004:   240816A9                                                                                save                    8, -22250
+1008:   240A0D00                                                                                save                    10, 13
+100C:   4C16000000                                                                              sce_espr_kill           22, 0, 0, 0
+1011:   4C16080000                                                                              sce_espr_kill           22, 8, 0, 0
+1016:   0D00CA000D00                                                                            for                     0, off_10E6, 13
+101C:   06005A00                                                                                if                      0, off_107A
+1020:   1D0A0401                                                                                work_copy               10, 4, 1
+1024:   230009050000                                                                            cmp                     0, 9, CMP_NE, 0
+102A:   130A4800                                                                                switch                  10, off_1076
+102E:   140000000100                                                                            case                    0, off_1034, 1
+
+off_1034:
+1034:   14001C000D00                                                                            case                    0, off_1056, 13
+103A:   1D080C01                                                                                work_copy               8, 12, 1
+103E:   540016000000000A50B0FCEF00000004000400000000                                            sce_espr3d_on           0, 22, 0, 2560, -20400, -4100, 0, 1024, 1024, 0, 0
+1054:   1A00                                                                                    break                   0
+
+off_1056:
+1056:   1500                                                                                    default                 0
+1058:   1D080C01                                                                                work_copy               8, 12, 1
+105C:   540016000000000850B0FCEF00000004000400000000                                            sce_espr3d_on           0, 22, 0, 2048, -20400, -4100, 0, 1024, 1024, 0, 0
+1072:   1A00                                                                                    break                   0
+1074:   1600                                                                                    eswitch                 0
+
+off_1076:
+1076:   07005200                                                                                else                    0, off_10C8
+
+off_107A:
+107A:   130A4800                                                                                switch                  10, off_10C6
+107E:   140000000100                                                                            case                    0, off_1084, 1
+
+off_1084:
+1084:   14001C000D00                                                                            case                    0, off_10A6, 13
+108A:   1D080C01                                                                                work_copy               8, 12, 1
+108E:   540016080000000A50B0FCEF00000004000400000000                                            sce_espr3d_on           0, 2070, 0, 2560, -20400, -4100, 0, 1024, 1024, 0, 0
+10A4:   1A00                                                                                    break                   0
+
+off_10A6:
+10A6:   1500                                                                                    default                 0
+10A8:   1D080C01                                                                                work_copy               8, 12, 1
+10AC:   540016080000000850B0FCEF00000004000400000000                                            sce_espr3d_on           0, 2070, 0, 2048, -20400, -4100, 0, 1024, 1024, 0, 0
+10C2:   1A00                                                                                    break                   0
+10C4:   1600                                                                                    eswitch                 0
+
+off_10C6:
+10C6:   00                                                                                      nop
+10C7:   00                                                                                      nop
+
+off_10C8:
+10C8:   251008                                                                                  copy                    16, 8
+10CB:   00                                                                                      nop
+10CC:   26000110C800                                                                            calc                    0, OP_SUB, 16, 200
+10D2:   250810                                                                                  copy                    8, 16
+10D5:   00                                                                                      nop
+10D6:   25100A                                                                                  copy                    16, 10
+10D9:   00                                                                                      nop
+10DA:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
+10E0:   250A10                                                                                  copy                    10, 16
+10E3:   00                                                                                      nop
+10E4:   0E00                                                                                    next                    0
+
+off_10E6:
+10E6:   0100                                                                                    evt_end                 0
+
+.proc main_14
+10E8:   2902                                                                                    cut_chg                 2
+10EA:   2B000500FFEF                                                                            message_on              0, 5, 0, 255, 239
+10F0:   02                                                                                      evt_next
+10F1:   2900                                                                                    cut_chg                 0
+10F3:   3C01                                                                                    cut_auto                1
+10F5:   22020700                                                                                set                     2, 7, 0
+10F9:   00                                                                                      nop
+10FA:   0100                                                                                    evt_end                 0
+
+.proc main_15
+10FC:   8C00965017000000                                                                        nop_8c                  0, 150, 80, 23, 0, 0, 0
+1104:   8C00503C5A001700                                                                        nop_8c                  0, 80, 60, 90, 0, 23, 0
+110C:   8C00960019007100                                                                        nop_8c                  0, 150, 0, 25, 0, 113, 0
+1114:   0100                                                                                    evt_end                 0
+
+.proc main_16
+1116:   8C0096501A000000                                                                        nop_8c                  0, 150, 80, 26, 0, 0, 0
+111E:   8C00503C5A001A00                                                                        nop_8c                  0, 80, 60, 90, 0, 26, 0
+1126:   8C00960010007400                                                                        nop_8c                  0, 150, 0, 16, 0, 116, 0
+112E:   8BC803009800                                                                            nop_8b                  200, 3, 0, 152, 0
+1134:   8B960C00AF00                                                                            nop_8b                  150, 12, 0, 175, 0
+113A:   8C0096501700D900                                                                        nop_8c                  0, 150, 80, 23, 0, 217, 0
+1142:   8C00503C5A00F000                                                                        nop_8c                  0, 80, 60, 90, 0, 240, 0
+114A:   8C00960019004A01                                                                        nop_8c                  0, 150, 0, 25, 0, 74, 1
+1152:   0100                                                                                    evt_end                 0
+
+.proc main_17
+1154:   2902                                                                                    cut_chg                 2
+1156:   2B000400FFEF                                                                            message_on              0, 4, 0, 255, 239
+115C:   02                                                                                      evt_next
+115D:   00                                                                                      nop
+115E:   06007E00                                                                                if                      0, off_11E0
+1162:   210B1F00                                                                                ck                      11, 31, 0
+1166:   46040031000000000000                                                                    aot_reset               4, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+1170:   22011B01                                                                                set                     1, 27, 1
+1174:   22020701                                                                                set                     2, 7, 1
+1178:   36020C000100000000000000                                                                se_on                   2, 12, 1, 0, 0, 0
+1184:   2E0100                                                                                  work_set                WK_PLAYER, 0
+1187:   00                                                                                      nop
+1188:   320076A300006CA3                                                                        pos_set                 0, -23690, 0, -23700
+1190:   3300000000000000                                                                        dir_set                 0, 0, 0, 0
+1198:   5A00                                                                                    weapon_chg              0
+119A:   2E0100                                                                                  work_set                WK_PLAYER, 0
+119D:   3F000F40                                                                                plc_motion              0, 15, 64
+11A1:   2E0200                                                                                  work_set                WK_SPLAYER, 0
+11A4:   3F000F40                                                                                plc_motion              0, 15, 64
+11A8:   02                                                                                      evt_next
+11A9:   2E0100                                                                                  work_set                WK_PLAYER, 0
+11AC:   66                                                                                      plc_stop
+11AD:   00                                                                                      nop
+11AE:   0507                                                                                    evt_kill                7
+11B0:   04051818                                                                                evt_exec                5, I_GOSUB, main_18
+11B4:   02                                                                                      evt_next
+11B5:   2903                                                                                    cut_chg                 3
+11B7:   00                                                                                      nop
+11B8:   04FF1812                                                                                evt_exec                255, I_GOSUB, main_12
+11BC:   1816                                                                                    gosub                   22
+11BE:   1805                                                                                    gosub                   5
+11C0:   090A1400                                                                                sleep                   10, 20
+11C4:   460201216AFA0000F0E7                                                                    aot_reset               2, SCE_DOOR, SAT_PL | SAT_FRONT, 106, 250, 0, 0, 240, 231
+11CE:   2E0100                                                                                  work_set                WK_PLAYER, 0
+11D1:   3F0A0F00                                                                                plc_motion              10, 15, 0
+11D5:   2E0200                                                                                  work_set                WK_SPLAYER, 0
+11D8:   3F000004                                                                                plc_motion              0, 0, 4
+11DC:   07001000                                                                                else                    0, off_11EC
+
+off_11E0:
+11E0:   2900                                                                                    cut_chg                 0
+11E2:   3C01                                                                                    cut_auto                1
+11E4:   0507                                                                                    evt_kill                7
+11E6:   22020700                                                                                set                     2, 7, 0
+11EA:   00                                                                                      nop
+11EB:   00                                                                                      nop
+
+off_11EC:
+11EC:   0100                                                                                    evt_end                 0
+
+.proc main_18
+11EE:   02                                                                                      evt_next
+11EF:   2E0200                                                                                  work_set                WK_SPLAYER, 0
+
+off_11F2:
+11F2:   3D1000                                                                                  member_copy             16, 0
+11F5:   00                                                                                      nop
+11F6:   260005100800                                                                            calc                    0, OP_OR, 16, 8
+11FC:   260005100200                                                                            calc                    0, OP_OR, 16, 2
+1202:   350010                                                                                  member_set2             0, 16
+1205:   00                                                                                      nop
+1206:   72004000610100002700000000000000                                                        super_on                0, 64, 0, 97, 1, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0
+1216:   17FFFF00D8FF                                                                            goto                    255, 255, 0, off_11F2
+121C:   0100                                                                                    evt_end                 0
+
+.proc main_19
+121E:   22020701                                                                                set                     2, 7, 1
+1222:   22011B01                                                                                set                     1, 27, 1
+1226:   2E0100                                                                                  work_set                WK_PLAYER, 0
+1229:   00                                                                                      nop
+122A:   3200C0A4000010AA                                                                        pos_set                 0, -23360, 0, -22000
+1232:   33000000000C0000                                                                        dir_set                 0, 0, 3072, 0
+123A:   3F001044                                                                                plc_motion              0, 16, 68
+123E:   090A0500                                                                                sleep                   10, 5
+1242:   3F010680                                                                                plc_motion              1, 6, 128
+1246:   090A1900                                                                                sleep                   10, 25
+124A:   42                                                                                      plc_ret
+124B:   22020700                                                                                set                     2, 7, 0
+124F:   22011B00                                                                                set                     1, 27, 0
+1253:   00                                                                                      nop
+1254:   0100                                                                                    evt_end                 0
+
+.proc main_1A
+1256:   2902                                                                                    cut_chg                 2
+1258:   0407180E                                                                                evt_exec                7, I_GOSUB, main_0E
+125C:   02                                                                                      evt_next
+125D:   00                                                                                      nop
+125E:   2B000200FFEF                                                                            message_on              0, 2, 0, 255, 239
+1264:   02                                                                                      evt_next
+1265:   00                                                                                      nop
+1266:   2B000300FFEF                                                                            message_on              0, 3, 0, 255, 239
+126C:   02                                                                                      evt_next
+126D:   00                                                                                      nop
+126E:   06005800                                                                                if                      0, off_12CA
+1272:   210B1F00                                                                                ck                      11, 31, 0
+1276:   22020701                                                                                set                     2, 7, 1
+127A:   886201                                                                                  sce_item_ck_lost        98, 1
+127D:   00                                                                                      nop
+127E:   36020A000100000000000000                                                                se_on                   2, 10, 1, 0, 0, 0
+128A:   180B                                                                                    gosub                   11
+128C:   090A6E00                                                                                sleep                   10, 110
+1290:   46060031000000000000                                                                    aot_reset               6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+129A:   06001800                                                                                if                      0, off_12B6
+129E:   2103C100                                                                                ck                      3, 193, 0
+12A2:   46040531060018140000                                                                    aot_reset               4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_14, 0, 0
+12AC:   0507                                                                                    evt_kill                7
+12AE:   03001814                                                                                evt_chain               0, 24, 20
+12B2:   07001400                                                                                else                    0, off_12C6
+
+off_12B6:
+12B6:   46040531060018170000                                                                    aot_reset               4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_17, 0, 0
+12C0:   03001817                                                                                evt_chain               0, 24, 23
+12C4:   00                                                                                      nop
+12C5:   00                                                                                      nop
+
+off_12C6:
+12C6:   07000C00                                                                                else                    0, off_12D2
+
+off_12CA:
+12CA:   2900                                                                                    cut_chg                 0
+12CC:   3C01                                                                                    cut_auto                1
+12CE:   0507                                                                                    evt_kill                7
+12D0:   00                                                                                      nop
+12D1:   00                                                                                      nop
+
+off_12D2:
+12D2:   0100                                                                                    evt_end                 0
+
+.proc main_1B
+12D4:   06006A00                                                                                if                      0, off_1342
+12D8:   21048B00                                                                                ck                      4, 139, 0
+12DC:   11000A00                                                                                do                      0, off_12EA
+12E0:   02                                                                                      evt_next
+12E1:   00                                                                                      nop
+12E2:   1206                                                                                    edwhile                 off_12EA
+12E4:   230002056200                                                                            cmp                     0, 2, CMP_NE, 98
+
+off_12EA:
+12EA:   22020701                                                                                set                     2, 7, 1
+12EE:   2902                                                                                    cut_chg                 2
+12F0:   0407180E                                                                                evt_exec                7, I_GOSUB, main_0E
+12F4:   02                                                                                      evt_next
+12F5:   886201                                                                                  sce_item_ck_lost        98, 1
+12F8:   36020A000100000000000000                                                                se_on                   2, 10, 1, 0, 0, 0
+1304:   180B                                                                                    gosub                   11
+1306:   090A6E00                                                                                sleep                   10, 110
+130A:   46060031000000000000                                                                    aot_reset               6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+1314:   06001800                                                                                if                      0, off_1330
+1318:   2103C100                                                                                ck                      3, 193, 0
+131C:   46040531060018140000                                                                    aot_reset               4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_14, 0, 0
+1326:   0507                                                                                    evt_kill                7
+1328:   03001814                                                                                evt_chain               0, 24, 20
+132C:   07001400                                                                                else                    0, off_1340
+
+off_1330:
+1330:   46040531060018170000                                                                    aot_reset               4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_17, 0, 0
+133A:   03001817                                                                                evt_chain               0, 24, 23
+133E:   00                                                                                      nop
+133F:   00                                                                                      nop
+
+off_1340:
+1340:   08                                                                                      endif
+1341:   00                                                                                      nop
+
+off_1342:
+1342:   0100                                                                                    evt_end                 0

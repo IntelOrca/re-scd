@@ -1,0 +1,525 @@
+.version 2
+init
+{
+    init_00()
+    {
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21395, -28145, 4600, 1800, -12865, 0, -13165, 1024, 1, 17, 7, 0, 29, 3, 0, 0, UNLOCKED, 0);
+        return 0;
+    }
+}
+
+main
+{
+    main_00()
+    {
+        if (game.scenario == 1)
+        {
+            if (game.difficult == 1)
+            {
+                item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14870, -27180, 2330, 1650, ITEM_FLAMEROUNDS, 6, 24, 255, 1);
+            }
+            else
+            {
+                item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21380, -11080, 1240, 1120, ITEM_FLAMEROUNDS, 6, 24, 1, 1);
+                obj_model_set(1, 0, 0, 0, 0, 0, 0, 10, 16, -20550, 0, -10250, 0, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            }
+        }
+        main_03();
+        return 0;
+    }
+
+    main_01()
+    {
+        main_02();
+        return 0;
+    }
+
+    main_02()
+    {
+        if (bits[4][60] == 1)
+        {
+            aot_reset(3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 10, 0, 0, 0, 255, 255);
+        }
+        main_06();
+        return 0;
+    }
+
+    main_03()
+    {
+        if (bits[4][60] == 1)
+        {
+            sce_espr_on2(1, 22, 2, 0, 0, 186, 2, 194, 160, 206, 245, 194, 212, 0, 0);
+            sce_espr_on2(2, 22, 2, 0, 0, 186, 2, 20, 161, 206, 245, 194, 212, 0, 0);
+            sce_espr_on2(3, 22, 2, 0, 0, 186, 2, 110, 161, 206, 245, 194, 212, 0, 0);
+            sce_espr_on2(4, 22, 2, 0, 0, 186, 2, 200, 161, 206, 245, 194, 212, 0, 0);
+            sce_espr_on2(5, 22, 2, 0, 0, 186, 2, 34, 162, 206, 245, 194, 212, 0, 0);
+        }
+        aot_set(3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24840, -11500, 1900, 1550, 255, 0, I_GOSUB, main_04, 0, 0);
+        item_aot_set(6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25240, -26800, 1360, 1070, ITEM_HERBG, 1, 253, 9, 1);
+        if (bits[4][122] == 0)
+        {
+            aot_set(5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17000, -10900, 1200, 1070, 255, 0, I_GOSUB, main_05, 0, 0);
+            obj_model_set(0, 0, 0, 0, 0, 0, 0, 10, 16, -16900, -1200, -10400, 0, -896, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+        obj_model_set(2, 0, 0, 0, 0, 0, 0, 10, 16, -24660, -2754, -11070, 128, -1024, -1856, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(3, 0, 0, 0, 0, 0, 0, 10, 16, -24390, -2428, -11070, -1024, -1024, 1024, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(4, 0, 0, 0, 0, 0, 0, 10, 16, -24300, -2428, -11070, -1024, -1024, 1024, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(5, 0, 0, 0, 0, 0, 0, 10, 16, -24210, -2428, -11070, -1024, -1024, 1024, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(6, 0, 0, 0, 0, 0, 0, 10, 16, -24120, -2428, -11070, -1024, -1024, 1024, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(7, 0, 0, 0, 0, 0, 0, 10, 16, -24030, -2428, -11070, -1024, -1024, 1024, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(9, 0, 0, 0, 0, 0, 0, 10, 16, -24814, 0, -26191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        return 0;
+    }
+
+    main_04()
+    {
+        bits[2][7] = 1;
+        message_on(0, 11, 0, 255, 239);
+        sleep(10, 1);
+        cut_chg(6);
+        work_set(WK_PLAYER, 0);
+        pos_set(0, 0, -2000, 0);
+        work_set(WK_OBJECT, 2);
+        pos_set(0, -24660, -2754, -11070);
+        save(5, 0);
+        save(6, 0);
+        save(7, -24660);
+        work_set(WK_OBJECT, 3);
+        dir_set(0, -1024, -1024, 1024);
+        work_set(WK_OBJECT, 4);
+        dir_set(0, -1024, -1024, 1024);
+        work_set(WK_OBJECT, 5);
+        dir_set(0, -1024, -1024, 1024);
+        work_set(WK_OBJECT, 6);
+        dir_set(0, -1024, -1024, 1024);
+        work_set(WK_OBJECT, 7);
+        dir_set(0, -1024, -1024, 1024);
+        sce_espr_kill2(1);
+        sce_espr_kill2(2);
+        sce_espr_kill2(3);
+        sce_espr_kill2(4);
+        sce_espr_kill2(5);
+        message_on(0, 1, 0, 255, 239);
+        evt_next();
+        se_on(2, 266, 0, -24421, -1024, -11276);
+        if (input.question == 0)
+        {
+            work_set(WK_OBJECT, 3);
+            dir_set(0, -1024, -1024, 1600);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 += 24;
+            copy(5, 16);
+            if (arr[5] >= 100)
+            {
+                save(5, 100);
+            }
+            copy(16, 5);
+            calc2(OP_SUB, 16, 6);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 += 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        else
+        {
+            work_set(WK_OBJECT, 3);
+            dir_set(0, -1024, -1024, 515);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 -= 0E;
+            copy(5, 16);
+            if (arr[5] <= 0)
+            {
+                save(5, 0);
+            }
+            copy(16, 6);
+            calc2(OP_SUB, 16, 5);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 -= 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        sce_espr_on2(1, 22, 2, 0, 0, 186, 2, 194, 160, 206, 245, 194, 212, 0, 0);
+        sleep(10, 30);
+        message_on(0, 2, 0, 255, 239);
+        evt_next();
+        se_on(2, 266, 0, -24421, -1024, -11276);
+        if (input.question == 0)
+        {
+            work_set(WK_OBJECT, 4);
+            dir_set(0, -1024, -1024, 1600);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 += 24;
+            copy(5, 16);
+            if (arr[5] >= 100)
+            {
+                save(5, 100);
+            }
+            copy(16, 5);
+            calc2(OP_SUB, 16, 6);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 += 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        else
+        {
+            work_set(WK_OBJECT, 4);
+            dir_set(0, -1024, -1024, 515);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 -= 0E;
+            copy(5, 16);
+            if (arr[5] <= 0)
+            {
+                save(5, 0);
+            }
+            copy(16, 6);
+            calc2(OP_SUB, 16, 5);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 -= 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        sce_espr_on2(2, 22, 2, 0, 0, 186, 2, 20, 161, 206, 245, 194, 212, 0, 0);
+        sleep(10, 30);
+        message_on(0, 3, 0, 255, 239);
+        evt_next();
+        se_on(2, 266, 0, -24421, -1024, -11276);
+        if (input.question == 0)
+        {
+            work_set(WK_OBJECT, 5);
+            dir_set(0, -1024, -1024, 1600);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 += 24;
+            copy(5, 16);
+            if (arr[5] >= 100)
+            {
+                save(5, 100);
+            }
+            copy(16, 5);
+            calc2(OP_SUB, 16, 6);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 += 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        else
+        {
+            work_set(WK_OBJECT, 5);
+            dir_set(0, -1024, -1024, 515);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 -= 0E;
+            copy(5, 16);
+            if (arr[5] <= 0)
+            {
+                save(5, 0);
+            }
+            copy(16, 6);
+            calc2(OP_SUB, 16, 5);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 -= 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        sce_espr_on2(3, 22, 2, 0, 0, 186, 2, 110, 161, 206, 245, 194, 212, 0, 0);
+        sleep(10, 30);
+        message_on(0, 4, 0, 255, 239);
+        evt_next();
+        se_on(2, 266, 0, -24421, -1024, -11276);
+        if (input.question == 0)
+        {
+            work_set(WK_OBJECT, 6);
+            dir_set(0, -1024, -1024, 1600);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 += 24;
+            copy(5, 16);
+            if (arr[5] >= 100)
+            {
+                save(5, 100);
+            }
+            copy(16, 5);
+            calc2(OP_SUB, 16, 6);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 += 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        else
+        {
+            work_set(WK_OBJECT, 6);
+            dir_set(0, -1024, -1024, 515);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 -= 0E;
+            copy(5, 16);
+            if (arr[5] <= 0)
+            {
+                save(5, 0);
+            }
+            copy(16, 6);
+            calc2(OP_SUB, 16, 5);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 -= 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        sce_espr_on2(4, 22, 2, 0, 0, 186, 2, 200, 161, 206, 245, 194, 212, 0, 0);
+        sleep(10, 30);
+        message_on(0, 5, 0, 255, 239);
+        evt_next();
+        se_on(2, 266, 0, -24421, -1024, -11276);
+        if (input.question == 0)
+        {
+            work_set(WK_OBJECT, 7);
+            dir_set(0, -1024, -1024, 1600);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 += 24;
+            copy(5, 16);
+            if (arr[5] >= 100)
+            {
+                save(5, 100);
+            }
+            copy(16, 5);
+            calc2(OP_SUB, 16, 6);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 += 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        else
+        {
+            work_set(WK_OBJECT, 7);
+            dir_set(0, -1024, -1024, 515);
+            copy(6, 5);
+            copy(16, 5);
+            var_10 -= 0E;
+            copy(5, 16);
+            if (arr[5] <= 0)
+            {
+                save(5, 0);
+            }
+            copy(16, 6);
+            calc2(OP_SUB, 16, 5);
+            copy(4, 16);
+            while (
+            {
+                copy(16, 4);
+                var_10 -= 01;
+                copy(4, 16);
+                copy(16, 7);
+                var_10 -= 09;
+                copy(7, 16);
+                work_set(WK_OBJECT, 2);
+                work_copy(7, 2, 1);
+                pos_set(0, 0, -2754, -11070);
+                evt_next();
+            }
+        }
+        sce_espr_on2(5, 22, 2, 0, 0, 186, 2, 34, 162, 206, 245, 194, 212, 0, 0);
+        sleep(10, 30);
+        work_set(WK_PLAYER, 0);
+        pos_set(0, -24485, 0, -11346);
+        cut_chg(4);
+        if (arr[5] == 100)
+        {
+            message_on(0, 6, 0, 255, 255);
+            se_on(2, 267, 0, -24421, -1024, -11276);
+        }
+        else
+        {
+            if (arr[5] == 80)
+            {
+                message_on(0, 7, 0, 255, 255);
+                bits[4][60] = 1;
+                se_on(2, 268, 0, -24421, -1024, -11276);
+                sleep(10, 20);
+                cut_chg(8);
+                sce_espr_on2(11, 22, 0, 0, 0, 180, 11, 44, 162, 136, 245, 150, 206, 0, 0);
+                sce_espr_on2(12, 22, 0, 0, 0, 180, 11, 28, 163, 136, 245, 150, 206, 0, 0);
+                sleep(10, 30);
+                se_on(2, 271, 0, -24421, -1024, -11276);
+                sce_espr_kill2(11);
+                sce_espr_kill2(12);
+                sce_espr_on2(13, 22, 16, 0, 0, 180, 11, 44, 162, 136, 245, 150, 206, 0, 0);
+                sce_espr_on2(14, 22, 16, 0, 0, 180, 11, 28, 163, 136, 245, 150, 206, 0, 0);
+                sleep(10, 30);
+                cut_chg(4);
+            }
+            else
+            {
+                if (arr[5] == 0)
+                {
+                    message_on(0, 9, 0, 255, 255);
+                }
+                if (arr[5] > 80)
+                {
+                    message_on(0, 6, 0, 255, 255);
+                }
+                else
+                {
+                    message_on(0, 8, 0, 255, 255);
+                }
+                se_on(2, 267, 0, -24421, -1024, -11276);
+            }
+        }
+        sleep(10, 1);
+        sce_espr_kill2(13);
+        sce_espr_kill2(14);
+        bits[2][7] = 0;
+        cut_auto(1);
+        return 0;
+    }
+
+    main_05()
+    {
+        bits[2][7] = 1;
+        message_on(0, 0, 0, 255, 239);
+        sleep(10, 1);
+        if (input.question == 0)
+        {
+            work_set(WK_OBJECT, 0);
+            pos_set(0, 0, -21024, 0);
+            bits[33][5] = 1;
+            bits[35][5] = 1;
+            bits[4][122] = 1;
+            aot_reset(5, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+            message_on(0, 12, 0, 255, 239);
+            sleep(10, 1);
+        }
+        bits[2][7] = 0;
+        return 0;
+    }
+
+    main_06()
+    {
+
+off_186A:
+        switch (var_1A)
+        {
+        case 0:
+            sce_bgm_control(1, 0, 1, 90, 40);
+            break;
+        case 1:
+            sce_bgm_control(1, 0, 1, 110, 40);
+            break;
+        case 2:
+            sce_bgm_control(1, 0, 1, 110, 80);
+            break;
+        case 3:
+            sce_bgm_control(1, 0, 1, 110, 80);
+            break;
+        case 4:
+            sce_bgm_control(1, 0, 1, 100, 90);
+            break;
+        case 5:
+            sce_bgm_control(1, 0, 1, 90, 90);
+            break;
+        case 6:
+            sce_bgm_control(1, 0, 1, 90, 90);
+            break;
+        }
+        do
+        {
+            sleep(10, 1);
+        } while (bits[1][11] == 0);
+        goto off_186A;
+        return 0;
+    }
+}

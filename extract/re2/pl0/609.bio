@@ -1,0 +1,145 @@
+.version 2
+init
+{
+    init_00()
+    {
+        if (bits[4][164] == 1)
+        {
+            bits[1][12] = 1;
+        }
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7777, -10184, 1300, 2840, -26178, 0, -5237, -24493, 5, 11, 0, 0, 41, 1, 0, 148, UNLOCK, 0);
+        aot_set(10, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -15247, -17384, 1300, 8310, 0, 0, 0, 0, 255, 255);
+        aot_set(11, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9687, -7704, 2200, 1110, 1, 0, 0, 0, 255, 255);
+        item_aot_set(7, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9687, -7704, 2200, 1110, ITEM_INKRIBBON, 3, 6, 255, 0);
+        return 0;
+    }
+}
+
+main
+{
+    main_00()
+    {
+        main_03();
+        if (bits[34][38] == 0)
+        {
+            aot_set(1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9458, -17827, 2340, 1430, 255, 0, I_GOSUB, main_02, 0, 0);
+        }
+        item_aot_set(8, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 1, 1, ITEM_SHOTGUNAMMO, 7, 37, 2, 0);
+        obj_model_set(2, 0, 0, 0, 0, 0, 0, 10, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        item_aot_set(9, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 1, 1, ITEM_SHOTGUNAMMO, 7, 38, 3, 0);
+        obj_model_set(3, 0, 0, 0, 0, 0, 0, 10, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        return 0;
+    }
+
+    main_01()
+    {
+        return 0;
+    }
+
+    main_02()
+    {
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        bits[2][3] = 1;
+        if (bits[34][37] == 0)
+        {
+            cut_chg(3);
+            work_set(WK_OBJECT, 2);
+            pos_set(0, -8067, -1934, -17298);
+            work_set(WK_OBJECT, 3);
+            pos_set(0, -8667, -1934, -17298);
+            se_on(2, 296, 0, -8767, -1934, -17448);
+            sleep(10, 30);
+            aot_on(8);
+            cut_chg(129);
+            evt_next();
+            work_set(WK_OBJECT, 2);
+            pos_set(0, 0, 0, 0);
+            work_set(WK_OBJECT, 3);
+            pos_set(0, 0, 0, 0);
+        }
+        else
+        {
+            if (bits[34][38] == 0)
+            {
+                cut_chg(3);
+                work_set(WK_OBJECT, 2);
+                pos_set(0, 0, 0, 0);
+                work_set(WK_OBJECT, 3);
+                pos_set(0, -8667, -1934, -17298);
+                se_on(2, 296, 0, -8767, -1934, -17448);
+                sleep(10, 30);
+                aot_on(9);
+                cut_chg(129);
+                evt_next();
+                work_set(WK_OBJECT, 3);
+                pos_set(0, 0, 0, 0);
+            }
+            else
+            {
+            }
+        }
+        cut_auto(1);
+        bits[2][3] = 0;
+        bits[2][2] = 0;
+        bits[2][7] = 0;
+        return 0;
+    }
+
+    main_03()
+    {
+        if (game.last_room == 0x60A)
+        {
+            evt_exec(255, I_GOSUB, main_04);
+        }
+        main_05();
+        return 0;
+    }
+
+    main_04()
+    {
+        game.cutscene = 1;
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        bits[2][3] = 1;
+        sleep(10, 1);
+        cut_chg(2);
+        work_set(WK_PLAYER, 0);
+        pos_set(0, -12994, -2500, -6064);
+        dir_set(0, 0, -3288, 0);
+        work_set(WK_PLAYER, 0);
+        plc_motion(0, 16, 0);
+        save(4, 0);
+        for 7 times
+        {
+            member_copy(16, 12);
+            calc2(OP_ADD, 16, 4);
+            member_set2(12, 16);
+            evt_next();
+            copy(16, 4);
+            var_10 += 5A;
+            copy(4, 16);
+        }
+        se_on(2, 29, 0, 1325, 0, -22023);
+        nop_8a(0, 2, 0, 0, 0);
+        nop_8b(255, 3, 0, 0, 0);
+        pos_set(0, -12994, 0, -6064);
+        plc_motion(0, 15, 0);
+        sleep(10, 50);
+        cut_auto(1);
+        work_set(WK_PLAYER, 0);
+        plc_ret();
+        bits[2][7] = 0;
+        bits[2][2] = 0;
+        bits[2][3] = 0;
+        game.cutscene = 0;
+        return 0;
+    }
+
+    main_05()
+    {
+        sce_em_set(0, 0, ENEMY_LICKERGREY, 0, 0, 0, 51, 0, 38, -12687, 0, -12836, -592, 0, 0);
+        sce_em_set(0, 1, ENEMY_LICKERGREY, 0, 0, 0, 51, 0, 39, -9522, 0, -13842, -1216, 0, 0);
+        return 0;
+    }
+}

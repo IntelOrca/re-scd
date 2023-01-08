@@ -1,0 +1,473 @@
+.version 2
+init
+{
+    init_00()
+    {
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22155, -20156, 1770, 2280, -15332, 0, -11799, 1832, 0, 1, 0, 0, 11, 0, 0, 0, UNLOCKED, 0);
+        aot_set_4p(1, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, 7973, -6626, 11430, 8000, 18900, 7950, 28700, -6100, 0, 0, 0, 0, 0, 0);
+        aot_set_4p(2, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, -827, 8174, 11810, 8400, 8500, -6300, 200, -7310, 0, 0, 0, 0, 0, 0);
+        aot_set_4p(3, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, -11127, 8274, -300, 8600, 560, -7200, -8800, -6800, 0, 0, 0, 0, 0, 0);
+        aot_set_4p(4, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, -21927, 8174, -10700, 8700, -8600, -6700, -22370, -6200, 0, 0, 0, 0, 0, 0);
+        aot_set_4p(5, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, -22427, -5726, -12500, -5900, -13270, -14710, -21890, -14820, 0, 0, 0, 0, 0, 0);
+        aot_set(6, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, -21876, -27262, 9100, 13100, 0, 0, 0, 0, 0, 0);
+        aot_set(7, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, 18929, -178, 1800, 1800, 0, 0, 0, 0, 0, 0);
+        aot_set(8, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, 20771, -1323, 1800, 1800, 0, 0, 0, 0, 0, 0);
+        aot_set(9, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, 18554, 4087, 1800, 1800, 0, 0, 0, 0, 0, 0);
+        aot_set(10, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, 22193, -1880, 1800, 1800, 0, 0, 0, 0, 0, 0);
+        aot_set(11, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, 18099, 2781, 1800, 1800, 0, 0, 0, 0, 0, 0);
+        aot_set(12, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, 18105, 800, 1900, 1800, 0, 0, 0, 0, 0, 0);
+        aot_set(13, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, 20073, -643, 1800, 1800, 0, 0, 0, 0, 0, 0);
+        if (game.difficult == 0)
+        {
+            sce_em_set(0, 0, ENEMY_ZOMBIERANDOM, 194, 80, 0, 1, 0, 35, 22813, 0, 210, 1947, 0, 0);
+            sce_em_set(0, 1, ENEMY_ZOMBIERANDOM, 198, 16, 0, 2, 0, 36, 18312, 0, 3539, 973, 0, 0);
+            sce_em_set(0, 2, ENEMY_ZOMBIERANDOM, 70, 16, 0, 1, 0, 37, 7007, 0, -1585, 3985, 0, 0);
+            sce_em_set(0, 3, ENEMY_ZOMBIERANDOM, 70, 16, 0, 2, 0, 38, -1261, 0, -2567, 329, 0, 0);
+            sce_em_set(0, 4, ENEMY_ZOMBIERANDOM, 64, 16, 0, 2, 0, 40, -4611, 0, 280, 2535, 0, 0);
+            sce_em_set(0, 5, ENEMY_ZOMBIERANDOM, 64, 16, 0, 1, 0, 41, 2556, 0, -1003, 3405, 0, 0);
+        }
+        else
+        {
+            sce_em_set(0, 0, ENEMY_ZOMBIERANDOM, 194, 80, 0, 2, 0, 35, 22813, 0, 210, 1947, 0, 0);
+            sce_em_set(0, 1, ENEMY_ZOMBIERANDOM, 198, 16, 0, 1, 0, 36, 18800, 0, 4007, 1407, 0, 0);
+            sce_em_set(0, 2, ENEMY_ZOMBIERANDOM, 70, 16, 0, 2, 0, 37, 8439, 0, -2106, 3601, 0, 0);
+            sce_em_set(0, 3, ENEMY_ZOMBIERANDOM, 70, 16, 0, 1, 0, 38, 9285, 0, 2426, 793, 0, 0);
+            sce_em_set(0, 4, ENEMY_ZOMBIERANDOM, 64, 16, 0, 2, 0, 39, 1114, 0, 2689, 4717, 0, 0);
+            sce_em_set(0, 5, ENEMY_ZOMBIERANDOM, 64, 16, 0, 1, 0, 40, -7356, 0, -1869, 71, 0, 0);
+        }
+        return 0;
+        db(0x20, 0x00);
+    }
+}
+
+main
+{
+    main_00()
+    {
+        evt_exec(255, I_GOSUB, main_04);
+        evt_exec(255, I_GOSUB, main_02);
+        return 0;
+    }
+
+    main_01()
+    {
+        switch (var_1A)
+        {
+        case 0:
+        case 1:
+            if (bits[5][7] == 0)
+            {
+                bits[5][7] = 1;
+                evt_exec(255, I_GOSUB, main_05);
+            }
+            if (bits[5][5] == 0)
+            {
+                bits[5][5] = 1;
+                evt_exec(255, I_GOSUB, main_06);
+            }
+            break;
+        case 2:
+            if (bits[5][6] == 0)
+            {
+                bits[5][6] = 1;
+                evt_exec(255, I_GOSUB, main_07);
+            }
+            break;
+        }
+        return 0;
+    }
+
+    main_02()
+    {
+        sleep(10, 50);
+        work_set(WK_ENEMY, 0);
+        member_copy(16, 7);
+        var_10 &= BFFF;
+        member_set2(7, 16);
+        evt_exec(255, I_GOSUB, main_03);
+        return 0;
+    }
+
+    main_03()
+    {
+
+off_138E:
+        switch (var_1A)
+        {
+        case 3:
+            if (bits[5][12] == 0 && bits[5][14] == 1)
+            {
+                bits[5][14] = 0;
+                bits[5][12] = 1;
+                if (game.difficult == 0)
+                {
+                    main_08();
+                }
+                else
+                {
+                }
+            }
+            break;
+        case 5:
+            if (bits[5][14] == 0)
+            {
+                bits[5][14] = 1;
+                bits[5][12] = 0;
+                if (game.difficult == 0)
+                {
+                    main_09();
+                }
+                else
+                {
+                    main_0B();
+                }
+            }
+            break;
+        }
+        evt_next();
+        goto off_138E;
+        return 0;
+    }
+
+    main_04()
+    {
+        evt_next();
+        switch (var_1A)
+        {
+        case 0:
+            sce_bgm_control(0, 0, 1, 120, 51);
+            sce_bgm_control(0, 0, 2, 71, 65);
+            break;
+        case 1:
+            sce_bgm_control(0, 0, 1, 106, 86);
+            sce_bgm_control(0, 0, 2, 71, 65);
+            break;
+        case 2:
+            sce_bgm_control(0, 0, 1, 96, 33);
+            sce_bgm_control(0, 0, 2, 71, 65);
+            break;
+        case 3:
+            sce_bgm_control(0, 0, 1, 106, 71);
+            sce_bgm_control(0, 0, 2, 71, 65);
+            break;
+        case 4:
+            sce_bgm_control(0, 0, 1, 81, 128);
+            sce_bgm_control(0, 0, 2, 71, 65);
+            break;
+        case 5:
+            sce_bgm_control(0, 0, 1, 51, 128);
+            sce_bgm_control(0, 0, 2, 61, 65);
+            break;
+        case 6:
+            sce_bgm_control(0, 0, 1, 31, 83);
+            sce_bgm_control(0, 0, 2, 51, 65);
+            break;
+        case 7:
+            sce_bgm_control(0, 0, 1, 26, 43);
+            sce_bgm_control(0, 0, 2, 51, 65);
+            break;
+        case 8:
+            sce_bgm_control(0, 0, 1, 1, 65);
+            sce_bgm_control(0, 0, 2, 41, 65);
+            break;
+        }
+        do
+        {
+            evt_next();
+        } while (bits[1][11] == 0);
+        goto off_13F9;
+        return 0;
+    }
+
+    main_05()
+    {
+        light_kido_set(0, 24000);
+        for 3 times
+        {
+            evt_next();
+            if (arr[26] == 2)
+            {
+                goto off_1520;
+            }
+        }
+        light_kido_set(0, 30000);
+        evt_next();
+        if (arr[26] == 2)
+        {
+            goto off_1520;
+        }
+        light_kido_set(0, 26000);
+        for 2 times
+        {
+            evt_next();
+            if (arr[26] == 2)
+            {
+                goto off_1520;
+            }
+        }
+
+off_1520:
+        bits[5][7] = 0;
+        return 0;
+    }
+
+    main_06()
+    {
+        sce_espr_kill(13, 0, 0, 0);
+        sce_espr_kill(14, 0, 0, 0);
+        sce_espr_kill(4, 18, 0, 0);
+        sce_espr_on(0, 14, 0, 14336, 29736, -3200, -4741, -512);
+        sce_espr_on(0, 13, 0, 12288, 23787, -4400, 7110, 0);
+        sce_espr_on(0, 13, 0, 9216, 26406, -9200, 4430, 0);
+        sce_espr_on(0, 4612, 0, 15872, 29736, -3200, -4741, 1024);
+        sce_espr_on(0, 4612, 0, 16384, 26406, -9600, 4430, -512);
+        sce_espr_on(0, 4612, 0, 14336, 23787, -4600, 7110, -1024);
+        sce_espr_on(0, 13, 0, 12288, 24129, 0, 4722, -512);
+        sce_espr_on(0, 14, 0, 12800, 22971, 0, -423, 0);
+        sce_espr_on(0, 14, 0, 13312, 19754, 0, 4987, -512);
+        sce_espr_on(0, 13, 0, 11520, 22293, 0, 1020, 0);
+        sce_espr_on(0, 14, 0, 12544, 21299, 5, 3981, 0);
+        sce_espr_on(0, 13, 0, 10240, 19005, 0, 1700, -512);
+        sce_espr_on(0, 14, 0, 10240, 23473, 0, 2857, 512);
+        sce_espr_on(0, 4612, 0, 11776, 22129, 0, 4722, -512);
+        sce_espr_on(0, 4612, 0, 10240, 20000, 0, 190, -256);
+        bits[5][5] = 1;
+        bits[5][6] = 0;
+        return 0;
+    }
+
+    main_07()
+    {
+        sce_espr_kill(13, 0, 0, 0);
+        sce_espr_kill(14, 0, 0, 0);
+        sce_espr_kill(4, 18, 0, 0);
+        sce_espr_on(0, 13, 0, 7680, -1431, -1500, -5174, -512);
+        sce_espr_on(0, 14, 0, 6144, -750, -1700, -6274, 0);
+        sce_espr_on(0, 4612, 0, 8192, -2150, -1550, -5300, 512);
+        sce_espr_on(0, 14, 0, 6144, -1404, -1400, -6541, 0);
+        bits[5][6] = 1;
+        bits[5][5] = 0;
+        return 0;
+    }
+
+    main_08()
+    {
+        if (bits[6][38] == 0)
+        {
+            work_set(WK_ENEMY, 3);
+            kage_set(3, 3, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 == 5)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, 12974, 0, -1630);
+                member_set(15, 245, 246);
+            }
+            if (&9 == 6)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, 12974, 0, -1630);
+                member_set(15, 245, 246);
+            }
+        }
+        return 0;
+    }
+
+    main_09()
+    {
+        if (bits[6][35] == 0)
+        {
+            work_set(WK_ENEMY, 0);
+            kage_set(3, 0, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -10738, 0, -1318);
+                member_set(15, 139, 8);
+            }
+        }
+        if (bits[6][36] == 0)
+        {
+            work_set(WK_ENEMY, 1);
+            kage_set(3, 1, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -12841, 0, -427);
+                member_set(15, 99, 9);
+            }
+        }
+        if (bits[6][37] == 0)
+        {
+            work_set(WK_ENEMY, 2);
+            kage_set(3, 2, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -12148, 0, -427);
+                member_set(15, 248, 8);
+            }
+        }
+        if (bits[6][38] == 0)
+        {
+            kage_set(3, 3, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            work_set(WK_ENEMY, 3);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -17506, 0, -14535);
+                member_set(15, 97, 12);
+            }
+        }
+        return 0;
+    }
+
+    main_0A()
+    {
+        if (bits[6][38] == 0)
+        {
+            work_set(WK_ENEMY, 3);
+            kage_set(3, 3, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 == 5)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, 12974, 0, -1630);
+                member_set(15, 245, 246);
+            }
+            if (&9 == 6)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, 12974, 0, -1630);
+                member_set(15, 245, 246);
+            }
+        }
+        return 0;
+    }
+
+    main_0B()
+    {
+        if (bits[6][35] == 0)
+        {
+            work_set(WK_ENEMY, 0);
+            kage_set(3, 0, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -11344, 0, -3127);
+                member_set(15, 160, 9);
+            }
+        }
+        if (bits[6][36] == 0)
+        {
+            work_set(WK_ENEMY, 1);
+            kage_set(3, 1, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 <= 2)
+            {
+                member_set(7, 64, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -10271, 0, -31);
+                member_set(15, 193, 8);
+            }
+        }
+        if (bits[6][37] == 0)
+        {
+            work_set(WK_ENEMY, 2);
+            kage_set(3, 2, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -15950, 0, -18787);
+                member_set(15, 107, 12);
+            }
+        }
+        if (bits[6][38] == 0)
+        {
+            kage_set(3, 3, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            work_set(WK_ENEMY, 3);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -18202, 0, -13424);
+                member_set(15, 75, 11);
+            }
+        }
+        if (bits[6][39] == 0)
+        {
+            kage_set(3, 4, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            work_set(WK_ENEMY, 4);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -11275, 0, -1193);
+                member_set(15, 157, 8);
+            }
+        }
+        if (bits[6][40] == 0)
+        {
+            kage_set(3, 5, 191, 191, 191, 144, 1, 88, 2, 0, 0, 0, 0);
+            work_set(WK_ENEMY, 5);
+            if (&9 <= 2)
+            {
+                member_set(7, 70, 16);
+                member_set(2, 1, 0);
+                member_set(3, 13, 0);
+                member_set(4, 0, 0);
+                member_set(5, 0, 0);
+                pos_set(0, -6688, 0, -2886);
+                member_set(15, 31, 250);
+            }
+        }
+        return 0;
+        db(0x08, 0x00);
+    }
+}

@@ -1,0 +1,441 @@
+.version 2
+init
+{
+    init_00()
+    {
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, 20000, 20000, 1, 1, -2651, 0, -14679, 2056, 5, 3, 7, 0, 40, 4, 0, 0, UNLOCKED, 0);
+        sce_em_set(0, 0, ENEMY_LICKERGREY, 0, 0, 0, 51, 0, 49, -12871, 0, -7014, 1183, 0, 0);
+        sce_em_set(0, 1, ENEMY_LICKERGREY, 0, 0, 0, 51, 0, 50, -10516, 0, -15903, 2149, 0, 0);
+        obj_model_set(0, 0, 0, 0, 0, 4, 0, 10, 16, -25030, 0, -23196, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        sce_espr_on(0, 2063, 0, 5120, -4400, 3300, -11700, 0);
+        sce_espr_on(0, 2063, 0, 4992, -2600, 3300, -11700, 0);
+        sce_espr_on(0, 2063, 0, 4864, -3700, 3300, -13600, 0);
+        sce_espr_on(0, 2063, 0, 6144, -800, 3300, -14600, 0);
+        sce_espr_on(0, 2063, 0, 7168, -1200, 3300, -16200, 0);
+        sce_espr_on(0, 2063, 0, 6400, -3500, 3300, -16500, 0);
+        sce_espr_on(0, 2063, 0, 7424, -3600, 3300, -18800, 0);
+        sce_espr_on(0, 2063, 0, 6272, -900, 3300, -16900, 0);
+        sce_espr_on(0, 2063, 0, 6144, -4300, 3300, -11700, 0);
+        sce_espr_on(0, 2063, 0, 5120, -2700, 3300, -11700, 0);
+        sce_espr_on(0, 2063, 0, 4096, -3700, 3300, -13500, 0);
+        sce_espr_on(0, 2063, 0, 6144, -800, 3300, -14700, 0);
+        sce_espr_on(0, 2063, 0, 4608, -1100, 3300, -16200, 0);
+        sce_espr_on(0, 2063, 0, 7168, -3600, 3300, -16500, 0);
+        sce_espr_on(0, 2063, 0, 6656, -3600, 3300, -18700, 0);
+        sce_espr_on(0, 2063, 0, 5632, -900, 3300, -17000, 0);
+        return 0;
+        db(0x92, 0x04);
+    }
+}
+
+main
+{
+    main_00()
+    {
+        aot_set(1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -25620, -24161, 2010, 2020, 255, 0, I_GOSUB, main_0D, 0, 0);
+        aot_set(2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 6411, -7611, 1940, 2320, 255, 0, I_GOSUB, main_05, 0, 0);
+        aot_set(3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7720, -18280, 1800, 5200, 255, 0, I_GOSUB, main_08, 0, 0);
+        evt_exec(255, I_GOSUB, main_09);
+        evt_exec(255, I_GOSUB, main_11);
+        return 0;
+    }
+
+    main_01()
+    {
+        return 0;
+    }
+
+    main_02()
+    {
+        aot_reset(5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        if (bits[7][49] == 0)
+        {
+            work_set(WK_ENEMY, 1);
+            member_set(23, 1, 0);
+        }
+        return 0;
+    }
+
+    main_03()
+    {
+        aot_reset(6, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        if (bits[7][50] == 0)
+        {
+            work_set(WK_ENEMY, 2);
+            member_set(23, 1, 0);
+        }
+        return 0;
+    }
+
+    main_04()
+    {
+        evt_next();
+
+off_1BD1:
+        work_set(WK_ENEMY, 0);
+        if (bits[5][32] == 1)
+        {
+            member_set(23, 1, 0);
+        }
+        else
+        {
+            member_set(23, 0, 0);
+        }
+        evt_next();
+        goto off_1BD1;
+        return 0;
+    }
+
+    main_05()
+    {
+        aot_reset(2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        bits[2][0] = 1;
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        if (bits[4][145] == 0)
+        {
+            cut_chg(9);
+            message_on(0, 0, 0, 0, 255);
+            evt_next();
+            if (input.question == 0)
+            {
+                bits[4][145] = 1;
+                bits[22][1] = 0;
+                se_on(2, 266, 1, 0, 0, 0);
+                sleep(10, 2);
+                se_on(2, 267, 1, 0, 0, 0);
+                sleep(10, 28);
+            }
+            else
+            {
+                se_on(4, 5, 0, 0, 0, 0);
+            }
+            cut_old();
+        }
+        else
+        {
+            message_on(0, 1, 0, 0, 255);
+            evt_next();
+        }
+        bits[2][2] = 0;
+        bits[2][0] = 0;
+        bits[2][7] = 0;
+        aot_reset(2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_05, 0, 0);
+        return 0;
+    }
+
+    main_06()
+    {
+        if (bits[7][49] == 0)
+        {
+            work_set(WK_ENEMY, 1);
+            member_copy(16, 7);
+            var_10 |= 8000;
+            member_set2(7, 16);
+        }
+        if (bits[7][50] == 0)
+        {
+            work_set(WK_ENEMY, 2);
+            member_copy(16, 7);
+            var_10 |= 8000;
+            member_set2(7, 16);
+        }
+        bits[5][31] = 1;
+        return 0;
+    }
+
+    main_07()
+    {
+        if (bits[7][49] == 0)
+        {
+            work_set(WK_ENEMY, 1);
+            member_copy(16, 7);
+            var_10 ^= 8000;
+            member_set2(7, 16);
+        }
+        if (bits[7][50] == 0)
+        {
+            work_set(WK_ENEMY, 2);
+            member_copy(16, 7);
+            var_10 ^= 8000;
+            member_set2(7, 16);
+        }
+        bits[5][31] = 0;
+        return 0;
+    }
+
+    main_08()
+    {
+        cut_auto(1);
+        aot_reset(3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        message_on(0, 2, 0, 0, 239);
+        evt_next();
+        aot_reset(3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_08, 0, 0);
+        return 0;
+    }
+
+    main_09()
+    {
+        bits[2][7] = 1;
+        evt_next();
+        evt_exec(255, I_GOSUB, main_0A);
+        evt_exec(255, I_GOSUB, main_0B);
+        sleep(10, 90);
+        bits[2][7] = 0;
+        return 0;
+    }
+
+    main_0A()
+    {
+        work_set(WK_OBJECT, 0);
+        member_set(12, 160, 246);
+        speed_set(1, 40);
+        for 2 times
+        {
+            add_speed();
+            evt_next();
+        }
+        nop_8b(100, 90, 0, 0, 0);
+        nop_8c(0, 160, 80, 20, 0, 87, 0);
+        nop_8a(0, 3, 0, 85, 0);
+        se_on(0, 1, 0, 0, 0, 0);
+        for 8 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 35);
+        for 20 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 30);
+        for 15 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 25);
+        for 15 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 20);
+        for 15 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 15);
+        for 10 times
+        {
+            add_speed();
+            evt_next();
+        }
+        member_copy(16, 12);
+        var_10 -= 0A;
+        member_set2(12, 16);
+        sleep(10, 5);
+        member_copy(16, 12);
+        var_10 += 23;
+        member_set2(12, 16);
+        return 0;
+    }
+
+    main_0B()
+    {
+        work_set(WK_PLAYER, 0);
+        pos_set(0, -24990, -2400, -23090);
+        member_set(15, 0, 0);
+        member_copy(16, 0);
+        var_10 |= 400;
+        member_set2(0, 16);
+        main_0C();
+        member_copy(16, 0);
+        var_10 &= FBFF;
+        member_set2(0, 16);
+        return 0;
+    }
+
+    main_0C()
+    {
+        speed_set(1, 40);
+        for 10 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 35);
+        for 20 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 30);
+        for 15 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 25);
+        for 15 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 20);
+        for 15 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, 15);
+        for 10 times
+        {
+            add_speed();
+            evt_next();
+        }
+        member_copy(16, 12);
+        var_10 -= 0A;
+        member_set2(12, 16);
+        sleep(10, 5);
+        member_copy(16, 12);
+        var_10 += 23;
+        member_set2(12, 16);
+        return 0;
+    }
+
+    main_0D()
+    {
+        aot_on(0);
+        return 0;
+    }
+
+    main_0E()
+    {
+        work_set(WK_PLAYER, 0);
+        pos_set(0, -27329, 0, -23540);
+        member_copy(16, 0);
+        var_10 |= 400;
+        member_set2(0, 16);
+        main_10();
+        member_copy(16, 0);
+        var_10 &= FBFF;
+        member_set2(0, 16);
+        return 0;
+    }
+
+    main_0F()
+    {
+        work_set(WK_OBJECT, 0);
+        member_set(12, 0, 0);
+        speed_set(1, -40);
+        for 2 times
+        {
+            add_speed();
+            evt_next();
+        }
+        for 8 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, -35);
+        for 20 times
+        {
+            add_speed();
+            evt_next();
+        }
+        return 0;
+    }
+
+    main_10()
+    {
+        speed_set(1, -40);
+        for 10 times
+        {
+            add_speed();
+            evt_next();
+        }
+        speed_set(1, -35);
+        for 20 times
+        {
+            add_speed();
+            evt_next();
+        }
+        return 0;
+    }
+
+    main_11()
+    {
+        evt_next();
+        switch (var_1A)
+        {
+        case 0:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 60, 64);
+            break;
+        case 1:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 80, 64);
+            break;
+        case 2:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 100, 64);
+            break;
+        case 3:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 100, 64);
+            break;
+        case 4:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 100, 64);
+            break;
+        case 5:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 100, 64);
+            break;
+        case 6:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 120, 64);
+            break;
+        case 7:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 80, 64);
+            break;
+        case 8:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 80, 64);
+            break;
+        case 9:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 80, 64);
+            break;
+        case 10:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 100, 64);
+            break;
+        case 11:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 80, 64);
+            break;
+        case 12:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 80, 64);
+            break;
+        case 13:
+            sce_bgm_control(1, 0, 1, 90, 64);
+            sce_bgm_control(1, 0, 2, 80, 64);
+            break;
+        }
+        do
+        {
+            evt_next();
+        } while (bits[1][11] == 0);
+        goto off_1F07;
+        return 0;
+        db(0x88, 0x48);
+    }
+}

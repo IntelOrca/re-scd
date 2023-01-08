@@ -1,0 +1,142 @@
+.version 2
+.init
+.proc init_00
+1E0A:   3B0201310000C2DC9E069E07FA0A2B9F0000DC3A0000000207000A0000000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9022, 1694, 1950, 2810, -24789, 0, 15068, 0, 0, 2, 7, 0, 10, 0, 0, 0, UNLOCKED, 0
+1E2A:   3B0301310000B09954974E0C14056AE5000034C30004001900000A0000000000                        door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26192, -26796, 3150, 1300, -6806, 0, -15564, 1024, 0, 25, 0, 0, 10, 0, 0, 0, UNLOCKED, 0
+1E4A:   06004A00                                                                                if                      0, off_1E98
+1E4E:   21001900                                                                                ck                      0, 25, 0
+1E52:   4400011F4000000902A0AB9A00005CA1BB0200000000                                            sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 64, 0, 0, 9, 2, 160, -25941, 0, -24228, 699, 0, 0
+1E68:   4400021F4000000901A163A5000095B72B0C00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 64, 0, 0, 9, 1, 161, -23197, 0, -18539, 3115, 0, 0
+1E7E:   440003134000002D00A2DE9800004FE3000800000000                                            sce_em_set              0, 3, ENEMY_ZOMBIEGIRL, 64, 0, 0, 45, 0, 162, -26402, 0, -7345, 2048, 0, 0
+1E94:   07005E00                                                                                else                    0, off_1EF2
+
+off_1E98:
+1E98:   4400001F40000009029FDFA300000CD2800F00000000                                            sce_em_set              0, 0, ENEMY_ZOMBIERANDOM, 64, 0, 0, 9, 2, 159, -23585, 0, -11764, 3968, 0, 0
+1EAE:   4400011F4000000902A0FB9A00000CA6BB0200000000                                            sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 64, 0, 0, 9, 2, 160, -25861, 0, -23028, 699, 0, 0
+1EC4:   4400021F4000000901A163A5000095B72B0C00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 64, 0, 0, 9, 1, 161, -23197, 0, -18539, 3115, 0, 0
+1EDA:   440003134000002D00A2DE9800004FE3000800000000                                            sce_em_set              0, 3, ENEMY_ZOMBIEGIRL, 64, 0, 0, 45, 0, 162, -26402, 0, -7345, 2048, 0, 0
+1EF0:   00                                                                                      nop
+1EF1:   00                                                                                      nop
+
+off_1EF2:
+1EF2:   06001C00                                                                                if                      0, off_1F12
+1EF6:   21001901                                                                                ck                      0, 25, 1
+1EFA:   4E0402310000AAB39ADD9E07EE0C14000F00A100FF00                                            item_aot_set            4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19542, -8806, 1950, 3310, ITEM_HANDGUNAMMO, 15, 161, 255, 0
+1F10:   08                                                                                      endif
+1F11:   00                                                                                      nop
+
+off_1F12:
+1F12:   0100                                                                                    evt_end                 0
+
+.main
+.proc main_00
+1F1A:   06000C00                                                                                if                      0, off_1F2A
+1F1E:   23001A000A00                                                                            cmp                     0, 26, CMP_EQ, 10
+1F24:   371C0000                                                                                sca_id_set              28, 0, 0
+1F28:   08                                                                                      endif
+1F29:   00                                                                                      nop
+
+off_1F2A:
+1F2A:   24041000                                                                                save                    4, 16
+1F2E:   1802                                                                                    gosub                   2
+1F30:   0100                                                                                    evt_end                 0
+
+.proc main_01
+1F32:   06000C00                                                                                if                      0, off_1F42
+1F36:   23001A000800                                                                            cmp                     0, 26, CMP_EQ, 8
+1F3C:   371C0000                                                                                sca_id_set              28, 0, 0
+1F40:   08                                                                                      endif
+1F41:   00                                                                                      nop
+
+off_1F42:
+1F42:   1802                                                                                    gosub                   2
+1F44:   0100                                                                                    evt_end                 0
+
+.proc main_02
+1F46:   06000601                                                                                if                      0, off_2050
+1F4A:   1D040401                                                                                work_copy               4, 4, 1
+1F4E:   23001A050000                                                                            cmp                     0, 26, CMP_NE, 0
+1F54:   131AF200                                                                                switch                  26, off_204A
+1F58:   14000E000000                                                                            case                    0, off_1F6C, 0
+1F5E:   510000023240                                                                            sce_bgm_control         0, 0, 2, 50, 64
+1F64:   510000032840                                                                            sce_bgm_control         0, 0, 3, 40, 64
+1F6A:   1A00                                                                                    break                   0
+
+off_1F6C:
+1F6C:   14000E000100                                                                            case                    0, off_1F80, 1
+1F72:   510000023240                                                                            sce_bgm_control         0, 0, 2, 50, 64
+1F78:   510000032840                                                                            sce_bgm_control         0, 0, 3, 40, 64
+1F7E:   1A00                                                                                    break                   0
+
+off_1F80:
+1F80:   14000E000200                                                                            case                    0, off_1F94, 2
+1F86:   510000023240                                                                            sce_bgm_control         0, 0, 2, 50, 64
+1F8C:   510000032840                                                                            sce_bgm_control         0, 0, 3, 40, 64
+1F92:   1A00                                                                                    break                   0
+
+off_1F94:
+1F94:   14000E000300                                                                            case                    0, off_1FA8, 3
+1F9A:   510000023C40                                                                            sce_bgm_control         0, 0, 2, 60, 64
+1FA0:   510000032840                                                                            sce_bgm_control         0, 0, 3, 40, 64
+1FA6:   1A00                                                                                    break                   0
+
+off_1FA8:
+1FA8:   14000E000400                                                                            case                    0, off_1FBC, 4
+1FAE:   510000024640                                                                            sce_bgm_control         0, 0, 2, 70, 64
+1FB4:   510000033240                                                                            sce_bgm_control         0, 0, 3, 50, 64
+1FBA:   1A00                                                                                    break                   0
+
+off_1FBC:
+1FBC:   14000E000500                                                                            case                    0, off_1FD0, 5
+1FC2:   510000024640                                                                            sce_bgm_control         0, 0, 2, 70, 64
+1FC8:   510000033240                                                                            sce_bgm_control         0, 0, 3, 50, 64
+1FCE:   1A00                                                                                    break                   0
+
+off_1FD0:
+1FD0:   14000E000600                                                                            case                    0, off_1FE4, 6
+1FD6:   510000023C40                                                                            sce_bgm_control         0, 0, 2, 60, 64
+1FDC:   510000033240                                                                            sce_bgm_control         0, 0, 3, 50, 64
+1FE2:   1A00                                                                                    break                   0
+
+off_1FE4:
+1FE4:   14000E000700                                                                            case                    0, off_1FF8, 7
+1FEA:   510000023C40                                                                            sce_bgm_control         0, 0, 2, 60, 64
+1FF0:   510000033240                                                                            sce_bgm_control         0, 0, 3, 50, 64
+1FF6:   1A00                                                                                    break                   0
+
+off_1FF8:
+1FF8:   14000E000800                                                                            case                    0, off_200C, 8
+1FFE:   510000023C40                                                                            sce_bgm_control         0, 0, 2, 60, 64
+2004:   510000033240                                                                            sce_bgm_control         0, 0, 3, 50, 64
+200A:   1A00                                                                                    break                   0
+
+off_200C:
+200C:   14000E000900                                                                            case                    0, off_2020, 9
+2012:   510000023C40                                                                            sce_bgm_control         0, 0, 2, 60, 64
+2018:   510000033240                                                                            sce_bgm_control         0, 0, 3, 50, 64
+201E:   1A00                                                                                    break                   0
+
+off_2020:
+2020:   14000E000A00                                                                            case                    0, off_2034, 10
+2026:   510000023C40                                                                            sce_bgm_control         0, 0, 2, 60, 64
+202C:   510000033240                                                                            sce_bgm_control         0, 0, 3, 50, 64
+2032:   1A00                                                                                    break                   0
+
+off_2034:
+2034:   14000E000B00                                                                            case                    0, off_2048, 11
+203A:   510000023240                                                                            sce_bgm_control         0, 0, 2, 50, 64
+2040:   510000032840                                                                            sce_bgm_control         0, 0, 3, 40, 64
+2046:   1A00                                                                                    break                   0
+
+off_2048:
+2048:   1600                                                                                    eswitch                 0
+
+off_204A:
+204A:   25041A                                                                                  copy                    4, 26
+204D:   00                                                                                      nop
+204E:   08                                                                                      endif
+204F:   00                                                                                      nop
+
+off_2050:
+2050:   0100                                                                                    evt_end                 0
+2052:   0000                                                                                    db                      0x00, 0x00

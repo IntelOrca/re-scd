@@ -1,0 +1,189 @@
+.version 2
+init
+{
+    init_00()
+    {
+        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16469, -26518, 1390, 1830, -25770, 0, -24897, 3720, 1, 7, 0, 0, 8, 0, 0, 0, UNLOCKED, 0);
+        door_aot_se(7, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24489, -27928, 2150, 930, -23193, 0, -9734, 912, 1, 2, 3, 0, 8, 0, 0, 131, UNLOCK, 0);
+        if (game.scenario == 0)
+        {
+            item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0, ITEM_FILMA, 1, 69, 1, 0);
+        }
+        else
+        {
+            item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0, ITEM_FILMB, 1, 70, 1, 0);
+        }
+        aot_set(4, SCE_NORMAL, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22795, -23220, 2280, 800, 0, 0, 0, 0, 0, 0);
+        aot_set(5, SCE_NORMAL, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24842, -21898, 2650, 820, 0, 0, 0, 0, 0, 0);
+        aot_set(6, SCE_NORMAL, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27837, -25806, 1790, 3050, 0, 0, 0, 0, 0, 0);
+        if (game.scenario == 0)
+        {
+            sce_em_set(0, 0, ENEMY_ZOMBIERANDOM, 6, 0, 0, 3, 3, 131, -25474, 0, -25143, 79, 0, 0);
+            sce_em_set(0, 1, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 3, 132, -22804, 0, -23677, 1053, 0, 0);
+            sce_em_set(0, 2, ENEMY_ZOMBIERANDOM, 6, 0, 0, 3, 3, 133, -19509, 0, -24796, 1941, 0, 0);
+            sce_em_set(0, 3, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 3, 134, -16956, 0, -21311, 1888, 0, 0);
+            sce_em_set(0, 4, ENEMY_ZOMBIERANDOM, 0, 0, 0, 3, 3, 135, -21375, 0, -20558, 3432, 0, 0);
+            sce_em_set(0, 5, ENEMY_ZOMBIERANDOM, 0, 0, 0, 42, 3, 136, -22484, 0, -19535, 56, 0, 0);
+        }
+        return 0;
+    }
+}
+
+main
+{
+    main_00()
+    {
+        if (bits[8][71] == 0)
+        {
+            aot_reset(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_02, 0, 0);
+        }
+        else
+        {
+            aot_reset(4, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        }
+        if (game.scenario == 0)
+        {
+            if (bits[8][69] == 0)
+            {
+                aot_reset(5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_03, 0, 0);
+            }
+            else
+            {
+                aot_reset(5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+            }
+        }
+        else
+        {
+            if (bits[8][70] == 0)
+            {
+                aot_reset(5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_03, 0, 0);
+            }
+            else
+            {
+                aot_reset(5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+            }
+        }
+        aot_reset(6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 0, 0, 0, 255);
+        obj_model_set(0, 0, 0, 0, 0, 0, 0, 10, 16, 0, 0, 0, 0, 2304, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(1, 0, 0, 0, 0, 0, 0, 10, 16, 0, 0, 0, 3520, -4416, -1406, 0, 0, 0, 0, 0, 0, 0, 0);
+        item_aot_set(3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0, ITEM_SHOTGUNAMMO, 7, 71, 0, 0);
+        if (game.scenario == 0)
+        {
+            item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0, ITEM_FILMA, 1, 69, 1, 0);
+        }
+        else
+        {
+            item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0, ITEM_FILMB, 1, 70, 1, 0);
+        }
+        return 0;
+    }
+
+    main_01()
+    {
+        return 0;
+    }
+
+    main_02()
+    {
+        aot_reset(4, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        cut_chg(4);
+        se_on(2, 296, 0, -21422, -1800, -23270);
+        work_set(WK_PLAYER, 0);
+        member_copy(16, 0);
+        var_10 |= 400;
+        member_set2(0, 16);
+        member_copy(16, 1);
+        var_10 |= 08;
+        member_set2(1, 16);
+        if (bits[8][71] == 0)
+        {
+            work_set(WK_OBJECT, 0);
+            pos_set(0, -20350, -900, -22750);
+            member_copy(16, 0);
+            var_10 |= 10;
+            member_set2(0, 16);
+        }
+        sleep(10, 30);
+        if (bits[8][71] == 0)
+        {
+            aot_on(3);
+            evt_next();
+            bits[2][7] = 1;
+            bits[2][2] = 1;
+        }
+        cut_old();
+        work_set(WK_PLAYER, 0);
+        member_copy(16, 0);
+        var_10 &= FBFF;
+        member_set2(0, 16);
+        member_copy(16, 1);
+        var_10 &= FFF7;
+        member_set2(1, 16);
+        work_set(WK_OBJECT, 0);
+        pos_set(0, 0, 0, 0);
+        cut_auto(1);
+        if (bits[8][71] == 0)
+        {
+            aot_reset(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_02, 0, 0);
+        }
+        bits[2][7] = 0;
+        bits[2][2] = 0;
+        return 0;
+    }
+
+    main_03()
+    {
+        aot_reset(5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        cut_chg(5);
+        se_on(2, 296, 0, -21631, -1800, -21938);
+        work_set(WK_PLAYER, 0);
+        member_copy(16, 0);
+        var_10 |= 400;
+        member_set2(0, 16);
+        member_copy(16, 1);
+        var_10 |= 08;
+        member_set2(1, 16);
+        work_set(WK_OBJECT, 1);
+        pos_set(0, -23100, -1600, -21500);
+        member_copy(16, 0);
+        var_10 |= 10;
+        member_set2(0, 16);
+        sleep(10, 30);
+        aot_on(2);
+        evt_next();
+        bits[2][7] = 1;
+        bits[2][2] = 1;
+        cut_old();
+        work_set(WK_OBJECT, 1);
+        pos_set(0, 0, 0, 0);
+        work_set(WK_PLAYER, 0);
+        member_copy(16, 0);
+        var_10 &= FBFF;
+        member_set2(0, 16);
+        member_copy(16, 1);
+        var_10 &= FFF7;
+        member_set2(1, 16);
+        cut_auto(1);
+        if (game.scenario == 0)
+        {
+            if (bits[8][69] == 0)
+            {
+                aot_reset(5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_03, 0, 0);
+            }
+        }
+        else
+        {
+            if (bits[8][70] == 0)
+            {
+                aot_reset(5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_03, 0, 0);
+            }
+        }
+        bits[2][7] = 0;
+        bits[2][2] = 0;
+        return 0;
+    }
+}
