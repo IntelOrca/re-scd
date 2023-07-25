@@ -1,9 +1,10 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     if                      0, off_040C
-    ck                      4, 164, 1
-    set                     1, 12, 1
+    ck                      FG_GENERAL_1, 164, 1
+    set                     FG_GAME, 12, 1
     endif
     nop
 
@@ -15,8 +16,8 @@ off_040C:
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   3
+.proc main
+    gosub                   main_03
     if                      0, off_0498
     ck                      34, 38, 0
     aot_set                 1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9458, -17827, 2340, 1430, 255, 0, I_GOSUB, main_02, 0, 0
@@ -30,13 +31,13 @@ off_0498:
     obj_model_set           3, 0, 0, 0, 0, 0, 0, 10, 16, 0, 0, 0, 0, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0
 
 .proc main_02
-    set                     2, 7, 1
-    set                     2, 2, 1
-    set                     2, 3, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_STATE, 2, 1
+    set                     FG_STATE, 3, 1
     if                      0, off_0572
     ck                      34, 37, 0
     cut_chg                 3
@@ -87,27 +88,27 @@ off_05BA:
 
 off_05BC:
     cut_auto                1
-    set                     2, 3, 0
-    set                     2, 2, 0
-    set                     2, 7, 0
+    set                     FG_STATE, 3, 0
+    set                     FG_STATE, 2, 0
+    set                     FG_STATE, 7, 0
     evt_end                 0
 
 .proc main_03
     if                      0, off_05DC
-    cmp                     0, 27, CMP_EQ, 1546
+    cmp                     0, V_LAST_RDT, CMP_EQ, 1546
     evt_exec                255, I_GOSUB, main_04
     endif
     nop
 
 off_05DC:
-    gosub                   5
+    gosub                   main_05
     evt_end                 0
 
 .proc main_04
-    set                     1, 27, 1
-    set                     2, 7, 1
-    set                     2, 2, 1
-    set                     2, 3, 1
+    set                     FG_GAME, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_STATE, 2, 1
+    set                     FG_STATE, 3, 1
     sleep                   10, 1
     cut_chg                 2
     work_set                WK_PLAYER, 0
@@ -117,19 +118,19 @@ off_05DC:
     work_set                WK_PLAYER, 0
     plc_motion              0, 16, 0
     nop
-    save                    4, 0
+    save                    V_04, 0
     for                     0, off_063A, 7
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc2                   OP_ADD, 16, 4
-    member_set2             12, 16
+    calc2                   OP_ADD, V_TEMP, V_04
+    member_set2             12, V_TEMP
     nop
     evt_next
     nop
-    copy                    16, 4
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_ADD, 16, 90
-    copy                    4, 16
+    calc                    0, OP_ADD, V_TEMP, 90
+    copy                    V_04, V_TEMP
     nop
     next                    0
 
@@ -143,13 +144,13 @@ off_063A:
     cut_auto                1
     work_set                WK_PLAYER, 0
     plc_ret
-    set                     2, 7, 0
-    set                     2, 2, 0
-    set                     2, 3, 0
-    set                     1, 27, 0
+    set                     FG_STATE, 7, 0
+    set                     FG_STATE, 2, 0
+    set                     FG_STATE, 3, 0
+    set                     FG_GAME, 27, 0
     evt_end                 0
 
 .proc main_05
-    sce_em_set              0, 0, ENEMY_LICKERGREY, 0, 0, 0, 51, 0, 38, -12687, 0, -12836, -592, 0, 0
-    sce_em_set              0, 1, ENEMY_LICKERGREY, 0, 0, 0, 51, 0, 39, -9522, 0, -13842, -1216, 0, 0
+    sce_em_set              0, 0, ENEMY_LICKER_GREY, 0, 0, 0, 51, 0, 38, -12687, 0, -12836, -592, 0, 0
+    sce_em_set              0, 1, ENEMY_LICKER_GREY, 0, 0, 0, 51, 0, 39, -9522, 0, -13842, -1216, 0, 0
     evt_end                 0

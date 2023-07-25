@@ -1,39 +1,40 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9800, -14500, 1800, 1800, -26100, 0, -23200, 0, 6, 1, 6, 0, 26, 0, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
+.proc main
     obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 0, -26500, -12600, -19500, -1024, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0
     aot_set                 1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27350, -27250, 1800, 1800, 255, 0, I_GOSUB, main_03, 0, 0
     aot_set                 11, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28250, -25750, 1800, 2400, 255, 0, I_GOSUB, main_03, 0, 0
     aot_set                 2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9800, -14500, 1800, 1800, 255, 0, I_GOSUB, main_06, 0, 0
-    aot_set                 3, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27350, -27250, 1800, 1800, 10, 0, 84, 0, 1, 0
-    aot_set                 13, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -28250, -25750, 1800, 2400, 10, 0, 84, 0, 1, 0
-    aot_set                 4, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27350, -27250, 1800, 1800, 10, 0, 85, 0, 1, 0
-    aot_set                 14, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -28250, -25750, 1800, 2400, 10, 0, 85, 0, 1, 0
+    aot_set                 3, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27350, -27250, 1800, 1800, 10, 0, ITEM_JOINTPLUGBLUE, 0, aot, 0
+    aot_set                 13, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -28250, -25750, 1800, 2400, 10, 0, ITEM_JOINTPLUGBLUE, 0, aot, 0
+    aot_set                 4, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27350, -27250, 1800, 1800, 10, 0, ITEM_JOINTPLUGRED, 0, aot, 0
+    aot_set                 14, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -28250, -25750, 1800, 2400, 10, 0, ITEM_JOINTPLUGRED, 0, aot, 0
     item_aot_set            5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26200, -23200, 3400, 2500, ITEM_ROCKETLAUNCHER, 2, 40, 0, 1
     if                      0, off_1262
-    ck                      4, 151, 0
-    sce_em_set              0, 255, ENEMY_ADAWONG1, 0, 2, 6, 0, 0, 255, -28000, -12600, -17900, 1600, 0, 0
-    sce_em_set              0, 0, ENEMY_TYRANT2, 0, 0, 0, 26, 0, 40, -8000, 9000, -25000, 0, 0, 0
+    ck                      FG_GENERAL_1, 151, 0
+    sce_em_set              0, 255, ENEMY_ADA_WONG_1, 0, 2, 6, 0, 0, 255, -28000, -12600, -17900, 1600, 0, 0
+    sce_em_set              0, 0, ENEMY_TYRANT_2, 0, 0, 0, 26, 0, 40, -8000, 9000, -25000, 0, 0, 0
     work_set                WK_SPLAYER, 0
     nop
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    gosub                   17
+    gosub                   main_11
     endif
     nop
 
 off_1262:
     aot_reset               2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     if                      0, off_12AC
-    ck                      4, 136, 1
+    ck                      FG_GENERAL_1, 136, 1
     aot_reset               3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     aot_reset               4, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     aot_reset               13, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
@@ -53,7 +54,7 @@ off_12AC:
 off_12BA:
     aot_reset               5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     if                      0, off_12D2
-    ck                      4, 160, 0
+    ck                      FG_GENERAL_1, 160, 0
     evt_exec                255, I_GOSUB, main_02
     endif
     nop
@@ -61,24 +62,24 @@ off_12BA:
 off_12D2:
     sce_espr3d_on           0, 534, 0, 3328, -26370, -1700, -26262, -256, 0, 0, 0
     evt_exec                255, I_GOSUB, main_09
-    gosub                   19
+    gosub                   main_13
     evt_end                 0
 
-.proc main_01
+.proc aot
     if                      0, off_12FC
-    ck                      1, 11, 1
-    gosub                   19
+    ck                      FG_GAME, 11, 1
+    gosub                   main_13
     endif
     nop
 
 off_12FC:
     if                      0, off_134A
-    ck                      4, 136, 0
+    ck                      FG_GENERAL_1, 136, 0
     if                      0, off_1326
-    cmp                     0, 2, CMP_EQ, 84
+    cmp                     0, V_USED_ITEM, CMP_EQ, 84
     if                      0, off_131E
-    keep_item_ck            84
-    keep_item_ck            85
+    keep_item_ck            ITEM_JOINTPLUGBLUE
+    keep_item_ck            ITEM_JOINTPLUGRED
     evt_exec                255, I_GOSUB, main_04
     else                    0, off_1324
 
@@ -93,10 +94,10 @@ off_1324:
 
 off_1326:
     if                      0, off_1348
-    cmp                     0, 2, CMP_EQ, 85
+    cmp                     0, V_USED_ITEM, CMP_EQ, 85
     if                      0, off_1340
-    keep_item_ck            84
-    keep_item_ck            85
+    keep_item_ck            ITEM_JOINTPLUGBLUE
+    keep_item_ck            ITEM_JOINTPLUGRED
     evt_exec                255, I_GOSUB, main_04
     else                    0, off_1346
 
@@ -115,28 +116,28 @@ off_1348:
 
 off_134A:
     if                      0, off_1360
-    ck                      7, 40, 0
-    ck                      4, 151, 0
-    ck                      5, 13, 0
+    ck                      FG_7, 40, 0
+    ck                      FG_GENERAL_1, 151, 0
+    ck                      FG_GENERAL_2, 13, 0
     evt_exec                255, I_GOSUB, main_0B
     endif
     nop
 
 off_1360:
     if                      0, off_1376
-    ck                      7, 40, 0
-    ck                      4, 151, 0
-    ck                      5, 11, 0
+    ck                      FG_7, 40, 0
+    ck                      FG_GENERAL_1, 151, 0
+    ck                      FG_GENERAL_2, 11, 0
     evt_exec                255, I_GOSUB, main_0E
     endif
     nop
 
 off_1376:
     if                      0, off_1390
-    ck                      7, 40, 1
-    ck                      4, 151, 0
-    ck                      5, 12, 0
-    set                     5, 12, 1
+    ck                      FG_7, 40, 1
+    ck                      FG_GENERAL_1, 151, 0
+    ck                      FG_GENERAL_2, 12, 0
+    set                     FG_GENERAL_2, 12, 1
     evt_exec                255, I_GOSUB, main_10
     endif
     nop
@@ -145,19 +146,19 @@ off_1390:
     evt_end                 0
 
 .proc main_02
-    set                     2, 7, 1
-    set                     1, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
     sleep                   10, 30
     nop_8a                  0, 10, 0, 0, 0
     nop_8b                  180, 10, 0, 5, 0
     nop_8b                  250, 5, 0, 10, 0
-    set                     1, 29, 1
+    set                     FG_GAME, 29, 1
     se_on                   2, 17, 0, 0, 0, 0
     work_set                WK_PLAYER, 0
     nop
     sleep                   10, 30
     plc_neck                2, 0, -512, -512, 60, 30
-    set                     1, 29, 0
+    set                     FG_GAME, 29, 0
     sleep                   10, 30
     plc_neck                2, 0, 512, -512, 60, 30
     wsleep
@@ -165,13 +166,13 @@ off_1390:
     plc_neck                2, 0, 0, -256, 60, 30
     sleep                   10, 30
     plc_neck                2, 0, 0, -512, 60, 30
-    set                     4, 160, 1
-    gosub                   18
+    set                     FG_GENERAL_1, 160, 1
+    gosub                   main_12
     evt_end                 0
 
 .proc main_03
     if                      0, off_1420
-    ck                      4, 136, 0
+    ck                      FG_GENERAL_1, 136, 0
     cut_chg                 4
     message_on              0, 0, 0, 255, 255
     sleep                   10, 1
@@ -181,7 +182,7 @@ off_1390:
 
 off_1420:
     if                      0, off_1448
-    ck                      7, 40, 0
+    ck                      FG_7, 40, 0
     sce_espr3d_on           0, 277, 0, 10240, -27900, -3900, -26800, -96, 288, 144, 0
     message_on              0, 1, 0, 255, 255
     else                    0, off_1450
@@ -202,22 +203,22 @@ off_1456:
 .proc main_04
     cut_chg                 4
     se_on                   2, 10, 0, 0, 0, 0
-    set                     4, 136, 1
+    set                     FG_GENERAL_1, 136, 1
     set                     15, 6, 1
     set                     16, 1, 1
     set                     17, 1, 1
-    sce_item_lost           84
-    sce_item_lost           85
+    sce_item_lost           ITEM_JOINTPLUGBLUE
+    sce_item_lost           ITEM_JOINTPLUGRED
     aot_reset               3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     aot_reset               4, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     aot_reset               13, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     aot_reset               14, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    set                     2, 7, 1
+    set                     FG_STATE, 7, 1
     sleep                   10, 10
     se_on                   2, 12, 0, 0, 0, 0
     sleep                   10, 20
     cut_chg                 3
-    set                     2, 7, 0
+    set                     FG_STATE, 7, 0
     sce_espr3d_on           0, 21, 0, 10240, -27900, -3900, -26800, -96, 288, 144, 0
     sce_espr3d_on           0, 2070, 0, 10240, -27900, -3900, -26800, -96, 288, 144, 0
     se_on                   2, 19, 0, 0, 0, 0
@@ -235,7 +236,7 @@ off_1456:
     cut_chg                 15
     se_on                   2, 11, 0, 0, 0, 0
     cut_auto                1
-    set                     2, 7, 1
+    set                     FG_STATE, 7, 1
     evt_exec                255, I_GOSUB, main_07
     evt_end                 0
 
@@ -255,8 +256,8 @@ off_1456:
     evt_end                 0
 
 .proc main_07
-    set                     2, 7, 1
-    set                     1, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
     work_set                WK_PLAYER, 0
     nop
     plc_dest                0, 21, 33, 2048, 128
@@ -283,9 +284,9 @@ off_1456:
     nop_8b                  180, 1, 0, 0, 0
     nop_8b                  250, 5, 0, 1, 0
     se_on                   2, 13, 0, 0, 0, 0
-    set                     1, 28, 1
+    set                     FG_GAME, 28, 1
     sleep                   10, 20
-    set                     1, 28, 0
+    set                     FG_GAME, 28, 0
     cut_chg                 5
     work_set                WK_PLAYER, 0
     nop
@@ -303,7 +304,7 @@ off_1456:
     work_set                WK_ENEMY, 0
     nop
     member_set              23, 2, 0
-    set                     1, 4, 0
+    set                     FG_GAME, 4, 0
     sleep                   10, 1
     xa_on                   0, 5
     sleep                   10, 160
@@ -311,14 +312,14 @@ off_1456:
     sleep                   10, 90
     wsleep
     wsleeping
-    set                     1, 4, 1
+    set                     FG_GAME, 4, 1
     work_set                WK_ENEMY, 0
     nop
     member_set              23, 3, 0
     cut_chg                 15
     evt_exec                255, I_GOSUB, main_0A
     sce_bgm_control         2, 1, 0, 0, 0
-    gosub                   18
+    gosub                   main_12
     evt_end                 0
 
 .proc main_08
@@ -331,15 +332,15 @@ off_1456:
     evt_end                 0
 
 .proc main_09
-    copy                    16, 29
+    copy                    V_TEMP, V_1D
     nop
-    calc                    0, OP_MOD, 16, 5
-    copy                    11, 16
+    calc                    0, OP_MOD, V_TEMP, 5
+    copy                    V_0B, V_TEMP
     nop
-    copy                    16, 11
+    copy                    V_TEMP, V_0B
     nop
-    calc                    0, OP_ADD, 16, 5
-    copy                    11, 16
+    calc                    0, OP_ADD, V_TEMP, 5
+    copy                    V_0B, V_TEMP
     nop
     for                     0, off_1748, 11
     sleep                   10, 10
@@ -348,10 +349,10 @@ off_1456:
 off_1748:
     sleep                   10, 90
     if                      0, off_1788
-    ck                      5, 20, 0
+    ck                      FG_GENERAL_2, 20, 0
     sce_espr_on             0, 3354, 0, 12288, -24000, 500, -13500, 0
     se_on                   2, 16, 0, 0, 0, 0
-    set                     1, 28, 1
+    set                     FG_GAME, 28, 1
     nop_8a                  0, 8, 0, 0, 0
     nop_8b                  90, 1, 0, 0, 0
     nop_8b                  150, 5, 0, 1, 0
@@ -359,15 +360,15 @@ off_1748:
     nop
 
 off_1788:
-    copy                    16, 29
+    copy                    V_TEMP, V_1D
     nop
-    calc                    0, OP_MOD, 16, 5
-    copy                    11, 16
+    calc                    0, OP_MOD, V_TEMP, 5
+    copy                    V_0B, V_TEMP
     nop
-    copy                    16, 11
+    copy                    V_TEMP, V_0B
     nop
-    calc                    0, OP_ADD, 16, 5
-    copy                    11, 16
+    calc                    0, OP_ADD, V_TEMP, 5
+    copy                    V_0B, V_TEMP
     nop
     for                     0, off_17B0, 11
     sleep                   10, 4
@@ -375,20 +376,20 @@ off_1788:
 
 off_17B0:
     if                      0, off_17C6
-    ck                      5, 20, 0
+    ck                      FG_GENERAL_2, 20, 0
     se_on                   2, 17, 0, 0, 0, 0
     endif
     nop
 
 off_17C6:
     sleep                   10, 30
-    set                     1, 28, 0
+    set                     FG_GAME, 28, 0
     evt_exec                255, I_GOSUB, main_09
     evt_end                 0
 
 .proc main_0A
     sleep                   10, 1800
-    set                     5, 15, 1
+    set                     FG_GENERAL_2, 15, 1
     evt_end                 0
 
 .proc main_0B
@@ -397,17 +398,17 @@ off_17C6:
     if                      0, off_17FC
     member_cmp              0, 25, 0, 1, 0
     member_cmp              0, 26, 0, 1, 0
-    set                     5, 13, 1
+    set                     FG_GENERAL_2, 13, 1
     evt_exec                255, I_GOSUB, main_0C
     endif
     nop
 
 off_17FC:
     if                      0, off_1818
-    ck                      5, 15, 1
+    ck                      FG_GENERAL_2, 15, 1
     member_cmp              0, 26, 0, 1, 0
-    ck                      5, 13, 0
-    set                     5, 13, 1
+    ck                      FG_GENERAL_2, 13, 0
+    set                     FG_GENERAL_2, 13, 1
     evt_exec                255, I_GOSUB, main_0C
     endif
     nop
@@ -416,28 +417,28 @@ off_1818:
     evt_end                 0
 
 .proc main_0C
-    set                     2, 7, 1
-    set                     1, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
     work_set                WK_ENEMY, 0
     nop
     member_set              7, 0, 128
-    copy                    4, 26
+    copy                    V_04, V_CUT
     nop
     work_set                WK_PLAYER, 0
     nop
-    member_copy             5, 11
+    member_copy             V_05, 11
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
-    member_copy             7, 15
+    member_copy             V_07, 15
     nop
     work_set                WK_ENEMY, 0
     nop
-    member_copy             8, 11
+    member_copy             V_08, 11
     nop
-    member_copy             9, 13
+    member_copy             V_09, 13
     nop
-    member_copy             10, 15
+    member_copy             V_0A, 15
     nop
     cut_chg                 7
     work_set                WK_OBJECT, 0
@@ -469,7 +470,7 @@ off_1818:
     evt_next
     nop
     edwhile                 off_18D0
-    ck                      5, 14, 0
+    ck                      FG_GENERAL_2, 14, 0
 
 off_18D0:
     sleep                   10, 15
@@ -484,7 +485,7 @@ off_18D0:
     cut_chg                 11
     sleep                   10, 1
     if                      0, off_1918
-    ck                      1, 0, 0
+    ck                      FG_GAME, F_PLAYER, 0
     xa_on                   0, 1
     message_on              0, 6, 0, 0, 0
     else                    0, off_1924
@@ -514,37 +515,37 @@ off_1924:
     dir_set                 0, 0, 1600, 0
     work_set                WK_ENEMY, 0
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 32767
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 32767
+    member_set2             7, V_TEMP
     nop
     work_set                WK_PLAYER, 0
     nop
-    member_set2             11, 5
+    member_set2             11, V_05
     nop
-    member_set2             13, 6
+    member_set2             13, V_06
     nop
-    member_set2             15, 7
+    member_set2             15, V_07
     nop
-    member_set2             39, 5
+    member_set2             39, V_05
     nop
-    member_set2             40, 6
+    member_set2             40, V_06
     nop
     work_set                WK_ENEMY, 0
     nop
-    member_set2             11, 8
+    member_set2             11, V_08
     nop
-    member_set2             13, 9
+    member_set2             13, V_09
     nop
-    member_set2             15, 10
+    member_set2             15, V_0A
     nop
-    member_set2             39, 8
+    member_set2             39, V_08
     nop
-    member_set2             40, 9
+    member_set2             40, V_09
     nop
     sleep                   10, 1
-    gosub                   18
+    gosub                   main_12
     evt_end                 0
 
 .proc main_0D
@@ -565,7 +566,7 @@ off_1924:
     member_cmp              0, 12, 3, 224, 252
 
 off_19DE:
-    set                     5, 14, 1
+    set                     FG_GENERAL_2, 14, 1
     se_on                   2, 14, 0, 0, 0, 0
     work_set                WK_OBJECT, 0
     nop
@@ -579,7 +580,7 @@ off_19DE:
     nop
     if                      0, off_1A20
     member_cmp              0, 24, 0, 1, 0
-    set                     5, 11, 1
+    set                     FG_GENERAL_2, 11, 1
     evt_exec                255, I_GOSUB, main_0F
     endif
     nop
@@ -589,11 +590,11 @@ off_1A20:
 
 .proc main_0F
     sce_bgm_control         2, 2, 0, 0, 0
-    set                     5, 20, 1
-    set                     1, 4, 0
+    set                     FG_GENERAL_2, 20, 1
+    set                     FG_GAME, 4, 0
     sleep                   10, 15
     if                      0, off_1A4A
-    ck                      1, 0, 0
+    ck                      FG_GAME, F_PLAYER, 0
     xa_on                   0, 2
     message_on              0, 7, 0, 0, 0
     else                    0, off_1A56
@@ -618,47 +619,47 @@ off_1A56:
     evt_end                 0
 
 .proc main_10
-    set                     2, 7, 1
-    set                     1, 27, 1
-    set                     5, 20, 0
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
+    set                     FG_GENERAL_2, 20, 0
     work_set                WK_ENEMY, 0
     nop
     member_set              24, 4, 0
     sleep                   10, 1
-    set                     2, 7, 1
+    set                     FG_STATE, 7, 1
     sleep                   10, 60
     cut_replace             12, 0
     cut_replace             13, 1
     cut_replace             14, 2
     cut_replace             15, 3
-    set                     1, 4, 1
+    set                     FG_GAME, 4, 1
     sce_bgm_control         0, 1, 0, 0, 0
     sce_bgmtbl_set          0, 2, 7, 12049, 32768
     sce_bgmtbl_set          0, 3, 7, 11299, 32832
     se_on                   2, 11, 0, 0, 0, 0
     if                      0, off_1AD2
-    cmp                     0, 26, CMP_EQ, 12
+    cmp                     0, V_CUT, CMP_EQ, 12
     cut_chg                 0
     endif
     nop
 
 off_1AD2:
     if                      0, off_1AE0
-    cmp                     0, 26, CMP_EQ, 13
+    cmp                     0, V_CUT, CMP_EQ, 13
     cut_chg                 1
     endif
     nop
 
 off_1AE0:
     if                      0, off_1AEE
-    cmp                     0, 26, CMP_EQ, 14
+    cmp                     0, V_CUT, CMP_EQ, 14
     cut_chg                 2
     endif
     nop
 
 off_1AEE:
     if                      0, off_1AFC
-    cmp                     0, 26, CMP_EQ, 15
+    cmp                     0, V_CUT, CMP_EQ, 15
     cut_chg                 3
     endif
     nop
@@ -666,23 +667,23 @@ off_1AEE:
 off_1AFC:
     aot_reset               0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 12, 154, 0, 0, 96, 165
     aot_reset               2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    set                     4, 151, 1
+    set                     FG_GENERAL_1, 151, 1
     sce_bgm_control         1, 1, 1, 127, 64
     sce_bgm_control         1, 0, 1, 127, 64
-    gosub                   18
+    gosub                   main_12
     evt_end                 0
 
 .proc main_11
-    save                    11, 0
+    save                    V_0B, 0
     for                     0, off_1B52, 15
     work_copy               11, 2, 0
     parts_set               0, 0, 0, 8224
     work_copy               11, 2, 0
     parts_set               0, 0, 1, 32
-    copy                    16, 11
+    copy                    V_TEMP, V_0B
     nop
-    calc                    0, OP_ADD, 16, 1
-    copy                    11, 16
+    calc                    0, OP_ADD, V_TEMP, 1
+    copy                    V_0B, V_TEMP
     nop
     next                    0
 
@@ -692,14 +693,14 @@ off_1B52:
 .proc main_12
     work_set                WK_PLAYER, 0
     plc_ret
-    set                     2, 7, 0
-    set                     1, 27, 0
+    set                     FG_STATE, 7, 0
+    set                     FG_GAME, 27, 0
     cut_auto                1
     evt_end                 0
 
 .proc main_13
     if                      0, off_1BFC
-    ck                      4, 151, 0
+    ck                      FG_GENERAL_1, 151, 0
     switch                  26, off_1BFA
     case                    0, off_1B76, 0
 
@@ -767,4 +768,3 @@ off_1BFA:
 
 off_1BFC:
     evt_end                 0
-    db                      0x39, 0x39

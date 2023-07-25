@@ -1,13 +1,14 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 10803, -9738, 5080, 3830, -13695, -1800, -26187, -904, 1, 0, 0, 1, 12, 0, 0, 0, UNLOCKED, 0
     aot_set                 1, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -26272, -22795, 4280, 1900, 0, 0, 0, 0, 0, 255
     aot_set                 2, SCE_NORMAL, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 10831, -28151, 4340, 2550, 0, 0, 0, 0, 0, 0
     aot_set                 3, SCE_NORMAL, SAT_EM | SAT_UNDER, 3, 0, -26066, -23500, 2450, 1570, 0, 0, 0, 0, 0, 0
     aot_set                 4, SCE_NORMAL, SAT_EM | SAT_UNDER, 3, 0, 21862, -18667, 6900, 8800, 0, 0, 0, 0, 0, 0
     if                      0, off_371A
-    ck                      0, 25, 1
+    ck                      FG_0, F_DIFFICULT, 1
     item_aot_set            5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 25562, -16667, 1840, 3500, ITEM_HERBG, 1, 211, 255, 0
     endif
     nop
@@ -16,11 +17,11 @@ off_371A:
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
+.proc main
+    gosub                   main_02
     if                      0, off_3766
-    ck                      5, 18, 0
-    gosub                   16
+    ck                      FG_GENERAL_2, 18, 0
+    gosub                   main_10
     evt_exec                255, I_GOSUB, main_03
     evt_exec                255, I_GOSUB, main_05
     evt_exec                255, I_GOSUB, main_06
@@ -30,7 +31,7 @@ off_371A:
 off_3766:
     evt_exec                255, I_GOSUB, main_03
     evt_exec                255, I_GOSUB, main_05
-    gosub                   15
+    gosub                   main_0F
     evt_exec                255, I_GOSUB, main_13
     evt_exec                255, I_GOSUB, main_12
     evt_exec                255, I_GOSUB, main_14
@@ -42,58 +43,58 @@ off_377E:
     evt_exec                255, I_GOSUB, main_07
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0
 
 .proc main_02
-    set                     5, 18, 1
-    save                    4, 0
+    set                     FG_GENERAL_2, 18, 1
+    save                    V_04, 0
     for                     0, off_37BA, 255
     if                      0, off_37AA
     work_copy               4, 2, 0
-    ck                      8, 0, 1
-    set                     5, 18, 0
+    ck                      FG_ITEM, 0, 1
+    set                     FG_GENERAL_2, 18, 0
     endif
     nop
 
 off_37AA:
-    copy                    16, 4
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_ADD, 16, 1
-    copy                    4, 16
+    calc                    0, OP_ADD, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
     next                    0
 
 off_37BA:
-    save                    4, 0
+    save                    V_04, 0
     for                     0, off_37E6, 255
     if                      0, off_37D6
     work_copy               4, 2, 0
     ck                      34, 0, 1
-    set                     5, 18, 0
+    set                     FG_GENERAL_2, 18, 0
     endif
     nop
 
 off_37D6:
-    copy                    16, 4
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_ADD, 16, 1
-    copy                    4, 16
+    calc                    0, OP_ADD, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
     next                    0
 
 off_37E6:
     if                      0, off_37F6
-    ck                      1, 5, 1
-    set                     5, 18, 0
+    ck                      FG_GAME, F_EASY, 1
+    set                     FG_GENERAL_2, 18, 0
     else                    0, off_382C
 
 off_37F6:
     if                      0, off_380E
-    ck                      1, 1, 0
+    ck                      FG_GAME, F_SCENARIO, 0
     if                      0, off_380C
-    ck                      5, 18, 1
-    set                     29, 17, 1
+    ck                      FG_GENERAL_2, 18, 1
+    set                     FG_LOCK, 17, 1
     endif
     nop
 
@@ -103,15 +104,15 @@ off_380C:
 
 off_380E:
     if                      0, off_381C
-    ck                      29, 17, 1
-    set                     5, 18, 1
+    ck                      FG_LOCK, 17, 1
+    set                     FG_GENERAL_2, 18, 1
     endif
     nop
 
 off_381C:
     if                      0, off_382A
-    ck                      6, 195, 1
-    set                     5, 18, 0
+    ck                      FG_ENEMY, 195, 1
+    set                     FG_GENERAL_2, 18, 0
     endif
     nop
 
@@ -126,19 +127,19 @@ off_382C:
     sleep                   10, 5
     work_set                WK_ENEMY, 3
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, -16385
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, -16385
+    member_set2             7, V_TEMP
     nop
     evt_next
-    nop
 
-off_3846:
+off_3845:
+    nop
     if                      0, off_3888
-    cmp                     0, 26, CMP_EQ, 0
+    cmp                     0, V_CUT, CMP_EQ, 0
     if                      0, off_3886
-    ck                      5, 9, 0
+    ck                      FG_GENERAL_2, 9, 0
     work_set                WK_ENEMY, 1
     nop
     if                      0, off_3884
@@ -146,7 +147,7 @@ off_3846:
     if                      0, off_3882
     member_cmp              0, 9, 0, 3, 0
     if                      0, off_3880
-    cmp                     0, 29, CMP_GE, 32000
+    cmp                     0, V_1D, CMP_GE, 32000
     evt_exec                255, I_GOSUB, main_04
     endif
     nop
@@ -170,42 +171,42 @@ off_3886:
 off_3888:
     evt_next
     nop
-    goto                    255, 255, 0, off_3846 + 3
+    goto                    255, 255, 0, off_3845
     evt_end                 0
 
 .proc main_04
     work_set                WK_ENEMY, 1
-    set                     5, 9, 1
+    set                     FG_GENERAL_2, 9, 1
     nop
     member_set              23, 0, 140
     evt_next
     nop
-    member_copy             16, 23
+    member_copy             V_TEMP, 23
     nop
-    calc                    0, OP_AND, 16, 32767
-    member_set2             23, 16
+    calc                    0, OP_AND, V_TEMP, 32767
+    member_set2             23, V_TEMP
     nop
     evt_end                 0
 
 .proc main_05
+
+off_38B0:
     work_set                WK_ENEMY, 1
     nop
-
-off_38B4:
     if                      0, off_3914
-    ck                      5, 9, 1
+    ck                      FG_GENERAL_2, 9, 1
     if                      0, off_38FA
     member_cmp              0, 24, 6, 0, 128
     se_on                   2, 266, 259, 0, 0, 0
     if                      0, off_38EA
-    ck                      5, 11, 0
-    set                     5, 11, 1
+    ck                      FG_GENERAL_2, 11, 0
+    set                     FG_GENERAL_2, 11, 1
     set                     13, 2, 1
     set                     13, 5, 0
     else                    0, off_38F8
 
 off_38EA:
-    set                     5, 11, 0
+    set                     FG_GENERAL_2, 11, 0
     set                     13, 2, 0
     set                     13, 5, 1
     nop
@@ -221,7 +222,7 @@ off_38FA:
     else                    0, off_390E
 
 off_3908:
-    set                     5, 9, 0
+    set                     FG_GENERAL_2, 9, 0
     nop
     nop
 
@@ -233,22 +234,22 @@ off_390E:
 off_3914:
     evt_next
     nop
-    goto                    255, 255, 0, off_38B4
+    goto                    255, 255, 0, off_38B0
     evt_end                 0
 
 .proc main_06
-    switch                  26, off_3A16
 
-off_3922:
+off_391E:
+    switch                  26, off_3A16
     case                    0, off_3928, 4
 
 off_3928:
     case                    0, off_3944, 5
     if                      0, off_3942
-    ck                      5, 1, 0
-    set                     5, 1, 1
-    set                     5, 3, 0
-    gosub                   8
+    ck                      FG_GENERAL_2, 1, 0
+    set                     FG_GENERAL_2, 1, 1
+    set                     FG_GENERAL_2, 3, 0
+    gosub                   main_08
     endif
     nop
 
@@ -264,18 +265,18 @@ off_394A:
 off_3950:
     case                    0, off_397C, 11
     if                      0, off_396A
-    ck                      5, 2, 0
-    set                     5, 2, 1
-    set                     5, 3, 0
-    gosub                   9
+    ck                      FG_GENERAL_2, 2, 0
+    set                     FG_GENERAL_2, 2, 1
+    set                     FG_GENERAL_2, 3, 0
+    gosub                   main_09
     endif
     nop
 
 off_396A:
     if                      0, off_397A
-    ck                      5, 17, 0
-    set                     5, 17, 1
-    gosub                   12
+    ck                      FG_GENERAL_2, 17, 0
+    set                     FG_GENERAL_2, 17, 1
+    gosub                   main_0C
     endif
     nop
 
@@ -285,18 +286,18 @@ off_397A:
 off_397C:
     case                    0, off_39A8, 0
     if                      0, off_3996
-    ck                      5, 2, 0
-    set                     5, 2, 1
-    set                     5, 3, 0
-    gosub                   9
+    ck                      FG_GENERAL_2, 2, 0
+    set                     FG_GENERAL_2, 2, 1
+    set                     FG_GENERAL_2, 3, 0
+    gosub                   main_09
     endif
     nop
 
 off_3996:
     if                      0, off_39A6
-    ck                      5, 17, 1
-    set                     5, 17, 0
-    gosub                   11
+    ck                      FG_GENERAL_2, 17, 1
+    set                     FG_GENERAL_2, 17, 0
+    gosub                   main_0B
     endif
     nop
 
@@ -324,10 +325,10 @@ off_39C6:
 off_39CC:
     case                    0, off_39E8, 15
     if                      0, off_39E6
-    ck                      5, 2, 0
-    set                     5, 2, 1
-    set                     5, 3, 0
-    gosub                   9
+    ck                      FG_GENERAL_2, 2, 0
+    set                     FG_GENERAL_2, 2, 1
+    set                     FG_GENERAL_2, 3, 0
+    gosub                   main_09
     endif
     nop
 
@@ -343,11 +344,11 @@ off_39EE:
 off_39F4:
     case                    0, off_3A14, 6
     if                      0, off_3A12
-    ck                      5, 3, 0
-    set                     5, 3, 1
-    set                     5, 1, 0
-    set                     5, 2, 0
-    gosub                   10
+    ck                      FG_GENERAL_2, 3, 0
+    set                     FG_GENERAL_2, 3, 1
+    set                     FG_GENERAL_2, 1, 0
+    set                     FG_GENERAL_2, 2, 0
+    gosub                   main_0A
     endif
     nop
 
@@ -360,13 +361,13 @@ off_3A14:
 off_3A16:
     evt_next
     nop
-    goto                    255, 255, 0, off_3922
+    goto                    255, 255, 0, off_391E
     evt_end                 0
 
 .proc main_07
-    switch                  26, off_3AF6
 
-off_3A24:
+off_3A20:
+    switch                  26, off_3AF6
     case                    0, off_3A3E, 0
     sce_bgm_control         0, 0, 1, 1, 65
     sce_bgm_control         0, 0, 2, 58, 65
@@ -448,66 +449,66 @@ off_3AF6:
     evt_next
     nop
     edwhile                 off_3B02
-    ck                      1, 11, 0
+    ck                      FG_GAME, 11, 0
 
 off_3B02:
-    goto                    255, 255, 0, off_3A24
+    goto                    255, 255, 0, off_3A20
     evt_end                 0
 
 .proc main_08
     if                      0, off_3B54
-    ck                      5, 21, 0
+    ck                      FG_GENERAL_2, 21, 0
     work_set                WK_ENEMY, 0
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
     endif
     nop
 
 off_3B54:
     if                      0, off_3B9E
-    ck                      5, 22, 0
+    ck                      FG_GENERAL_2, 22, 0
     work_set                WK_ENEMY, 5
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -517,48 +518,48 @@ off_3B9E:
 
 .proc main_09
     if                      0, off_3BDC
-    ck                      5, 21, 0
+    ck                      FG_GENERAL_2, 21, 0
     work_set                WK_ENEMY, 0
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     endif
     nop
 
 off_3BDC:
     if                      0, off_3C18
-    ck                      5, 22, 0
+    ck                      FG_GENERAL_2, 22, 0
     work_set                WK_ENEMY, 5
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -568,52 +569,52 @@ off_3C18:
 
 .proc main_0A
     if                      0, off_3D38
-    cmp                     0, 26, CMP_EQ, 6
+    cmp                     0, V_CUT, CMP_EQ, 6
     if                      0, off_3CAC
-    ck                      5, 21, 0
+    ck                      FG_GENERAL_2, 21, 0
     work_set                WK_ENEMY, 0
     nop
     if                      0, off_3C6C
     member_cmp              0, 9, 0, 4, 0
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     else                    0, off_3CAA
 
 off_3C6C:
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
     nop
     nop
@@ -624,50 +625,50 @@ off_3CAA:
 
 off_3CAC:
     if                      0, off_3D34
-    ck                      5, 22, 0
+    ck                      FG_GENERAL_2, 22, 0
     work_set                WK_ENEMY, 5
     nop
     if                      0, off_3CF4
     member_cmp              0, 9, 0, 4, 0
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     else                    0, off_3D32
 
 off_3CF4:
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
     nop
     nop
@@ -681,48 +682,48 @@ off_3D34:
 
 off_3D38:
     if                      0, off_3D74
-    ck                      5, 21, 0
+    ck                      FG_GENERAL_2, 21, 0
     work_set                WK_ENEMY, 0
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     endif
     nop
 
 off_3D74:
     if                      0, off_3DB0
-    ck                      5, 22, 0
+    ck                      FG_GENERAL_2, 22, 0
     work_set                WK_ENEMY, 5
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -738,76 +739,76 @@ off_3DB2:
     work_set                WK_ENEMY, 1
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     work_set                WK_ENEMY, 2
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     work_set                WK_ENEMY, 3
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     if                      0, off_3E86
-    ck                      5, 16, 1
+    ck                      FG_GENERAL_2, 16, 1
     work_set                WK_ENEMY, 4
     nop
     member_set              12, 232, 234
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -819,96 +820,96 @@ off_3E86:
     work_set                WK_ENEMY, 1
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
     work_set                WK_ENEMY, 2
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
     work_set                WK_ENEMY, 3
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
     if                      0, off_3F92
-    ck                      5, 16, 1
+    ck                      FG_GENERAL_2, 16, 1
     work_set                WK_ENEMY, 4
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -928,15 +929,15 @@ off_3F92:
     if                      0, off_3FCE
     member_cmp              0, 2, 5, 7, 0
     member_set              7, 6, 0
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
     endif
     nop
@@ -947,15 +948,15 @@ off_3FCE:
     if                      0, off_3FFE
     member_cmp              0, 2, 5, 7, 0
     member_set              7, 6, 0
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
     endif
     nop
@@ -966,15 +967,15 @@ off_3FFE:
     if                      0, off_402E
     member_cmp              0, 2, 5, 7, 0
     member_set              7, 6, 0
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
     endif
     nop
@@ -983,96 +984,96 @@ off_402E:
     do                      0, off_403E
     sleep                   10, 1
     edwhile                 off_403E
-    cmp                     0, 26, CMP_EQ, 15
+    cmp                     0, V_CUT, CMP_EQ, 15
 
 off_403E:
     work_set                WK_ENEMY, 6
     nop
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_ENEMY, 7
     nop
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_ENEMY, 8
     nop
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     evt_end                 0
 
 .proc main_0F
-    sce_em_set              0, 0, ENEMY_ZOMBIEBRAD, 6, 16, 0, 2, 0, 195, -2915, 0, -14478, 4000, 0, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_BRAD, 6, 16, 0, 2, 0, 195, -2915, 0, -14478, 4000, 0, 0
     item_aot_set            31, SCE_ITEM, SAT_EM | SAT_MANUAL | SAT_FRONT, 0, 194, -1000, -1000, 2000, 2000, ITEM_SPECIALKEY, 1, 156, 255, 1
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 6, 16, 3, 2, 0, 255, -24137, -5400, -25367, 3061, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 6, 16, 3, 1, 1, 255, -26445, -5400, -29095, 3024, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIERANDOM, 2, 80, 3, 2, 3, 255, -26877, -5400, -25065, 3223, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 2, 0, 255, -24137, -5400, -25367, 3061, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 1, 1, 255, -26445, -5400, -29095, 3024, 0, 0
+    sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 2, 80, 3, 2, 3, 255, -26877, -5400, -25065, 3223, 0, 0
     evt_end                 0
 
 .proc main_10
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 6, 16, 3, 2, 0, 255, -24137, -5400, -25367, 3061, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 6, 16, 3, 1, 0, 255, -26445, -5400, -29095, 3024, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIERANDOM, 2, 80, 3, 2, 3, 255, -23577, -5400, -26265, 3831, 0, 0
-    sce_em_set              0, 4, ENEMY_ZOMBIERANDOM, 6, 16, 3, 1, 0, 255, -25425, -5400, -28865, 3224, 0, 0
-    set                     5, 16, 1
-    sce_em_set              0, 0, ENEMY_ZOMBIERANDOM, 64, 0, 3, 1, 0, 56, -10880, -5400, -20763, 2015, 0, 0
-    sce_em_set              0, 5, ENEMY_ZOMBIERANDOM, 70, 0, 3, 2, 0, 60, -1148, -5400, -22749, 2138, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 2, 0, 255, -24137, -5400, -25367, 3061, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 1, 0, 255, -26445, -5400, -29095, 3024, 0, 0
+    sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 2, 80, 3, 2, 3, 255, -23577, -5400, -26265, 3831, 0, 0
+    sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 1, 0, 255, -25425, -5400, -28865, 3224, 0, 0
+    set                     FG_GENERAL_2, 16, 1
+    sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 64, 0, 3, 1, 0, 56, -10880, -5400, -20763, 2015, 0, 0
+    sce_em_set              0, 5, ENEMY_ZOMBIE_RANDOM, 70, 0, 3, 2, 0, 60, -1148, -5400, -22749, 2138, 0, 0
     if                      0, off_41A6
-    ck                      6, 56, 1
-    set                     5, 21, 1
+    ck                      FG_ENEMY, 56, 1
+    set                     FG_GENERAL_2, 21, 1
     endif
     nop
 
 off_41A6:
     if                      0, off_41B4
-    ck                      6, 60, 1
-    set                     5, 22, 1
+    ck                      FG_ENEMY, 60, 1
+    set                     FG_GENERAL_2, 22, 1
     endif
     nop
 
 off_41B4:
-    sce_em_set              0, 6, ENEMY_ZOMBIERANDOM, 6, 128, 3, 1, 0, 255, 13105, -5400, -30139, 3160, 0, 0
-    sce_em_set              0, 7, ENEMY_ZOMBIERANDOM, 6, 128, 3, 2, 0, 255, 15615, -5400, -29673, 2138, 0, 0
-    sce_em_set              0, 8, ENEMY_ZOMBIERANDOM, 6, 128, 3, 1, 0, 255, 18947, -5400, -30341, 2138, 0, 0
+    sce_em_set              0, 6, ENEMY_ZOMBIE_RANDOM, 6, 128, 3, 1, 0, 255, 13105, -5400, -30139, 3160, 0, 0
+    sce_em_set              0, 7, ENEMY_ZOMBIE_RANDOM, 6, 128, 3, 2, 0, 255, 15615, -5400, -29673, 2138, 0, 0
+    sce_em_set              0, 8, ENEMY_ZOMBIE_RANDOM, 6, 128, 3, 1, 0, 255, 18947, -5400, -30341, 2138, 0, 0
     evt_end                 0
 
 .proc main_11
+
+off_41F8:
     evt_next
     work_set                WK_PLAYER, 0
-
-off_41FC:
     if                      0, off_422E
     member_cmp              0, 9, 0, 2, 0
     if                      0, off_422C
-    ck                      6, 56, 1
+    ck                      FG_ENEMY, 56, 1
     if                      0, off_422A
-    ck                      6, 60, 1
+    ck                      FG_ENEMY, 60, 1
     if                      0, off_4228
-    ck                      5, 0, 0
-    set                     5, 0, 1
+    ck                      FG_GENERAL_2, 0, 0
+    set                     FG_GENERAL_2, 0, 1
     evt_exec                255, I_GOSUB, main_0D
     endif
     nop
@@ -1091,13 +1092,13 @@ off_422C:
 
 off_422E:
     if                      0, off_4240
-    cmp                     0, 26, CMP_EQ, 10
+    cmp                     0, V_CUT, CMP_EQ, 10
     sca_id_set              8, 0, 94
     else                    0, off_425A
 
 off_4240:
     if                      0, off_4252
-    cmp                     0, 26, CMP_EQ, 9
+    cmp                     0, V_CUT, CMP_EQ, 9
     sca_id_set              8, 0, 94
     else                    0, off_4258
 
@@ -1111,22 +1112,22 @@ off_4258:
     nop
 
 off_425A:
-    goto                    255, 255, 0, off_41FC
+    goto                    255, 255, 0, off_41F8
     evt_end                 0
 
 .proc main_12
+
+off_4262:
     evt_next
     nop
-
-off_4264:
     if                      0, off_4276
-    cmp                     0, 26, CMP_EQ, 10
+    cmp                     0, V_CUT, CMP_EQ, 10
     sca_id_set              8, 0, 94
     else                    0, off_4290
 
 off_4276:
     if                      0, off_4288
-    cmp                     0, 26, CMP_EQ, 9
+    cmp                     0, V_CUT, CMP_EQ, 9
     sca_id_set              8, 0, 94
     else                    0, off_428E
 
@@ -1140,13 +1141,13 @@ off_428E:
     nop
 
 off_4290:
-    goto                    255, 255, 0, off_4264 + 2
+    goto                    255, 255, 0, off_4262
     evt_end                 0
 
 .proc main_13
-    switch                  26, off_440C
 
-off_429C:
+off_4298:
+    switch                  26, off_440C
     case                    0, off_42A2, 2
 
 off_42A2:
@@ -1161,26 +1162,26 @@ off_42AE:
 off_42B4:
     case                    0, off_4300, 5
     if                      0, off_42FE
-    ck                      5, 1, 0
-    set                     5, 1, 1
-    set                     5, 2, 0
+    ck                      FG_GENERAL_2, 1, 0
+    set                     FG_GENERAL_2, 1, 1
+    set                     FG_GENERAL_2, 2, 0
     work_set                WK_ENEMY, 0
     nop
     member_set              12, 0, 0
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_AND, 16, -9
-    member_set2             1, 16
+    calc                    0, OP_AND, V_TEMP, -9
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 16383
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 16383
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -1191,39 +1192,39 @@ off_42FE:
 off_4300:
     case                    0, off_436A, 0
     if                      0, off_4316
-    ck                      5, 17, 1
-    set                     5, 17, 0
-    gosub                   11
+    ck                      FG_GENERAL_2, 17, 1
+    set                     FG_GENERAL_2, 17, 0
+    gosub                   main_0B
     endif
     nop
 
 off_4316:
     if                      0, off_4368
-    ck                      5, 2, 0
-    set                     5, 2, 1
-    set                     5, 1, 0
+    ck                      FG_GENERAL_2, 2, 0
+    set                     FG_GENERAL_2, 2, 1
+    set                     FG_GENERAL_2, 1, 0
     work_set                WK_ENEMY, 0
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -1240,9 +1241,9 @@ off_4370:
 off_4376:
     case                    0, off_438C, 11
     if                      0, off_438C
-    ck                      5, 17, 0
-    set                     5, 17, 1
-    gosub                   12
+    ck                      FG_GENERAL_2, 17, 0
+    set                     FG_GENERAL_2, 17, 1
+    gosub                   main_0C
     endif
     nop
 
@@ -1267,31 +1268,31 @@ off_43AA:
 off_43B0:
     case                    0, off_440A, 15
     if                      0, off_4408
-    ck                      5, 2, 0
-    set                     5, 2, 1
-    set                     5, 1, 0
+    ck                      FG_GENERAL_2, 2, 0
+    set                     FG_GENERAL_2, 2, 1
+    set                     FG_GENERAL_2, 1, 0
     work_set                WK_ENEMY, 0
     nop
     member_set              12, 0, 131
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 16384
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 16384
+    member_set2             7, V_TEMP
     nop
     endif
     nop
@@ -1305,16 +1306,16 @@ off_440A:
 off_440C:
     evt_next
     nop
-    goto                    255, 255, 0, off_429C
+    goto                    255, 255, 0, off_4298
     evt_end                 0
 
 .proc main_14
-    if                      0, off_4432
 
-off_441A:
-    ck                      6, 195, 1
-    ck                      5, 20, 0
-    set                     5, 20, 1
+off_4416:
+    if                      0, off_4432
+    ck                      FG_ENEMY, 195, 1
+    ck                      FG_GENERAL_2, 20, 0
+    set                     FG_GENERAL_2, 20, 1
     aot_reset               31, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 83, 0, 1, 0, 156, 0
     endif
     nop
@@ -1322,5 +1323,5 @@ off_441A:
 off_4432:
     evt_next
     nop
-    goto                    255, 255, 0, off_441A
+    goto                    255, 255, 0, off_4416
     evt_end                 0

@@ -1,19 +1,20 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18419, -27826, 4740, 990, -7893, 0, -22497, 1320, 2, 4, 3, 0, 31, 1, 0, 0, UNLOCKED, 0
     door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -27339, -9726, 2350, 1390, -20143, -7200, -22770, 3120, 3, 3, 0, 4, 6, 1, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
-    gosub                   6
-    gosub                   5
+.proc main
+    gosub                   main_02
+    gosub                   main_06
+    gosub                   main_05
     evt_end                 0
 
-.proc main_01
-    gosub                   4
+.proc aot
+    gosub                   main_04
     evt_end                 0
 
 .proc main_02
@@ -23,8 +24,8 @@
     aot_set                 5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18415, -5953, 4880, 1800, 0, 0, 0, 0, 255, 255
     sce_espr_on             0, 284, 0, 4096, -17800, -2400, -16500, 0
     sce_espr_on             0, 284, 0, 4096, -17700, -2400, -6000, 0
-    gosub                   3
-    save                    4, 255
+    gosub                   main_03
+    save                    V_04, 255
     sce_bgm_control         0, 0, 1, 100, 64
     evt_end                 0
 
@@ -43,8 +44,8 @@
 .proc main_04
     if                      0, off_0A5E
     work_copy               4, 4, 1
-    cmp                     0, 26, CMP_NE, 0
-    copy                    4, 26
+    cmp                     0, V_CUT, CMP_NE, 0
+    copy                    V_04, V_CUT
     nop
     switch                  26, off_0A5C
     case                    0, off_09F2, 0
@@ -93,14 +94,14 @@ off_0A5E:
 
 .proc main_05
     if                      0, off_0AA6
-    ck                      1, 3, 1
+    ck                      FG_GAME, 3, 1
     if                      0, off_0A8C
-    cmp                     0, 27, CMP_EQ, 772
-    sce_em_set              0, 255, ENEMY_ADAWONG1, 0, 12, 0, 31, 0, 255, -15295, 0, -25998, 2872, 0, 0
+    cmp                     0, V_LAST_RDT, CMP_EQ, 772
+    sce_em_set              0, 255, ENEMY_ADA_WONG_1, 0, 12, 0, 31, 0, 255, -15295, 0, -25998, 2872, 0, 0
     else                    0, off_0AA4
 
 off_0A8C:
-    sce_em_set              0, 255, ENEMY_ADAWONG1, 0, 12, 1, 31, 0, 255, -26179, -1800, -9642, 249, 0, 0
+    sce_em_set              0, 255, ENEMY_ADA_WONG_1, 0, 12, 1, 31, 0, 255, -26179, -1800, -9642, 249, 0, 0
     nop
     nop
 
@@ -117,4 +118,3 @@ off_0AA6:
     item_aot_set            4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -23918, -9803, 1410, 1300, ITEM_HERBB, 1, 165, 2, 1
     obj_model_set           2, 0, 0, 0, 0, 1, 0, 10, 16, -23768, -1800, -9403, 0, 2048, -128, 0, 0, 0, 0, 0, 0, 0, 0
     evt_end                 0
-    db                      0x18, 0x00

@@ -1,17 +1,18 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -13633, -28415, 4600, 2000, 10146, 0, -9265, 1136, 1, 17, 6, 0, 6, 2, 0, 0, UNLOCKED, 0
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 20000, 20000, 10, 10, -2249, 0, -16376, 3063, 2, 7, 0, 0, 22, 5, 0, 0, UNLOCKED, 0
     if                      0, off_083A
-    ck                      4, 83, 0
-    sce_em_set              0, 0, ENEMY_CEREBRUS, 0, 0, 3, 12, 0, 141, -7168, -5400, -8856, 3072, 0, 0
-    sce_em_set              0, 1, ENEMY_CEREBRUS, 0, 0, 3, 12, 0, 142, -29658, -5400, -8856, 2224, 0, 0
+    ck                      FG_GENERAL_1, 83, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_DOG, 0, 0, 3, 12, 0, 141, -7168, -5400, -8856, 3072, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_DOG, 0, 0, 3, 12, 0, 142, -29658, -5400, -8856, 2224, 0, 0
     else                    0, off_0868
 
 off_083A:
-    sce_em_set              0, 0, ENEMY_CEREBRUS, 0, 0, 0, 12, 0, 141, -10936, 0, -16395, 944, 0, 0
-    sce_em_set              0, 1, ENEMY_CEREBRUS, 0, 0, 0, 12, 0, 142, -15329, 0, -9605, 2080, 0, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_DOG, 0, 0, 0, 12, 0, 141, -10936, 0, -16395, 944, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_DOG, 0, 0, 0, 12, 0, 142, -15329, 0, -9605, 2080, 0, 0
     nop
     nop
 
@@ -19,12 +20,11 @@ off_0868:
     obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -12347, 0, -20874, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     item_aot_set            31, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -13747, -21274, 1800, 1400, ITEM_HERBR, 2, 142, 0, 1
     evt_end                 0
-    db                      0x18, 0x1A
 
 .main
-.proc main_00
+.proc main
     if                      0, off_08D8
-    ck                      4, 83, 0
+    ck                      FG_GENERAL_1, 83, 0
     aot_set                 3, SCE_EVENT, SAT_PL | SAT_UNDER, 0, 0, -19058, -13175, 2800, 5400, 255, 0, I_GOSUB, main_03, 0, 0
     endif
     nop
@@ -37,7 +37,7 @@ off_08D8:
     aot_set                 2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26653, -10265, 2170, 1280, 255, 0, I_GOSUB, main_02, 0, 0
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0
 
 .proc main_02
@@ -46,7 +46,7 @@ off_08D8:
     evt_next
     nop
     if                      0, off_0944
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     se_on                   4, 6, 0, 0, 0, 0
     aot_on                  1
     else                    0, off_0952
@@ -61,7 +61,7 @@ off_0952:
     evt_end                 0
 
 .proc main_03
-    set                     4, 83, 1
+    set                     FG_GENERAL_1, 83, 1
     aot_reset               3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     sleep                   10, 15
     evt_exec                255, I_GOSUB, main_05
@@ -89,10 +89,10 @@ off_0952:
 
 .proc main_06
     sleep                   10, 10
-    if                      0, off_09BE
 
-off_09B2:
-    cmp                     0, 26, CMP_LE, 1
+off_09AE:
+    if                      0, off_09BE
+    cmp                     0, V_CUT, CMP_LE, 1
     evt_exec                255, I_GOSUB, main_07
     endif
     nop
@@ -102,23 +102,23 @@ off_09BE:
     evt_next
     nop
     edwhile                 off_09CA
-    ck                      1, 11, 0
+    ck                      FG_GAME, 11, 0
 
 off_09CA:
-    goto                    255, 255, 0, off_09B2
+    goto                    255, 255, 0, off_09AE
     evt_end                 0
 
 .proc main_07
     while                   6, off_0A4C
-    cmp                     0, 26, CMP_LE, 1
+    cmp                     0, V_CUT, CMP_LE, 1
     if                      0, off_0A46
-    cmp                     0, 29, CMP_GE, 28672
+    cmp                     0, V_1D, CMP_GE, 28672
     sce_rnd
     nop
     if                      0, off_0A12
-    cmp                     0, 29, 6, 1
+    cmp                     0, V_1D, 6, 1
     if                      0, off_0A0E
-    cmp                     0, 29, 6, 2
+    cmp                     0, V_1D, 6, 2
     sce_espr_on             0, 5376, 0, 2560, -10400, -4500, -25100, 0
     endif
     nop
@@ -128,7 +128,7 @@ off_0A0E:
 
 off_0A12:
     if                      0, off_0A30
-    cmp                     0, 29, 6, 2
+    cmp                     0, V_1D, 6, 2
     sce_espr_on             0, 5376, 0, 2048, -10200, -4500, -18300, 0
     else                    0, off_0A42
 
@@ -153,9 +153,9 @@ off_0A4C:
     evt_end                 0
 
 .proc main_08
-    switch                  26, off_0A9A
 
-off_0A52:
+off_0A4E:
+    switch                  26, off_0A9A
     case                    0, off_0A60, 0
     sce_bgm_control         0, 0, 2, 50, 64
     break                   0
@@ -188,9 +188,8 @@ off_0A9A:
     evt_next
     nop
     edwhile                 off_0AA6
-    ck                      1, 11, 0
+    ck                      FG_GAME, 11, 0
 
 off_0AA6:
-    goto                    255, 255, 0, off_0A52
+    goto                    255, 255, 0, off_0A4E
     evt_end                 0
-    db                      0x40, 0x68

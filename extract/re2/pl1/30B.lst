@@ -1,11 +1,12 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 0B2E:   3B000131000088BC71EF98087805849FE8EA189BE00E02030003240100000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17272, -4239, 2200, 1400, -24700, -5400, -25832, 3808, 2, 3, 0, 3, 36, 1, 0, 0, UNLOCKED, 0
 0B4E:   3B010131000018FA5AE612072008A19AE8EAA09B081002050503080000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -1512, -6566, 1810, 2080, -25951, -5400, -25696, 4104, 2, 5, 5, 3, 8, 0, 0, 0, UNLOCKED, 0
 0B6E:   3B02013100001CBA26B6AC085A05FEDF00001A137D03020204000E0500000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17892, -18906, 2220, 1370, -8194, 0, 4890, 893, 2, 2, 4, 0, 14, 5, 0, 0, UNLOCKED, 0
 0B8E:   06001C00                                                                                if                      0, off_0BAE
-0B92:   21010601                                                                                ck                      1, 6, 1
+0B92:   21010601                                                                                ck                      FG_GAME, F_BONUS, 1
 0B96:   2C03043100002CB424C7AE06A40B0E000000FFFF                                                aot_set                 3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19412, -14556, 1710, 2980, 14, 0, 0, 0, 255, 255
 0BAA:   07002600                                                                                else                    0, off_0BD0
 
@@ -16,26 +17,25 @@ off_0BAE:
 
 off_0BD0:
 0BD0:   0100                                                                                    evt_end                 0
-0BD2:   2605                                                                                    db                      0x26, 0x05
 
 .main
-.proc main_00
-0BDC:   1802                                                                                    gosub                   2
+.proc main
+0BDC:   1802                                                                                    gosub                   main_02
 0BDE:   4E050231000040E1C2ED4006DC0518000600C1000101                                            item_aot_set            5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7872, -4670, 1600, 1500, ITEM_EXPLOSIVEROUNDS, 6, 193, 1, 1
 0BF4:   2D0100000000000000000A001000DBE4000061EF000000000000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -6949, 0, -4255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 0C1A:   0100                                                                                    evt_end                 0
 
-.proc main_01
-0C1C:   1803                                                                                    gosub                   3
+.proc aot
+0C1C:   1803                                                                                    gosub                   main_03
 0C1E:   0100                                                                                    evt_end                 0
 
 .proc main_02
 0C20:   06006000                                                                                if                      0, off_0C84
-0C24:   21010601                                                                                ck                      1, 6, 1
-0C28:   44000112000000050029B4D500005BEDA70700000000                                            sce_em_set              0, 1, ENEMY_ZOMBIEGUY1, 0, 0, 0, 5, 0, 41, -10828, 0, -4773, 1959, 0, 0
-0C3E:   4400021200000005002AF4C6000057DF070800000000                                            sce_em_set              0, 2, ENEMY_ZOMBIEGUY1, 0, 0, 0, 5, 0, 42, -14604, 0, -8361, 2055, 0, 0
-0C54:   4400031200000005002B35C4000099C5C70700000000                                            sce_em_set              0, 3, ENEMY_ZOMBIEGUY1, 0, 0, 0, 5, 0, 43, -15307, 0, -14951, 1991, 0, 0
-0C6A:   4400041200000005002C91BC000034D2C70700000000                                            sce_em_set              0, 4, ENEMY_ZOMBIEGUY1, 0, 0, 0, 5, 0, 44, -17263, 0, -11724, 1991, 0, 0
+0C24:   21010601                                                                                ck                      FG_GAME, F_BONUS, 1
+0C28:   44000112000000050029B4D500005BEDA70700000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 5, 0, 41, -10828, 0, -4773, 1959, 0, 0
+0C3E:   4400021200000005002AF4C6000057DF070800000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 5, 0, 42, -14604, 0, -8361, 2055, 0, 0
+0C54:   4400031200000005002B35C4000099C5C70700000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 5, 0, 43, -15307, 0, -14951, 1991, 0, 0
+0C6A:   4400041200000005002C91BC000034D2C70700000000                                            sce_em_set              0, 4, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 5, 0, 44, -17263, 0, -11724, 1991, 0, 0
 0C80:   07002E00                                                                                else                    0, off_0CAE
 
 off_0C84:
@@ -49,15 +49,13 @@ off_0CAE:
 
 .proc main_03
 0CB0:   06000800                                                                                if                      0, off_0CBC
-0CB4:   21010601                                                                                ck                      1, 6, 1
+0CB4:   21010601                                                                                ck                      FG_GAME, F_BONUS, 1
 0CB8:   0100                                                                                    evt_end                 0
 0CBA:   08                                                                                      endif
 0CBB:   00                                                                                      nop
 
 off_0CBC:
 0CBC:   131AEC00                                                                                switch                  26, off_0DAC
-
-off_0CC0:
 0CC0:   140014000000                                                                            case                    0, off_0CDA, 0
 0CC6:   510000014640                                                                            sce_bgm_control         0, 0, 1, 70, 64
 0CCC:   510000020140                                                                            sce_bgm_control         0, 0, 2, 1, 64
@@ -127,9 +125,8 @@ off_0DAC:
 0DAC:   11000A00                                                                                do                      0, off_0DBA
 0DB0:   090A0100                                                                                sleep                   10, 1
 0DB4:   1204                                                                                    edwhile                 off_0DBA
-0DB6:   21010B00                                                                                ck                      1, 11, 0
+0DB6:   21010B00                                                                                ck                      FG_GAME, 11, 0
 
 off_0DBA:
-0DBA:   17FFFF0002FF                                                                            goto                    255, 255, 0, off_0CC0
+0DBA:   17FFFF0002FF                                                                            goto                    255, 255, 0, off_0CBC
 0DC0:   0100                                                                                    evt_end                 0
-0DC2:   1900                                                                                    db                      0x19, 0x00

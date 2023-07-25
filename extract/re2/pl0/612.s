@@ -1,15 +1,16 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26988, -15799, 1800, 2000, 1772, 0, -14819, 2048, 5, 20, 0, 0, 37, 0, 0, 0, UNLOCKED, 0
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16652, -27286, 2900, 1600, -14434, 0, 3227, 1008, 5, 22, 6, 0, 37, 0, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
+.proc main
+    gosub                   main_02
     if                      0, off_12CE
-    ck                      4, 165, 0
+    ck                      FG_GENERAL_1, 165, 0
     aot_set_4p              6, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28790, -8700, -25770, -5900, -22600, -8300, -25000, -10800, 255, 0, I_GOSUB, main_03, 0, 0
     endif
     nop
@@ -18,7 +19,7 @@ off_12CE:
     sce_espr3d_on2          0, 22, 10, 0, 0, 0, 18, 186, 160, 86, 248, 238, 219, 0, 0, 0, 4, 0, 0, 0, 0
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0
 
 .proc main_02
@@ -39,14 +40,14 @@ off_12CE:
     evt_end                 0
 
 .proc main_03
-    set                     2, 7, 1
+    set                     FG_STATE, 7, 1
     message_on              0, 0, 0, 255, 239
     sleep                   10, 1
     if                      0, off_1552
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     se_on                   2, 266, 4, 0, 0, 0
     if                      0, off_1512
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     set                     33, 13, 1
     set                     33, 14, 1
     set                     33, 15, 1
@@ -57,7 +58,7 @@ off_1512:
     set                     33, 16, 1
     set                     33, 17, 1
     if                      0, off_1530
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     set                     35, 13, 1
     set                     35, 14, 1
     set                     35, 15, 1
@@ -67,7 +68,7 @@ off_1512:
 off_1530:
     set                     35, 16, 1
     set                     35, 17, 1
-    set                     4, 165, 1
+    set                     FG_GENERAL_1, 165, 1
     aot_reset               6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
     message_on              0, 14, 0, 255, 239
     sleep                   10, 1
@@ -75,20 +76,20 @@ off_1530:
     nop
 
 off_1552:
-    set                     2, 7, 0
+    set                     FG_STATE, 7, 0
     evt_end                 0
 
 .proc main_04
-    set                     2, 7, 1
+    set                     FG_STATE, 7, 1
     message_on              0, 15, 0, 255, 239
     sleep                   10, 1
     if                      0, off_1598
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     se_on                   2, 266, 4, 0, 0, 0
-    set                     4, 164, 1
+    set                     FG_GENERAL_1, 164, 1
     if                      0, off_158C
-    ck                      1, 1, 0
-    set                     29, 14, 1
+    ck                      FG_GAME, F_SCENARIO, 0
+    set                     FG_LOCK, 14, 1
     endif
     nop
 
@@ -98,6 +99,5 @@ off_158C:
     nop
 
 off_1598:
-    set                     2, 7, 0
+    set                     FG_STATE, 7, 0
     evt_end                 0
-    db                      0x00, 0x00

@@ -1,35 +1,36 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 11BA:   3B0001310000F055E9B808079808109B000020FE0000000600000800008A5800                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 22000, -18199, 1800, 2200, -25840, 0, -480, 0, 0, 6, 0, 0, 8, 0, 0, 138, ITEM_CABINKEY, 0
 11DA:   3B0101310000CE2C14D360090807AE6700005D9918FC000406000A0100000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 11470, -11500, 2400, 1800, 26542, 0, -26275, -1000, 0, 4, 6, 0, 10, 1, 0, 0, UNLOCKED, 0
 11FA:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
+.proc main
 1204:   22130100                                                                                set                     19, 1, 0
 1208:   4E020231000096C98EC22003140558000100040000A0                                            item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -13930, -15730, 800, 1300, ITEM_CABINKEY, 1, 4, 0, 160
 121E:   2C030431000090DE0C95B824080702000000FFFF                                                aot_set                 3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -8560, -27380, 9400, 1800, 2, 0, 0, 0, 255, 255
-1232:   440000100000000783196E41000026B7000C00000000                                            sce_em_set              0, 0, ENEMY_ZOMBIECOP, 0, 0, 0, 7, 131, 25, 16750, 0, -18650, 3072, 0, 0
-1248:   4400011000000007831AEE340000B4E2C80000000000                                            sce_em_set              0, 1, ENEMY_ZOMBIECOP, 0, 0, 0, 7, 131, 26, 13550, 0, -7500, 200, 0, 0
-125E:   4400021006000008831B9033000058E9680D00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIECOP, 6, 0, 0, 8, 131, 27, 13200, 0, -5800, 3432, 0, 0
+1232:   440000100000000783196E41000026B7000C00000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_COP, 0, 0, 0, 7, 131, 25, 16750, 0, -18650, 3072, 0, 0
+1248:   4400011000000007831AEE340000B4E2C80000000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_COP, 0, 0, 0, 7, 131, 26, 13550, 0, -7500, 200, 0, 0
+125E:   4400021006000008831B9033000058E9680D00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_COP, 6, 0, 0, 8, 131, 27, 13200, 0, -5800, 3432, 0, 0
 1274:   2D0000000000000000000A001000E4CB88FABEC4000000000000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -13340, -1400, -15170, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-129A:   1803                                                                                    gosub                   3
+129A:   1803                                                                                    gosub                   main_03
 129C:   0100                                                                                    evt_end                 0
 
-.proc main_01
+.proc aot
 129E:   06000800                                                                                if                      0, off_12AA
-12A2:   21010B01                                                                                ck                      1, 11, 1
-12A6:   1803                                                                                    gosub                   3
+12A2:   21010B01                                                                                ck                      FG_GAME, 11, 1
+12A6:   1803                                                                                    gosub                   main_03
 12A8:   08                                                                                      endif
 12A9:   00                                                                                      nop
 
 off_12AA:
 12AA:   06007C00                                                                                if                      0, off_132A
-12AE:   23001A000000                                                                            cmp                     0, 26, CMP_EQ, 0
-12B4:   21050A00                                                                                ck                      5, 10, 0
+12AE:   23001A000000                                                                            cmp                     0, V_CUT, CMP_EQ, 0
+12B4:   21050A00                                                                                ck                      FG_GENERAL_2, 10, 0
 12B8:   06003200                                                                                if                      0, off_12EE
-12BC:   21061A00                                                                                ck                      6, 26, 0
+12BC:   21061A00                                                                                ck                      FG_ENEMY, 26, 0
 12C0:   2E0301                                                                                  work_set                WK_ENEMY, 1
 12C3:   00                                                                                      nop
 12C4:   34070000                                                                                member_set              7, 0, 0
@@ -45,7 +46,7 @@ off_12AA:
 
 off_12EE:
 12EE:   06003200                                                                                if                      0, off_1324
-12F2:   21061B00                                                                                ck                      6, 27, 0
+12F2:   21061B00                                                                                ck                      FG_ENEMY, 27, 0
 12F6:   2E0302                                                                                  work_set                WK_ENEMY, 2
 12F9:   00                                                                                      nop
 12FA:   34070000                                                                                member_set              7, 0, 0
@@ -60,16 +61,16 @@ off_12EE:
 1323:   00                                                                                      nop
 
 off_1324:
-1324:   22050A01                                                                                set                     5, 10, 1
+1324:   22050A01                                                                                set                     FG_GENERAL_2, 10, 1
 1328:   08                                                                                      endif
 1329:   00                                                                                      nop
 
 off_132A:
 132A:   06007A00                                                                                if                      0, off_13A8
-132E:   21010B01                                                                                ck                      1, 11, 1
-1332:   21050A01                                                                                ck                      5, 10, 1
+132E:   21010B01                                                                                ck                      FG_GAME, 11, 1
+1332:   21050A01                                                                                ck                      FG_GENERAL_2, 10, 1
 1336:   06003200                                                                                if                      0, off_136C
-133A:   21061A00                                                                                ck                      6, 26, 0
+133A:   21061A00                                                                                ck                      FG_ENEMY, 26, 0
 133E:   2E0301                                                                                  work_set                WK_ENEMY, 1
 1341:   00                                                                                      nop
 1342:   34070000                                                                                member_set              7, 0, 0
@@ -85,7 +86,7 @@ off_132A:
 
 off_136C:
 136C:   06003200                                                                                if                      0, off_13A2
-1370:   21061B00                                                                                ck                      6, 27, 0
+1370:   21061B00                                                                                ck                      FG_ENEMY, 27, 0
 1374:   2E0302                                                                                  work_set                WK_ENEMY, 2
 1377:   00                                                                                      nop
 1378:   34070000                                                                                member_set              7, 0, 0
@@ -100,7 +101,7 @@ off_136C:
 13A1:   00                                                                                      nop
 
 off_13A2:
-13A2:   22050A00                                                                                set                     5, 10, 0
+13A2:   22050A00                                                                                set                     FG_GENERAL_2, 10, 0
 13A6:   08                                                                                      endif
 13A7:   00                                                                                      nop
 
@@ -109,12 +110,12 @@ off_13A8:
 
 .proc main_02
 13AA:   06004600                                                                                if                      0, off_13F4
-13AE:   21040200                                                                                ck                      4, 2, 0
+13AE:   21040200                                                                                ck                      FG_GENERAL_1, 2, 0
 13B2:   06002800                                                                                if                      0, off_13DE
-13B6:   21080401                                                                                ck                      8, 4, 1
+13B6:   21080401                                                                                ck                      FG_ITEM, 4, 1
 13BA:   2B000100FFFF                                                                            message_on              0, 1, 0, 255, 255
 13C0:   3602250000001B28F8F89ACC                                                                se_on                   2, 37, 0, 10267, -1800, -13158
-13CC:   22040201                                                                                set                     4, 2, 1
+13CC:   22040201                                                                                set                     FG_GENERAL_1, 2, 1
 13D0:   46000131109B000020FE                                                                    aot_reset               0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 16, 155, 0, 0, 32, 254
 13DA:   07001800                                                                                else                    0, off_13F2
 

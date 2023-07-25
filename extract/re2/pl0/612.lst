@@ -1,15 +1,16 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 125A:   3B0001310000949649C20807D007EC0600001DC6000805140000250000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26988, -15799, 1800, 2000, 1772, 0, -14819, 2048, 5, 20, 0, 0, 37, 0, 0, 0, UNLOCKED, 0
 127A:   3B0101310000F4BE6A95540B40069EC700009B0CF00305160600250000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16652, -27286, 2900, 1600, -14434, 0, 3227, 1008, 5, 22, 6, 0, 37, 0, 0, 0, UNLOCKED, 0
 129A:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
-12A6:   1802                                                                                    gosub                   2
+.proc main
+12A6:   1802                                                                                    gosub                   main_02
 12A8:   06002200                                                                                if                      0, off_12CE
-12AC:   2104A500                                                                                ck                      4, 165, 0
+12AC:   2104A500                                                                                ck                      FG_GENERAL_1, 165, 0
 12B0:   6706053100008A8F04DE569BF4E8B8A794DF589ED0D5FF0018030000                                aot_set_4p              6, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28790, -8700, -25770, -5900, -22600, -8300, -25000, -10800, 255, 0, I_GOSUB, main_03, 0, 0
 12CC:   08                                                                                      endif
 12CD:   00                                                                                      nop
@@ -18,7 +19,7 @@ off_12CE:
 12CE:   7500160A00000012BAA056F8EEDB0000000400000000                                            sce_espr3d_on2          0, 22, 10, 0, 0, 0, 18, 186, 160, 86, 248, 238, 219, 0, 0, 0, 4, 0, 0, 0, 0
 12E4:   0100                                                                                    evt_end                 0
 
-.proc main_01
+.proc aot
 12E6:   0100                                                                                    evt_end                 0
 
 .proc main_02
@@ -39,14 +40,14 @@ off_12CE:
 14D8:   0100                                                                                    evt_end                 0
 
 .proc main_03
-14DA:   22020701                                                                                set                     2, 7, 1
+14DA:   22020701                                                                                set                     FG_STATE, 7, 1
 14DE:   2B000000FFEF                                                                            message_on              0, 0, 0, 255, 239
 14E4:   090A0100                                                                                sleep                   10, 1
 14E8:   06006600                                                                                if                      0, off_1552
-14EC:   210B1F00                                                                                ck                      11, 31, 0
+14EC:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 14F0:   36020A010400000000000000                                                                se_on                   2, 266, 4, 0, 0, 0
 14FC:   06001200                                                                                if                      0, off_1512
-1500:   21010101                                                                                ck                      1, 1, 1
+1500:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
 1504:   22210D01                                                                                set                     33, 13, 1
 1508:   22210E01                                                                                set                     33, 14, 1
 150C:   22210F01                                                                                set                     33, 15, 1
@@ -57,7 +58,7 @@ off_1512:
 1512:   22211001                                                                                set                     33, 16, 1
 1516:   22211101                                                                                set                     33, 17, 1
 151A:   06001200                                                                                if                      0, off_1530
-151E:   21010101                                                                                ck                      1, 1, 1
+151E:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
 1522:   22230D01                                                                                set                     35, 13, 1
 1526:   22230E01                                                                                set                     35, 14, 1
 152A:   22230F01                                                                                set                     35, 15, 1
@@ -67,7 +68,7 @@ off_1512:
 off_1530:
 1530:   22231001                                                                                set                     35, 16, 1
 1534:   22231101                                                                                set                     35, 17, 1
-1538:   2204A501                                                                                set                     4, 165, 1
+1538:   2204A501                                                                                set                     FG_GENERAL_1, 165, 1
 153C:   46060031000000000000                                                                    aot_reset               6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
 1546:   2B000E00FFEF                                                                            message_on              0, 14, 0, 255, 239
 154C:   090A0100                                                                                sleep                   10, 1
@@ -75,20 +76,20 @@ off_1530:
 1551:   00                                                                                      nop
 
 off_1552:
-1552:   22020700                                                                                set                     2, 7, 0
+1552:   22020700                                                                                set                     FG_STATE, 7, 0
 1556:   0100                                                                                    evt_end                 0
 
 .proc main_04
-1558:   22020701                                                                                set                     2, 7, 1
+1558:   22020701                                                                                set                     FG_STATE, 7, 1
 155C:   2B000F00FFEF                                                                            message_on              0, 15, 0, 255, 239
 1562:   090A0100                                                                                sleep                   10, 1
 1566:   06002E00                                                                                if                      0, off_1598
-156A:   210B1F00                                                                                ck                      11, 31, 0
+156A:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 156E:   36020A010400000000000000                                                                se_on                   2, 266, 4, 0, 0, 0
-157A:   2204A401                                                                                set                     4, 164, 1
+157A:   2204A401                                                                                set                     FG_GENERAL_1, 164, 1
 157E:   06000A00                                                                                if                      0, off_158C
-1582:   21010100                                                                                ck                      1, 1, 0
-1586:   221D0E01                                                                                set                     29, 14, 1
+1582:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
+1586:   221D0E01                                                                                set                     FG_LOCK, 14, 1
 158A:   08                                                                                      endif
 158B:   00                                                                                      nop
 
@@ -98,6 +99,5 @@ off_158C:
 1597:   00                                                                                      nop
 
 off_1598:
-1598:   22020700                                                                                set                     2, 7, 0
+1598:   22020700                                                                                set                     FG_STATE, 7, 0
 159C:   0100                                                                                    evt_end                 0
-159E:   0000                                                                                    db                      0x00, 0x00

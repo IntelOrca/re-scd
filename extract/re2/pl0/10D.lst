@@ -1,25 +1,26 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 07B6:   3B0001310000B4A1379B1405780578A10000589E0000000E0000000000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24140, -25801, 1300, 1400, -24200, 0, -25000, 0, 0, 14, 0, 0, 0, 0, 0, 0, UNLOCKED, 0
 07D6:   3B0101310000FCD1C5DA0807B004BDD40000A899000C011B0400058000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -11780, -9531, 1800, 1200, -11075, 0, -26200, 3072, 1, 27, 4, 0, 5, 128, 0, 0, UNLOCKED, 0
 07F6:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
+.proc main
 07FE:   2C02043100005CC7B4C9E015080700000000FFFF                                                aot_set                 2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14500, -13900, 5600, 1800, 0, 0, 0, 0, 255, 255
 0812:   06007E00                                                                                if                      0, off_0894
-0816:   21010000                                                                                ck                      1, 0, 0
+0816:   21010000                                                                                ck                      FG_GAME, F_PLAYER, 0
 081A:   06007400                                                                                if                      0, off_0892
-081E:   21010101                                                                                ck                      1, 1, 1
-0822:   21086A01                                                                                ck                      8, 106, 1
-0826:   21045000                                                                                ck                      4, 80, 0
+081E:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
+0822:   21086A01                                                                                ck                      FG_ITEM, 106, 1
+0826:   21045000                                                                                ck                      FG_GENERAL_1, 80, 0
 082A:   06005400                                                                                if                      0, off_0882
-082E:   23001B000E01                                                                            cmp                     0, 27, CMP_EQ, 270
-0834:   2206C400                                                                                set                     6, 196, 0
-0838:   4400002A0000001200C428A60000FCD6000000000000                                            sce_em_set              0, 0, ENEMY_TYRANT1, 0, 0, 0, 18, 0, 196, -23000, 0, -10500, 0, 0, 0
+082E:   23001B000E01                                                                            cmp                     0, V_LAST_RDT, CMP_EQ, 270
+0834:   2206C400                                                                                set                     FG_ENEMY, 196, 0
+0838:   4400002A0000001200C428A60000FCD6000000000000                                            sce_em_set              0, 0, ENEMY_TYRANT_1, 0, 0, 0, 18, 0, 196, -23000, 0, -10500, 0, 0, 0
 084E:   06002600                                                                                if                      0, off_0878
-0852:   2106C700                                                                                ck                      6, 199, 0
+0852:   2106C700                                                                                ck                      FG_ENEMY, 199, 0
 0856:   4E0A023100C27CFC7CFC0807080715000700CE00FF01                                            item_aot_set            10, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 194, -900, -900, 1800, 1800, ITEM_SHOTGUNAMMO, 7, 206, 255, 1
 086C:   460A0021000000000000                                                                    aot_reset               10, SCE_AUTO, SAT_PL | SAT_FRONT, 0, 0, 0, 0, 0, 0
 0876:   08                                                                                      endif
@@ -30,7 +31,7 @@ off_0878:
 087E:   07001200                                                                                else                    0, off_0890
 
 off_0882:
-0882:   22045001                                                                                set                     4, 80, 1
+0882:   22045001                                                                                set                     FG_GENERAL_1, 80, 1
 0886:   57000D01FF000000                                                                        sce_bgmtbl_set          0, 13, 1, 255, 0
 088E:   00                                                                                      nop
 088F:   00                                                                                      nop
@@ -45,7 +46,7 @@ off_0892:
 
 off_0894:
 0894:   06004200                                                                                if                      0, off_08DA
-0898:   2106C701                                                                                ck                      6, 199, 1
+0898:   2106C701                                                                                ck                      FG_ENEMY, 199, 1
 089C:   2D0000000000000000000A0010008E9F000000BF000000000000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -24690, 0, -16640, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 08C2:   4E0A023100002C9D14BA0807080716000800CE0000A1                                            item_aot_set            10, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25300, -17900, 1800, 1800, ITEM_MAGNUMAMMO, 8, 206, 0, 161
 08D8:   08                                                                                      endif
@@ -54,25 +55,25 @@ off_0894:
 off_08DA:
 08DA:   0100                                                                                    evt_end                 0
 
-.proc main_01
+.proc aot
 08DC:   06003C00                                                                                if                      0, off_091C
-08E0:   21010000                                                                                ck                      1, 0, 0
-08E4:   21010101                                                                                ck                      1, 1, 1
-08E8:   21086A01                                                                                ck                      8, 106, 1
-08EC:   21045000                                                                                ck                      4, 80, 0
+08E0:   21010000                                                                                ck                      FG_GAME, F_PLAYER, 0
+08E4:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
+08E8:   21086A01                                                                                ck                      FG_ITEM, 106, 1
+08EC:   21045000                                                                                ck                      FG_GENERAL_1, 80, 0
 08F0:   06002600                                                                                if                      0, off_091A
-08F4:   2106C401                                                                                ck                      6, 196, 1
-08F8:   21050A00                                                                                ck                      5, 10, 0
+08F4:   2106C401                                                                                ck                      FG_ENEMY, 196, 1
+08F8:   21050A00                                                                                ck                      FG_GENERAL_2, 10, 0
 08FC:   06000E00                                                                                if                      0, off_090E
-0900:   2106C700                                                                                ck                      6, 199, 0
+0900:   2106C700                                                                                ck                      FG_ENEMY, 199, 0
 0904:   04FF1802                                                                                evt_exec                255, I_GOSUB, main_02
-0908:   2206C701                                                                                set                     6, 199, 1
+0908:   2206C701                                                                                set                     FG_ENEMY, 199, 1
 090C:   08                                                                                      endif
 090D:   00                                                                                      nop
 
 off_090E:
 090E:   510005000000                                                                            sce_bgm_control         0, 5, 0, 0, 0
-0914:   22050A01                                                                                set                     5, 10, 1
+0914:   22050A01                                                                                set                     FG_GENERAL_2, 10, 1
 0918:   08                                                                                      endif
 0919:   00                                                                                      nop
 
@@ -85,7 +86,7 @@ off_091C:
 
 .proc main_02
 091E:   06001400                                                                                if                      0, off_0936
-0922:   2108CE00                                                                                ck                      8, 206, 0
+0922:   2108CE00                                                                                ck                      FG_ITEM, 206, 0
 0926:   090A9700                                                                                sleep                   10, 151
 092A:   460A023116000800CE00                                                                    aot_reset               10, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 22, 0, 8, 0, 206, 0
 0934:   08                                                                                      endif

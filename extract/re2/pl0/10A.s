@@ -1,18 +1,19 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23889, -26379, 1800, 2200, -26505, 0, -24896, 0, 0, 9, 6, 0, 0, 0, 0, 0, UNLOCKED, 0
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28159, -22686, 1600, 5020, -15091, 0, -18195, 2096, 0, 15, 0, 0, 5, 128, 0, 0, UNLOCKED, 0
     door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -15481, -9444, 2800, 1260, -18363, 0, -13512, 1039, 0, 11, 0, 0, 3, 1, 0, 0, UNLOCKED, 0
     door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21700, 8350, 1430, 1690, -9798, 0, -20111, -2143, 1, 27, 0, 0, 0, 0, 0, 0, UNLOCKED, 0
     if                      0, off_1AE4
-    ck                      1, 6, 1
-    sce_em_set              0, 0, ENEMY_ZOMBIERANDOM, 6, 0, 0, 6, 0, 74, -24336, 0, -25994, 2859, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 0, 0, 0, 43, 0, 123, -23892, 0, -22831, 3125, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 0, 0, 0, 6, 0, 124, -25379, 0, -24310, 2995, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIERANDOM, 6, 0, 0, 43, 0, 125, -25923, 0, -25882, 3061, 0, 0
-    sce_em_set              0, 4, ENEMY_ZOMBIERANDOM, 0, 0, 0, 6, 0, 126, -23861, 0, -18512, 2199, 0, 0
-    sce_em_set              0, 5, ENEMY_ZOMBIERANDOM, 0, 0, 0, 43, 0, 127, -24329, 0, -11488, 1280, 0, 0
+    ck                      FG_GAME, F_BONUS, 1
+    sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 6, 0, 74, -24336, 0, -25994, 2859, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 43, 0, 123, -23892, 0, -22831, 3125, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 6, 0, 124, -25379, 0, -24310, 2995, 0, 0
+    sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 43, 0, 125, -25923, 0, -25882, 3061, 0, 0
+    sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 6, 0, 126, -23861, 0, -18512, 2199, 0, 0
+    sce_em_set              0, 5, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 43, 0, 127, -24329, 0, -11488, 1280, 0, 0
     aot_reset               2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 0, 0, 0, 255
     evt_end                 0
     endif
@@ -20,7 +21,7 @@
 
 off_1AE4:
     if                      0, off_1BE6
-    ck                      4, 0, 0
+    ck                      FG_GENERAL_1, 0, 0
     sce_espr_on             0, 13, 0, 7680, -16530, -100, -4877, 512
     sce_espr_on             0, 14, 0, 10240, -17386, -100, -6290, 0
     sce_espr_on             0, 13, 0, 10240, -16605, -100, -7370, 3584
@@ -31,14 +32,14 @@ off_1AE4:
     sce_espr_on             0, 13, 0, 11776, -17438, 0, -4630, 0
     sce_espr_on             0, 14, 0, 7680, -16030, -800, -5500, 0
     if                      0, off_1BB4
-    ck                      1, 1, 0
-    sce_em_set              0, 0, ENEMY_ZOMBIECOP, 6, 0, 0, 5, 0, 76, -23968, 0, -12309, 1251, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIECOP, 128, 0, 0, 6, 0, 77, -21635, 0, -4759, 1800, 0, 0
+    ck                      FG_GAME, F_SCENARIO, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_COP, 6, 0, 0, 5, 0, 76, -23968, 0, -12309, 1251, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_COP, 128, 0, 0, 6, 0, 77, -21635, 0, -4759, 1800, 0, 0
     else                    0, off_1BE2
 
 off_1BB4:
-    sce_em_set              0, 0, ENEMY_LICKERRED, 1, 1, 0, 14, 0, 76, -27000, -3000, -12400, 1024, 0, 0
-    sce_em_set              0, 1, ENEMY_LICKERRED, 0, 0, 0, 14, 0, 77, -22712, 0, -6235, 1800, 0, 0
+    sce_em_set              0, 0, ENEMY_LICKER_RED, 1, 1, 0, 14, 0, 76, -27000, -3000, -12400, 1024, 0, 0
+    sce_em_set              0, 1, ENEMY_LICKER_RED, 0, 0, 0, 14, 0, 77, -22712, 0, -6235, 1800, 0, 0
     nop
     nop
 
@@ -48,16 +49,16 @@ off_1BE2:
 off_1BE6:
     aot_set                 4, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20400, -4500, 2460, 2500, 1, 0, 0, 0, 0, 255
     if                      0, off_1C6A
-    ck                      1, 0, 0
+    ck                      FG_GAME, F_PLAYER, 0
     if                      0, off_1C3A
-    ck                      1, 1, 0
-    sce_em_set              0, 0, ENEMY_ZOMBIECOP, 6, 0, 0, 5, 0, 76, -23968, 0, -12309, 1251, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIECOP, 0, 0, 0, 6, 0, 77, -21635, 0, -4759, 1800, 0, 0
+    ck                      FG_GAME, F_SCENARIO, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_COP, 6, 0, 0, 5, 0, 76, -23968, 0, -12309, 1251, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_COP, 0, 0, 0, 6, 0, 77, -21635, 0, -4759, 1800, 0, 0
     else                    0, off_1C68
 
 off_1C3A:
-    sce_em_set              0, 0, ENEMY_LICKERRED, 1, 1, 0, 14, 0, 76, -27000, -3000, -12400, 1024, 0, 0
-    sce_em_set              0, 1, ENEMY_LICKERRED, 0, 0, 0, 14, 0, 77, -22712, 0, -6235, 1800, 0, 0
+    sce_em_set              0, 0, ENEMY_LICKER_RED, 1, 1, 0, 14, 0, 76, -27000, -3000, -12400, 1024, 0, 0
+    sce_em_set              0, 1, ENEMY_LICKER_RED, 0, 0, 0, 14, 0, 77, -22712, 0, -6235, 1800, 0, 0
     nop
     nop
 
@@ -71,12 +72,11 @@ off_1C6A:
 
 off_1C6C:
     evt_end                 0
-    db                      0x48, 0xB0
 
 .main
-.proc main_00
+.proc main
     if                      0, off_1C96
-    ck                      1, 6, 1
+    ck                      FG_GAME, F_BONUS, 1
     cut_be_set              0, 2, 1
     cut_be_set              1, 3, 1
     cut_be_set              4, 1, 1
@@ -86,9 +86,9 @@ off_1C6C:
     nop
 
 off_1C96:
-    set                     5, 0, 0
+    set                     FG_GENERAL_2, 0, 0
     if                      0, off_1CBC
-    ck                      4, 0, 1
+    ck                      FG_GENERAL_1, 0, 1
     cut_be_set              0, 2, 1
     cut_be_set              1, 3, 1
     cut_be_set              4, 1, 1
@@ -112,7 +112,7 @@ off_1CBC:
 
 off_1D56:
     if                      0, off_1D80
-    ck                      4, 87, 1
+    ck                      FG_GENERAL_1, 87, 1
     sca_id_set              12, 0, 0
     cut_be_set              4, 1, 0
     cut_be_set              4, 2, 1
@@ -133,16 +133,16 @@ off_1D92:
     evt_exec                255, I_GOSUB, main_02
     evt_end                 0
 
-.proc main_01
+.proc aot
     if                      0, off_1DEC
-    ck                      1, 6, 0
+    ck                      FG_GAME, F_BONUS, 0
     if                      0, off_1DE8
-    ck                      4, 0, 0
+    ck                      FG_GENERAL_1, 0, 0
     if                      0, off_1DC6
-    cmp                     0, 26, CMP_EQ, 2
+    cmp                     0, V_CUT, CMP_EQ, 2
     if                      0, off_1DC4
-    ck                      5, 0, 0
-    set                     5, 0, 1
+    ck                      FG_GENERAL_2, 0, 0
+    set                     FG_GENERAL_2, 0, 1
     evt_exec                255, I_GOSUB, main_03
     endif
     nop
@@ -153,10 +153,10 @@ off_1DC4:
 
 off_1DC6:
     if                      0, off_1DE4
-    cmp                     0, 26, CMP_GE, 3
+    cmp                     0, V_CUT, CMP_GE, 3
     if                      0, off_1DE2
-    ck                      5, 0, 0
-    set                     5, 0, 1
+    ck                      FG_GENERAL_2, 0, 0
+    set                     FG_GENERAL_2, 0, 1
     evt_exec                255, I_GOSUB, main_04
     endif
     nop
@@ -180,10 +180,10 @@ off_1DEC:
     evt_end                 0
 
 .proc main_02
-    if                      0, off_1E52
 
-off_1DF2:
-    ck                      4, 0, 0
+off_1DEE:
+    if                      0, off_1E52
+    ck                      FG_GENERAL_1, 0, 0
     switch                  26, off_1E50
     case                    0, off_1E08, 0
     sce_bgm_control         0, 0, 1, 52, 45
@@ -226,10 +226,10 @@ off_1E52:
     evt_next
     nop
     edwhile                 off_1E5E
-    ck                      1, 11, 0
+    ck                      FG_GAME, 11, 0
 
 off_1E5E:
-    goto                    255, 255, 0, off_1DF2
+    goto                    255, 255, 0, off_1DEE
     evt_end                 0
 
 .proc main_03
@@ -253,7 +253,7 @@ off_1E7C:
     next                    0
 
 off_1EA0:
-    set                     5, 0, 0
+    set                     FG_GENERAL_2, 0, 0
     evt_end                 0
 
 .proc main_04
@@ -280,6 +280,5 @@ off_1EC0:
     next                    0
 
 off_1EEC:
-    set                     5, 0, 0
+    set                     FG_GENERAL_2, 0, 0
     evt_end                 0
-    db                      0x00, 0x04

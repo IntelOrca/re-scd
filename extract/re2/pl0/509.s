@@ -1,20 +1,21 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, 11238, -17701, 1800, 2200, -12007, 0, -25230, 2040, 4, 5, 0, 0, 7, 1, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
+.proc main
+    gosub                   main_02
     evt_end                 0
 
-.proc main_01
-    gosub                   3
+.proc aot
+    gosub                   main_03
     evt_end                 0
 
 .proc main_02
-    set                     5, 2, 1
+    set                     FG_GENERAL_2, 2, 1
     obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, 18000, 0, -14400, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
     obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, 18000, 0, -18900, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
     obj_model_set           2, 0, 0, 0, 0, 0, 0, 26, 16, 8500, 0, -30900, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -33,13 +34,13 @@
     obj_model_set           15, 0, 0, 0, 0, 0, 0, 10, 16, 8500, 0, -2300, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
     obj_model_set           16, 0, 0, 0, 0, 0, 0, 10, 0, 6313, -6000, -14000, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
     if                      0, off_1C96
-    ck                      1, 1, 0
-    sce_em_set              0, 0, ENEMY_49, 0, 0, 0, 33, 0, 23, 32000, 0, 32000, 0, 0, 0
+    ck                      FG_GAME, F_SCENARIO, 0
+    sce_em_set              0, 0, ENEMY_BIRKIN_2, 0, 0, 0, 33, 0, 23, 32000, 0, 32000, 0, 0, 0
     aot_set                 1, SCE_EVENT, SAT_PL | SAT_UNDER, 0, 0, 7505, -13822, 1850, 8900, 255, 0, I_GOSUB, main_04, 0, 0
     else                    0, off_1CC2
 
 off_1C96:
-    sce_em_set              0, 0, ENEMY_51, 0, 96, 0, 34, 0, 23, 32000, 0, 32000, 0, 0, 0
+    sce_em_set              0, 0, ENEMY_BIRKIN_4, 0, 96, 0, 34, 0, 23, 32000, 0, 32000, 0, 0, 0
     aot_set                 2, SCE_EVENT, SAT_PL | SAT_UNDER, 0, 0, -6595, -15122, 5850, 1900, 255, 0, I_GOSUB, main_07, 0, 0
     nop
     nop
@@ -48,7 +49,7 @@ off_1CC2:
     aot_set                 3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 12648, -15122, 1830, 1380, 1, 0, 0, 0, 255, 255
     aot_reset               0, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_13, 0, 0
     sca_id_set              11, 0, 0
-    gosub                   8
+    gosub                   main_08
     evt_exec                9, I_GOSUB, main_0A
     sce_bgm_control         0, 0, 1, 91, 64
     evt_exec                255, I_GOSUB, main_11
@@ -57,54 +58,54 @@ off_1CC2:
 
 .proc main_03
     if                      0, off_1D0E
-    ck                      5, 0, 0
-    ck                      7, 23, 1
-    set                     5, 0, 1
-    gosub                   16
+    ck                      FG_GENERAL_2, 0, 0
+    ck                      FG_7, 23, 1
+    set                     FG_GENERAL_2, 0, 1
+    gosub                   main_10
     endif
     nop
 
 off_1D0E:
     if                      0, off_1D1A
-    ck                      1, 11, 1
-    gosub                   8
+    ck                      FG_GAME, 11, 1
+    gosub                   main_08
     endif
     nop
 
 off_1D1A:
-    gosub                   9
+    gosub                   main_09
     evt_end                 0
 
 .proc main_04
     aot_reset               1, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    set                     2, 7, 1
-    set                     1, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
     evt_exec                255, I_GOSUB, main_06
     while                   4, off_1D40
-    ck                      5, 1, 0
+    ck                      FG_GENERAL_2, 1, 0
     evt_next
     nop
     ewhile                  0
 
 off_1D40:
-    set                     5, 1, 0
+    set                     FG_GENERAL_2, 1, 0
     work_set                WK_PLAYER, 0
     nop
     plc_dest                0, 21, 32, 1255, 256
     plc_neck                1, 6660, -5796, -16110, 96, 96
-    gosub                   20
+    gosub                   main_14
     plc_motion              1, 1, 8
     sleep                   10, 8
     plc_stop
     nop
     while                   4, off_1D72
-    ck                      5, 1, 0
+    ck                      FG_GENERAL_2, 1, 0
     evt_next
     nop
     ewhile                  0
 
 off_1D72:
-    set                     5, 1, 0
+    set                     FG_GENERAL_2, 1, 0
     evt_kill                9
     evt_exec                9, I_GOSUB, main_0C
     evt_kill                8
@@ -112,39 +113,39 @@ off_1D72:
     cut_chg                 6
     work_set                WK_ENEMY, 0
     nop
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 2
-    calc                    0, OP_OR, 16, 8
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 2
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             0, V_TEMP
     nop
     pos_set                 0, 6660, -5796, -16110
     member_set              15, 32, 11
     sleep                   10, 60
-    set                     5, 2, 0
+    set                     FG_GENERAL_2, 2, 0
     cut_chg                 7
     evt_next
     sce_bgm_control         0, 0, 1, 61, 64
     nop
-    gosub                   21
+    gosub                   main_15
     work_set                WK_ENEMY, 0
     nop
     member_set              23, 1, 0
-    if                      0, off_1DD6
 
-off_1DC8:
+off_1DC4:
+    if                      0, off_1DD6
     member_cmp              0, 23, 6, 2, 0
-    goto                    255, 255, 0, off_1DE2
+    goto                    255, 255, 0, off_1DDE
     endif
     nop
 
 off_1DD6:
     evt_next
     nop
-    goto                    255, 255, 0, off_1DC8
-    sleep                   10, 60
+    goto                    255, 255, 0, off_1DC4
 
-off_1DE2:
+off_1DDE:
+    sleep                   10, 60
     wsleep
     wsleeping
     evt_kill                9
@@ -171,24 +172,24 @@ off_1DE2:
     member_set              12, 0, 0
     work_set                WK_ENEMY, 0
     nop
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -11
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -11
+    member_set2             0, V_TEMP
     nop
     work_set                WK_PLAYER, 0
     plc_ret
     cut_auto                1
-    set                     5, 2, 1
-    set                     2, 7, 0
-    set                     1, 27, 0
+    set                     FG_GENERAL_2, 2, 1
+    set                     FG_STATE, 7, 0
+    set                     FG_GAME, 27, 0
     evt_end                 0
 
 .proc main_05
     sleep                   10, 4
-    set                     1, 29, 1
+    set                     FG_GAME, 29, 1
     sleep                   10, 8
-    set                     1, 29, 0
+    set                     FG_GAME, 29, 0
     evt_end                 0
 
 .proc main_06
@@ -210,7 +211,7 @@ off_1E9E:
     nop_8a                  0, 4, 0, 0, 0
     nop_8a                  0, 4, 0, 8, 0
     se_on                   2, 266, 4100, 0, 0, 0
-    set                     5, 1, 1
+    set                     FG_GENERAL_2, 1, 1
     member_set              12, 12, 254
     speed_set               2, 350
     speed_set               1, -250
@@ -240,13 +241,13 @@ off_1EDE:
 
 off_1F02:
     pos_set                 0, 32000, 0, 32000
-    set                     5, 1, 1
+    set                     FG_GENERAL_2, 1, 1
     evt_end                 0
 
 .proc main_07
     aot_reset               2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    set                     2, 7, 1
-    set                     1, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
     work_set                WK_ENEMY, 0
     nop
     pos_set                 0, 439, 0, -23018
@@ -262,26 +263,26 @@ off_1F02:
     pos_set                 0, -3600, -500, -21420
     member_set              15, 80, 11
     sleep                   10, 20
-    gosub                   22
+    gosub                   main_16
     sce_bgm_control         0, 0, 1, 76, 64
     member_set              23, 3, 0
-    if                      0, off_1F7A
 
-off_1F6C:
+off_1F68:
+    if                      0, off_1F7A
     member_cmp              0, 24, 6, 1, 0
-    goto                    255, 255, 0, off_1F86
+    goto                    255, 255, 0, off_1F82
     endif
     nop
 
 off_1F7A:
     evt_next
     nop
-    goto                    255, 255, 0, off_1F6C
+    goto                    255, 255, 0, off_1F68
+
+off_1F82:
     wsleep
     wsleeping
     evt_kill                9
-
-off_1F86:
     evt_exec                9, I_GOSUB, main_0B
     sce_bgm_control         0, 0, 1, 1, 64
     sce_bgm_control         1, 1, 0, 101, 64
@@ -292,125 +293,125 @@ off_1F86:
     pos_set                 0, -3600, 0, -21420
     work_set                WK_PLAYER, 0
     plc_ret
-    set                     2, 7, 0
-    set                     1, 27, 0
+    set                     FG_STATE, 7, 0
+    set                     FG_GAME, 27, 0
     evt_end                 0
 
 .proc main_08
-    save                    4, -9
+    save                    V_04, -9
     switch                  26, off_2992
     case                    0, off_20DC, 0
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -418,115 +419,115 @@ off_20DC:
     case                    0, off_21FC, 1
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -534,115 +535,115 @@ off_21FC:
     case                    0, off_231C, 2
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -650,115 +651,115 @@ off_231C:
     case                    0, off_243C, 3
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -766,115 +767,115 @@ off_243C:
     case                    0, off_2558, 4
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -882,115 +883,115 @@ off_2558:
     case                    0, off_2678, 5
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc                    0, OP_OR, 16, 8
-    member_set2             1, 16
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -998,115 +999,115 @@ off_2678:
     case                    0, off_2780, 6
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -1114,115 +1115,115 @@ off_2780:
     case                    0, off_2888, 7
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -1230,115 +1231,115 @@ off_2888:
     case                    0, off_2990, 8
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 1
+    member_copy             V_TEMP, 1
     nop
-    calc2                   OP_AND, 16, 4
-    member_set2             1, 16
+    calc2                   OP_AND, V_TEMP, V_04
+    member_set2             1, V_TEMP
     nop
     break                   0
 
@@ -1353,23 +1354,23 @@ off_2992:
     case                    0, off_29C8, 0
     work_set                WK_OBJECT, 5
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1377,23 +1378,23 @@ off_29C8:
     case                    0, off_29F8, 1
     work_set                WK_OBJECT, 5
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1401,23 +1402,23 @@ off_29F8:
     case                    0, off_2A28, 2
     work_set                WK_OBJECT, 0
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1425,23 +1426,23 @@ off_2A28:
     case                    0, off_2A58, 3
     work_set                WK_OBJECT, 3
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1449,23 +1450,23 @@ off_2A58:
     case                    0, off_2A88, 4
     work_set                WK_OBJECT, 1
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1473,23 +1474,23 @@ off_2A88:
     case                    0, off_2AB8, 5
     work_set                WK_OBJECT, 1
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 0
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1497,23 +1498,23 @@ off_2AB8:
     case                    0, off_2AE8, 6
     work_set                WK_OBJECT, 2
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 0
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1521,23 +1522,23 @@ off_2AE8:
     case                    0, off_2B18, 7
     work_set                WK_OBJECT, 2
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 0
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1545,23 +1546,23 @@ off_2B18:
     case                    0, off_2B48, 8
     work_set                WK_OBJECT, 2
     nop
-    member_copy             4, 11
+    member_copy             V_04, 11
     nop
-    member_copy             5, 12
+    member_copy             V_05, 12
     nop
-    member_copy             6, 13
+    member_copy             V_06, 13
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             7, 11
+    member_copy             V_07, 11
     nop
-    member_copy             8, 13
+    member_copy             V_08, 13
     nop
     work_set                WK_OBJECT, 0
     nop
-    member_copy             9, 11
+    member_copy             V_09, 11
     nop
-    member_copy             10, 13
+    member_copy             V_0A, 13
     nop
     break                   0
 
@@ -1662,10 +1663,10 @@ off_2B4A:
     member_set              15, 0, 4
     evt_kill                8
     evt_exec                8, I_GOSUB, main_0D
+
+off_2CB4:
     work_set                WK_OBJECT, 0
     nop
-
-off_2CB8:
     member_set              12, 0, 0
     work_set                WK_OBJECT, 1
     nop
@@ -1717,122 +1718,122 @@ off_2CB8:
     for                     0, off_2E60, 60
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 12
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 13
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 14
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 15
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     evt_next
     nop
     next                    0
 
 off_2E60:
-    goto                    255, 255, 0, off_2CB8
+    goto                    255, 255, 0, off_2CB4
     evt_end                 0
 
 .proc main_0C
@@ -1872,10 +1873,10 @@ off_2E60:
     work_set                WK_OBJECT, 11
     nop
     member_set              15, 0, 4
+
+off_2EC8:
     work_set                WK_OBJECT, 0
     nop
-
-off_2ECC:
     pos_set                 0, 18000, 0, -18900
     work_set                WK_OBJECT, 1
     nop
@@ -1915,119 +1916,119 @@ off_2ECC:
     for                     0, off_303C, 60
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 1
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 3
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 4
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 5
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 6
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 7
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 8
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 9
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 10
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     work_set                WK_OBJECT, 11
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_SUB, 16, 180
-    member_set2             12, 16
+    calc                    0, OP_SUB, V_TEMP, 180
+    member_set2             12, V_TEMP
     nop
     evt_next
     nop
     next                    0
 
 off_303C:
-    goto                    255, 255, 0, off_2ECC
+    goto                    255, 255, 0, off_2EC8
     evt_end                 0
 
 .proc main_0D
-    save                    12, 0
 
-off_3048:
-    save                    13, 0
-    save                    14, 0
+off_3044:
+    save                    V_0C, 0
+    save                    V_0D, 0
+    save                    V_0E, 0
     evt_next
     nop
     for                     0, off_309E, 9
-    copy                    16, 12
+    copy                    V_TEMP, V_0C
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    12, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0C, V_TEMP
     nop
-    copy                    16, 13
+    copy                    V_TEMP, V_0D
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    13, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0D, V_TEMP
     nop
-    copy                    16, 14
+    copy                    V_TEMP, V_0E
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    14, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0E, V_TEMP
     nop
     work_copy               12, 2, 1
     light_kido_set          0, 0
@@ -2042,20 +2043,20 @@ off_3048:
 off_309E:
     sleep                   10, 31
     for                     0, off_30EE, 20
-    copy                    16, 12
+    copy                    V_TEMP, V_0C
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    12, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0C, V_TEMP
     nop
-    copy                    16, 13
+    copy                    V_TEMP, V_0D
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    13, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0D, V_TEMP
     nop
-    copy                    16, 14
+    copy                    V_TEMP, V_0E
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    14, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0E, V_TEMP
     nop
     work_copy               12, 2, 1
     light_kido_set          0, 0
@@ -2068,7 +2069,7 @@ off_309E:
     next                    0
 
 off_30EE:
-    goto                    255, 255, 0, off_3048
+    goto                    255, 255, 0, off_3044
     evt_end                 0
 
 .proc main_0E
@@ -2076,28 +2077,28 @@ off_30EE:
     light_kido_set          1, 0
     light_kido_set          2, 0
     sleep                   10, 30
-    save                    12, 0
 
-off_310A:
-    save                    13, 0
-    save                    14, 0
+off_3106:
+    save                    V_0C, 0
+    save                    V_0D, 0
+    save                    V_0E, 0
     evt_next
     nop
     for                     0, off_3160, 18
-    copy                    16, 12
+    copy                    V_TEMP, V_0C
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    12, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0C, V_TEMP
     nop
-    copy                    16, 13
+    copy                    V_TEMP, V_0D
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    13, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0D, V_TEMP
     nop
-    copy                    16, 14
+    copy                    V_TEMP, V_0E
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    14, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0E, V_TEMP
     nop
     work_copy               12, 2, 1
     light_kido_set          0, 0
@@ -2123,20 +2124,20 @@ off_3160:
 
 off_3182:
     for                     0, off_31CE, 30
-    copy                    16, 12
+    copy                    V_TEMP, V_0C
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    12, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0C, V_TEMP
     nop
-    copy                    16, 13
+    copy                    V_TEMP, V_0D
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    13, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0D, V_TEMP
     nop
-    copy                    16, 14
+    copy                    V_TEMP, V_0E
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    14, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0E, V_TEMP
     nop
     work_copy               12, 2, 1
     light_kido_set          0, 0
@@ -2149,32 +2150,32 @@ off_3182:
     next                    0
 
 off_31CE:
-    goto                    255, 255, 0, off_310A
+    goto                    255, 255, 0, off_3106
     evt_end                 0
 
 .proc main_0F
-    save                    12, 0
 
-off_31DA:
-    save                    13, 0
-    save                    14, 0
+off_31D6:
+    save                    V_0C, 0
+    save                    V_0D, 0
+    save                    V_0E, 0
     evt_next
     nop
     for                     0, off_3230, 18
-    copy                    16, 12
+    copy                    V_TEMP, V_0C
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    12, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0C, V_TEMP
     nop
-    copy                    16, 13
+    copy                    V_TEMP, V_0D
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    13, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0D, V_TEMP
     nop
-    copy                    16, 14
+    copy                    V_TEMP, V_0E
     nop
-    calc                    0, OP_ADD, 16, 2000
-    copy                    14, 16
+    calc                    0, OP_ADD, V_TEMP, 2000
+    copy                    V_0E, V_TEMP
     nop
     work_copy               12, 2, 1
     light_kido_set          0, 0
@@ -2200,20 +2201,20 @@ off_3230:
 
 off_3252:
     for                     0, off_329E, 30
-    copy                    16, 12
+    copy                    V_TEMP, V_0C
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    12, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0C, V_TEMP
     nop
-    copy                    16, 13
+    copy                    V_TEMP, V_0D
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    13, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0D, V_TEMP
     nop
-    copy                    16, 14
+    copy                    V_TEMP, V_0E
     nop
-    calc                    0, OP_SUB, 16, 720
-    copy                    14, 16
+    calc                    0, OP_SUB, V_TEMP, 720
+    copy                    V_0E, V_TEMP
     nop
     work_copy               12, 2, 1
     light_kido_set          0, 0
@@ -2226,7 +2227,7 @@ off_3252:
     next                    0
 
 off_329E:
-    goto                    255, 255, 0, off_31DA
+    goto                    255, 255, 0, off_31D6
     evt_end                 0
 
 .proc main_10
@@ -2237,17 +2238,17 @@ off_329E:
     sce_bgm_control         1, 5, 0, 91, 64
     sce_bgmtbl_set          0, 9, 5, 65312, 0
     if                      0, off_32FC
-    ck                      1, 0, 1
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_PLAYER, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     work_set                WK_PLAYER, 0
     nop
     if                      0, off_32F4
     member_cmp              0, 6, 0, 1, 0
-    save                    32, 5
+    save                    V_20, 5
     else                    0, off_32FA
 
 off_32F4:
-    save                    32, 7
+    save                    V_20, 7
     nop
     nop
 
@@ -2259,8 +2260,8 @@ off_32FC:
     evt_end                 0
 
 .proc main_11
-    set                     2, 7, 1
-    set                     1, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
     work_set                WK_PLAYER, 0
     nop
     sleep                   10, 5
@@ -2271,19 +2272,19 @@ off_32FC:
     plc_motion              0, 16, 144
     sleep                   10, 24
     plc_ret
-    set                     2, 7, 0
-    set                     1, 27, 0
+    set                     FG_STATE, 7, 0
+    set                     FG_GAME, 27, 0
     nop
     evt_end                 0
 
 .proc main_12
-    sleep                   10, 90
 
-off_333E:
-    set                     1, 28, 1
+off_333A:
+    sleep                   10, 90
+    set                     FG_GAME, 28, 1
     se_on                   2, 268, 0, 5525, 0, -16467
     if                      0, off_335E
-    ck                      5, 2, 1
+    ck                      FG_GENERAL_2, 2, 1
     nop_8b                  120, 4, 0, 0, 0
     endif
     nop
@@ -2291,7 +2292,7 @@ off_333E:
 off_335E:
     sleep                   10, 4
     if                      0, off_3372
-    ck                      5, 2, 1
+    ck                      FG_GENERAL_2, 2, 1
     nop_8b                  150, 4, 0, 0, 0
     endif
     nop
@@ -2299,19 +2300,19 @@ off_335E:
 off_3372:
     sleep                   10, 4
     if                      0, off_3386
-    ck                      5, 2, 1
+    ck                      FG_GENERAL_2, 2, 1
     nop_8b                  80, 4, 0, 0, 0
     endif
     nop
 
 off_3386:
     sleep                   10, 4
-    set                     1, 28, 0
-    goto                    255, 255, 0, off_333E
+    set                     FG_GAME, 28, 0
+    goto                    255, 255, 0, off_333A
     evt_end                 0
 
 .proc main_13
-    set                     1, 28, 0
+    set                     FG_GAME, 28, 0
     se_on                   2, 278, 1, 0, 0, 0
     message_on              0, 0, 0, 255, 255
     evt_next
@@ -2323,7 +2324,7 @@ off_3386:
     evt_next
     nop
     edwhile                 off_33BC
-    ck                      5, 32, 0
+    ck                      FG_GENERAL_2, 32, 0
 
 off_33BC:
     evt_end                 0
@@ -2335,4 +2336,3 @@ off_33BC:
 .proc main_16
     xa_on                   0, 20
     evt_end                 0
-    db                      0x96, 0x5C

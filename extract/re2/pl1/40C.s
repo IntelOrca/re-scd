@@ -1,13 +1,14 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20800, -23555, 3200, 2700, -26344, 0, -25179, -16, 3, 15, 3, 0, 30, 0, 0, 0, UNLOCKED, 0
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 30000, 30000, 100, 100, -8391, -7200, -25888, -648, 3, 0, 0, 4, 33, 0, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
-    sce_em_set              0, 0, ENEMY_48, 1, 0, 31, 0, 0, 255, 2602, 0, -21667, 3088, 0, 0
+.proc main
+    sce_em_set              0, 0, ENEMY_BIRKIN_1, 1, 0, 31, 0, 0, 255, 2602, 0, -21667, 3088, 0, 0
     obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -25600, 980, -26850, 0, -2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
     obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -25600, 980, -18550, 0, -2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
     obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -23150, 0, -22350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -35,11 +36,11 @@
     evt_exec                255, I_GOSUB, main_03
     evt_end                 0
 
-.proc main_01
+.proc aot
     if                      0, off_102E
-    ck                      8, 45, 1
-    ck                      5, 3, 0
-    set                     5, 3, 1
+    ck                      FG_ITEM, 45, 1
+    ck                      FG_GENERAL_2, 3, 0
+    set                     FG_GENERAL_2, 3, 1
     aot_reset               2, SCE_EVENT, SAT_PL | SAT_UNDER, 255, 0, I_GOSUB, main_02, 0, 0
     endif
     nop
@@ -48,9 +49,9 @@ off_102E:
     evt_end                 0
 
 .proc main_02
-    set                     2, 7, 1
-    set                     1, 27, 1
-    set                     3, 36, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
+    set                     FG_3, 36, 1
     sce_bgmtbl_set          0, 1, 4, 65292, 64
     sce_bgmtbl_set          0, 0, 4, 5887, 32768
     sce_bgmtbl_set          0, 15, 4, 8991, 32768
@@ -60,9 +61,9 @@ off_102E:
     sleep                   10, 18
     evt_exec                255, I_GOSUB, main_07
     se_on                   2, 266, 1, 0, 0, 0
-    set                     1, 28, 1
+    set                     FG_GAME, 28, 1
     sleep                   10, 8
-    set                     1, 28, 0
+    set                     FG_GAME, 28, 0
     sleep                   10, 18
     xa_on                   0, 41
     sleep                   10, 8
@@ -70,7 +71,7 @@ off_102E:
     nop_8c                  0, 200, 100, 16, 0, 12, 0
     evt_exec                255, I_GOSUB, main_0C
     evt_exec                255, I_GOSUB, main_0D
-    set                     5, 0, 1
+    set                     FG_GENERAL_2, 0, 1
     evt_exec                255, I_GOSUB, main_09
     sleep                   10, 4
     evt_exec                255, I_GOSUB, main_0A
@@ -81,7 +82,7 @@ off_102E:
     sce_fade_set            2, 2, 7, 0, 2
     sleep                   10, 63
     while                   4, off_10E8
-    ck                      1, 26, 1
+    ck                      FG_GAME, 26, 1
     sce_fade_adjust         2, 255, 127
     evt_next
     nop
@@ -105,40 +106,40 @@ off_10E8:
     sleep                   10, 160
     cut_chg                 3
     sleep                   10, 30
-    set                     5, 2, 1
+    set                     FG_GENERAL_2, 2, 1
     if                      0, off_1130
-    ck                      29, 1, 1
-    save                    32, 3
+    ck                      FG_LOCK, 1, 1
+    save                    V_20, 3
     else                    0, off_1136
 
 off_1130:
-    save                    32, 1
+    save                    V_20, 1
     nop
     nop
 
 off_1136:
     aot_on                  1
-    set                     2, 7, 0
-    set                     1, 27, 0
+    set                     FG_STATE, 7, 0
+    set                     FG_GAME, 27, 0
     evt_end                 0
 
 .proc main_03
     evt_next
     work_set                WK_ENEMY, 0
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_ADD, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_ADD, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
     evt_end                 0
 
 .proc main_04
     work_set                WK_ENEMY, 0
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_SUB, 16, -32768
-    member_set2             7, 16
+    calc                    0, OP_SUB, V_TEMP, -32768
+    member_set2             7, V_TEMP
     nop
     for                     0, off_1176, 160
     member_set              15, 16, 13
@@ -212,20 +213,20 @@ off_1248:
     sce_bgm_control         0, 2, 0, 100, 64
     evt_next
     nop
-    member_copy             16, 0
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_OR, 16, 1024
-    member_set2             0, 16
+    calc                    0, OP_OR, V_TEMP, 1024
+    member_set2             0, V_TEMP
     nop
     sce_bgm_control         1, 1, 0, 100, 64
     plc_motion              0, 15, 64
     sleep                   10, 12
     member_set              12, 0, 0
     for                     0, off_132E, 15
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc                    0, OP_ADD, 16, 300
-    member_set2             12, 16
+    calc                    0, OP_ADD, V_TEMP, 300
+    member_set2             12, V_TEMP
     nop
     evt_next
     nop
@@ -233,7 +234,7 @@ off_1248:
 
 off_132E:
     while                   6, off_133C
-    cmp                     0, 26, CMP_NE, 2
+    cmp                     0, V_CUT, CMP_NE, 2
     evt_next
     nop
     ewhile                  0
@@ -242,36 +243,36 @@ off_133C:
     sce_bgm_control         2, 1, 1, 100, 64
     member_set              11, 4, 41
     member_set              13, 182, 202
-    save                    5, 0
-    save                    6, 0
-    save                    7, 0
+    save                    V_05, 0
+    save                    V_06, 0
+    save                    V_07, 0
     member_set              15, 0, 12
     member_set              12, 20, 211
     for                     0, off_13A8, 15
-    member_copy             16, 11
+    member_copy             V_TEMP, 11
     nop
-    calc2                   OP_ADD, 16, 5
-    member_set2             11, 16
+    calc2                   OP_ADD, V_TEMP, V_05
+    member_set2             11, V_TEMP
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc2                   OP_SUB, 16, 7
-    member_set2             12, 16
+    calc2                   OP_SUB, V_TEMP, V_07
+    member_set2             12, V_TEMP
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc2                   OP_ADD, 16, 6
-    copy                    5, 16
+    calc2                   OP_ADD, V_TEMP, V_06
+    copy                    V_05, V_TEMP
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_MUL, 16, 2
-    copy                    7, 16
+    calc                    0, OP_MUL, V_TEMP, 2
+    copy                    V_07, V_TEMP
     nop
-    copy                    16, 6
+    copy                    V_TEMP, V_06
     nop
-    calc                    0, OP_SUB, 16, 6
-    copy                    6, 16
+    calc                    0, OP_SUB, V_TEMP, 6
+    copy                    V_06, V_TEMP
     nop
     evt_next
     nop
@@ -285,7 +286,7 @@ off_13A8:
     plc_motion              0, 16, 64
     sleep                   10, 37
     while                   6, off_13DC
-    cmp                     0, 26, CMP_NE, 3
+    cmp                     0, V_CUT, CMP_NE, 3
     evt_next
     nop
     ewhile                  0
@@ -317,11 +318,11 @@ off_141C:
     plc_motion              0, 17, 80
     plc_cnt                 74
     sleep                   10, 32
-    sce_item_lost           73
-    member_copy             16, 0
+    sce_item_lost           ITEM_WOLFMEDAL
+    member_copy             V_TEMP, 0
     nop
-    calc                    0, OP_AND, 16, -1025
-    member_set2             0, 16
+    calc                    0, OP_AND, V_TEMP, -1025
+    member_set2             0, V_TEMP
     nop
     evt_end                 0
 
@@ -352,7 +353,7 @@ off_145E:
 
 off_147A:
     while                   6, off_1488
-    cmp                     0, 26, CMP_NE, 2
+    cmp                     0, V_CUT, CMP_NE, 2
     evt_next
     nop
     ewhile                  0
@@ -394,7 +395,7 @@ off_14C4:
 off_14F4:
     se_on                   2, 269, 3588, 0, 0, 0
     while                   6, off_1510
-    cmp                     0, 26, CMP_NE, 3
+    cmp                     0, V_CUT, CMP_NE, 3
     add_speed
     add_aspeed
     evt_next
@@ -406,53 +407,53 @@ off_1510:
     evt_end                 0
 
 .proc main_09
-    save                    4, 3
-    save                    6, 0
-    save                    5, 0
+    save                    V_04, 3
+    save                    V_06, 0
+    save                    V_05, 0
     for                     0, off_15A6, 40
-    save                    4, 3
+    save                    V_04, 3
     for                     0, off_1578, 8
     work_copy               4, 2, 0
     work_set                WK_OBJECT, 0
     nop
-    member_copy             16, 12
+    member_copy             V_TEMP, 12
     nop
-    calc2                   OP_ADD, 16, 5
-    member_set2             12, 16
+    calc2                   OP_ADD, V_TEMP, V_05
+    member_set2             12, V_TEMP
     nop
-    member_copy             16, 14
+    member_copy             V_TEMP, 14
     nop
-    calc                    0, OP_ADD, 16, 10
-    member_set2             14, 16
+    calc                    0, OP_ADD, V_TEMP, 10
+    member_set2             14, V_TEMP
     nop
     if                      0, off_1568
-    cmp                     0, 12, CMP_LE, -1000
+    cmp                     0, V_0C, CMP_LE, -1000
     member_set              12, 24, 252
     endif
     nop
 
 off_1568:
-    copy                    16, 4
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_ADD, 16, 1
-    copy                    4, 16
+    calc                    0, OP_ADD, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
     next                    0
 
 off_1578:
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc2                   OP_ADD, 16, 6
-    copy                    5, 16
+    calc2                   OP_ADD, V_TEMP, V_06
+    copy                    V_05, V_TEMP
     nop
-    copy                    16, 6
+    copy                    V_TEMP, V_06
     nop
-    calc                    0, OP_ADD, 16, 4
-    copy                    6, 16
+    calc                    0, OP_ADD, V_TEMP, 4
+    copy                    V_06, V_TEMP
     nop
     if                      0, off_15A2
-    cmp                     0, 5, CMP_GE, 800
-    save                    5, 800
+    cmp                     0, V_05, CMP_GE, 800
+    save                    V_05, 800
     endif
     nop
 

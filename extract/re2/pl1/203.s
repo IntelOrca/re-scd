@@ -1,8 +1,9 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27713, -23125, 1240, 2470, -14423, 0, -7289, 2024, 1, 4, 4, 0, 8, 0, 0, 0, UNLOCKED, 0
-    item_aot_set            6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23098, -25955, 2460, 7900, ITEM_118, 1, 153, 255, 0
+    item_aot_set            6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23098, -25955, 2460, 7900, ITEM_76, 1, 153, 255, 0
     item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26643, -18975, 940, 1870, ITEM_INKRIBBON, 3, 35, 1, 0
     obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, 26219, -2209, 18285, 0, 0, 384, 0, 0, 0, 0, 0, 0, 0, 0
     aot_set                 7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23098, -25955, 2460, 7900, 0, 0, 0, 0, 255, 255
@@ -14,9 +15,9 @@
     evt_end                 0
 
 .main
-.proc main_00
+.proc main
     if                      0, off_0810
-    ck                      1, 1, 0
+    ck                      FG_GAME, F_SCENARIO, 0
     item_aot_set            5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -20613, -26525, 2040, 870, ITEM_CRANK, 1, 188, 4, 0
     obj_model_set           4, 0, 0, 0, 0, 0, 0, 10, 16, -19435, -4000, -26182, 0, -1216, 0, 0, 0, 0, 0, 0, 0, 0, 0
     else                    0, off_084E
@@ -30,6 +31,5 @@ off_0810:
 off_084E:
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0
-    db                      0x04, 0x9A

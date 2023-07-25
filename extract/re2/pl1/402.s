@@ -1,27 +1,28 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18419, -27826, 4740, 990, -7893, 0, -22497, 1320, 2, 4, 3, 0, 31, 1, 0, 0, UNLOCKED, 0
     door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -27339, -9726, 2350, 1390, -20143, -7200, -22770, 3120, 3, 3, 0, 4, 6, 1, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
-    gosub                   5
+.proc main
+    gosub                   main_02
+    gosub                   main_05
     if                      0, off_08E4
-    ck                      1, 1, 1
-    sce_em_set              0, 0, ENEMY_ZOMBIERANDOM, 6, 0, 0, 36, 0, 5, -17518, 0, -19627, 147, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 0, 0, 0, 36, 0, 6, -14776, 0, -23206, 2387, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 0, 0, 0, 36, 0, 7, -16206, 0, -6115, 959, 0, 0
+    ck                      FG_GAME, F_SCENARIO, 1
+    sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 36, 0, 5, -17518, 0, -19627, 147, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 36, 0, 6, -14776, 0, -23206, 2387, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 36, 0, 7, -16206, 0, -6115, 959, 0, 0
     endif
     nop
 
 off_08E4:
     evt_end                 0
 
-.proc main_01
-    gosub                   4
+.proc aot
+    gosub                   main_04
     evt_end                 0
 
 .proc main_02
@@ -31,8 +32,8 @@ off_08E4:
     aot_set                 5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18415, -5953, 4880, 1800, 0, 0, 0, 0, 255, 255
     sce_espr_on             0, 284, 0, 4096, -17800, -2400, -16500, 0
     sce_espr_on             0, 284, 0, 4096, -17700, -2400, -6000, 0
-    gosub                   3
-    save                    4, 255
+    gosub                   main_03
+    save                    V_04, 255
     sce_bgm_control         0, 0, 1, 100, 64
     evt_end                 0
 
@@ -51,8 +52,8 @@ off_08E4:
 .proc main_04
     if                      0, off_0A96
     work_copy               4, 4, 1
-    cmp                     0, 26, CMP_NE, 0
-    copy                    4, 26
+    cmp                     0, V_CUT, CMP_NE, 0
+    copy                    V_04, V_CUT
     nop
     switch                  26, off_0A94
     case                    0, off_0A2A, 0
@@ -101,26 +102,26 @@ off_0A96:
 
 .proc main_05
     if                      0, off_0AFA
-    ck                      1, 3, 1
+    ck                      FG_GAME, 3, 1
     if                      0, off_0AC4
-    cmp                     0, 27, CMP_EQ, 772
-    sce_em_set              0, 255, ENEMY_SHERRYWITHPENDANT, 0, 4, 0, 32, 0, 255, -15295, 0, -25998, 2872, 0, 0
+    cmp                     0, V_LAST_RDT, CMP_EQ, 772
+    sce_em_set              0, 255, ENEMY_SHERRY_PENDANT, 0, 4, 0, 32, 0, 255, -15295, 0, -25998, 2872, 0, 0
     else                    0, off_0ADC
 
 off_0AC4:
-    sce_em_set              0, 255, ENEMY_SHERRYWITHPENDANT, 0, 4, 1, 32, 0, 255, -26179, -1800, -9642, 249, 0, 0
+    sce_em_set              0, 255, ENEMY_SHERRY_PENDANT, 0, 4, 1, 32, 0, 255, -26179, -1800, -9642, 249, 0, 0
     nop
     nop
 
 off_0ADC:
     if                      0, off_0AF8
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     work_set                WK_SPLAYER, 0
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 2048
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 2048
+    member_set2             7, V_TEMP
     nop
     endif
     nop

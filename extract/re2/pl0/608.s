@@ -1,14 +1,15 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -10290, 8069, 2300, 1800, -8792, 0, -26442, -992, 5, 6, 7, 0, 37, 0, 0, 0, UNLOCKED, 0
     door_aot_set_4p         1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22904, -21106, -21090, -23000, -22193, -24040, -24044, -22184, -8893, 0, -12514, 1576, 5, 11, 6, 0, 37, 0, 0, 0, UNLOCKED, 0
     door_aot_set_4p         2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 3296, -23026, 5100, -21180, 6390, -22130, 4136, -24518, 8890, 0, -12464, 512, 5, 12, 6, 0, 37, 0, 0, 0, UNLOCKED, 0
     if                      0, off_27BA
-    ck                      1, 1, 0
+    ck                      FG_GAME, F_SCENARIO, 0
     if                      0, off_27B8
-    ck                      4, 130, 1
-    set                     4, 154, 1
+    ck                      FG_GENERAL_1, 130, 1
+    set                     FG_GENERAL_1, 154, 1
     endif
     nop
 
@@ -18,11 +19,11 @@ off_27B8:
 
 off_27BA:
     if                      0, off_27EC
-    ck                      1, 0, 1
+    ck                      FG_GAME, F_PLAYER, 1
     if                      0, off_27EA
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     if                      0, off_27E8
-    ck                      4, 133, 1
+    ck                      FG_GENERAL_1, 133, 1
     aot_reset               1, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, 0, 0, 255, 255
     aot_reset               2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, 0, 0, 255, 255
     endif
@@ -38,30 +39,29 @@ off_27EA:
 
 off_27EC:
     evt_end                 0
-    db                      0x00, 0x00
 
 .main
-.proc main_00
-    gosub                   2
-    gosub                   3
+.proc main
+    gosub                   main_02
+    gosub                   main_03
     evt_end                 0
 
-.proc main_01
-    gosub                   7
-    gosub                   4
+.proc aot
+    gosub                   main_07
+    gosub                   main_04
     evt_end                 0
 
 .proc main_02
-    save                    5, 255
-    sce_em_set              0, 0, ENEMY_63, 0, 0, 0, 0, 0, 255, -9059, -300, -9005, 1024, 0, 0
+    save                    V_05, 255
+    sce_em_set              0, 0, ENEMY_3F, 0, 0, 0, 0, 0, 255, -9059, -300, -9005, 1024, 0, 0
     if                      0, off_2872
-    ck                      4, 106, 0
+    ck                      FG_GENERAL_1, 106, 0
     aot_set                 6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -10317, -10364, 2850, 2880, 0, 0, 0, 0, 255, 255
-    aot_set                 5, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -10317, -10364, 2850, 2880, 10, 0, 76, 0, 1, 0
+    aot_set                 5, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -10317, -10364, 2850, 2880, 10, 0, ITEM_MAINFUSE, 0, aot, 0
     cut_replace             1, 4
     cut_replace             2, 5
     if                      0, off_286E
-    cmp                     0, 25, CMP_EQ, 8
+    cmp                     0, V_19, CMP_EQ, 8
     cut_replace             3, 6
     nop
     endif
@@ -86,12 +86,12 @@ off_288C:
 
 .proc main_04
     if                      0, off_28E4
-    ck                      4, 106, 0
+    ck                      FG_GENERAL_1, 106, 0
     if                      0, off_28E2
-    cmp                     0, 0, CMP_EQ, 5
+    cmp                     0, V_00, CMP_EQ, 5
     if                      0, off_28E0
-    cmp                     0, 2, CMP_EQ, 76
-    set                     4, 106, 1
+    cmp                     0, V_USED_ITEM, CMP_EQ, 76
+    set                     FG_GENERAL_1, 106, 1
     evt_exec                255, I_GOSUB, main_05
     endif
     nop
@@ -108,9 +108,9 @@ off_28E4:
     evt_end                 0
 
 .proc main_05
-    sce_item_lost           76
+    sce_item_lost           ITEM_MAINFUSE
     aot_reset               5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    copy                    4, 26
+    copy                    V_04, V_CUT
     nop
     cut_chg                 6
     work_set                WK_PLAYER, 0
@@ -119,8 +119,8 @@ off_28E4:
     work_set                WK_OBJECT, 0
     nop
     super_set               0, 130, 129, 0, -700, 0, 0, 0, 0
-    set                     2, 7, 1
-    set                     1, 27, 1
+    set                     FG_STATE, 7, 1
+    set                     FG_GAME, 27, 1
     nop_8c                  0, 0, 120, 80, 0, 0, 0
     nop_8a                  0, 40, 0, 10, 0
     sleep                   10, 7
@@ -161,10 +161,10 @@ off_298E:
     nop
     sce_fade_set            2, 2, 7, 0, 252
     sleep                   10, 60
-    copy                    16, 4
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 3
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 3
+    copy                    V_04, V_TEMP
     nop
     aot_reset               6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, 0, 0, 255, 255
     work_copy               4, 1, 0
@@ -173,15 +173,15 @@ off_298E:
     nop
     member_set              12, 0, 0
     cut_auto                1
-    set                     2, 7, 0
-    set                     1, 27, 0
+    set                     FG_STATE, 7, 0
+    set                     FG_GAME, 27, 0
     evt_end                 0
 
 .proc main_06
     evt_next
     nop
     if                      0, off_29FA
-    ck                      4, 106, 1
+    ck                      FG_GENERAL_1, 106, 1
     work_set                WK_OBJECT, 0
     nop
     pos_set                 0, -9059, -600, -9005
@@ -197,8 +197,8 @@ off_29FA:
 .proc main_07
     if                      0, off_2A4C
     work_copy               5, 4, 1
-    cmp                     0, 26, CMP_NE, 0
-    copy                    5, 26
+    cmp                     0, V_CUT, CMP_NE, 0
+    copy                    V_05, V_CUT
     nop
     switch                  26, off_2A4A
     case                    0, off_2A18, 1
@@ -236,8 +236,8 @@ off_2A4C:
 .proc main_08
     if                      0, off_2A86
     work_copy               5, 4, 1
-    cmp                     0, 26, CMP_NE, 0
-    copy                    5, 26
+    cmp                     0, V_CUT, CMP_NE, 0
+    copy                    V_05, V_CUT
     nop
     switch                  26, off_2A84
     case                    0, off_2A6A, 1

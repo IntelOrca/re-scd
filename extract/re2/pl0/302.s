@@ -1,19 +1,20 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 1, 1, -6611, 0, -3724, -2080, 1, 26, 3, 0, 22, 4, 0, 0, UNLOCKED, 0
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9153, 5181, 3200, 1800, -16806, 0, -17551, -1017, 2, 11, 0, 0, 14, 4, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
+.proc main
     obj_model_set           0, 0, 130, 4, 7, 0, 0, 10, 26, -17000, -180, -18000, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
     obj_model_set           1, 0, 130, 4, 7, 0, 0, 10, 26, -17200, -180, -16200, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
     obj_model_set           2, 0, 130, 4, 7, 0, 0, 10, 26, -6000, -180, 7200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     aot_set                 2, SCE_WATER, SAT_PL | SAT_EM | SAT_SPL | SAT_OB | SAT_UNDER, 0, 0, -20592, -20566, 18000, 29370, 76, 255, 0, 0, 0, 0
     aot_set                 3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -9853, -17919, 1800, 1800, 255, 0, I_GOSUB, main_04, 0, 0
     if                      0, off_0B08
-    ck                      1, 6, 0
+    ck                      FG_GAME, F_BONUS, 0
     sce_em_set              0, 0, ENEMY_SPIDER, 9, 0, 0, 16, 0, 106, -14472, -1800, -13055, 1041, 0, 0
     sce_em_set              0, 1, ENEMY_SPIDER, 0, 0, 0, 16, 0, 145, -11485, 0, 4025, 2048, 0, 0
     else                    0, off_0B36
@@ -26,7 +27,7 @@ off_0B08:
 
 off_0B36:
     if                      0, off_0B54
-    cmp                     0, 26, CMP_EQ, 0
+    cmp                     0, V_CUT, CMP_EQ, 0
     work_set                WK_OBJECT, 1
     nop
     member_set              12, 0, 131
@@ -49,9 +50,9 @@ off_0B66:
     sce_bgm_control         0, 0, 1, 90, 64
     evt_end                 0
 
-.proc main_01
-    gosub                   2
-    gosub                   3
+.proc aot
+    gosub                   main_02
+    gosub                   main_03
     evt_end                 0
 
 .proc main_02
@@ -163,11 +164,10 @@ off_0C6A:
     evt_next
     nop
     if                      0, off_0C80
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     aot_on                  0
     endif
     nop
 
 off_0C80:
     evt_end                 0
-    db                      0x20, 0x00

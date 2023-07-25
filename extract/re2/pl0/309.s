@@ -1,11 +1,12 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     if                      0, off_1258
-    ck                      4, 254, 1
-    set                     4, 57, 0
-    set                     6, 98, 0
-    set                     4, 58, 0
+    ck                      FG_GENERAL_1, 254, 1
+    set                     FG_GENERAL_1, 57, 0
+    set                     FG_ENEMY, 98, 0
+    set                     FG_GENERAL_1, 58, 0
     endif
     nop
 
@@ -16,12 +17,12 @@ off_1258:
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
+.proc main
+    gosub                   main_02
     sce_bgm_control         1, 1, 0, 0, 0
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0
 
 .proc main_02
@@ -44,7 +45,7 @@ off_1258:
     evt_next
     nop
     if                      0, off_1364
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     aot_on                  2
     endif
     nop
@@ -57,7 +58,7 @@ off_1364:
     evt_next
     nop
     if                      0, off_137A
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     aot_on                  3
     endif
     nop

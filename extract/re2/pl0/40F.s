@@ -1,14 +1,15 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     evt_end                 0
 
 .proc init_01
     evt_end                 0
 
 .main
-.proc main_00
+.proc main
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0

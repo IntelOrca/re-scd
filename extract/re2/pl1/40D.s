@@ -1,22 +1,23 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -8441, -26564, 1300, 1200, -26340, -1800, -20754, -4096, 3, 7, 0, 1, 34, 1, 0, 0, UNLOCKED, 0
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26622, -14200, 1500, 2000, -24251, 0, -25677, 3040, 3, 14, 0, 0, 7, 1, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
-    gosub                   6
+.proc main
+    gosub                   main_02
+    gosub                   main_06
     evt_end                 0
 
-.proc main_01
+.proc aot
     evt_end                 0
 
 .proc main_02
     if                      0, off_0F50
-    ck                      4, 73, 0
+    ck                      FG_GENERAL_1, 73, 0
     aot_set                 2, SCE_EVENT, SAT_PL | SAT_UNDER, 1, 0, -18725, -27684, 2400, 3600, 255, 0, I_GOSUB, main_03, 0, 0
     endif
     nop
@@ -25,7 +26,7 @@ off_0F50:
     evt_end                 0
 
 .proc main_03
-    set                     4, 73, 1
+    set                     FG_GENERAL_1, 73, 1
     aot_reset               2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     se_on                   2, 10, 0, -18000, -7800, -25000
     nop_8b                  200, 15, 0, 0, 0
@@ -60,26 +61,26 @@ off_0F50:
 
 .proc main_06
     if                      0, off_109A
-    ck                      1, 3, 1
+    ck                      FG_GAME, 3, 1
     if                      0, off_1064
-    cmp                     0, 27, CMP_EQ, 1031
-    sce_em_set              0, 255, ENEMY_SHERRYWITHPENDANT, 0, 4, 1, 32, 0, 255, -8220, -1800, -26508, 2161, 0, 0
+    cmp                     0, V_LAST_RDT, CMP_EQ, 1031
+    sce_em_set              0, 255, ENEMY_SHERRY_PENDANT, 0, 4, 1, 32, 0, 255, -8220, -1800, -26508, 2161, 0, 0
     else                    0, off_107C
 
 off_1064:
-    sce_em_set              0, 255, ENEMY_SHERRYWITHPENDANT, 0, 4, 0, 32, 0, 255, -26392, -224, -14650, 792, 0, 0
+    sce_em_set              0, 255, ENEMY_SHERRY_PENDANT, 0, 4, 0, 32, 0, 255, -26392, -224, -14650, 792, 0, 0
     nop
     nop
 
 off_107C:
     if                      0, off_1098
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     work_set                WK_SPLAYER, 0
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_OR, 16, 2048
-    member_set2             7, 16
+    calc                    0, OP_OR, V_TEMP, 2048
+    member_set2             7, V_TEMP
     nop
     endif
     nop

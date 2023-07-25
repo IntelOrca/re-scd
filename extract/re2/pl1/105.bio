@@ -1,142 +1,132 @@
-.version 2
-init
+#version 2
+
+proc init
 {
-    init_00()
+    door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 22000, -18199, 1800, 2200, -25840, 0, -480, 0, 0, 6, 0, 0, 8, 0, 0, 138, ITEM_CABINKEY, 0);
+    door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 11470, -11500, 2400, 1800, 26542, 0, -26275, -1000, 0, 4, 6, 0, 10, 1, 0, 0, UNLOCKED, 0);
+}
+
+proc main
+{
+    set(19, 1, 0);
+    item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -13930, -15730, 800, 1300, ITEM_CABINKEY, 1, 4, 0, 160);
+    aot_set(3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -8560, -27380, 9400, 1800, 2, 0, 0, 0, 255, 255);
+    sce_em_set(0, 0, ENEMY_ZOMBIE_COP, 0, 0, 0, 7, 131, 25, 16750, 0, -18650, 3072, 0, 0);
+    sce_em_set(0, 1, ENEMY_ZOMBIE_COP, 0, 0, 0, 7, 131, 26, 13550, 0, -7500, 200, 0, 0);
+    sce_em_set(0, 2, ENEMY_ZOMBIE_COP, 6, 0, 0, 8, 131, 27, 13200, 0, -5800, 3432, 0, 0);
+    obj_model_set(0, 0, 0, 0, 0, 0, 0, 10, 16, -13340, -1400, -15170, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    main_03();
+}
+
+proc aot
+{
+    if (ck(FG_GAME, 11, 1))
     {
-        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 22000, -18199, 1800, 2200, -25840, 0, -480, 0, 0, 6, 0, 0, 8, 0, 0, 138, ITEM_CABINKEY, 0);
-        door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 11470, -11500, 2400, 1800, 26542, 0, -26275, -1000, 0, 4, 6, 0, 10, 1, 0, 0, UNLOCKED, 0);
-        return 0;
+        main_03();
+    }
+    if (cmp(0, V_CUT, CMP_EQ, 0) && ck(FG_GENERAL_2, 10, 0))
+    {
+        if (ck(FG_ENEMY, 26, 0))
+        {
+            work_set(WK_ENEMY, 1);
+            member_set(7, 0, 0);
+            member_set(2, 1, 0);
+            member_set(3, 13, 0);
+            member_set(4, 0, 0);
+            member_set(5, 0, 0);
+            pos_set(0, 13550, 0, -7500);
+            dir_set(0, 0, 1200, 0);
+            member_set(31, 0, 0);
+        }
+        if (ck(FG_ENEMY, 27, 0))
+        {
+            work_set(WK_ENEMY, 2);
+            member_set(7, 0, 0);
+            member_set(2, 1, 0);
+            member_set(3, 13, 0);
+            member_set(4, 0, 0);
+            member_set(5, 0, 0);
+            pos_set(0, 13200, 0, -5800);
+            dir_set(0, 0, 1067, 0);
+            member_set(31, 0, 0);
+        }
+        set(FG_GENERAL_2, 10, 1);
+    }
+    if (ck(FG_GAME, 11, 1) && ck(FG_GENERAL_2, 10, 1))
+    {
+        if (ck(FG_ENEMY, 26, 0))
+        {
+            work_set(WK_ENEMY, 1);
+            member_set(7, 0, 0);
+            member_set(2, 1, 0);
+            member_set(3, 13, 0);
+            member_set(4, 0, 0);
+            member_set(5, 0, 0);
+            pos_set(0, -3890, 0, -14483);
+            dir_set(0, 0, 200, 0);
+            member_set(31, 0, 0);
+        }
+        if (ck(FG_ENEMY, 27, 0))
+        {
+            work_set(WK_ENEMY, 2);
+            member_set(7, 0, 0);
+            member_set(2, 1, 0);
+            member_set(3, 13, 0);
+            member_set(4, 0, 0);
+            member_set(5, 0, 0);
+            pos_set(0, -4444, 0, -18818);
+            dir_set(0, 0, 3432, 0);
+            member_set(31, 0, 0);
+        }
+        set(FG_GENERAL_2, 10, 0);
     }
 }
 
-main
+proc main_02
 {
-    main_00()
+    if (ck(FG_GENERAL_1, 2, 0))
     {
-        bits[19][1] = 0;
-        item_aot_set(2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -13930, -15730, 800, 1300, ITEM_CABINKEY, 1, 4, 0, 160);
-        aot_set(3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -8560, -27380, 9400, 1800, 2, 0, 0, 0, 255, 255);
-        sce_em_set(0, 0, ENEMY_ZOMBIECOP, 0, 0, 0, 7, 131, 25, 16750, 0, -18650, 3072, 0, 0);
-        sce_em_set(0, 1, ENEMY_ZOMBIECOP, 0, 0, 0, 7, 131, 26, 13550, 0, -7500, 200, 0, 0);
-        sce_em_set(0, 2, ENEMY_ZOMBIECOP, 6, 0, 0, 8, 131, 27, 13200, 0, -5800, 3432, 0, 0);
-        obj_model_set(0, 0, 0, 0, 0, 0, 0, 10, 16, -13340, -1400, -15170, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        main_03();
-        return 0;
+        if (ck(FG_ITEM, 4, 1))
+        {
+            message_on(0, 1, 0, 255, 255);
+            se_on(2, 37, 0, 10267, -1800, -13158);
+            set(FG_GENERAL_1, 2, 1);
+            aot_reset(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 16, 155, 0, 0, 32, 254);
+        }
+        else
+        {
+            message_on(0, 0, 0, 255, 255);
+            se_on(2, 22, 0, 10267, -1800, -13158);
+        }
     }
+}
 
-    main_01()
+proc main_03
+{
+    switch (V_CUT)
     {
-        if (bits[1][11] == 1)
-        {
-            main_03();
-        }
-        if (arr[26] == 0 && bits[5][10] == 0)
-        {
-            if (bits[6][26] == 0)
-            {
-                work_set(WK_ENEMY, 1);
-                member_set(7, 0, 0);
-                member_set(2, 1, 0);
-                member_set(3, 13, 0);
-                member_set(4, 0, 0);
-                member_set(5, 0, 0);
-                pos_set(0, 13550, 0, -7500);
-                dir_set(0, 0, 1200, 0);
-                member_set(31, 0, 0);
-            }
-            if (bits[6][27] == 0)
-            {
-                work_set(WK_ENEMY, 2);
-                member_set(7, 0, 0);
-                member_set(2, 1, 0);
-                member_set(3, 13, 0);
-                member_set(4, 0, 0);
-                member_set(5, 0, 0);
-                pos_set(0, 13200, 0, -5800);
-                dir_set(0, 0, 1067, 0);
-                member_set(31, 0, 0);
-            }
-            bits[5][10] = 1;
-        }
-        if (bits[1][11] == 1 && bits[5][10] == 1)
-        {
-            if (bits[6][26] == 0)
-            {
-                work_set(WK_ENEMY, 1);
-                member_set(7, 0, 0);
-                member_set(2, 1, 0);
-                member_set(3, 13, 0);
-                member_set(4, 0, 0);
-                member_set(5, 0, 0);
-                pos_set(0, -3890, 0, -14483);
-                dir_set(0, 0, 200, 0);
-                member_set(31, 0, 0);
-            }
-            if (bits[6][27] == 0)
-            {
-                work_set(WK_ENEMY, 2);
-                member_set(7, 0, 0);
-                member_set(2, 1, 0);
-                member_set(3, 13, 0);
-                member_set(4, 0, 0);
-                member_set(5, 0, 0);
-                pos_set(0, -4444, 0, -18818);
-                dir_set(0, 0, 3432, 0);
-                member_set(31, 0, 0);
-            }
-            bits[5][10] = 0;
-        }
-        return 0;
-    }
-
-    main_02()
-    {
-        if (bits[4][2] == 0)
-        {
-            if (bits[8][4] == 1)
-            {
-                message_on(0, 1, 0, 255, 255);
-                se_on(2, 37, 0, 10267, -1800, -13158);
-                bits[4][2] = 1;
-                aot_reset(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 16, 155, 0, 0, 32, 254);
-            }
-            else
-            {
-                message_on(0, 0, 0, 255, 255);
-                se_on(2, 22, 0, 10267, -1800, -13158);
-            }
-        }
-        return 0;
-    }
-
-    main_03()
-    {
-        switch (var_1A)
-        {
-        case 0:
-        case 5:
-            sce_bgm_control(0, 0, 1, 0, 64);
-            sce_bgm_control(0, 0, 2, 60, 65);
-            sce_bgm_control(0, 0, 3, 60, 65);
-            break;
-        case 1:
-        case 2:
-            sce_bgm_control(0, 0, 1, 0, 40);
-            sce_bgm_control(0, 0, 2, 60, 65);
-            sce_bgm_control(0, 0, 3, 60, 65);
-            break;
-        case 3:
-        case 4:
-            sce_bgm_control(0, 0, 1, 0, 90);
-            sce_bgm_control(0, 0, 2, 60, 65);
-            sce_bgm_control(0, 0, 3, 60, 65);
-            break;
-        case 6:
-            sce_bgm_control(0, 0, 1, 0, 65);
-            sce_bgm_control(0, 0, 2, 50, 65);
-            sce_bgm_control(0, 0, 3, 50, 65);
-            break;
-        }
-        return 0;
+    case 0:
+    case 5:
+        sce_bgm_control(0, 0, 1, 0, 64);
+        sce_bgm_control(0, 0, 2, 60, 65);
+        sce_bgm_control(0, 0, 3, 60, 65);
+        break;
+    case 1:
+    case 2:
+        sce_bgm_control(0, 0, 1, 0, 40);
+        sce_bgm_control(0, 0, 2, 60, 65);
+        sce_bgm_control(0, 0, 3, 60, 65);
+        break;
+    case 3:
+    case 4:
+        sce_bgm_control(0, 0, 1, 0, 90);
+        sce_bgm_control(0, 0, 2, 60, 65);
+        sce_bgm_control(0, 0, 3, 60, 65);
+        break;
+    case 6:
+        sce_bgm_control(0, 0, 1, 0, 65);
+        sce_bgm_control(0, 0, 2, 50, 65);
+        sce_bgm_control(0, 0, 3, 50, 65);
+        break;
     }
 }

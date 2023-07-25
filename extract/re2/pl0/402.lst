@@ -1,19 +1,20 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 0856:   3B01013100000DB84E938412DE032BE100001FA82805020403001F0100000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18419, -27826, 4740, 990, -7893, 0, -22497, 1320, 2, 4, 3, 0, 31, 1, 0, 0, UNLOCKED, 0
 0876:   3B0201310100359502DA2E096E0551B1E0E30EA7300C03030004060100000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -27339, -9726, 2350, 1390, -20143, -7200, -22770, 3120, 3, 3, 0, 4, 6, 1, 0, 0, UNLOCKED, 0
 0896:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
-08A6:   1802                                                                                    gosub                   2
-08A8:   1806                                                                                    gosub                   6
-08AA:   1805                                                                                    gosub                   5
+.proc main
+08A6:   1802                                                                                    gosub                   main_02
+08A8:   1806                                                                                    gosub                   main_06
+08AA:   1805                                                                                    gosub                   main_05
 08AC:   0100                                                                                    evt_end                 0
 
-.proc main_01
-08AE:   1804                                                                                    gosub                   4
+.proc aot
+08AE:   1804                                                                                    gosub                   main_04
 08B0:   0100                                                                                    evt_end                 0
 
 .proc main_02
@@ -23,8 +24,8 @@
 08EE:   2C050431000011B8BFE81013080700000000FFFF                                                aot_set                 5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18415, -5953, 4880, 1800, 0, 0, 0, 0, 255, 255
 0902:   3A001C010000001078BAA0F68CBF0000                                                        sce_espr_on             0, 284, 0, 4096, -17800, -2400, -16500, 0
 0912:   3A001C0100000010DCBAA0F690E80000                                                        sce_espr_on             0, 284, 0, 4096, -17700, -2400, -6000, 0
-0922:   1803                                                                                    gosub                   3
-0924:   2404FF00                                                                                save                    4, 255
+0922:   1803                                                                                    gosub                   main_03
+0924:   2404FF00                                                                                save                    V_04, 255
 0928:   510000016440                                                                            sce_bgm_control         0, 0, 1, 100, 64
 092E:   0100                                                                                    evt_end                 0
 
@@ -43,8 +44,8 @@
 .proc main_04
 09C2:   06009800                                                                                if                      0, off_0A5E
 09C6:   1D040401                                                                                work_copy               4, 4, 1
-09CA:   23001A050000                                                                            cmp                     0, 26, CMP_NE, 0
-09D0:   25041A                                                                                  copy                    4, 26
+09CA:   23001A050000                                                                            cmp                     0, V_CUT, CMP_NE, 0
+09D0:   25041A                                                                                  copy                    V_04, V_CUT
 09D3:   00                                                                                      nop
 09D4:   131A8400                                                                                switch                  26, off_0A5C
 09D8:   140014000000                                                                            case                    0, off_09F2, 0
@@ -93,14 +94,14 @@ off_0A5E:
 
 .proc main_05
 0A60:   06004200                                                                                if                      0, off_0AA6
-0A64:   21010301                                                                                ck                      1, 3, 1
+0A64:   21010301                                                                                ck                      FG_GAME, 3, 1
 0A68:   06002000                                                                                if                      0, off_0A8C
-0A6C:   23001B000403                                                                            cmp                     0, 27, CMP_EQ, 772
-0A72:   4400FF41000C001F00FF41C40000729A380B00000000                                            sce_em_set              0, 255, ENEMY_ADAWONG1, 0, 12, 0, 31, 0, 255, -15295, 0, -25998, 2872, 0, 0
+0A6C:   23001B000403                                                                            cmp                     0, V_LAST_RDT, CMP_EQ, 772
+0A72:   4400FF41000C001F00FF41C40000729A380B00000000                                            sce_em_set              0, 255, ENEMY_ADA_WONG_1, 0, 12, 0, 31, 0, 255, -15295, 0, -25998, 2872, 0, 0
 0A88:   07001C00                                                                                else                    0, off_0AA4
 
 off_0A8C:
-0A8C:   4400FF41000C011F00FFBD99F8F856DAF90000000000                                            sce_em_set              0, 255, ENEMY_ADAWONG1, 0, 12, 1, 31, 0, 255, -26179, -1800, -9642, 249, 0, 0
+0A8C:   4400FF41000C011F00FFBD99F8F856DAF90000000000                                            sce_em_set              0, 255, ENEMY_ADA_WONG_1, 0, 12, 1, 31, 0, 255, -26179, -1800, -9642, 249, 0, 0
 0AA2:   00                                                                                      nop
 0AA3:   00                                                                                      nop
 
@@ -117,4 +118,3 @@ off_0AA6:
 0AE4:   4E040231010092A2B5D98205140528000100A5000201                                            item_aot_set            4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -23918, -9803, 1410, 1300, ITEM_HERBB, 1, 165, 2, 1
 0AFA:   2D0200000000010000000A00100028A3F8F845DB0000000880FF000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 1, 0, 10, 16, -23768, -1800, -9403, 0, 2048, -128, 0, 0, 0, 0, 0, 0, 0, 0
 0B20:   0100                                                                                    evt_end                 0
-0B22:   1800                                                                                    db                      0x18, 0x00

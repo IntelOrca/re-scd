@@ -1,20 +1,21 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 728, -15037, 2500, 1100, 24730, 0, -15507, 5344, 1, 27, 15, 0, 16, 1, 0, 0, UNLOCKED, 0
     door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17672, -6137, 2100, 1200, -10883, 0, -6299, 1008, 2, 0, 0, 0, 23, 0, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
-    gosub                   2
-    gosub                   3
+.proc main
+    gosub                   main_02
+    gosub                   main_03
     evt_end                 0
 
-.proc main_01
+.proc aot
     if                      0, off_09F2
-    ck                      1, 11, 1
-    gosub                   3
+    ck                      FG_GAME, 11, 1
+    gosub                   main_03
     endif
     nop
 
@@ -32,7 +33,7 @@ off_09F2:
 
 .proc main_03
     if                      0, off_0A68
-    cmp                     0, 26, CMP_EQ, 5
+    cmp                     0, V_CUT, CMP_EQ, 5
     evt_exec                9, I_GOSUB, main_04
     else                    0, off_0A6C
 
@@ -42,19 +43,19 @@ off_0A68:
     nop
 
 off_0A6C:
-    gosub                   5
+    gosub                   main_05
     evt_end                 0
 
 .proc main_04
-    light_kido_set          1, 4000
 
-off_0A74:
+off_0A70:
+    light_kido_set          1, 4000
     sleep                   10, 3
     light_kido_set          1, 2500
     sleep                   10, 2
     light_kido_set          1, 3500
     sleep                   10, 1
-    goto                    255, 255, 0, off_0A74
+    goto                    255, 255, 0, off_0A70
     evt_end                 0
 
 .proc main_05
@@ -108,4 +109,3 @@ off_0B12:
 
 off_0B14:
     evt_end                 0
-    db                      0x18, 0x00

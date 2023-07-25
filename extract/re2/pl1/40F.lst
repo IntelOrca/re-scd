@@ -1,10 +1,11 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 02E6:   3B0001310000CEE10F9AE803D007889800001DC6BB0103010A001E0000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7730, -26097, 1000, 2000, -26488, 0, -14819, 443, 3, 1, 10, 0, 30, 0, 0, 0, UNLOCKED, 0
 0306:   3B01013100008A94379AE803D00753AD000017A80008030C00001E0000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27510, -26057, 1000, 2000, -21165, 0, -22505, 2048, 3, 12, 0, 0, 30, 0, 0, 0, UNLOCKED, 0
 0326:   06001602                                                                                if                      0, off_0540
-032A:   21010300                                                                                ck                      1, 3, 0
+032A:   21010300                                                                                ck                      FG_GAME, 3, 0
 032E:   440000290000000F00FFF4C3F0F1D39D000400000000                                            sce_em_set              0, 0, ENEMY_COCKROACH, 0, 0, 0, 15, 0, 255, -15372, -3600, -25133, 1024, 0, 0
 0344:   440001290000000F00FFF4C3F0F1D39D000400000000                                            sce_em_set              0, 1, ENEMY_COCKROACH, 0, 0, 0, 15, 0, 255, -15372, -3600, -25133, 1024, 0, 0
 035A:   440002290000000F00FFF4C3F0F1D39D000400000000                                            sce_em_set              0, 2, ENEMY_COCKROACH, 0, 0, 0, 15, 0, 255, -15372, -3600, -25133, 1024, 0, 0
@@ -34,22 +35,21 @@
 
 off_0540:
 0540:   0100                                                                                    evt_end                 0
-0542:   0000                                                                                    db                      0x00, 0x00
 
 .main
-.proc main_00
+.proc main
 054A:   22200A01                                                                                set                     32, 10, 1
-054E:   22050101                                                                                set                     5, 1, 1
+054E:   22050101                                                                                set                     FG_GENERAL_2, 1, 1
 0552:   04FF1802                                                                                evt_exec                255, I_GOSUB, main_02
 0556:   0100                                                                                    evt_end                 0
 
-.proc main_01
+.proc aot
 0558:   0100                                                                                    evt_end                 0
 
 .proc main_02
 055A:   510001016440                                                                            sce_bgm_control         0, 1, 1, 100, 64
 0560:   0F045000                                                                                while                   4, off_05B4
-0564:   21050101                                                                                ck                      5, 1, 1
+0564:   21050101                                                                                ck                      FG_GENERAL_2, 1, 1
 0568:   131A3A00                                                                                switch                  26, off_05A6
 056C:   140008000000                                                                            case                    0, off_057A, 0
 0572:   510000015040                                                                            sce_bgm_control         0, 0, 1, 80, 64
@@ -78,11 +78,10 @@ off_05A6:
 05AA:   02                                                                                      evt_next
 05AB:   00                                                                                      nop
 05AC:   1204                                                                                    edwhile                 off_05B2
-05AE:   21010B00                                                                                ck                      1, 11, 0
+05AE:   21010B00                                                                                ck                      FG_GAME, 11, 0
 
 off_05B2:
 05B2:   1000                                                                                    ewhile                  0
 
 off_05B4:
 05B4:   0100                                                                                    evt_end                 0
-05B6:   0000                                                                                    db                      0x00, 0x00

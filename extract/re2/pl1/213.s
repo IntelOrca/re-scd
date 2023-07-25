@@ -1,15 +1,16 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21395, -28145, 4600, 1800, -12865, 0, -13165, 1024, 1, 17, 7, 0, 29, 3, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
-.proc main_00
+.proc main
     if                      0, off_0F1C
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     if                      0, off_0EDC
-    ck                      0, 25, 1
+    ck                      FG_0, F_DIFFICULT, 1
     item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14870, -27180, 2330, 1650, ITEM_FLAMEROUNDS, 6, 24, 255, 1
     else                    0, off_0F1A
 
@@ -24,27 +25,27 @@ off_0F1A:
     nop
 
 off_0F1C:
-    gosub                   3
+    gosub                   main_03
     evt_end                 0
 
-.proc main_01
-    gosub                   2
+.proc aot
+    gosub                   main_02
     evt_end                 0
 
 .proc main_02
     if                      0, off_0F38
-    ck                      4, 60, 1
+    ck                      FG_GENERAL_1, 60, 1
     aot_reset               3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 10, 0, 0, 0, 255, 255
     endif
     nop
 
 off_0F38:
-    gosub                   6
+    gosub                   main_06
     evt_end                 0
 
 .proc main_03
     if                      0, off_0F96
-    ck                      4, 60, 1
+    ck                      FG_GENERAL_1, 60, 1
     sce_espr_on2            1, 22, 2, 0, 0, 186, 2, 194, 160, 206, 245, 194, 212, 0, 0
     sce_espr_on2            2, 22, 2, 0, 0, 186, 2, 20, 161, 206, 245, 194, 212, 0, 0
     sce_espr_on2            3, 22, 2, 0, 0, 186, 2, 110, 161, 206, 245, 194, 212, 0, 0
@@ -57,7 +58,7 @@ off_0F96:
     aot_set                 3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24840, -11500, 1900, 1550, 255, 0, I_GOSUB, main_04, 0, 0
     item_aot_set            6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25240, -26800, 1360, 1070, ITEM_HERBG, 1, 253, 9, 1
     if                      0, off_1004
-    ck                      4, 122, 0
+    ck                      FG_GENERAL_1, 122, 0
     aot_set                 5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17000, -10900, 1200, 1070, 255, 0, I_GOSUB, main_05, 0, 0
     obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -16900, -1200, -10400, 0, -896, 0, 0, 0, 0, 0, 0, 0, 0, 0
     endif
@@ -74,7 +75,7 @@ off_1004:
     evt_end                 0
 
 .proc main_04
-    set                     2, 7, 1
+    set                     FG_STATE, 7, 1
     message_on              0, 11, 0, 255, 239
     sleep                   10, 1
     cut_chg                 6
@@ -84,9 +85,9 @@ off_1004:
     work_set                WK_OBJECT, 2
     nop
     pos_set                 0, -24660, -2754, -11070
-    save                    5, 0
-    save                    6, 0
-    save                    7, -24660
+    save                    V_05, 0
+    save                    V_06, 0
+    save                    V_07, -24660
     work_set                WK_OBJECT, 3
     nop
     dir_set                 0, -1024, -1024, 1024
@@ -112,40 +113,40 @@ off_1004:
     nop
     se_on                   2, 266, 0, -24421, -1024, -11276
     if                      0, off_121E
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     work_set                WK_OBJECT, 3
     nop
     dir_set                 0, -1024, -1024, 1600
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_ADD, 16, 36
-    copy                    5, 16
+    calc                    0, OP_ADD, V_TEMP, 36
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_11D4
-    cmp                     0, 5, CMP_GE, 100
-    save                    5, 100
+    cmp                     0, V_05, CMP_GE, 100
+    save                    V_05, 100
     endif
     nop
 
 off_11D4:
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc2                   OP_SUB, 16, 6
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_06
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_121A
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_ADD, 16, 9
-    copy                    7, 16
+    calc                    0, OP_ADD, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -162,36 +163,36 @@ off_121E:
     work_set                WK_OBJECT, 3
     nop
     dir_set                 0, -1024, -1024, 515
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_SUB, 16, 14
-    copy                    5, 16
+    calc                    0, OP_SUB, V_TEMP, 14
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_124C
-    cmp                     0, 5, CMP_LE, 0
-    save                    5, 0
+    cmp                     0, V_05, CMP_LE, 0
+    save                    V_05, 0
     endif
     nop
 
 off_124C:
-    copy                    16, 6
+    copy                    V_TEMP, V_06
     nop
-    calc2                   OP_SUB, 16, 5
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_05
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_1292
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_SUB, 16, 9
-    copy                    7, 16
+    calc                    0, OP_SUB, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -213,40 +214,40 @@ off_1294:
     nop
     se_on                   2, 266, 0, -24421, -1024, -11276
     if                      0, off_133C
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     work_set                WK_OBJECT, 4
     nop
     dir_set                 0, -1024, -1024, 1600
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_ADD, 16, 36
-    copy                    5, 16
+    calc                    0, OP_ADD, V_TEMP, 36
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_12F2
-    cmp                     0, 5, CMP_GE, 100
-    save                    5, 100
+    cmp                     0, V_05, CMP_GE, 100
+    save                    V_05, 100
     endif
     nop
 
 off_12F2:
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc2                   OP_SUB, 16, 6
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_06
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_1338
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_ADD, 16, 9
-    copy                    7, 16
+    calc                    0, OP_ADD, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -263,36 +264,36 @@ off_133C:
     work_set                WK_OBJECT, 4
     nop
     dir_set                 0, -1024, -1024, 515
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_SUB, 16, 14
-    copy                    5, 16
+    calc                    0, OP_SUB, V_TEMP, 14
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_136A
-    cmp                     0, 5, CMP_LE, 0
-    save                    5, 0
+    cmp                     0, V_05, CMP_LE, 0
+    save                    V_05, 0
     endif
     nop
 
 off_136A:
-    copy                    16, 6
+    copy                    V_TEMP, V_06
     nop
-    calc2                   OP_SUB, 16, 5
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_05
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_13B0
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_SUB, 16, 9
-    copy                    7, 16
+    calc                    0, OP_SUB, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -314,40 +315,40 @@ off_13B2:
     nop
     se_on                   2, 266, 0, -24421, -1024, -11276
     if                      0, off_145A
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     work_set                WK_OBJECT, 5
     nop
     dir_set                 0, -1024, -1024, 1600
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_ADD, 16, 36
-    copy                    5, 16
+    calc                    0, OP_ADD, V_TEMP, 36
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_1410
-    cmp                     0, 5, CMP_GE, 100
-    save                    5, 100
+    cmp                     0, V_05, CMP_GE, 100
+    save                    V_05, 100
     endif
     nop
 
 off_1410:
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc2                   OP_SUB, 16, 6
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_06
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_1456
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_ADD, 16, 9
-    copy                    7, 16
+    calc                    0, OP_ADD, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -364,36 +365,36 @@ off_145A:
     work_set                WK_OBJECT, 5
     nop
     dir_set                 0, -1024, -1024, 515
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_SUB, 16, 14
-    copy                    5, 16
+    calc                    0, OP_SUB, V_TEMP, 14
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_1488
-    cmp                     0, 5, CMP_LE, 0
-    save                    5, 0
+    cmp                     0, V_05, CMP_LE, 0
+    save                    V_05, 0
     endif
     nop
 
 off_1488:
-    copy                    16, 6
+    copy                    V_TEMP, V_06
     nop
-    calc2                   OP_SUB, 16, 5
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_05
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_14CE
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_SUB, 16, 9
-    copy                    7, 16
+    calc                    0, OP_SUB, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -415,40 +416,40 @@ off_14D0:
     nop
     se_on                   2, 266, 0, -24421, -1024, -11276
     if                      0, off_1578
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     work_set                WK_OBJECT, 6
     nop
     dir_set                 0, -1024, -1024, 1600
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_ADD, 16, 36
-    copy                    5, 16
+    calc                    0, OP_ADD, V_TEMP, 36
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_152E
-    cmp                     0, 5, CMP_GE, 100
-    save                    5, 100
+    cmp                     0, V_05, CMP_GE, 100
+    save                    V_05, 100
     endif
     nop
 
 off_152E:
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc2                   OP_SUB, 16, 6
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_06
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_1574
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_ADD, 16, 9
-    copy                    7, 16
+    calc                    0, OP_ADD, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -465,36 +466,36 @@ off_1578:
     work_set                WK_OBJECT, 6
     nop
     dir_set                 0, -1024, -1024, 515
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_SUB, 16, 14
-    copy                    5, 16
+    calc                    0, OP_SUB, V_TEMP, 14
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_15A6
-    cmp                     0, 5, CMP_LE, 0
-    save                    5, 0
+    cmp                     0, V_05, CMP_LE, 0
+    save                    V_05, 0
     endif
     nop
 
 off_15A6:
-    copy                    16, 6
+    copy                    V_TEMP, V_06
     nop
-    calc2                   OP_SUB, 16, 5
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_05
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_15EC
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_SUB, 16, 9
-    copy                    7, 16
+    calc                    0, OP_SUB, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -516,40 +517,40 @@ off_15EE:
     nop
     se_on                   2, 266, 0, -24421, -1024, -11276
     if                      0, off_1696
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     work_set                WK_OBJECT, 7
     nop
     dir_set                 0, -1024, -1024, 1600
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_ADD, 16, 36
-    copy                    5, 16
+    calc                    0, OP_ADD, V_TEMP, 36
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_164C
-    cmp                     0, 5, CMP_GE, 100
-    save                    5, 100
+    cmp                     0, V_05, CMP_GE, 100
+    save                    V_05, 100
     endif
     nop
 
 off_164C:
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc2                   OP_SUB, 16, 6
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_06
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_1692
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_ADD, 16, 9
-    copy                    7, 16
+    calc                    0, OP_ADD, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -566,36 +567,36 @@ off_1696:
     work_set                WK_OBJECT, 7
     nop
     dir_set                 0, -1024, -1024, 515
-    copy                    6, 5
+    copy                    V_06, V_05
     nop
-    copy                    16, 5
+    copy                    V_TEMP, V_05
     nop
-    calc                    0, OP_SUB, 16, 14
-    copy                    5, 16
+    calc                    0, OP_SUB, V_TEMP, 14
+    copy                    V_05, V_TEMP
     nop
     if                      0, off_16C4
-    cmp                     0, 5, CMP_LE, 0
-    save                    5, 0
+    cmp                     0, V_05, CMP_LE, 0
+    save                    V_05, 0
     endif
     nop
 
 off_16C4:
-    copy                    16, 6
+    copy                    V_TEMP, V_06
     nop
-    calc2                   OP_SUB, 16, 5
-    copy                    4, 16
+    calc2                   OP_SUB, V_TEMP, V_05
+    copy                    V_04, V_TEMP
     nop
     while                   6, off_170A
-    cmp                     0, 4, CMP_GT, 0
-    copy                    16, 4
+    cmp                     0, V_04, CMP_GT, 0
+    copy                    V_TEMP, V_04
     nop
-    calc                    0, OP_SUB, 16, 1
-    copy                    4, 16
+    calc                    0, OP_SUB, V_TEMP, 1
+    copy                    V_04, V_TEMP
     nop
-    copy                    16, 7
+    copy                    V_TEMP, V_07
     nop
-    calc                    0, OP_SUB, 16, 9
-    copy                    7, 16
+    calc                    0, OP_SUB, V_TEMP, 9
+    copy                    V_07, V_TEMP
     nop
     work_set                WK_OBJECT, 2
     nop
@@ -617,16 +618,16 @@ off_170C:
     pos_set                 0, -24485, 0, -11346
     cut_chg                 4
     if                      0, off_174E
-    cmp                     0, 5, CMP_EQ, 100
+    cmp                     0, V_05, CMP_EQ, 100
     message_on              0, 6, 0, 255, 255
     se_on                   2, 267, 0, -24421, -1024, -11276
     else                    0, off_1810
 
 off_174E:
     if                      0, off_17D2
-    cmp                     0, 5, CMP_EQ, 80
+    cmp                     0, V_05, CMP_EQ, 80
     message_on              0, 7, 0, 255, 255
-    set                     4, 60, 1
+    set                     FG_GENERAL_1, 60, 1
     se_on                   2, 268, 0, -24421, -1024, -11276
     sleep                   10, 20
     cut_chg                 8
@@ -644,14 +645,14 @@ off_174E:
 
 off_17D2:
     if                      0, off_17E4
-    cmp                     0, 5, CMP_EQ, 0
+    cmp                     0, V_05, CMP_EQ, 0
     message_on              0, 9, 0, 255, 255
     endif
     nop
 
 off_17E4:
     if                      0, off_17F8
-    cmp                     0, 5, CMP_GT, 80
+    cmp                     0, V_05, CMP_GT, 80
     message_on              0, 6, 0, 255, 255
     else                    0, off_1800
 
@@ -673,22 +674,22 @@ off_1810:
     sleep                   10, 1
     sce_espr_kill2          13
     sce_espr_kill2          14
-    set                     2, 7, 0
+    set                     FG_STATE, 7, 0
     cut_auto                1
     evt_end                 0
 
 .proc main_05
-    set                     2, 7, 1
+    set                     FG_STATE, 7, 1
     message_on              0, 0, 0, 255, 239
     sleep                   10, 1
     if                      0, off_1864
-    ck                      11, 31, 0
+    ck                      FG_INPUT, F_QUESTION, 0
     work_set                WK_OBJECT, 0
     nop
     pos_set                 0, 0, -21024, 0
     set                     33, 5, 1
     set                     35, 5, 1
-    set                     4, 122, 1
+    set                     FG_GENERAL_1, 122, 1
     aot_reset               5, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
     message_on              0, 12, 0, 255, 239
     sleep                   10, 1
@@ -696,13 +697,13 @@ off_1810:
     nop
 
 off_1864:
-    set                     2, 7, 0
+    set                     FG_STATE, 7, 0
     evt_end                 0
 
 .proc main_06
-    switch                  26, off_18D2
 
-off_186E:
+off_186A:
+    switch                  26, off_18D2
     case                    0, off_187C, 0
     sce_bgm_control         1, 0, 1, 90, 40
     break                   0
@@ -744,8 +745,8 @@ off_18D2:
     do                      0, off_18E0
     sleep                   10, 1
     edwhile                 off_18E0
-    ck                      1, 11, 0
+    ck                      FG_GAME, 11, 0
 
 off_18E0:
-    goto                    255, 255, 0, off_186E
+    goto                    255, 255, 0, off_186A
     evt_end                 0

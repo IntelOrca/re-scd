@@ -1,6 +1,7 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 25151, -28560, 3290, 1750, 12210, 0, -11899, 1120, 0, 5, 0, 0, 10, 0, 0, 0, UNLOCKED, 0
     aot_set                 1, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, -24275, -28206, 17000, 10700, 0, 0, 0, 0, 0, 0
     aot_set                 2, SCE_NORMAL, SAT_EM | SAT_UNDER, 0, 0, -7565, -28223, 8990, 10900, 0, 0, 0, 0, 0, 0
@@ -14,22 +15,22 @@
     aot_set                 10, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -21824, -23636, 1800, 1800, 0, 0, 0, 0, 0, 0
     aot_set                 11, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -22049, -23636, 1800, 1800, 0, 0, 0, 0, 0, 0
     if                      0, off_0D40
-    cmp                     0, 26, CMP_EQ, 0
-    sce_em_set              0, 0, ENEMY_ZOMBIERANDOM, 6, 16, 0, 1, 0, 43, -23035, 0, -20374, 245, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 6, 16, 0, 2, 0, 44, -25200, 0, -24045, 3984, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 6, 144, 0, 1, 0, 45, 14152, 0, -23396, 3729, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIERANDOM, 6, 144, 0, 2, 0, 46, -7865, 0, -19561, 1561, 0, 0
-    sce_em_set              0, 4, ENEMY_ZOMBIERANDOM, 6, 144, 0, 1, 0, 47, 5278, 0, -23047, 1633, 0, 0
-    sce_em_set              0, 5, ENEMY_ZOMBIERANDOM, 134, 16, 0, 2, 0, 48, -25624, 0, -21920, 289, 0, 0
+    cmp                     0, V_CUT, CMP_EQ, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 6, 16, 0, 1, 0, 43, -23035, 0, -20374, 245, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 6, 16, 0, 2, 0, 44, -25200, 0, -24045, 3984, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 6, 144, 0, 1, 0, 45, 14152, 0, -23396, 3729, 0, 0
+    sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 6, 144, 0, 2, 0, 46, -7865, 0, -19561, 1561, 0, 0
+    sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 6, 144, 0, 1, 0, 47, 5278, 0, -23047, 1633, 0, 0
+    sce_em_set              0, 5, ENEMY_ZOMBIE_RANDOM, 134, 16, 0, 2, 0, 48, -25624, 0, -21920, 289, 0, 0
     else                    0, off_0DC6
 
 off_0D40:
-    sce_em_set              0, 0, ENEMY_ZOMBIERANDOM, 6, 16, 0, 1, 0, 43, 20582, 0, -19501, 577, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 6, 16, 0, 2, 0, 44, 25230, 0, -20270, 1045, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 0, 16, 0, 1, 0, 45, -2868, 0, -21616, 117, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIERANDOM, 0, 16, 0, 2, 0, 46, -8812, 0, -22737, 121, 0, 0
-    sce_em_set              0, 4, ENEMY_ZOMBIERANDOM, 0, 16, 0, 1, 0, 47, 11435, 0, -23037, 3625, 0, 0
-    sce_em_set              0, 5, ENEMY_ZOMBIERANDOM, 128, 16, 0, 2, 0, 48, -11315, 0, -21351, 77, 0, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 6, 16, 0, 1, 0, 43, 20582, 0, -19501, 577, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 6, 16, 0, 2, 0, 44, 25230, 0, -20270, 1045, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 0, 16, 0, 1, 0, 45, -2868, 0, -21616, 117, 0, 0
+    sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 0, 16, 0, 2, 0, 46, -8812, 0, -22737, 121, 0, 0
+    sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 0, 16, 0, 1, 0, 47, 11435, 0, -23037, 3625, 0, 0
+    sce_em_set              0, 5, ENEMY_ZOMBIE_RANDOM, 128, 16, 0, 2, 0, 48, -11315, 0, -21351, 77, 0, 0
     nop
     nop
 
@@ -37,11 +38,11 @@ off_0DC6:
     evt_end                 0
 
 .main
-.proc main_00
-    set                     5, 0, 1
+.proc main
+    set                     FG_GENERAL_2, 0, 1
     evt_exec                255, I_GOSUB, main_03
     if                      0, off_0DF4
-    cmp                     0, 26, CMP_EQ, 0
+    cmp                     0, V_CUT, CMP_EQ, 0
     evt_exec                255, I_GOSUB, main_02
     endif
     nop
@@ -49,32 +50,32 @@ off_0DC6:
 off_0DF4:
     evt_end                 0
 
-.proc main_01
+.proc aot
     switch                  26, off_0E96
     case                    0, off_0E00, 0
 
 off_0E00:
     case                    0, off_0E40, 1
     if                      0, off_0E18
-    ck                      5, 4, 0
-    set                     5, 4, 1
+    ck                      FG_GENERAL_2, 4, 0
+    set                     FG_GENERAL_2, 4, 1
     evt_exec                10, I_GOSUB, main_08
     endif
     nop
 
 off_0E18:
     if                      0, off_0E2C
-    ck                      5, 0, 0
-    set                     5, 0, 1
-    set                     5, 2, 0
-    gosub                   4
+    ck                      FG_GENERAL_2, 0, 0
+    set                     FG_GENERAL_2, 0, 1
+    set                     FG_GENERAL_2, 2, 0
+    gosub                   main_04
     endif
     nop
 
 off_0E2C:
     if                      0, off_0E3E
-    ck                      5, 5, 0
-    set                     5, 5, 1
+    ck                      FG_GENERAL_2, 5, 0
+    set                     FG_GENERAL_2, 5, 1
     evt_exec                10, I_GOSUB, main_09
     endif
     nop
@@ -85,10 +86,10 @@ off_0E3E:
 off_0E40:
     case                    0, off_0E5C, 2
     if                      0, off_0E5A
-    ck                      5, 1, 0
-    set                     5, 1, 1
-    set                     5, 3, 0
-    gosub                   5
+    ck                      FG_GENERAL_2, 1, 0
+    set                     FG_GENERAL_2, 1, 1
+    set                     FG_GENERAL_2, 3, 0
+    gosub                   main_05
     endif
     nop
 
@@ -98,10 +99,10 @@ off_0E5A:
 off_0E5C:
     case                    0, off_0E78, 3
     if                      0, off_0E76
-    ck                      5, 2, 0
-    set                     5, 2, 1
-    set                     5, 0, 0
-    gosub                   6
+    ck                      FG_GENERAL_2, 2, 0
+    set                     FG_GENERAL_2, 2, 1
+    set                     FG_GENERAL_2, 0, 0
+    gosub                   main_06
     endif
     nop
 
@@ -111,10 +112,10 @@ off_0E76:
 off_0E78:
     case                    0, off_0E94, 4
     if                      0, off_0E92
-    ck                      5, 3, 0
-    set                     5, 3, 1
-    set                     5, 1, 0
-    gosub                   7
+    ck                      FG_GENERAL_2, 3, 0
+    set                     FG_GENERAL_2, 3, 1
+    set                     FG_GENERAL_2, 1, 0
+    gosub                   main_07
     endif
     nop
 
@@ -132,50 +133,50 @@ off_0E96:
     evt_next
     nop
     edwhile                 off_0EA6
-    cmp                     0, 26, CMP_NE, 1
+    cmp                     0, V_CUT, CMP_NE, 1
 
 off_0EA6:
     work_set                WK_ENEMY, 3
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 32767
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 32767
+    member_set2             7, V_TEMP
     nop
     do                      0, off_0EC6
     evt_next
     nop
     edwhile                 off_0EC6
-    cmp                     0, 26, CMP_NE, 3
+    cmp                     0, V_CUT, CMP_NE, 3
 
 off_0EC6:
     work_set                WK_ENEMY, 4
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 32767
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 32767
+    member_set2             7, V_TEMP
     nop
     do                      0, off_0EE6
     evt_next
     nop
     edwhile                 off_0EE6
-    cmp                     0, 26, CMP_NE, 4
+    cmp                     0, V_CUT, CMP_NE, 4
 
 off_0EE6:
     work_set                WK_ENEMY, 2
     nop
-    member_copy             16, 7
+    member_copy             V_TEMP, 7
     nop
-    calc                    0, OP_AND, 16, 32767
-    member_set2             7, 16
+    calc                    0, OP_AND, V_TEMP, 32767
+    member_set2             7, V_TEMP
     nop
     evt_end                 0
 
 .proc main_03
-    switch                  26, off_0F8C
 
-off_0EFE:
+off_0EFA:
+    switch                  26, off_0F8C
     case                    0, off_0F12, 0
     sce_bgm_control         0, 0, 1, 120, 59
     sce_bgm_control         0, 0, 2, 71, 65
@@ -225,17 +226,17 @@ off_0F8C:
     evt_next
     nop
     edwhile                 off_0F98
-    ck                      1, 11, 0
+    ck                      FG_GAME, 11, 0
 
 off_0F98:
-    goto                    255, 255, 0, off_0EFE
+    goto                    255, 255, 0, off_0EFA
     evt_end                 0
 
 .proc main_04
     work_set                WK_ENEMY, 2
     nop
     if                      0, off_0FD6
-    ck                      6, 45, 0
+    ck                      FG_ENEMY, 45, 0
     if                      0, off_0FD4
     member_cmp              0, 9, 2, 3, 0
     member_set              7, 6, 16
@@ -255,7 +256,7 @@ off_0FD6:
     work_set                WK_ENEMY, 3
     nop
     if                      0, off_100C
-    ck                      6, 46, 0
+    ck                      FG_ENEMY, 46, 0
     if                      0, off_100A
     member_cmp              0, 9, 2, 3, 0
     member_set              7, 6, 16
@@ -278,7 +279,7 @@ off_100C:
     work_set                WK_ENEMY, 0
     nop
     if                      0, off_1044
-    ck                      6, 43, 0
+    ck                      FG_ENEMY, 43, 0
     if                      0, off_1042
     member_cmp              0, 9, 2, 4, 0
     member_set              7, 6, 16
@@ -298,7 +299,7 @@ off_1044:
     work_set                WK_ENEMY, 1
     nop
     if                      0, off_107E
-    ck                      6, 44, 0
+    ck                      FG_ENEMY, 44, 0
     if                      0, off_107C
     member_cmp              0, 9, 2, 4, 0
     member_set              7, 6, 16
@@ -322,7 +323,7 @@ off_107E:
     work_set                WK_ENEMY, 2
     nop
     if                      0, off_10B6
-    ck                      6, 45, 0
+    ck                      FG_ENEMY, 45, 0
     if                      0, off_10B4
     member_cmp              0, 9, 0, 1, 0
     member_set              7, 6, 16
@@ -342,7 +343,7 @@ off_10B6:
     work_set                WK_ENEMY, 3
     nop
     if                      0, off_10F0
-    ck                      6, 46, 0
+    ck                      FG_ENEMY, 46, 0
     if                      0, off_10EE
     member_cmp              0, 9, 0, 1, 0
     member_set              7, 6, 16
@@ -363,7 +364,7 @@ off_10F0:
     work_set                WK_ENEMY, 0
     nop
     if                      0, off_112A
-    ck                      6, 43, 0
+    ck                      FG_ENEMY, 43, 0
     if                      0, off_1128
     member_cmp              0, 9, 0, 1, 0
     member_set              7, 6, 16
@@ -384,7 +385,7 @@ off_112A:
     work_set                WK_ENEMY, 1
     nop
     if                      0, off_117C
-    ck                      6, 44, 0
+    ck                      FG_ENEMY, 44, 0
     if                      0, off_117A
     member_cmp              0, 9, 0, 1, 0
     member_set              7, 6, 16
@@ -418,7 +419,7 @@ off_117C:
     work_set                WK_ENEMY, 0
     nop
     if                      0, off_11B4
-    ck                      6, 43, 0
+    ck                      FG_ENEMY, 43, 0
     if                      0, off_11B2
     member_cmp              0, 9, 4, 2, 0
     member_set              7, 6, 16
@@ -438,7 +439,7 @@ off_11B4:
     work_set                WK_ENEMY, 1
     nop
     if                      0, off_11EA
-    ck                      6, 44, 0
+    ck                      FG_ENEMY, 44, 0
     if                      0, off_11E8
     member_cmp              0, 9, 4, 2, 0
     member_set              7, 6, 16
@@ -463,8 +464,8 @@ off_11EA:
     evt_next
     nop
     if                      0, off_120A
-    cmp                     0, 26, CMP_EQ, 3
-    goto                    255, 255, 0, off_1248
+    cmp                     0, V_CUT, CMP_EQ, 3
+    goto                    255, 255, 0, off_1244
     endif
     nop
 
@@ -476,8 +477,8 @@ off_120C:
     evt_next
     nop
     if                      0, off_1224
-    cmp                     0, 26, CMP_EQ, 3
-    goto                    255, 255, 0, off_1248
+    cmp                     0, V_CUT, CMP_EQ, 3
+    goto                    255, 255, 0, off_1244
     endif
     nop
 
@@ -487,8 +488,8 @@ off_1224:
     evt_next
     nop
     if                      0, off_1242
-    cmp                     0, 26, CMP_EQ, 3
-    goto                    255, 255, 0, off_1248
+    cmp                     0, V_CUT, CMP_EQ, 3
+    goto                    255, 255, 0, off_1244
     endif
     nop
 
@@ -496,9 +497,7 @@ off_1242:
     next                    0
 
 off_1244:
-    set                     5, 4, 0
-
-off_1248:
+    set                     FG_GENERAL_2, 4, 0
     evt_end                 0
 
 .proc main_09
@@ -513,5 +512,5 @@ off_1248:
     sce_espr_on             0, 4612, 0, 15360, -30584, -9600, -17382, 512
     sce_espr_on             0, 4612, 0, 16384, -27921, -200, -19750, -252
     sce_espr_on             0, 4612, 0, 16896, -26853, -100, -24166, 312
-    set                     5, 5, 1
+    set                     FG_GENERAL_2, 5, 1
     evt_end                 0

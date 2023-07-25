@@ -1,10 +1,11 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 1682:   06000E00                                                                                if                      0, off_1694
-1686:   2104FE01                                                                                ck                      4, 254, 1
-168A:   22036300                                                                                set                     3, 99, 0
-168E:   22010301                                                                                set                     1, 3, 1
+1686:   2104FE01                                                                                ck                      FG_GENERAL_1, 254, 1
+168A:   22036300                                                                                set                     FG_3, 99, 0
+168E:   22010301                                                                                set                     FG_GAME, 3, 1
 1692:   08                                                                                      endif
 1693:   00                                                                                      nop
 
@@ -18,18 +19,18 @@ off_1694:
 1736:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
-1744:   1802                                                                                    gosub                   2
+.proc main
+1744:   1802                                                                                    gosub                   main_02
 1746:   0100                                                                                    evt_end                 0
 
-.proc main_01
-1748:   1805                                                                                    gosub                   5
+.proc aot
+1748:   1805                                                                                    gosub                   main_05
 174A:   0100                                                                                    evt_end                 0
 
 .proc main_02
-174C:   24081000                                                                                save                    8, 16
+174C:   24081000                                                                                save                    V_08, 16
 1750:   510000020100                                                                            sce_bgm_control         0, 0, 2, 1, 0
-1756:   1805                                                                                    gosub                   5
+1756:   1805                                                                                    gosub                   main_05
 1758:   2C010531010072B996B698086405FF0018030000                                                aot_set                 1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -18062, -18794, 2200, 1380, 255, 0, I_GOSUB, main_03, 0, 0
 176C:   2C0205310000BCEC80C72607B60DFF0018040000                                                aot_set                 2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -4932, -14464, 1830, 3510, 255, 0, I_GOSUB, main_04, 0, 0
 1780:   0100                                                                                    evt_end                 0
@@ -39,7 +40,7 @@ off_1694:
 1788:   02                                                                                      evt_next
 1789:   00                                                                                      nop
 178A:   06000800                                                                                if                      0, off_1796
-178E:   210B1F00                                                                                ck                      11, 31, 0
+178E:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 1792:   4705                                                                                    aot_on                  5
 1794:   08                                                                                      endif
 1795:   00                                                                                      nop
@@ -54,7 +55,7 @@ off_1796:
 .proc main_05
 179C:   06008600                                                                                if                      0, off_1826
 17A0:   1D080401                                                                                work_copy               8, 4, 1
-17A4:   23001A050000                                                                            cmp                     0, 26, CMP_NE, 0
+17A4:   23001A050000                                                                            cmp                     0, V_CUT, CMP_NE, 0
 17AA:   131A7200                                                                                switch                  26, off_1820
 17AE:   140008000000                                                                            case                    0, off_17BC, 0
 17B4:   510000013240                                                                            sce_bgm_control         0, 0, 1, 50, 64
@@ -99,7 +100,7 @@ off_181E:
 181E:   1600                                                                                    eswitch                 0
 
 off_1820:
-1820:   25081A                                                                                  copy                    8, 26
+1820:   25081A                                                                                  copy                    V_08, V_CUT
 1823:   00                                                                                      nop
 1824:   08                                                                                      endif
 1825:   00                                                                                      nop

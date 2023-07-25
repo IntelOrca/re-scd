@@ -1,15 +1,16 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 0E82:   3B00013100006DAC0F92F8110807BFCD000093CC0004011107001D0300000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21395, -28145, 4600, 1800, -12865, 0, -13165, 1024, 1, 17, 7, 0, 29, 3, 0, 0, UNLOCKED, 0
 0EA2:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
+.proc main
 0EB2:   06006600                                                                                if                      0, off_0F1C
-0EB6:   21010101                                                                                ck                      1, 1, 1
+0EB6:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
 0EBA:   06001E00                                                                                if                      0, off_0EDC
-0EBE:   21001901                                                                                ck                      0, 25, 1
+0EBE:   21001901                                                                                ck                      FG_0, F_DIFFICULT, 1
 0EC2:   4E0202310000EAC5D4951A097206190006001800FF01                                            item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14870, -27180, 2330, 1650, ITEM_FLAMEROUNDS, 6, 24, 255, 1
 0ED8:   07004200                                                                                else                    0, off_0F1A
 
@@ -24,27 +25,27 @@ off_0F1A:
 0F1B:   00                                                                                      nop
 
 off_0F1C:
-0F1C:   1803                                                                                    gosub                   3
+0F1C:   1803                                                                                    gosub                   main_03
 0F1E:   0100                                                                                    evt_end                 0
 
-.proc main_01
-0F20:   1802                                                                                    gosub                   2
+.proc aot
+0F20:   1802                                                                                    gosub                   main_02
 0F22:   0100                                                                                    evt_end                 0
 
 .proc main_02
 0F24:   06001000                                                                                if                      0, off_0F38
-0F28:   21043C01                                                                                ck                      4, 60, 1
+0F28:   21043C01                                                                                ck                      FG_GENERAL_1, 60, 1
 0F2C:   460304310A000000FFFF                                                                    aot_reset               3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 10, 0, 0, 0, 255, 255
 0F36:   08                                                                                      endif
 0F37:   00                                                                                      nop
 
 off_0F38:
-0F38:   1806                                                                                    gosub                   6
+0F38:   1806                                                                                    gosub                   main_06
 0F3A:   0100                                                                                    evt_end                 0
 
 .proc main_03
 0F3C:   06005600                                                                                if                      0, off_0F96
-0F40:   21043C01                                                                                ck                      4, 60, 1
+0F40:   21043C01                                                                                ck                      FG_GENERAL_1, 60, 1
 0F44:   640116020000BA02C2A0CEF5C2D40000                                                        sce_espr_on2            1, 22, 2, 0, 0, 186, 2, 194, 160, 206, 245, 194, 212, 0, 0
 0F54:   640216020000BA0214A1CEF5C2D40000                                                        sce_espr_on2            2, 22, 2, 0, 0, 186, 2, 20, 161, 206, 245, 194, 212, 0, 0
 0F64:   640316020000BA026EA1CEF5C2D40000                                                        sce_espr_on2            3, 22, 2, 0, 0, 186, 2, 110, 161, 206, 245, 194, 212, 0, 0
@@ -57,7 +58,7 @@ off_0F96:
 0F96:   2C0305310000F89E14D36C070E06FF0018040000                                                aot_set                 3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24840, -11500, 1900, 1550, 255, 0, I_GOSUB, main_04, 0, 0
 0FAA:   4E0602310000689D509750052E0426000100FD000901                                            item_aot_set            6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25240, -26800, 1360, 1070, ITEM_HERBG, 1, 253, 9, 1
 0FC0:   06004000                                                                                if                      0, off_1004
-0FC4:   21047A00                                                                                ck                      4, 122, 0
+0FC4:   21047A00                                                                                ck                      FG_GENERAL_1, 122, 0
 0FC8:   2C050531000098BD6CD5B0042E04FF0018050000                                                aot_set                 5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17000, -10900, 1200, 1070, 255, 0, I_GOSUB, main_05, 0, 0
 0FDC:   2D0000000000000000000A001000FCBD50FB60D7000080FC0000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -16900, -1200, -10400, 0, -896, 0, 0, 0, 0, 0, 0, 0, 0, 0
 1002:   08                                                                                      endif
@@ -74,7 +75,7 @@ off_1004:
 110E:   0100                                                                                    evt_end                 0
 
 .proc main_04
-1110:   22020701                                                                                set                     2, 7, 1
+1110:   22020701                                                                                set                     FG_STATE, 7, 1
 1114:   2B000B00FFEF                                                                            message_on              0, 11, 0, 255, 239
 111A:   090A0100                                                                                sleep                   10, 1
 111E:   2906                                                                                    cut_chg                 6
@@ -84,9 +85,9 @@ off_1004:
 112C:   2E0402                                                                                  work_set                WK_OBJECT, 2
 112F:   00                                                                                      nop
 1130:   3200AC9F3EF5C2D4                                                                        pos_set                 0, -24660, -2754, -11070
-1138:   24050000                                                                                save                    5, 0
-113C:   24060000                                                                                save                    6, 0
-1140:   2407AC9F                                                                                save                    7, -24660
+1138:   24050000                                                                                save                    V_05, 0
+113C:   24060000                                                                                save                    V_06, 0
+1140:   2407AC9F                                                                                save                    V_07, -24660
 1144:   2E0403                                                                                  work_set                WK_OBJECT, 3
 1147:   00                                                                                      nop
 1148:   330000FC00FC0004                                                                        dir_set                 0, -1024, -1024, 1024
@@ -112,40 +113,40 @@ off_1004:
 1191:   00                                                                                      nop
 1192:   36020A0100009BA000FCF4D3                                                                se_on                   2, 266, 0, -24421, -1024, -11276
 119E:   06007C00                                                                                if                      0, off_121E
-11A2:   210B1F00                                                                                ck                      11, 31, 0
+11A2:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 11A6:   2E0403                                                                                  work_set                WK_OBJECT, 3
 11A9:   00                                                                                      nop
 11AA:   330000FC00FC4006                                                                        dir_set                 0, -1024, -1024, 1600
-11B2:   250605                                                                                  copy                    6, 5
+11B2:   250605                                                                                  copy                    V_06, V_05
 11B5:   00                                                                                      nop
-11B6:   251005                                                                                  copy                    16, 5
+11B6:   251005                                                                                  copy                    V_TEMP, V_05
 11B9:   00                                                                                      nop
-11BA:   260000102400                                                                            calc                    0, OP_ADD, 16, 36
-11C0:   250510                                                                                  copy                    5, 16
+11BA:   260000102400                                                                            calc                    0, OP_ADD, V_TEMP, 36
+11C0:   250510                                                                                  copy                    V_05, V_TEMP
 11C3:   00                                                                                      nop
 11C4:   06000C00                                                                                if                      0, off_11D4
-11C8:   230005026400                                                                            cmp                     0, 5, CMP_GE, 100
-11CE:   24056400                                                                                save                    5, 100
+11C8:   230005026400                                                                            cmp                     0, V_05, CMP_GE, 100
+11CE:   24056400                                                                                save                    V_05, 100
 11D2:   08                                                                                      endif
 11D3:   00                                                                                      nop
 
 off_11D4:
-11D4:   251005                                                                                  copy                    16, 5
+11D4:   251005                                                                                  copy                    V_TEMP, V_05
 11D7:   00                                                                                      nop
-11D8:   27011006                                                                                calc2                   OP_SUB, 16, 6
-11DC:   250410                                                                                  copy                    4, 16
+11D8:   27011006                                                                                calc2                   OP_SUB, V_TEMP, V_06
+11DC:   250410                                                                                  copy                    V_04, V_TEMP
 11DF:   00                                                                                      nop
 11E0:   0F063600                                                                                while                   6, off_121A
-11E4:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-11EA:   251004                                                                                  copy                    16, 4
+11E4:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+11EA:   251004                                                                                  copy                    V_TEMP, V_04
 11ED:   00                                                                                      nop
-11EE:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-11F4:   250410                                                                                  copy                    4, 16
+11EE:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+11F4:   250410                                                                                  copy                    V_04, V_TEMP
 11F7:   00                                                                                      nop
-11F8:   251007                                                                                  copy                    16, 7
+11F8:   251007                                                                                  copy                    V_TEMP, V_07
 11FB:   00                                                                                      nop
-11FC:   260000100900                                                                            calc                    0, OP_ADD, 16, 9
-1202:   250710                                                                                  copy                    7, 16
+11FC:   260000100900                                                                            calc                    0, OP_ADD, V_TEMP, 9
+1202:   250710                                                                                  copy                    V_07, V_TEMP
 1205:   00                                                                                      nop
 1206:   2E0402                                                                                  work_set                WK_OBJECT, 2
 1209:   00                                                                                      nop
@@ -162,36 +163,36 @@ off_121E:
 121E:   2E0403                                                                                  work_set                WK_OBJECT, 3
 1221:   00                                                                                      nop
 1222:   330000FC00FC0302                                                                        dir_set                 0, -1024, -1024, 515
-122A:   250605                                                                                  copy                    6, 5
+122A:   250605                                                                                  copy                    V_06, V_05
 122D:   00                                                                                      nop
-122E:   251005                                                                                  copy                    16, 5
+122E:   251005                                                                                  copy                    V_TEMP, V_05
 1231:   00                                                                                      nop
-1232:   260001100E00                                                                            calc                    0, OP_SUB, 16, 14
-1238:   250510                                                                                  copy                    5, 16
+1232:   260001100E00                                                                            calc                    0, OP_SUB, V_TEMP, 14
+1238:   250510                                                                                  copy                    V_05, V_TEMP
 123B:   00                                                                                      nop
 123C:   06000C00                                                                                if                      0, off_124C
-1240:   230005040000                                                                            cmp                     0, 5, CMP_LE, 0
-1246:   24050000                                                                                save                    5, 0
+1240:   230005040000                                                                            cmp                     0, V_05, CMP_LE, 0
+1246:   24050000                                                                                save                    V_05, 0
 124A:   08                                                                                      endif
 124B:   00                                                                                      nop
 
 off_124C:
-124C:   251006                                                                                  copy                    16, 6
+124C:   251006                                                                                  copy                    V_TEMP, V_06
 124F:   00                                                                                      nop
-1250:   27011005                                                                                calc2                   OP_SUB, 16, 5
-1254:   250410                                                                                  copy                    4, 16
+1250:   27011005                                                                                calc2                   OP_SUB, V_TEMP, V_05
+1254:   250410                                                                                  copy                    V_04, V_TEMP
 1257:   00                                                                                      nop
 1258:   0F063600                                                                                while                   6, off_1292
-125C:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-1262:   251004                                                                                  copy                    16, 4
+125C:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+1262:   251004                                                                                  copy                    V_TEMP, V_04
 1265:   00                                                                                      nop
-1266:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-126C:   250410                                                                                  copy                    4, 16
+1266:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+126C:   250410                                                                                  copy                    V_04, V_TEMP
 126F:   00                                                                                      nop
-1270:   251007                                                                                  copy                    16, 7
+1270:   251007                                                                                  copy                    V_TEMP, V_07
 1273:   00                                                                                      nop
-1274:   260001100900                                                                            calc                    0, OP_SUB, 16, 9
-127A:   250710                                                                                  copy                    7, 16
+1274:   260001100900                                                                            calc                    0, OP_SUB, V_TEMP, 9
+127A:   250710                                                                                  copy                    V_07, V_TEMP
 127D:   00                                                                                      nop
 127E:   2E0402                                                                                  work_set                WK_OBJECT, 2
 1281:   00                                                                                      nop
@@ -213,40 +214,40 @@ off_1294:
 12AF:   00                                                                                      nop
 12B0:   36020A0100009BA000FCF4D3                                                                se_on                   2, 266, 0, -24421, -1024, -11276
 12BC:   06007C00                                                                                if                      0, off_133C
-12C0:   210B1F00                                                                                ck                      11, 31, 0
+12C0:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 12C4:   2E0404                                                                                  work_set                WK_OBJECT, 4
 12C7:   00                                                                                      nop
 12C8:   330000FC00FC4006                                                                        dir_set                 0, -1024, -1024, 1600
-12D0:   250605                                                                                  copy                    6, 5
+12D0:   250605                                                                                  copy                    V_06, V_05
 12D3:   00                                                                                      nop
-12D4:   251005                                                                                  copy                    16, 5
+12D4:   251005                                                                                  copy                    V_TEMP, V_05
 12D7:   00                                                                                      nop
-12D8:   260000102400                                                                            calc                    0, OP_ADD, 16, 36
-12DE:   250510                                                                                  copy                    5, 16
+12D8:   260000102400                                                                            calc                    0, OP_ADD, V_TEMP, 36
+12DE:   250510                                                                                  copy                    V_05, V_TEMP
 12E1:   00                                                                                      nop
 12E2:   06000C00                                                                                if                      0, off_12F2
-12E6:   230005026400                                                                            cmp                     0, 5, CMP_GE, 100
-12EC:   24056400                                                                                save                    5, 100
+12E6:   230005026400                                                                            cmp                     0, V_05, CMP_GE, 100
+12EC:   24056400                                                                                save                    V_05, 100
 12F0:   08                                                                                      endif
 12F1:   00                                                                                      nop
 
 off_12F2:
-12F2:   251005                                                                                  copy                    16, 5
+12F2:   251005                                                                                  copy                    V_TEMP, V_05
 12F5:   00                                                                                      nop
-12F6:   27011006                                                                                calc2                   OP_SUB, 16, 6
-12FA:   250410                                                                                  copy                    4, 16
+12F6:   27011006                                                                                calc2                   OP_SUB, V_TEMP, V_06
+12FA:   250410                                                                                  copy                    V_04, V_TEMP
 12FD:   00                                                                                      nop
 12FE:   0F063600                                                                                while                   6, off_1338
-1302:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-1308:   251004                                                                                  copy                    16, 4
+1302:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+1308:   251004                                                                                  copy                    V_TEMP, V_04
 130B:   00                                                                                      nop
-130C:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-1312:   250410                                                                                  copy                    4, 16
+130C:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+1312:   250410                                                                                  copy                    V_04, V_TEMP
 1315:   00                                                                                      nop
-1316:   251007                                                                                  copy                    16, 7
+1316:   251007                                                                                  copy                    V_TEMP, V_07
 1319:   00                                                                                      nop
-131A:   260000100900                                                                            calc                    0, OP_ADD, 16, 9
-1320:   250710                                                                                  copy                    7, 16
+131A:   260000100900                                                                            calc                    0, OP_ADD, V_TEMP, 9
+1320:   250710                                                                                  copy                    V_07, V_TEMP
 1323:   00                                                                                      nop
 1324:   2E0402                                                                                  work_set                WK_OBJECT, 2
 1327:   00                                                                                      nop
@@ -263,36 +264,36 @@ off_133C:
 133C:   2E0404                                                                                  work_set                WK_OBJECT, 4
 133F:   00                                                                                      nop
 1340:   330000FC00FC0302                                                                        dir_set                 0, -1024, -1024, 515
-1348:   250605                                                                                  copy                    6, 5
+1348:   250605                                                                                  copy                    V_06, V_05
 134B:   00                                                                                      nop
-134C:   251005                                                                                  copy                    16, 5
+134C:   251005                                                                                  copy                    V_TEMP, V_05
 134F:   00                                                                                      nop
-1350:   260001100E00                                                                            calc                    0, OP_SUB, 16, 14
-1356:   250510                                                                                  copy                    5, 16
+1350:   260001100E00                                                                            calc                    0, OP_SUB, V_TEMP, 14
+1356:   250510                                                                                  copy                    V_05, V_TEMP
 1359:   00                                                                                      nop
 135A:   06000C00                                                                                if                      0, off_136A
-135E:   230005040000                                                                            cmp                     0, 5, CMP_LE, 0
-1364:   24050000                                                                                save                    5, 0
+135E:   230005040000                                                                            cmp                     0, V_05, CMP_LE, 0
+1364:   24050000                                                                                save                    V_05, 0
 1368:   08                                                                                      endif
 1369:   00                                                                                      nop
 
 off_136A:
-136A:   251006                                                                                  copy                    16, 6
+136A:   251006                                                                                  copy                    V_TEMP, V_06
 136D:   00                                                                                      nop
-136E:   27011005                                                                                calc2                   OP_SUB, 16, 5
-1372:   250410                                                                                  copy                    4, 16
+136E:   27011005                                                                                calc2                   OP_SUB, V_TEMP, V_05
+1372:   250410                                                                                  copy                    V_04, V_TEMP
 1375:   00                                                                                      nop
 1376:   0F063600                                                                                while                   6, off_13B0
-137A:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-1380:   251004                                                                                  copy                    16, 4
+137A:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+1380:   251004                                                                                  copy                    V_TEMP, V_04
 1383:   00                                                                                      nop
-1384:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-138A:   250410                                                                                  copy                    4, 16
+1384:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+138A:   250410                                                                                  copy                    V_04, V_TEMP
 138D:   00                                                                                      nop
-138E:   251007                                                                                  copy                    16, 7
+138E:   251007                                                                                  copy                    V_TEMP, V_07
 1391:   00                                                                                      nop
-1392:   260001100900                                                                            calc                    0, OP_SUB, 16, 9
-1398:   250710                                                                                  copy                    7, 16
+1392:   260001100900                                                                            calc                    0, OP_SUB, V_TEMP, 9
+1398:   250710                                                                                  copy                    V_07, V_TEMP
 139B:   00                                                                                      nop
 139C:   2E0402                                                                                  work_set                WK_OBJECT, 2
 139F:   00                                                                                      nop
@@ -314,40 +315,40 @@ off_13B2:
 13CD:   00                                                                                      nop
 13CE:   36020A0100009BA000FCF4D3                                                                se_on                   2, 266, 0, -24421, -1024, -11276
 13DA:   06007C00                                                                                if                      0, off_145A
-13DE:   210B1F00                                                                                ck                      11, 31, 0
+13DE:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 13E2:   2E0405                                                                                  work_set                WK_OBJECT, 5
 13E5:   00                                                                                      nop
 13E6:   330000FC00FC4006                                                                        dir_set                 0, -1024, -1024, 1600
-13EE:   250605                                                                                  copy                    6, 5
+13EE:   250605                                                                                  copy                    V_06, V_05
 13F1:   00                                                                                      nop
-13F2:   251005                                                                                  copy                    16, 5
+13F2:   251005                                                                                  copy                    V_TEMP, V_05
 13F5:   00                                                                                      nop
-13F6:   260000102400                                                                            calc                    0, OP_ADD, 16, 36
-13FC:   250510                                                                                  copy                    5, 16
+13F6:   260000102400                                                                            calc                    0, OP_ADD, V_TEMP, 36
+13FC:   250510                                                                                  copy                    V_05, V_TEMP
 13FF:   00                                                                                      nop
 1400:   06000C00                                                                                if                      0, off_1410
-1404:   230005026400                                                                            cmp                     0, 5, CMP_GE, 100
-140A:   24056400                                                                                save                    5, 100
+1404:   230005026400                                                                            cmp                     0, V_05, CMP_GE, 100
+140A:   24056400                                                                                save                    V_05, 100
 140E:   08                                                                                      endif
 140F:   00                                                                                      nop
 
 off_1410:
-1410:   251005                                                                                  copy                    16, 5
+1410:   251005                                                                                  copy                    V_TEMP, V_05
 1413:   00                                                                                      nop
-1414:   27011006                                                                                calc2                   OP_SUB, 16, 6
-1418:   250410                                                                                  copy                    4, 16
+1414:   27011006                                                                                calc2                   OP_SUB, V_TEMP, V_06
+1418:   250410                                                                                  copy                    V_04, V_TEMP
 141B:   00                                                                                      nop
 141C:   0F063600                                                                                while                   6, off_1456
-1420:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-1426:   251004                                                                                  copy                    16, 4
+1420:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+1426:   251004                                                                                  copy                    V_TEMP, V_04
 1429:   00                                                                                      nop
-142A:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-1430:   250410                                                                                  copy                    4, 16
+142A:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+1430:   250410                                                                                  copy                    V_04, V_TEMP
 1433:   00                                                                                      nop
-1434:   251007                                                                                  copy                    16, 7
+1434:   251007                                                                                  copy                    V_TEMP, V_07
 1437:   00                                                                                      nop
-1438:   260000100900                                                                            calc                    0, OP_ADD, 16, 9
-143E:   250710                                                                                  copy                    7, 16
+1438:   260000100900                                                                            calc                    0, OP_ADD, V_TEMP, 9
+143E:   250710                                                                                  copy                    V_07, V_TEMP
 1441:   00                                                                                      nop
 1442:   2E0402                                                                                  work_set                WK_OBJECT, 2
 1445:   00                                                                                      nop
@@ -364,36 +365,36 @@ off_145A:
 145A:   2E0405                                                                                  work_set                WK_OBJECT, 5
 145D:   00                                                                                      nop
 145E:   330000FC00FC0302                                                                        dir_set                 0, -1024, -1024, 515
-1466:   250605                                                                                  copy                    6, 5
+1466:   250605                                                                                  copy                    V_06, V_05
 1469:   00                                                                                      nop
-146A:   251005                                                                                  copy                    16, 5
+146A:   251005                                                                                  copy                    V_TEMP, V_05
 146D:   00                                                                                      nop
-146E:   260001100E00                                                                            calc                    0, OP_SUB, 16, 14
-1474:   250510                                                                                  copy                    5, 16
+146E:   260001100E00                                                                            calc                    0, OP_SUB, V_TEMP, 14
+1474:   250510                                                                                  copy                    V_05, V_TEMP
 1477:   00                                                                                      nop
 1478:   06000C00                                                                                if                      0, off_1488
-147C:   230005040000                                                                            cmp                     0, 5, CMP_LE, 0
-1482:   24050000                                                                                save                    5, 0
+147C:   230005040000                                                                            cmp                     0, V_05, CMP_LE, 0
+1482:   24050000                                                                                save                    V_05, 0
 1486:   08                                                                                      endif
 1487:   00                                                                                      nop
 
 off_1488:
-1488:   251006                                                                                  copy                    16, 6
+1488:   251006                                                                                  copy                    V_TEMP, V_06
 148B:   00                                                                                      nop
-148C:   27011005                                                                                calc2                   OP_SUB, 16, 5
-1490:   250410                                                                                  copy                    4, 16
+148C:   27011005                                                                                calc2                   OP_SUB, V_TEMP, V_05
+1490:   250410                                                                                  copy                    V_04, V_TEMP
 1493:   00                                                                                      nop
 1494:   0F063600                                                                                while                   6, off_14CE
-1498:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-149E:   251004                                                                                  copy                    16, 4
+1498:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+149E:   251004                                                                                  copy                    V_TEMP, V_04
 14A1:   00                                                                                      nop
-14A2:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-14A8:   250410                                                                                  copy                    4, 16
+14A2:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+14A8:   250410                                                                                  copy                    V_04, V_TEMP
 14AB:   00                                                                                      nop
-14AC:   251007                                                                                  copy                    16, 7
+14AC:   251007                                                                                  copy                    V_TEMP, V_07
 14AF:   00                                                                                      nop
-14B0:   260001100900                                                                            calc                    0, OP_SUB, 16, 9
-14B6:   250710                                                                                  copy                    7, 16
+14B0:   260001100900                                                                            calc                    0, OP_SUB, V_TEMP, 9
+14B6:   250710                                                                                  copy                    V_07, V_TEMP
 14B9:   00                                                                                      nop
 14BA:   2E0402                                                                                  work_set                WK_OBJECT, 2
 14BD:   00                                                                                      nop
@@ -415,40 +416,40 @@ off_14D0:
 14EB:   00                                                                                      nop
 14EC:   36020A0100009BA000FCF4D3                                                                se_on                   2, 266, 0, -24421, -1024, -11276
 14F8:   06007C00                                                                                if                      0, off_1578
-14FC:   210B1F00                                                                                ck                      11, 31, 0
+14FC:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 1500:   2E0406                                                                                  work_set                WK_OBJECT, 6
 1503:   00                                                                                      nop
 1504:   330000FC00FC4006                                                                        dir_set                 0, -1024, -1024, 1600
-150C:   250605                                                                                  copy                    6, 5
+150C:   250605                                                                                  copy                    V_06, V_05
 150F:   00                                                                                      nop
-1510:   251005                                                                                  copy                    16, 5
+1510:   251005                                                                                  copy                    V_TEMP, V_05
 1513:   00                                                                                      nop
-1514:   260000102400                                                                            calc                    0, OP_ADD, 16, 36
-151A:   250510                                                                                  copy                    5, 16
+1514:   260000102400                                                                            calc                    0, OP_ADD, V_TEMP, 36
+151A:   250510                                                                                  copy                    V_05, V_TEMP
 151D:   00                                                                                      nop
 151E:   06000C00                                                                                if                      0, off_152E
-1522:   230005026400                                                                            cmp                     0, 5, CMP_GE, 100
-1528:   24056400                                                                                save                    5, 100
+1522:   230005026400                                                                            cmp                     0, V_05, CMP_GE, 100
+1528:   24056400                                                                                save                    V_05, 100
 152C:   08                                                                                      endif
 152D:   00                                                                                      nop
 
 off_152E:
-152E:   251005                                                                                  copy                    16, 5
+152E:   251005                                                                                  copy                    V_TEMP, V_05
 1531:   00                                                                                      nop
-1532:   27011006                                                                                calc2                   OP_SUB, 16, 6
-1536:   250410                                                                                  copy                    4, 16
+1532:   27011006                                                                                calc2                   OP_SUB, V_TEMP, V_06
+1536:   250410                                                                                  copy                    V_04, V_TEMP
 1539:   00                                                                                      nop
 153A:   0F063600                                                                                while                   6, off_1574
-153E:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-1544:   251004                                                                                  copy                    16, 4
+153E:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+1544:   251004                                                                                  copy                    V_TEMP, V_04
 1547:   00                                                                                      nop
-1548:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-154E:   250410                                                                                  copy                    4, 16
+1548:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+154E:   250410                                                                                  copy                    V_04, V_TEMP
 1551:   00                                                                                      nop
-1552:   251007                                                                                  copy                    16, 7
+1552:   251007                                                                                  copy                    V_TEMP, V_07
 1555:   00                                                                                      nop
-1556:   260000100900                                                                            calc                    0, OP_ADD, 16, 9
-155C:   250710                                                                                  copy                    7, 16
+1556:   260000100900                                                                            calc                    0, OP_ADD, V_TEMP, 9
+155C:   250710                                                                                  copy                    V_07, V_TEMP
 155F:   00                                                                                      nop
 1560:   2E0402                                                                                  work_set                WK_OBJECT, 2
 1563:   00                                                                                      nop
@@ -465,36 +466,36 @@ off_1578:
 1578:   2E0406                                                                                  work_set                WK_OBJECT, 6
 157B:   00                                                                                      nop
 157C:   330000FC00FC0302                                                                        dir_set                 0, -1024, -1024, 515
-1584:   250605                                                                                  copy                    6, 5
+1584:   250605                                                                                  copy                    V_06, V_05
 1587:   00                                                                                      nop
-1588:   251005                                                                                  copy                    16, 5
+1588:   251005                                                                                  copy                    V_TEMP, V_05
 158B:   00                                                                                      nop
-158C:   260001100E00                                                                            calc                    0, OP_SUB, 16, 14
-1592:   250510                                                                                  copy                    5, 16
+158C:   260001100E00                                                                            calc                    0, OP_SUB, V_TEMP, 14
+1592:   250510                                                                                  copy                    V_05, V_TEMP
 1595:   00                                                                                      nop
 1596:   06000C00                                                                                if                      0, off_15A6
-159A:   230005040000                                                                            cmp                     0, 5, CMP_LE, 0
-15A0:   24050000                                                                                save                    5, 0
+159A:   230005040000                                                                            cmp                     0, V_05, CMP_LE, 0
+15A0:   24050000                                                                                save                    V_05, 0
 15A4:   08                                                                                      endif
 15A5:   00                                                                                      nop
 
 off_15A6:
-15A6:   251006                                                                                  copy                    16, 6
+15A6:   251006                                                                                  copy                    V_TEMP, V_06
 15A9:   00                                                                                      nop
-15AA:   27011005                                                                                calc2                   OP_SUB, 16, 5
-15AE:   250410                                                                                  copy                    4, 16
+15AA:   27011005                                                                                calc2                   OP_SUB, V_TEMP, V_05
+15AE:   250410                                                                                  copy                    V_04, V_TEMP
 15B1:   00                                                                                      nop
 15B2:   0F063600                                                                                while                   6, off_15EC
-15B6:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-15BC:   251004                                                                                  copy                    16, 4
+15B6:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+15BC:   251004                                                                                  copy                    V_TEMP, V_04
 15BF:   00                                                                                      nop
-15C0:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-15C6:   250410                                                                                  copy                    4, 16
+15C0:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+15C6:   250410                                                                                  copy                    V_04, V_TEMP
 15C9:   00                                                                                      nop
-15CA:   251007                                                                                  copy                    16, 7
+15CA:   251007                                                                                  copy                    V_TEMP, V_07
 15CD:   00                                                                                      nop
-15CE:   260001100900                                                                            calc                    0, OP_SUB, 16, 9
-15D4:   250710                                                                                  copy                    7, 16
+15CE:   260001100900                                                                            calc                    0, OP_SUB, V_TEMP, 9
+15D4:   250710                                                                                  copy                    V_07, V_TEMP
 15D7:   00                                                                                      nop
 15D8:   2E0402                                                                                  work_set                WK_OBJECT, 2
 15DB:   00                                                                                      nop
@@ -516,40 +517,40 @@ off_15EE:
 1609:   00                                                                                      nop
 160A:   36020A0100009BA000FCF4D3                                                                se_on                   2, 266, 0, -24421, -1024, -11276
 1616:   06007C00                                                                                if                      0, off_1696
-161A:   210B1F00                                                                                ck                      11, 31, 0
+161A:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 161E:   2E0407                                                                                  work_set                WK_OBJECT, 7
 1621:   00                                                                                      nop
 1622:   330000FC00FC4006                                                                        dir_set                 0, -1024, -1024, 1600
-162A:   250605                                                                                  copy                    6, 5
+162A:   250605                                                                                  copy                    V_06, V_05
 162D:   00                                                                                      nop
-162E:   251005                                                                                  copy                    16, 5
+162E:   251005                                                                                  copy                    V_TEMP, V_05
 1631:   00                                                                                      nop
-1632:   260000102400                                                                            calc                    0, OP_ADD, 16, 36
-1638:   250510                                                                                  copy                    5, 16
+1632:   260000102400                                                                            calc                    0, OP_ADD, V_TEMP, 36
+1638:   250510                                                                                  copy                    V_05, V_TEMP
 163B:   00                                                                                      nop
 163C:   06000C00                                                                                if                      0, off_164C
-1640:   230005026400                                                                            cmp                     0, 5, CMP_GE, 100
-1646:   24056400                                                                                save                    5, 100
+1640:   230005026400                                                                            cmp                     0, V_05, CMP_GE, 100
+1646:   24056400                                                                                save                    V_05, 100
 164A:   08                                                                                      endif
 164B:   00                                                                                      nop
 
 off_164C:
-164C:   251005                                                                                  copy                    16, 5
+164C:   251005                                                                                  copy                    V_TEMP, V_05
 164F:   00                                                                                      nop
-1650:   27011006                                                                                calc2                   OP_SUB, 16, 6
-1654:   250410                                                                                  copy                    4, 16
+1650:   27011006                                                                                calc2                   OP_SUB, V_TEMP, V_06
+1654:   250410                                                                                  copy                    V_04, V_TEMP
 1657:   00                                                                                      nop
 1658:   0F063600                                                                                while                   6, off_1692
-165C:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-1662:   251004                                                                                  copy                    16, 4
+165C:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+1662:   251004                                                                                  copy                    V_TEMP, V_04
 1665:   00                                                                                      nop
-1666:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-166C:   250410                                                                                  copy                    4, 16
+1666:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+166C:   250410                                                                                  copy                    V_04, V_TEMP
 166F:   00                                                                                      nop
-1670:   251007                                                                                  copy                    16, 7
+1670:   251007                                                                                  copy                    V_TEMP, V_07
 1673:   00                                                                                      nop
-1674:   260000100900                                                                            calc                    0, OP_ADD, 16, 9
-167A:   250710                                                                                  copy                    7, 16
+1674:   260000100900                                                                            calc                    0, OP_ADD, V_TEMP, 9
+167A:   250710                                                                                  copy                    V_07, V_TEMP
 167D:   00                                                                                      nop
 167E:   2E0402                                                                                  work_set                WK_OBJECT, 2
 1681:   00                                                                                      nop
@@ -566,36 +567,36 @@ off_1696:
 1696:   2E0407                                                                                  work_set                WK_OBJECT, 7
 1699:   00                                                                                      nop
 169A:   330000FC00FC0302                                                                        dir_set                 0, -1024, -1024, 515
-16A2:   250605                                                                                  copy                    6, 5
+16A2:   250605                                                                                  copy                    V_06, V_05
 16A5:   00                                                                                      nop
-16A6:   251005                                                                                  copy                    16, 5
+16A6:   251005                                                                                  copy                    V_TEMP, V_05
 16A9:   00                                                                                      nop
-16AA:   260001100E00                                                                            calc                    0, OP_SUB, 16, 14
-16B0:   250510                                                                                  copy                    5, 16
+16AA:   260001100E00                                                                            calc                    0, OP_SUB, V_TEMP, 14
+16B0:   250510                                                                                  copy                    V_05, V_TEMP
 16B3:   00                                                                                      nop
 16B4:   06000C00                                                                                if                      0, off_16C4
-16B8:   230005040000                                                                            cmp                     0, 5, CMP_LE, 0
-16BE:   24050000                                                                                save                    5, 0
+16B8:   230005040000                                                                            cmp                     0, V_05, CMP_LE, 0
+16BE:   24050000                                                                                save                    V_05, 0
 16C2:   08                                                                                      endif
 16C3:   00                                                                                      nop
 
 off_16C4:
-16C4:   251006                                                                                  copy                    16, 6
+16C4:   251006                                                                                  copy                    V_TEMP, V_06
 16C7:   00                                                                                      nop
-16C8:   27011005                                                                                calc2                   OP_SUB, 16, 5
-16CC:   250410                                                                                  copy                    4, 16
+16C8:   27011005                                                                                calc2                   OP_SUB, V_TEMP, V_05
+16CC:   250410                                                                                  copy                    V_04, V_TEMP
 16CF:   00                                                                                      nop
 16D0:   0F063600                                                                                while                   6, off_170A
-16D4:   230004010000                                                                            cmp                     0, 4, CMP_GT, 0
-16DA:   251004                                                                                  copy                    16, 4
+16D4:   230004010000                                                                            cmp                     0, V_04, CMP_GT, 0
+16DA:   251004                                                                                  copy                    V_TEMP, V_04
 16DD:   00                                                                                      nop
-16DE:   260001100100                                                                            calc                    0, OP_SUB, 16, 1
-16E4:   250410                                                                                  copy                    4, 16
+16DE:   260001100100                                                                            calc                    0, OP_SUB, V_TEMP, 1
+16E4:   250410                                                                                  copy                    V_04, V_TEMP
 16E7:   00                                                                                      nop
-16E8:   251007                                                                                  copy                    16, 7
+16E8:   251007                                                                                  copy                    V_TEMP, V_07
 16EB:   00                                                                                      nop
-16EC:   260001100900                                                                            calc                    0, OP_SUB, 16, 9
-16F2:   250710                                                                                  copy                    7, 16
+16EC:   260001100900                                                                            calc                    0, OP_SUB, V_TEMP, 9
+16F2:   250710                                                                                  copy                    V_07, V_TEMP
 16F5:   00                                                                                      nop
 16F6:   2E0402                                                                                  work_set                WK_OBJECT, 2
 16F9:   00                                                                                      nop
@@ -617,16 +618,16 @@ off_170C:
 1724:   32005BA00000AED3                                                                        pos_set                 0, -24485, 0, -11346
 172C:   2904                                                                                    cut_chg                 4
 172E:   06001C00                                                                                if                      0, off_174E
-1732:   230005006400                                                                            cmp                     0, 5, CMP_EQ, 100
+1732:   230005006400                                                                            cmp                     0, V_05, CMP_EQ, 100
 1738:   2B000600FFFF                                                                            message_on              0, 6, 0, 255, 255
 173E:   36020B0100009BA000FCF4D3                                                                se_on                   2, 267, 0, -24421, -1024, -11276
 174A:   0700C600                                                                                else                    0, off_1810
 
 off_174E:
 174E:   06008000                                                                                if                      0, off_17D2
-1752:   230005005000                                                                            cmp                     0, 5, CMP_EQ, 80
+1752:   230005005000                                                                            cmp                     0, V_05, CMP_EQ, 80
 1758:   2B000700FFFF                                                                            message_on              0, 7, 0, 255, 255
-175E:   22043C01                                                                                set                     4, 60, 1
+175E:   22043C01                                                                                set                     FG_GENERAL_1, 60, 1
 1762:   36020C0100009BA000FCF4D3                                                                se_on                   2, 268, 0, -24421, -1024, -11276
 176E:   090A1400                                                                                sleep                   10, 20
 1772:   2908                                                                                    cut_chg                 8
@@ -644,14 +645,14 @@ off_174E:
 
 off_17D2:
 17D2:   06000E00                                                                                if                      0, off_17E4
-17D6:   230005000000                                                                            cmp                     0, 5, CMP_EQ, 0
+17D6:   230005000000                                                                            cmp                     0, V_05, CMP_EQ, 0
 17DC:   2B000900FFFF                                                                            message_on              0, 9, 0, 255, 255
 17E2:   08                                                                                      endif
 17E3:   00                                                                                      nop
 
 off_17E4:
 17E4:   06001000                                                                                if                      0, off_17F8
-17E8:   230005015000                                                                            cmp                     0, 5, CMP_GT, 80
+17E8:   230005015000                                                                            cmp                     0, V_05, CMP_GT, 80
 17EE:   2B000600FFFF                                                                            message_on              0, 6, 0, 255, 255
 17F4:   07000C00                                                                                else                    0, off_1800
 
@@ -673,22 +674,22 @@ off_1810:
 1810:   090A0100                                                                                sleep                   10, 1
 1814:   650D                                                                                    sce_espr_kill2          13
 1816:   650E                                                                                    sce_espr_kill2          14
-1818:   22020700                                                                                set                     2, 7, 0
+1818:   22020700                                                                                set                     FG_STATE, 7, 0
 181C:   3C01                                                                                    cut_auto                1
 181E:   0100                                                                                    evt_end                 0
 
 .proc main_05
-1820:   22020701                                                                                set                     2, 7, 1
+1820:   22020701                                                                                set                     FG_STATE, 7, 1
 1824:   2B000000FFEF                                                                            message_on              0, 0, 0, 255, 239
 182A:   090A0100                                                                                sleep                   10, 1
 182E:   06003200                                                                                if                      0, off_1864
-1832:   210B1F00                                                                                ck                      11, 31, 0
+1832:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 1836:   2E0400                                                                                  work_set                WK_OBJECT, 0
 1839:   00                                                                                      nop
 183A:   32000000E0AD0000                                                                        pos_set                 0, 0, -21024, 0
 1842:   22210501                                                                                set                     33, 5, 1
 1846:   22230501                                                                                set                     35, 5, 1
-184A:   22047A01                                                                                set                     4, 122, 1
+184A:   22047A01                                                                                set                     FG_GENERAL_1, 122, 1
 184E:   46050031000000000000                                                                    aot_reset               5, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
 1858:   2B000C00FFEF                                                                            message_on              0, 12, 0, 255, 239
 185E:   090A0100                                                                                sleep                   10, 1
@@ -696,13 +697,13 @@ off_1810:
 1863:   00                                                                                      nop
 
 off_1864:
-1864:   22020700                                                                                set                     2, 7, 0
+1864:   22020700                                                                                set                     FG_STATE, 7, 0
 1868:   0100                                                                                    evt_end                 0
 
 .proc main_06
-186A:   131A6400                                                                                switch                  26, off_18D2
 
-off_186E:
+off_186A:
+186A:   131A6400                                                                                switch                  26, off_18D2
 186E:   140008000000                                                                            case                    0, off_187C, 0
 1874:   510100015A28                                                                            sce_bgm_control         1, 0, 1, 90, 40
 187A:   1A00                                                                                    break                   0
@@ -744,8 +745,8 @@ off_18D2:
 18D2:   11000A00                                                                                do                      0, off_18E0
 18D6:   090A0100                                                                                sleep                   10, 1
 18DA:   1204                                                                                    edwhile                 off_18E0
-18DC:   21010B00                                                                                ck                      1, 11, 0
+18DC:   21010B00                                                                                ck                      FG_GAME, 11, 0
 
 off_18E0:
-18E0:   17FFFF008AFF                                                                            goto                    255, 255, 0, off_186E
+18E0:   17FFFF008AFF                                                                            goto                    255, 255, 0, off_186A
 18E6:   0100                                                                                    evt_end                 0

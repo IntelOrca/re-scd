@@ -1,70 +1,62 @@
-.version 2
-init
+#version 2
+
+proc init
 {
-    init_00()
+    door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16987, -2142, 1230, 2400, -17416, 0, -559, 1888, 0, 6, 1, 0, 8, 1, 0, 0, UNLOCKED, 0);
+    door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -1892, -15410, 1460, 1590, -4847, 0, -2857, -2080, 0, 8, 0, 0, 14, 4, 0, 0, UNLOCKED, 0);
+    if (ck(FG_0, F_DIFFICULT, 0))
     {
-        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16987, -2142, 1230, 2400, -17416, 0, -559, 1888, 0, 6, 1, 0, 8, 1, 0, 0, UNLOCKED, 0);
-        door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -1892, -15410, 1460, 1590, -4847, 0, -2857, -2080, 0, 8, 0, 0, 14, 4, 0, 0, UNLOCKED, 0);
-        if (game.difficult == 0)
+        if (cmp(0, V_CUT, CMP_EQ, 0) && ck(FG_GENERAL_1, 3, 0))
         {
-            if (arr[26] == 0 && bits[4][3] == 0)
+            sce_em_set(0, 0, ENEMY_ZOMBIE_COP, 0, 0, 0, 9, 0, 15, -8809, 0, 4235, 3673, 0, 0);
+            sce_em_set(0, 1, ENEMY_ZOMBIE_COP, 0, 0, 0, 9, 0, 16, 1382, 0, -18677, 3273, 0, 0);
+            sce_em_set(0, 2, ENEMY_ZOMBIE_COP, 0, 0, 0, 41, 0, 17, -3231, 0, -740, 2287, 0, 0);
+        }
+        else
+        {
+            set(FG_GENERAL_1, 3, 1);
+            sce_em_set(0, 0, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 9, 0, 18, -7940, 0, 4732, 429, 0, 0);
+            sce_em_set(0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 9, 0, 19, 1577, 0, -1264, 889, 0, 0);
+            sce_em_set(0, 2, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 9, 0, 207, 4440, 0, -11560, 1945, 0, 0);
+            sce_em_set(0, 3, ENEMY_ZOMBIE_GIRL, 0, 0, 0, 11, 0, 208, 1799, 0, -14450, 755, 0, 0);
+        }
+    }
+    else
+    {
+        if (cmp(0, V_CUT, CMP_NE, 0))
+        {
+            set(FG_GENERAL_1, 3, 1);
+        }
+        sce_em_set(0, 0, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 9, 0, 18, -9191, 0, 3828, 493, 0, 0);
+        sce_em_set(0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 9, 0, 19, -495, 0, -786, 2681, 0, 0);
+        sce_em_set(0, 2, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 9, 0, 207, 4574, 0, -11352, 2073, 0, 0);
+        sce_em_set(0, 3, ENEMY_ZOMBIE_GIRL, 6, 0, 0, 11, 0, 208, 2648, 0, -14087, 1091, 0, 0);
+    }
+    if (ck(FG_GENERAL_1, 3, 1))
+    {
+        if (ck(FG_GENERAL_1, 0, 0))
+        {
+            cut_replace(0, 6);
+            cut_replace(1, 7);
+            if (cmp(0, V_CUT, CMP_EQ, 0))
             {
-                sce_em_set(0, 0, ENEMY_ZOMBIECOP, 0, 0, 0, 9, 0, 15, -8809, 0, 4235, 3673, 0, 0);
-                sce_em_set(0, 1, ENEMY_ZOMBIECOP, 0, 0, 0, 9, 0, 16, 1382, 0, -18677, 3273, 0, 0);
-                sce_em_set(0, 2, ENEMY_ZOMBIECOP, 0, 0, 0, 41, 0, 17, -3231, 0, -740, 2287, 0, 0);
-            }
-            else
-            {
-                bits[4][3] = 1;
-                sce_em_set(0, 0, ENEMY_ZOMBIERANDOM, 0, 0, 0, 9, 0, 18, -7940, 0, 4732, 429, 0, 0);
-                sce_em_set(0, 1, ENEMY_ZOMBIERANDOM, 0, 0, 0, 9, 0, 19, 1577, 0, -1264, 889, 0, 0);
-                sce_em_set(0, 2, ENEMY_ZOMBIERANDOM, 0, 0, 0, 9, 0, 207, 4440, 0, -11560, 1945, 0, 0);
-                sce_em_set(0, 3, ENEMY_ZOMBIEGIRL, 0, 0, 0, 11, 0, 208, 1799, 0, -14450, 755, 0, 0);
+                cut_chg(6);
+                cut_auto(1);
             }
         }
         else
         {
-            if (arr[26] != 0)
-            {
-                bits[4][3] = 1;
-            }
-            sce_em_set(0, 0, ENEMY_ZOMBIERANDOM, 6, 0, 0, 9, 0, 18, -9191, 0, 3828, 493, 0, 0);
-            sce_em_set(0, 1, ENEMY_ZOMBIERANDOM, 0, 0, 0, 9, 0, 19, -495, 0, -786, 2681, 0, 0);
-            sce_em_set(0, 2, ENEMY_ZOMBIERANDOM, 6, 0, 0, 9, 0, 207, 4574, 0, -11352, 2073, 0, 0);
-            sce_em_set(0, 3, ENEMY_ZOMBIEGIRL, 6, 0, 0, 11, 0, 208, 2648, 0, -14087, 1091, 0, 0);
+            sce_bgm_control(0, 0, 1, 1, 0);
         }
-        if (bits[4][3] == 1)
-        {
-            if (bits[4][0] == 0)
-            {
-                cut_replace(0, 6);
-                cut_replace(1, 7);
-                if (arr[26] == 0)
-                {
-                    cut_chg(6);
-                    cut_auto(1);
-                }
-            }
-            else
-            {
-                sce_bgm_control(0, 0, 1, 1, 0);
-            }
-        }
-        sce_bgm_control(0, 0, 2, 64, 0);
-        sce_bgm_control(0, 0, 3, 64, 0);
-        return 0;
     }
+    sce_bgm_control(0, 0, 2, 64, 0);
+    sce_bgm_control(0, 0, 3, 64, 0);
 }
 
-main
+proc main
 {
-    main_00()
-    {
-        return 0;
-    }
+}
 
-    main_01()
-    {
-        return 0;
-    }
+proc aot
+{
 }

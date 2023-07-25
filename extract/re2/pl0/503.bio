@@ -1,371 +1,351 @@
-.version 2
-init
+#version 2
+
+proc init
 {
-    init_00()
+    aot_set(12, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20637, -19264, 2240, 740, 3, 0, 0, 0, 255, 255);
+    door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0, -21679, 0, -989, 1128, 4, 8, 6, 0, 22, 5, 0, 0, UNLOCKED, 0);
+    if (ck(FG_GAME, F_SCENARIO, 0))
     {
-        aot_set(12, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20637, -19264, 2240, 740, 3, 0, 0, 0, 255, 255);
-        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0, -21679, 0, -989, 1128, 4, 8, 6, 0, 22, 5, 0, 0, UNLOCKED, 0);
-        if (game.scenario == 0)
+        door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25331, -19116, 2200, 1000, -15093, 0, -20758, 3168, 4, 4, 0, 0, 7, 1, 0, 0, UNLOCKED, 0);
+    }
+    else
+    {
+        door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25331, -19116, 2200, 1000, -15293, -19800, -20675, 3168, 4, 6, 0, 11, 7, 1, 0, 0, UNLOCKED, 0);
+        door_aot_se(7, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25331, -19116, 2200, 1000, -15146, 0, -20121, 3184, 4, 4, 0, 0, 7, 1, 0, 0, UNLOCKED, 0);
+    }
+    aot_set(2, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18310, -27260, 2600, 2500, 0, 0, 1, 0, 0, 0);
+    obj_model_set(0, 0, 0, 0, 0, 0, 0, 10, 16, -16540, -1480, -25810, 0, -2048, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    aot_set(16, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21364, -24329, 1700, 1500, 8, 0, 0, 0, 0, 0);
+}
+
+proc main
+{
+    save(V_04, 0);
+    main_02();
+    main_03();
+}
+
+proc aot
+{
+    main_0A();
+}
+
+proc main_02
+{
+    aot_set(10, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27431, -27516, 2700, 2700, 255, 0, I_GOSUB, main_04, 0, 0);
+    aot_set(6, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17701, -21627, 1500, 1600, 255, 0, I_GOSUB, main_09, 0, 0);
+    if (ck(FG_GAME, F_SCENARIO, 1))
+    {
+        aot_set(11, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -17701, -21627, 1500, 1600, 10, 0, ITEM_UPKEY, 0, aot, 0);
+        if (ck(FG_GENERAL_1, 63, 0))
         {
-            door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25331, -19116, 2200, 1000, -15093, 0, -20758, 3168, 4, 4, 0, 0, 7, 1, 0, 0, UNLOCKED, 0);
+            set(FG_GENERAL_1, 63, 1);
+            aot_set(13, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18488, -20538, 1080, 1270, 2, 0, 0, 0, 255, 255);
+            sce_em_set(0, 255, ENEMY_ADA_WONG_1, 0, 8, 0, 0, 0, 255, -23939, 0, -25348, 2984, 0, 0);
+            fork main_06;
         }
         else
         {
-            door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25331, -19116, 2200, 1000, -15293, -19800, -20675, 3168, 4, 6, 0, 11, 7, 1, 0, 0, UNLOCKED, 0);
-            door_aot_se(7, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25331, -19116, 2200, 1000, -15146, 0, -20121, 3184, 4, 4, 0, 0, 7, 1, 0, 0, UNLOCKED, 0);
+            if (ck(FG_GENERAL_1, 64, 1))
+            {
+                aot_set(13, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18488, -20538, 1080, 1270, 2, 0, 0, 0, 255, 255);
+                sce_em_set(0, 255, ENEMY_ADA_WONG_1, 0, 8, 0, 0, 0, 255, -18029, 0, -20281, 3903, 0, 0);
+                work_set(WK_SPLAYER, 0);
+                member_copy(V_TEMP, 0);
+                calc(0, OP_OR, V_TEMP, 4);
+                member_set2(0, V_TEMP);
+                sce_espr3d_on(0, 21, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
+                fork main_07;
+                if (ck(34, 9, 1))
+                {
+                }
+            }
+            else
+            {
+                main_05();
+            }
         }
-        aot_set(2, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18310, -27260, 2600, 2500, 0, 0, 1, 0, 0, 0);
-        obj_model_set(0, 0, 0, 0, 0, 0, 0, 10, 16, -16540, -1480, -25810, 0, -2048, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        aot_set(16, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21364, -24329, 1700, 1500, 8, 0, 0, 0, 0, 0);
-        return 0;
+        if (ck(FG_GENERAL_1, 98, 1))
+        {
+            aot_reset(1, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+            sce_espr3d_on(0, 22, 0, 1024, -17200, -1900, -20800, 0, 900, 0, 0);
+            sce_espr3d_on(0, 10261, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
+        }
+        else
+        {
+            aot_reset(7, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+        }
+    }
+    else
+    {
+        main_05();
     }
 }
 
-main
+proc main_03
 {
-    main_00()
-    {
-        save(4, 0);
-        main_02();
-        main_03();
-        return 0;
-    }
+    item_aot_set(4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18568, -22447, 780, 950, ITEM_SHOTGUNAMMO, 7, 3, 3, 0);
+    obj_model_set(3, 0, 0, 0, 0, 0, 0, 10, 16, -19190, -2130, -22410, 0, -2944, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    item_aot_set(5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19298, -22447, 710, 850, ITEM_MAGNUMAMMO, 8, 2, 2, 0);
+    obj_model_set(2, 0, 0, 0, 0, 0, 0, 10, 16, -19688, -2080, -22410, -64, -2880, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    item_aot_set(15, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26706, -21307, 1200, 1080, ITEM_FAIDSPRAY, 1, 26, 4, 0);
+    obj_model_set(4, 0, 0, 0, 0, 0, 0, 10, 16, -26981, -2210, -20392, 0, -448, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    item_aot_set(3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21364, -24329, 1700, 1500, ITEM_INKRIBBON, 3, 80, 6, 0);
+    obj_model_set(6, 0, 0, 0, 0, 0, 0, 10, 16, -20514, -1410, -23529, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+}
 
-    main_01()
+proc main_04
+{
+    message_on(0, 4, 0, 255, 255);
+    evt_next();
+    if (ck(FG_INPUT, F_QUESTION, 0))
     {
-        main_0A();
-        return 0;
+        set(FG_GAME, 3, 0);
+        set(FG_GENERAL_1, 113, 1);
+        aot_on(0);
     }
+}
 
-    main_02()
+proc main_05
+{
+    if (ck(FG_GAME, 3, 1))
     {
-        aot_set(10, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27431, -27516, 2700, 2700, 255, 0, I_GOSUB, main_04, 0, 0);
-        aot_set(6, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17701, -21627, 1500, 1600, 255, 0, I_GOSUB, main_09, 0, 0);
-        if (game.scenario == 1)
+        if (cmp(0, V_LAST_RDT, CMP_EQ, 1288))
         {
-            aot_set(11, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -17701, -21627, 1500, 1600, 10, 0, 94, 0, 1, 0);
-            if (bits[4][63] == 0)
+            sce_em_set(0, 255, ENEMY_ADA_WONG_1, 0, 12, 0, 31, 0, 255, -24650, 0, -26219, 3560, 0, 0);
+        }
+        else
+        {
+            sce_em_set(0, 255, ENEMY_ADA_WONG_1, 0, 12, 0, 31, 0, 255, -24729, 0, -19284, 3560, 0, 0);
+        }
+    }
+    else
+    {
+        if (ck(FG_GENERAL_1, 113, 1))
+        {
+            sce_em_set(0, 255, ENEMY_ADA_WONG_1, 0, 12, 0, 31, 0, 255, -24650, 0, -26219, 3560, 0, 0);
+            set(FG_GENERAL_1, 113, 0);
+        }
+    }
+}
+
+proc main_06
+{
+    set(FG_STATE, 7, 1);
+    set(FG_GAME, 27, 1);
+    work_set(WK_PLAYER, 0);
+    pos_set(0, -23354, 0, -25078);
+    member_set(15, 168, 11);
+    evt_next();
+    work_set(WK_PLAYER, 0);
+    plc_dest(0, 4, 32, -22260, -24004);
+    sleep(10, 18);
+    work_set(WK_SPLAYER, 0);
+    plc_dest(0, 4, 34, -23696, -24094);
+    sleep(10, 8);
+    plc_neck(2, 0, 512, 0, 10, 10);
+    work_set(WK_PLAYER, 0);
+    plc_neck(2, 0, 256, 1024, 20, 20);
+    sleep(10, 18);
+    work_set(WK_PLAYER, 0);
+    plc_neck(2, 0, 0, -1024, 20, 20);
+    sleep(10, 8);
+    work_set(WK_SPLAYER, 0);
+    plc_neck(2, 0, 0, 1024, 20, 20);
+    cut_chg(1);
+    sleep(10, 30);
+    work_set(WK_PLAYER, 0);
+    plc_motion(0, 22, 0);
+    sleep(10, 29);
+    plc_stop();
+    work_set(WK_PLAYER, 0);
+    plc_neck(5, 2, 0, 0, 30, 30);
+    sleep(10, 8);
+    work_set(WK_SPLAYER, 0);
+    plc_neck(5, 1, 0, 0, 30, 30);
+    sleep(10, 20);
+    xa_on(0, 0);
+    evt_next();
+    message_on(0, 5, 0, 0, 0);
+    work_set(WK_SPLAYER, 0);
+    plc_motion(0, 16, 16);
+    sleep(10, 48);
+    plc_motion(0, 17, 16);
+    wsleep();
+    wsleeping();
+    work_set(WK_PLAYER, 0);
+    plc_neck(3, 1, 0, 0, 40, 40);
+    sleep(10, 10);
+    work_set(WK_SPLAYER, 0);
+    member_copy(V_TEMP, 7);
+    calc(0, OP_AND, V_TEMP, -4097);
+    member_set2(7, V_TEMP);
+    plc_neck(6, 0, 0, 0, 30, 30);
+    sleep(10, 10);
+    plc_dest(0, 4, 0, -22117, -20250);
+    work_set(WK_PLAYER, 0);
+    plc_motion(0, 22, 144);
+    plc_cnt(0);
+    work_set(WK_SPLAYER, 0);
+    sleep(10, 30);
+    plc_flg(1, 4);
+    plc_dest(0, 4, 0, -17948, -20256);
+    main_0C();
+    member_copy(V_TEMP, 0);
+    calc(0, OP_OR, V_TEMP, 4);
+    member_set2(0, V_TEMP);
+    sleep(10, 15);
+    set(FG_GAME, 3, 0);
+    work_set(WK_SPLAYER, 0);
+    splc_sce();
+    plc_motion(0, 22, 0);
+    sleep(10, 100);
+    sce_espr3d_on(0, 21, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
+    work_set(WK_PLAYER, 0);
+    plc_neck(6, 0, 0, 0, 40, 40);
+    sleep(10, 10);
+    cut_chg(0);
+    cut_auto(1);
+    set(FG_GENERAL_1, 64, 1);
+    work_set(WK_PLAYER, 0);
+    plc_ret();
+    set(FG_STATE, 7, 0);
+    set(FG_GAME, 27, 0);
+    fork main_07;
+}
+
+proc main_07
+{
+    evt_next();
+    while (ck(FG_GENERAL_1, 98, 0))
+    {
+        work_set(WK_SPLAYER, 0);
+        if (cmp(0, V_1D, CMP_GE, 22528))
+        {
+            save(V_04, 0);
+            plc_motion(0, 22, 0);
+            plc_cnt(19);
+            sleep(10, 100);
+        }
+        else
+        {
+            if (cmp(0, V_1D, CMP_LT, 18432))
             {
-                bits[4][63] = 1;
-                aot_set(13, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18488, -20538, 1080, 1270, 2, 0, 0, 0, 255, 255);
-                sce_em_set(0, 255, ENEMY_ADAWONG1, 0, 8, 0, 0, 0, 255, -23939, 0, -25348, 2984, 0, 0);
-                evt_exec(255, I_GOSUB, main_06);
-            }
-            else
-            {
-                if (bits[4][64] == 1)
+                if (cmp(0, V_1D, CMP_GE, 14336))
                 {
-                    aot_set(13, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18488, -20538, 1080, 1270, 2, 0, 0, 0, 255, 255);
-                    sce_em_set(0, 255, ENEMY_ADAWONG1, 0, 8, 0, 0, 0, 255, -18029, 0, -20281, 3903, 0, 0);
-                    work_set(WK_SPLAYER, 0);
-                    member_copy(16, 0);
-                    var_10 |= 04;
-                    member_set2(0, 16);
-                    sce_espr3d_on(0, 21, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
-                    evt_exec(255, I_GOSUB, main_07);
-                    if (bits[34][9] == 1)
+                    copy(V_TEMP, V_04);
+                    calc(0, OP_ADD, V_TEMP, 1);
+                    copy(V_04, V_TEMP);
+                    if (cmp(0, V_04, CMP_GE, 3))
                     {
+                        save(V_04, 0);
+                        plc_motion(0, 22, 0);
+                        plc_cnt(19);
+                        sleep(10, 140);
                     }
-                }
-                else
-                {
-                    main_05();
-                }
-            }
-            if (bits[4][98] == 1)
-            {
-                aot_reset(1, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
-                sce_espr3d_on(0, 22, 0, 1024, -17200, -1900, -20800, 0, 900, 0, 0);
-                sce_espr3d_on(0, 10261, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
-            }
-            else
-            {
-                aot_reset(7, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
-            }
-        }
-        else
-        {
-            main_05();
-        }
-        return 0;
-    }
-
-    main_03()
-    {
-        item_aot_set(4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18568, -22447, 780, 950, ITEM_SHOTGUNAMMO, 7, 3, 3, 0);
-        obj_model_set(3, 0, 0, 0, 0, 0, 0, 10, 16, -19190, -2130, -22410, 0, -2944, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        item_aot_set(5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -19298, -22447, 710, 850, ITEM_MAGNUMAMMO, 8, 2, 2, 0);
-        obj_model_set(2, 0, 0, 0, 0, 0, 0, 10, 16, -19688, -2080, -22410, -64, -2880, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        item_aot_set(15, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26706, -21307, 1200, 1080, ITEM_FAIDSPRAY, 1, 26, 4, 0);
-        obj_model_set(4, 0, 0, 0, 0, 0, 0, 10, 16, -26981, -2210, -20392, 0, -448, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        item_aot_set(3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21364, -24329, 1700, 1500, ITEM_INKRIBBON, 3, 80, 6, 0);
-        obj_model_set(6, 0, 0, 0, 0, 0, 0, 10, 16, -20514, -1410, -23529, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        return 0;
-    }
-
-    main_04()
-    {
-        message_on(0, 4, 0, 255, 255);
-        evt_next();
-        if (input.question == 0)
-        {
-            bits[1][3] = 0;
-            bits[4][113] = 1;
-            aot_on(0);
-        }
-        return 0;
-    }
-
-    main_05()
-    {
-        if (bits[1][3] == 1)
-        {
-            if (game.last_room == 0x508)
-            {
-                sce_em_set(0, 255, ENEMY_ADAWONG1, 0, 12, 0, 31, 0, 255, -24650, 0, -26219, 3560, 0, 0);
-            }
-            else
-            {
-                sce_em_set(0, 255, ENEMY_ADAWONG1, 0, 12, 0, 31, 0, 255, -24729, 0, -19284, 3560, 0, 0);
-            }
-        }
-        else
-        {
-            if (bits[4][113] == 1)
-            {
-                sce_em_set(0, 255, ENEMY_ADAWONG1, 0, 12, 0, 31, 0, 255, -24650, 0, -26219, 3560, 0, 0);
-                bits[4][113] = 0;
-            }
-        }
-        return 0;
-    }
-
-    main_06()
-    {
-        bits[2][7] = 1;
-        game.cutscene = 1;
-        work_set(WK_PLAYER, 0);
-        pos_set(0, -23354, 0, -25078);
-        member_set(15, 168, 11);
-        evt_next();
-        work_set(WK_PLAYER, 0);
-        plc_dest(0, 4, 32, -22260, -24004);
-        sleep(10, 18);
-        work_set(WK_SPLAYER, 0);
-        plc_dest(0, 4, 34, -23696, -24094);
-        sleep(10, 8);
-        plc_neck(2, 0, 512, 0, 10, 10);
-        work_set(WK_PLAYER, 0);
-        plc_neck(2, 0, 256, 1024, 20, 20);
-        sleep(10, 18);
-        work_set(WK_PLAYER, 0);
-        plc_neck(2, 0, 0, -1024, 20, 20);
-        sleep(10, 8);
-        work_set(WK_SPLAYER, 0);
-        plc_neck(2, 0, 0, 1024, 20, 20);
-        cut_chg(1);
-        sleep(10, 30);
-        work_set(WK_PLAYER, 0);
-        plc_motion(0, 22, 0);
-        sleep(10, 29);
-        plc_stop();
-        work_set(WK_PLAYER, 0);
-        plc_neck(5, 2, 0, 0, 30, 30);
-        sleep(10, 8);
-        work_set(WK_SPLAYER, 0);
-        plc_neck(5, 1, 0, 0, 30, 30);
-        sleep(10, 20);
-        xa_on(0, 0);
-        evt_next();
-        message_on(0, 5, 0, 0, 0);
-        work_set(WK_SPLAYER, 0);
-        plc_motion(0, 16, 16);
-        sleep(10, 48);
-        plc_motion(0, 17, 16);
-        wsleep();
-        wsleeping();
-        work_set(WK_PLAYER, 0);
-        plc_neck(3, 1, 0, 0, 40, 40);
-        sleep(10, 10);
-        work_set(WK_SPLAYER, 0);
-        member_copy(16, 7);
-        var_10 &= EFFF;
-        member_set2(7, 16);
-        plc_neck(6, 0, 0, 0, 30, 30);
-        sleep(10, 10);
-        plc_dest(0, 4, 0, -22117, -20250);
-        work_set(WK_PLAYER, 0);
-        plc_motion(0, 22, 144);
-        plc_cnt(0);
-        work_set(WK_SPLAYER, 0);
-        sleep(10, 30);
-        plc_flg(1, 4);
-        plc_dest(0, 4, 0, -17948, -20256);
-        main_0C();
-        member_copy(16, 0);
-        var_10 |= 04;
-        member_set2(0, 16);
-        sleep(10, 15);
-        bits[1][3] = 0;
-        work_set(WK_SPLAYER, 0);
-        splc_sce();
-        plc_motion(0, 22, 0);
-        sleep(10, 100);
-        sce_espr3d_on(0, 21, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
-        work_set(WK_PLAYER, 0);
-        plc_neck(6, 0, 0, 0, 40, 40);
-        sleep(10, 10);
-        cut_chg(0);
-        cut_auto(1);
-        bits[4][64] = 1;
-        work_set(WK_PLAYER, 0);
-        plc_ret();
-        bits[2][7] = 0;
-        game.cutscene = 0;
-        evt_exec(255, I_GOSUB, main_07);
-        return 0;
-    }
-
-    main_07()
-    {
-        evt_next();
-        while (
-        {
-            work_set(WK_SPLAYER, 0);
-            if (arr[29] >= 22528)
-            {
-                save(4, 0);
-                plc_motion(0, 22, 0);
-                plc_cnt(19);
-                sleep(10, 100);
-            }
-            else
-            {
-                if (arr[29] < 18432)
-                {
-                    if (arr[29] >= 14336)
+                    else
                     {
-                        copy(16, 4);
-                        var_10 += 01;
-                        copy(4, 16);
-                        if (arr[4] >= 3)
-                        {
-                            save(4, 0);
-                            plc_motion(0, 22, 0);
-                            plc_cnt(19);
-                            sleep(10, 140);
-                        }
-                        else
-                        {
-                            plc_neck(4, 2, 0, 0, 32, 32);
-                            sleep(10, 70);
-                        }
+                        plc_neck(4, 2, 0, 0, 32, 32);
+                        sleep(10, 70);
                     }
                 }
             }
-            evt_next();
         }
-        return 0;
-    }
-
-    main_08()
-    {
         evt_next();
-        work_set(WK_SPLAYER, 0);
-        aot_reset(13, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
-        return 0;
     }
+}
 
-    main_09()
+proc main_08
+{
+    evt_next();
+    work_set(WK_SPLAYER, 0);
+    aot_reset(13, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+}
+
+proc main_09
+{
+    if (ck(FG_GAME, F_SCENARIO, 1))
     {
-        if (game.scenario == 1)
+        if (ck(FG_GENERAL_1, 98, 0))
         {
-            if (bits[4][98] == 0)
+            message_on(0, 1, 0, 255, 255);
+        }
+    }
+    else
+    {
+        message_on(0, 0, 0, 255, 255);
+    }
+}
+
+proc main_0A
+{
+    if (ck(FG_GENERAL_1, 98, 0))
+    {
+        if (cmp(0, V_00, CMP_EQ, 11))
+        {
+            if (cmp(0, V_USED_ITEM, CMP_EQ, 94))
             {
-                message_on(0, 1, 0, 255, 255);
+                set(FG_GENERAL_1, 98, 1);
+                fork main_0B;
             }
         }
-        else
-        {
-            message_on(0, 0, 0, 255, 255);
-        }
-        return 0;
     }
+}
 
-    main_0A()
-    {
-        if (bits[4][98] == 0)
-        {
-            if (arr[0] == 11)
-            {
-                if (arr[2] == 94)
-                {
-                    bits[4][98] = 1;
-                    evt_exec(255, I_GOSUB, main_0B);
-                }
-            }
-        }
-        return 0;
-    }
+proc main_0B
+{
+    sce_item_lost(ITEM_UPKEY);
+    aot_reset(11, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+    set(FG_STATE, 7, 1);
+    set(FG_GAME, 27, 1);
+    work_set(WK_PLAYER, 0);
+    pos_set(0, -17952, 0, -21337);
+    dir_set(0, 0, 3900, 0);
+    work_set(WK_SPLAYER, 0);
+    pos_set(0, -18230, 0, -20056);
+    dir_set(0, 0, 4669, 0);
+    splc_sce();
+    sce_espr3d_on(0, 22, 0, 1024, -17200, -1900, -20800, 0, 900, 0, 0);
+    set(FG_GENERAL_1, 98, 1);
+    se_on(2, 10, 1, 0, 0, 0);
+    sleep(10, 15);
+    se_on(2, 11, 1, 0, 0, 0);
+    sleep(10, 100);
+    sce_espr_kill(21, 0, 0, 0);
+    sce_espr3d_on(0, 10261, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
+    work_set(WK_PLAYER, 0);
+    plc_neck(1, -17200, -2100, -20300, 32, 32);
+    sleep(10, 50);
+    plc_neck(5, 2, 0, 0, 32, 32);
+    plc_dest(0, 9, 32, -19106, -20336);
+    sleep(10, 6);
+    xa_on(0, 1);
+    evt_next();
+    message_on(0, 6, 0, 0, 0);
+    work_set(WK_PLAYER, 0);
+    plc_motion(0, 16, 0);
+    sleep(10, 30);
+    plc_motion(0, 21, 8);
+    wsleep();
+    wsleeping();
+    aot_reset(7, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 214, 196, 0, 0, 103, 177);
+    aot_reset(1, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+    aot_reset(13, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
+    set(FG_GENERAL_1, 64, 0);
+    set(FG_9, 93, 1);
+    work_set(WK_PLAYER, 0);
+    plc_ret();
+    work_set(WK_SPLAYER, 0);
+    splc_ret();
+    set(FG_STATE, 7, 0);
+    set(FG_GAME, 27, 0);
+}
 
-    main_0B()
+proc main_0C
+{
+    do
     {
-        sce_item_lost(94);
-        aot_reset(11, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
-        bits[2][7] = 1;
-        game.cutscene = 1;
-        work_set(WK_PLAYER, 0);
-        pos_set(0, -17952, 0, -21337);
-        dir_set(0, 0, 3900, 0);
-        work_set(WK_SPLAYER, 0);
-        pos_set(0, -18230, 0, -20056);
-        dir_set(0, 0, 4669, 0);
-        splc_sce();
-        sce_espr3d_on(0, 22, 0, 1024, -17200, -1900, -20800, 0, 900, 0, 0);
-        bits[4][98] = 1;
-        se_on(2, 10, 1, 0, 0, 0);
-        sleep(10, 15);
-        se_on(2, 11, 1, 0, 0, 0);
-        sleep(10, 100);
-        sce_espr_kill(21, 0, 0, 0);
-        sce_espr3d_on(0, 10261, 0, 4096, -17200, -2100, -20300, 0, 1000, 0, 0);
-        work_set(WK_PLAYER, 0);
-        plc_neck(1, -17200, -2100, -20300, 32, 32);
-        sleep(10, 50);
-        plc_neck(5, 2, 0, 0, 32, 32);
-        plc_dest(0, 9, 32, -19106, -20336);
-        sleep(10, 6);
-        xa_on(0, 1);
         evt_next();
-        message_on(0, 6, 0, 0, 0);
-        work_set(WK_PLAYER, 0);
-        plc_motion(0, 16, 0);
-        sleep(10, 30);
-        plc_motion(0, 21, 8);
-        wsleep();
-        wsleeping();
-        aot_reset(7, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 214, 196, 0, 0, 103, 177);
-        aot_reset(1, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
-        aot_reset(13, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0);
-        bits[4][64] = 0;
-        bits[9][93] = 1;
-        work_set(WK_PLAYER, 0);
-        plc_ret();
-        work_set(WK_SPLAYER, 0);
-        splc_ret();
-        bits[2][7] = 0;
-        game.cutscene = 0;
-        return 0;
-    }
-
-    main_0C()
-    {
-        do
-        {
-            evt_next();
-        } while (bits[5][0] == 0);
-        bits[5][0] = 0;
-        return 0;
-        db(0x34, 0x32);
-    }
+    } while (ck(FG_GENERAL_2, 0, 0));
+    set(FG_GENERAL_2, 0, 0);
 }

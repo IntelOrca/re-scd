@@ -1,8 +1,9 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 085A:   06002800                                                                                if                      0, off_0886
-085E:   21049101                                                                                ck                      4, 145, 1
+085E:   21049101                                                                                ck                      FG_GENERAL_1, 145, 1
 0862:   3B030131000004B05CF28205D81387AD00009CA400F805010000270000000000                        door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20476, -3492, 1410, 5080, -21113, 0, -23396, -2048, 5, 1, 0, 0, 39, 0, 0, 0, UNLOCKED, 0
 0882:   07001A00                                                                                else                    0, off_089C
 
@@ -19,8 +20,8 @@ off_089C:
 092E:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
-0944:   1802                                                                                    gosub                   2
+.proc main
+0944:   1802                                                                                    gosub                   main_02
 0946:   2E0401                                                                                  work_set                WK_OBJECT, 1
 0949:   00                                                                                      nop
 094A:   32000000B0B90000                                                                        pos_set                 0, 0, -18000, 0
@@ -29,22 +30,22 @@ off_089C:
 0956:   32000000B0B90000                                                                        pos_set                 0, 0, -18000, 0
 095E:   0100                                                                                    evt_end                 0
 
-.proc main_01
-0960:   1805                                                                                    gosub                   5
+.proc aot
+0960:   1805                                                                                    gosub                   main_05
 0962:   0100                                                                                    evt_end                 0
 
 .proc main_02
 0964:   06000C00                                                                                if                      0, off_0974
-0968:   23001B000006                                                                            cmp                     0, 27, CMP_EQ, 1536
+0968:   23001B000006                                                                            cmp                     0, V_LAST_RDT, CMP_EQ, 1536
 096E:   04FF1806                                                                                evt_exec                255, I_GOSUB, main_06
 0972:   08                                                                                      endif
 0973:   00                                                                                      nop
 
 off_0974:
-0974:   24061000                                                                                save                    6, 16
-0978:   1805                                                                                    gosub                   5
+0974:   24061000                                                                                save                    V_06, 16
+0978:   1805                                                                                    gosub                   main_05
 097A:   06001A00                                                                                if                      0, off_0998
-097E:   21049101                                                                                ck                      4, 145, 1
+097E:   21049101                                                                                ck                      FG_GENERAL_1, 145, 1
 0982:   2C010531000004B05CF28205D813FF0018030000                                                aot_set                 1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20476, -3492, 1410, 5080, 255, 0, I_GOSUB, main_03, 0, 0
 0996:   08                                                                                      endif
 0997:   00                                                                                      nop
@@ -64,7 +65,7 @@ off_0998:
 .proc main_05
 09B6:   06009400                                                                                if                      0, off_0A4E
 09BA:   1D060401                                                                                work_copy               6, 4, 1
-09BE:   23001A050000                                                                            cmp                     0, 26, CMP_NE, 0
+09BE:   23001A050000                                                                            cmp                     0, V_CUT, CMP_NE, 0
 09C4:   131A8000                                                                                switch                  26, off_0A48
 09C8:   140008000000                                                                            case                    0, off_09D6, 0
 09CE:   510100013C40                                                                            sce_bgm_control         1, 0, 1, 60, 64
@@ -114,7 +115,7 @@ off_0A46:
 0A46:   1600                                                                                    eswitch                 0
 
 off_0A48:
-0A48:   25061A                                                                                  copy                    6, 26
+0A48:   25061A                                                                                  copy                    V_06, V_CUT
 0A4B:   00                                                                                      nop
 0A4C:   08                                                                                      endif
 0A4D:   00                                                                                      nop
@@ -124,8 +125,8 @@ off_0A4E:
 
 .proc main_06
 0A50:   02                                                                                      evt_next
-0A51:   22020701                                                                                set                     2, 7, 1
-0A55:   22011B01                                                                                set                     1, 27, 1
+0A51:   22020701                                                                                set                     FG_STATE, 7, 1
+0A55:   22011B01                                                                                set                     FG_GAME, 27, 1
 0A59:   2903                                                                                    cut_chg                 3
 0A5B:   2E0100                                                                                  work_set                WK_PLAYER, 0
 0A5E:   320087D890E8B9FD                                                                        pos_set                 0, -10105, -6000, -583
@@ -134,17 +135,17 @@ off_0A4E:
 0A72:   04FF1808                                                                                evt_exec                255, I_GOSUB, main_08
 0A76:   090A0A00                                                                                sleep                   10, 10
 0A7A:   04FF1807                                                                                evt_exec                255, I_GOSUB, main_07
-0A7E:   24040000                                                                                save                    4, 0
+0A7E:   24040000                                                                                save                    V_04, 0
 0A82:   0D001E000A00                                                                            for                     0, off_0AA6, 10
-0A88:   3D100C                                                                                  member_copy             16, 12
+0A88:   3D100C                                                                                  member_copy             V_TEMP, 12
 0A8B:   00                                                                                      nop
-0A8C:   27001004                                                                                calc2                   OP_ADD, 16, 4
-0A90:   350C10                                                                                  member_set2             12, 16
+0A8C:   27001004                                                                                calc2                   OP_ADD, V_TEMP, V_04
+0A90:   350C10                                                                                  member_set2             12, V_TEMP
 0A93:   00                                                                                      nop
-0A94:   251004                                                                                  copy                    16, 4
+0A94:   251004                                                                                  copy                    V_TEMP, V_04
 0A97:   00                                                                                      nop
-0A98:   260000105A00                                                                            calc                    0, OP_ADD, 16, 90
-0A9E:   250410                                                                                  copy                    4, 16
+0A98:   260000105A00                                                                            calc                    0, OP_ADD, V_TEMP, 90
+0A9E:   250410                                                                                  copy                    V_04, V_TEMP
 0AA1:   00                                                                                      nop
 0AA2:   02                                                                                      evt_next
 0AA3:   00                                                                                      nop
@@ -155,27 +156,27 @@ off_0AA6:
 0AAA:   36021D00000087D80000B9FD                                                                se_on                   2, 29, 0, -10105, 0, -583
 0AB6:   8A0003000000                                                                            nop_8a                  0, 3, 0, 0, 0
 0ABC:   8BFF05000000                                                                            nop_8b                  255, 5, 0, 0, 0
-0AC2:   3D100C                                                                                  member_copy             16, 12
+0AC2:   3D100C                                                                                  member_copy             V_TEMP, 12
 0AC5:   00                                                                                      nop
-0AC6:   27001004                                                                                calc2                   OP_ADD, 16, 4
-0ACA:   350C10                                                                                  member_set2             12, 16
+0AC6:   27001004                                                                                calc2                   OP_ADD, V_TEMP, V_04
+0ACA:   350C10                                                                                  member_set2             12, V_TEMP
 0ACD:   00                                                                                      nop
-0ACE:   251004                                                                                  copy                    16, 4
+0ACE:   251004                                                                                  copy                    V_TEMP, V_04
 0AD1:   00                                                                                      nop
-0AD2:   260000105A00                                                                            calc                    0, OP_ADD, 16, 90
-0AD8:   250410                                                                                  copy                    4, 16
+0AD2:   260000105A00                                                                            calc                    0, OP_ADD, V_TEMP, 90
+0AD8:   250410                                                                                  copy                    V_04, V_TEMP
 0ADB:   00                                                                                      nop
 0ADC:   02                                                                                      evt_next
 0ADD:   00                                                                                      nop
-0ADE:   3D100C                                                                                  member_copy             16, 12
+0ADE:   3D100C                                                                                  member_copy             V_TEMP, 12
 0AE1:   00                                                                                      nop
-0AE2:   27001004                                                                                calc2                   OP_ADD, 16, 4
-0AE6:   350C10                                                                                  member_set2             12, 16
+0AE2:   27001004                                                                                calc2                   OP_ADD, V_TEMP, V_04
+0AE6:   350C10                                                                                  member_set2             12, V_TEMP
 0AE9:   00                                                                                      nop
-0AEA:   251004                                                                                  copy                    16, 4
+0AEA:   251004                                                                                  copy                    V_TEMP, V_04
 0AED:   00                                                                                      nop
-0AEE:   260000105A00                                                                            calc                    0, OP_ADD, 16, 90
-0AF4:   250410                                                                                  copy                    4, 16
+0AEE:   260000105A00                                                                            calc                    0, OP_ADD, V_TEMP, 90
+0AF4:   250410                                                                                  copy                    V_04, V_TEMP
 0AF7:   00                                                                                      nop
 0AF8:   02                                                                                      evt_next
 0AF9:   00                                                                                      nop
@@ -220,8 +221,8 @@ off_0AA6:
 0BD8:   2E0100                                                                                  work_set                WK_PLAYER, 0
 0BDB:   42                                                                                      plc_ret
 0BDC:   3C01                                                                                    cut_auto                1
-0BDE:   22020700                                                                                set                     2, 7, 0
-0BE2:   22011B00                                                                                set                     1, 27, 0
+0BDE:   22020700                                                                                set                     FG_STATE, 7, 0
+0BE2:   22011B00                                                                                set                     FG_GAME, 27, 0
 0BE6:   0100                                                                                    evt_end                 0
 
 .proc main_07
@@ -243,22 +244,22 @@ off_0AA6:
 0C5D:   00                                                                                      nop
 0C5E:   3200CBD5BCE9B9FD                                                                        pos_set                 0, -10805, -5700, -583
 0C66:   3300000000000000                                                                        dir_set                 0, 0, 0, 0
-0C6E:   24050000                                                                                save                    5, 0
+0C6E:   24050000                                                                                save                    V_05, 0
 0C72:   0D002C000900                                                                            for                     0, off_0CA4, 9
-0C78:   3D100C                                                                                  member_copy             16, 12
+0C78:   3D100C                                                                                  member_copy             V_TEMP, 12
 0C7B:   00                                                                                      nop
-0C7C:   27001005                                                                                calc2                   OP_ADD, 16, 5
-0C80:   350C10                                                                                  member_set2             12, 16
+0C7C:   27001005                                                                                calc2                   OP_ADD, V_TEMP, V_05
+0C80:   350C10                                                                                  member_set2             12, V_TEMP
 0C83:   00                                                                                      nop
-0C84:   3D1010                                                                                  member_copy             16, 16
+0C84:   3D1010                                                                                  member_copy             V_TEMP, 16
 0C87:   00                                                                                      nop
-0C88:   260000102800                                                                            calc                    0, OP_ADD, 16, 40
-0C8E:   351010                                                                                  member_set2             16, 16
+0C88:   260000102800                                                                            calc                    0, OP_ADD, V_TEMP, 40
+0C8E:   351010                                                                                  member_set2             16, V_TEMP
 0C91:   00                                                                                      nop
-0C92:   251005                                                                                  copy                    16, 5
+0C92:   251005                                                                                  copy                    V_TEMP, V_05
 0C95:   00                                                                                      nop
-0C96:   260000105A00                                                                            calc                    0, OP_ADD, 16, 90
-0C9C:   250510                                                                                  copy                    5, 16
+0C96:   260000105A00                                                                            calc                    0, OP_ADD, V_TEMP, 90
+0C9C:   250510                                                                                  copy                    V_05, V_TEMP
 0C9F:   00                                                                                      nop
 0CA0:   02                                                                                      evt_next
 0CA1:   00                                                                                      nop
@@ -266,20 +267,20 @@ off_0AA6:
 
 off_0CA4:
 0CA4:   0D002C000200                                                                            for                     0, off_0CD6, 2
-0CAA:   3D100C                                                                                  member_copy             16, 12
+0CAA:   3D100C                                                                                  member_copy             V_TEMP, 12
 0CAD:   00                                                                                      nop
-0CAE:   27001005                                                                                calc2                   OP_ADD, 16, 5
-0CB2:   350C10                                                                                  member_set2             12, 16
+0CAE:   27001005                                                                                calc2                   OP_ADD, V_TEMP, V_05
+0CB2:   350C10                                                                                  member_set2             12, V_TEMP
 0CB5:   00                                                                                      nop
-0CB6:   3D1010                                                                                  member_copy             16, 16
+0CB6:   3D1010                                                                                  member_copy             V_TEMP, 16
 0CB9:   00                                                                                      nop
-0CBA:   260001105000                                                                            calc                    0, OP_SUB, 16, 80
-0CC0:   351010                                                                                  member_set2             16, 16
+0CBA:   260001105000                                                                            calc                    0, OP_SUB, V_TEMP, 80
+0CC0:   351010                                                                                  member_set2             16, V_TEMP
 0CC3:   00                                                                                      nop
-0CC4:   251005                                                                                  copy                    16, 5
+0CC4:   251005                                                                                  copy                    V_TEMP, V_05
 0CC7:   00                                                                                      nop
-0CC8:   260000105A00                                                                            calc                    0, OP_ADD, 16, 90
-0CCE:   250510                                                                                  copy                    5, 16
+0CC8:   260000105A00                                                                            calc                    0, OP_ADD, V_TEMP, 90
+0CCE:   250510                                                                                  copy                    V_05, V_TEMP
 0CD1:   00                                                                                      nop
 0CD2:   02                                                                                      evt_next
 0CD3:   00                                                                                      nop
@@ -291,39 +292,39 @@ off_0CD6:
 0CE8:   8BFA05000000                                                                            nop_8b                  250, 5, 0, 0, 0
 0CEE:   8C00C8320A000500                                                                        nop_8c                  0, 200, 50, 10, 0, 5, 0
 0CF6:   340C0000                                                                                member_set              12, 0, 0
-0CFA:   3D100B                                                                                  member_copy             16, 11
+0CFA:   3D100B                                                                                  member_copy             V_TEMP, 11
 0CFD:   00                                                                                      nop
-0CFE:   260001103200                                                                            calc                    0, OP_SUB, 16, 50
-0D04:   350B10                                                                                  member_set2             11, 16
+0CFE:   260001103200                                                                            calc                    0, OP_SUB, V_TEMP, 50
+0D04:   350B10                                                                                  member_set2             11, V_TEMP
 0D07:   00                                                                                      nop
-0D08:   3D1010                                                                                  member_copy             16, 16
+0D08:   3D1010                                                                                  member_copy             V_TEMP, 16
 0D0B:   00                                                                                      nop
-0D0C:   260001105000                                                                            calc                    0, OP_SUB, 16, 80
-0D12:   351010                                                                                  member_set2             16, 16
+0D0C:   260001105000                                                                            calc                    0, OP_SUB, V_TEMP, 80
+0D12:   351010                                                                                  member_set2             16, V_TEMP
 0D15:   00                                                                                      nop
 0D16:   02                                                                                      evt_next
 0D17:   00                                                                                      nop
-0D18:   2405C0FE                                                                                save                    5, -320
+0D18:   2405C0FE                                                                                save                    V_05, -320
 0D1C:   0D003A000600                                                                            for                     0, off_0D5C, 6
-0D22:   3D100C                                                                                  member_copy             16, 12
+0D22:   3D100C                                                                                  member_copy             V_TEMP, 12
 0D25:   00                                                                                      nop
-0D26:   27001005                                                                                calc2                   OP_ADD, 16, 5
-0D2A:   350C10                                                                                  member_set2             12, 16
+0D26:   27001005                                                                                calc2                   OP_ADD, V_TEMP, V_05
+0D2A:   350C10                                                                                  member_set2             12, V_TEMP
 0D2D:   00                                                                                      nop
-0D2E:   3D100B                                                                                  member_copy             16, 11
+0D2E:   3D100B                                                                                  member_copy             V_TEMP, 11
 0D31:   00                                                                                      nop
-0D32:   260001103200                                                                            calc                    0, OP_SUB, 16, 50
-0D38:   350B10                                                                                  member_set2             11, 16
+0D32:   260001103200                                                                            calc                    0, OP_SUB, V_TEMP, 50
+0D38:   350B10                                                                                  member_set2             11, V_TEMP
 0D3B:   00                                                                                      nop
-0D3C:   3D1010                                                                                  member_copy             16, 16
+0D3C:   3D1010                                                                                  member_copy             V_TEMP, 16
 0D3F:   00                                                                                      nop
-0D40:   260001105000                                                                            calc                    0, OP_SUB, 16, 80
-0D46:   351010                                                                                  member_set2             16, 16
+0D40:   260001105000                                                                            calc                    0, OP_SUB, V_TEMP, 80
+0D46:   351010                                                                                  member_set2             16, V_TEMP
 0D49:   00                                                                                      nop
-0D4A:   251005                                                                                  copy                    16, 5
+0D4A:   251005                                                                                  copy                    V_TEMP, V_05
 0D4D:   00                                                                                      nop
-0D4E:   260000105A00                                                                            calc                    0, OP_ADD, 16, 90
-0D54:   250510                                                                                  copy                    5, 16
+0D4E:   260000105A00                                                                            calc                    0, OP_ADD, V_TEMP, 90
+0D54:   250510                                                                                  copy                    V_05, V_TEMP
 0D57:   00                                                                                      nop
 0D58:   02                                                                                      evt_next
 0D59:   00                                                                                      nop
@@ -331,25 +332,25 @@ off_0CD6:
 
 off_0D5C:
 0D5C:   0D003A000200                                                                            for                     0, off_0D9C, 2
-0D62:   3D100C                                                                                  member_copy             16, 12
+0D62:   3D100C                                                                                  member_copy             V_TEMP, 12
 0D65:   00                                                                                      nop
-0D66:   27001005                                                                                calc2                   OP_ADD, 16, 5
-0D6A:   350C10                                                                                  member_set2             12, 16
+0D66:   27001005                                                                                calc2                   OP_ADD, V_TEMP, V_05
+0D6A:   350C10                                                                                  member_set2             12, V_TEMP
 0D6D:   00                                                                                      nop
-0D6E:   3D100B                                                                                  member_copy             16, 11
+0D6E:   3D100B                                                                                  member_copy             V_TEMP, 11
 0D71:   00                                                                                      nop
-0D72:   260001102800                                                                            calc                    0, OP_SUB, 16, 40
-0D78:   350B10                                                                                  member_set2             11, 16
+0D72:   260001102800                                                                            calc                    0, OP_SUB, V_TEMP, 40
+0D78:   350B10                                                                                  member_set2             11, V_TEMP
 0D7B:   00                                                                                      nop
-0D7C:   3D1010                                                                                  member_copy             16, 16
+0D7C:   3D1010                                                                                  member_copy             V_TEMP, 16
 0D7F:   00                                                                                      nop
-0D80:   260000105000                                                                            calc                    0, OP_ADD, 16, 80
-0D86:   351010                                                                                  member_set2             16, 16
+0D80:   260000105000                                                                            calc                    0, OP_ADD, V_TEMP, 80
+0D86:   351010                                                                                  member_set2             16, V_TEMP
 0D89:   00                                                                                      nop
-0D8A:   251005                                                                                  copy                    16, 5
+0D8A:   251005                                                                                  copy                    V_TEMP, V_05
 0D8D:   00                                                                                      nop
-0D8E:   260000105A00                                                                            calc                    0, OP_ADD, 16, 90
-0D94:   250510                                                                                  copy                    5, 16
+0D8E:   260000105A00                                                                            calc                    0, OP_ADD, V_TEMP, 90
+0D94:   250510                                                                                  copy                    V_05, V_TEMP
 0D97:   00                                                                                      nop
 0D98:   02                                                                                      evt_next
 0D99:   00                                                                                      nop
@@ -360,87 +361,87 @@ off_0D9C:
 0DA0:   340C0000                                                                                member_set              12, 0, 0
 0DA4:   02                                                                                      evt_next
 0DA5:   00                                                                                      nop
-0DA6:   3D1010                                                                                  member_copy             16, 16
+0DA6:   3D1010                                                                                  member_copy             V_TEMP, 16
 0DA9:   00                                                                                      nop
-0DAA:   260000105000                                                                            calc                    0, OP_ADD, 16, 80
-0DB0:   351010                                                                                  member_set2             16, 16
+0DAA:   260000105000                                                                            calc                    0, OP_ADD, V_TEMP, 80
+0DB0:   351010                                                                                  member_set2             16, V_TEMP
 0DB3:   00                                                                                      nop
-0DB4:   3D100B                                                                                  member_copy             16, 11
+0DB4:   3D100B                                                                                  member_copy             V_TEMP, 11
 0DB7:   00                                                                                      nop
-0DB8:   260001100A00                                                                            calc                    0, OP_SUB, 16, 10
-0DBE:   350B10                                                                                  member_set2             11, 16
+0DB8:   260001100A00                                                                            calc                    0, OP_SUB, V_TEMP, 10
+0DBE:   350B10                                                                                  member_set2             11, V_TEMP
 0DC1:   00                                                                                      nop
 0DC2:   02                                                                                      evt_next
 0DC3:   00                                                                                      nop
-0DC4:   3D1010                                                                                  member_copy             16, 16
+0DC4:   3D1010                                                                                  member_copy             V_TEMP, 16
 0DC7:   00                                                                                      nop
-0DC8:   260000100000                                                                            calc                    0, OP_ADD, 16, 0
-0DCE:   351010                                                                                  member_set2             16, 16
+0DC8:   260000100000                                                                            calc                    0, OP_ADD, V_TEMP, 0
+0DCE:   351010                                                                                  member_set2             16, V_TEMP
 0DD1:   00                                                                                      nop
-0DD2:   3D100B                                                                                  member_copy             16, 11
+0DD2:   3D100B                                                                                  member_copy             V_TEMP, 11
 0DD5:   00                                                                                      nop
-0DD6:   260001100A00                                                                            calc                    0, OP_SUB, 16, 10
-0DDC:   350B10                                                                                  member_set2             11, 16
+0DD6:   260001100A00                                                                            calc                    0, OP_SUB, V_TEMP, 10
+0DDC:   350B10                                                                                  member_set2             11, V_TEMP
 0DDF:   00                                                                                      nop
 0DE0:   02                                                                                      evt_next
 0DE1:   00                                                                                      nop
-0DE2:   3D1010                                                                                  member_copy             16, 16
+0DE2:   3D1010                                                                                  member_copy             V_TEMP, 16
 0DE5:   00                                                                                      nop
-0DE6:   260001105000                                                                            calc                    0, OP_SUB, 16, 80
-0DEC:   351010                                                                                  member_set2             16, 16
+0DE6:   260001105000                                                                            calc                    0, OP_SUB, V_TEMP, 80
+0DEC:   351010                                                                                  member_set2             16, V_TEMP
 0DEF:   00                                                                                      nop
-0DF0:   3D100B                                                                                  member_copy             16, 11
+0DF0:   3D100B                                                                                  member_copy             V_TEMP, 11
 0DF3:   00                                                                                      nop
-0DF4:   260001100A00                                                                            calc                    0, OP_SUB, 16, 10
-0DFA:   350B10                                                                                  member_set2             11, 16
+0DF4:   260001100A00                                                                            calc                    0, OP_SUB, V_TEMP, 10
+0DFA:   350B10                                                                                  member_set2             11, V_TEMP
 0DFD:   00                                                                                      nop
 0DFE:   02                                                                                      evt_next
 0DFF:   00                                                                                      nop
-0E00:   3D1010                                                                                  member_copy             16, 16
+0E00:   3D1010                                                                                  member_copy             V_TEMP, 16
 0E03:   00                                                                                      nop
-0E04:   260000102800                                                                            calc                    0, OP_ADD, 16, 40
-0E0A:   351010                                                                                  member_set2             16, 16
+0E04:   260000102800                                                                            calc                    0, OP_ADD, V_TEMP, 40
+0E0A:   351010                                                                                  member_set2             16, V_TEMP
 0E0D:   00                                                                                      nop
-0E0E:   3D100B                                                                                  member_copy             16, 11
+0E0E:   3D100B                                                                                  member_copy             V_TEMP, 11
 0E11:   00                                                                                      nop
-0E12:   260001100500                                                                            calc                    0, OP_SUB, 16, 5
-0E18:   350B10                                                                                  member_set2             11, 16
+0E12:   260001100500                                                                            calc                    0, OP_SUB, V_TEMP, 5
+0E18:   350B10                                                                                  member_set2             11, V_TEMP
 0E1B:   00                                                                                      nop
 0E1C:   02                                                                                      evt_next
 0E1D:   00                                                                                      nop
-0E1E:   3D1010                                                                                  member_copy             16, 16
+0E1E:   3D1010                                                                                  member_copy             V_TEMP, 16
 0E21:   00                                                                                      nop
-0E22:   260000100000                                                                            calc                    0, OP_ADD, 16, 0
-0E28:   351010                                                                                  member_set2             16, 16
+0E22:   260000100000                                                                            calc                    0, OP_ADD, V_TEMP, 0
+0E28:   351010                                                                                  member_set2             16, V_TEMP
 0E2B:   00                                                                                      nop
-0E2C:   3D100B                                                                                  member_copy             16, 11
+0E2C:   3D100B                                                                                  member_copy             V_TEMP, 11
 0E2F:   00                                                                                      nop
-0E30:   260001100500                                                                            calc                    0, OP_SUB, 16, 5
-0E36:   350B10                                                                                  member_set2             11, 16
+0E30:   260001100500                                                                            calc                    0, OP_SUB, V_TEMP, 5
+0E36:   350B10                                                                                  member_set2             11, V_TEMP
 0E39:   00                                                                                      nop
 0E3A:   02                                                                                      evt_next
 0E3B:   00                                                                                      nop
-0E3C:   3D1010                                                                                  member_copy             16, 16
+0E3C:   3D1010                                                                                  member_copy             V_TEMP, 16
 0E3F:   00                                                                                      nop
-0E40:   260001102800                                                                            calc                    0, OP_SUB, 16, 40
-0E46:   351010                                                                                  member_set2             16, 16
+0E40:   260001102800                                                                            calc                    0, OP_SUB, V_TEMP, 40
+0E46:   351010                                                                                  member_set2             16, V_TEMP
 0E49:   00                                                                                      nop
-0E4A:   3D100B                                                                                  member_copy             16, 11
+0E4A:   3D100B                                                                                  member_copy             V_TEMP, 11
 0E4D:   00                                                                                      nop
-0E4E:   260001100500                                                                            calc                    0, OP_SUB, 16, 5
-0E54:   350B10                                                                                  member_set2             11, 16
+0E4E:   260001100500                                                                            calc                    0, OP_SUB, V_TEMP, 5
+0E54:   350B10                                                                                  member_set2             11, V_TEMP
 0E57:   00                                                                                      nop
 0E58:   02                                                                                      evt_next
 0E59:   00                                                                                      nop
-0E5A:   3D1010                                                                                  member_copy             16, 16
+0E5A:   3D1010                                                                                  member_copy             V_TEMP, 16
 0E5D:   00                                                                                      nop
-0E5E:   260000101400                                                                            calc                    0, OP_ADD, 16, 20
-0E64:   351010                                                                                  member_set2             16, 16
+0E5E:   260000101400                                                                            calc                    0, OP_ADD, V_TEMP, 20
+0E64:   351010                                                                                  member_set2             16, V_TEMP
 0E67:   00                                                                                      nop
-0E68:   3D100B                                                                                  member_copy             16, 11
+0E68:   3D100B                                                                                  member_copy             V_TEMP, 11
 0E6B:   00                                                                                      nop
-0E6C:   260001100200                                                                            calc                    0, OP_SUB, 16, 2
-0E72:   350B10                                                                                  member_set2             11, 16
+0E6C:   260001100200                                                                            calc                    0, OP_SUB, V_TEMP, 2
+0E72:   350B10                                                                                  member_set2             11, V_TEMP
 0E75:   00                                                                                      nop
 0E76:   02                                                                                      evt_next
 0E77:   00                                                                                      nop
@@ -452,7 +453,7 @@ off_0D9C:
 0E82:   02                                                                                      evt_next
 0E83:   00                                                                                      nop
 0E84:   1204                                                                                    edwhile                 off_0E8A
-0E86:   21052000                                                                                ck                      5, 32, 0
+0E86:   21052000                                                                                ck                      FG_GENERAL_2, 32, 0
 
 off_0E8A:
 0E8A:   0100                                                                                    evt_end                 0

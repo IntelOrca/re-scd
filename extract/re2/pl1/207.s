@@ -1,8 +1,9 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
     if                      0, off_0F16
-    ck                      1, 6, 1
+    ck                      FG_GAME, F_BONUS, 1
     evt_end                 0
     endif
     nop
@@ -22,34 +23,33 @@ off_0F16:
     item_aot_set            6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14039, -10552, 2550, 1740, ITEM_HERBG, 1, 167, 1, 1
     obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -13728, 0, -10037, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     if                      0, off_10D4
-    ck                      1, 1, 0
-    sce_em_set              0, 0, ENEMY_ZOMBIEGIRL, 6, 0, 0, 44, 0, 71, -25621, 0, -20311, 213, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 0, 0, 0, 42, 1, 72, -21898, 0, -12962, 3049, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 1, 115, -17938, 0, -10646, 1597, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 1, 116, -25817, 0, -12071, 4491, 0, 0
+    ck                      FG_GAME, F_SCENARIO, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_GIRL, 6, 0, 0, 44, 0, 71, -25621, 0, -20311, 213, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 42, 1, 72, -21898, 0, -12962, 3049, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 42, 1, 115, -17938, 0, -10646, 1597, 0, 0
+    sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 42, 1, 116, -25817, 0, -12071, 4491, 0, 0
     endif
     nop
 
 off_10D4:
     evt_end                 0
-    db                      0x00, 0x78
 
 .main
-.proc main_00
+.proc main
     if                      0, off_10F2
-    ck                      1, 6, 1
-    gosub                   5
+    ck                      FG_GAME, F_BONUS, 1
+    gosub                   main_05
     evt_end                 0
     endif
     nop
 
 off_10F2:
-    gosub                   2
+    gosub                   main_02
     evt_end                 0
 
-.proc main_01
+.proc aot
     if                      0, off_1102
-    ck                      1, 6, 1
+    ck                      FG_GAME, F_BONUS, 1
     evt_end                 0
     endif
     nop
@@ -59,18 +59,18 @@ off_1102:
 
 .proc main_02
     if                      0, off_1166
-    ck                      1, 1, 1
+    ck                      FG_GAME, F_SCENARIO, 1
     if                      0, off_1138
-    ck                      29, 9, 1
+    ck                      FG_LOCK, 9, 1
     if                      0, off_1132
-    ck                      4, 153, 1
+    ck                      FG_GENERAL_1, 153, 1
     if                      0, off_112A
-    ck                      8, 119, 0
-    gosub                   3
+    ck                      FG_ITEM, 119, 0
+    gosub                   main_03
     else                    0, off_112E
 
 off_112A:
-    gosub                   4
+    gosub                   main_04
     nop
     nop
 
@@ -86,16 +86,16 @@ off_1134:
 
 off_1138:
     if                      0, off_1162
-    ck                      29, 10, 0
+    ck                      FG_LOCK, 10, 0
     if                      0, off_115E
-    ck                      4, 153, 1
+    ck                      FG_GENERAL_1, 153, 1
     if                      0, off_1156
-    ck                      8, 119, 0
-    gosub                   3
+    ck                      FG_ITEM, 119, 0
+    gosub                   main_03
     else                    0, off_115A
 
 off_1156:
-    gosub                   4
+    gosub                   main_04
     nop
     nop
 
@@ -122,16 +122,16 @@ off_1166:
     evt_end                 0
 
 .proc main_03
-    sce_em_set              0, 0, ENEMY_ZOMBIEGIRL, 6, 0, 0, 44, 0, 71, -25766, 0, -12292, 3629, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 1, 72, -23546, 0, -13098, 6551, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 1, 115, -25236, 0, -19817, 3809, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 1, 116, -22263, 0, -10976, 1649, 0, 0
-    sce_em_set              0, 4, ENEMY_ZOMBIERANDOM, 6, 0, 0, 42, 1, 183, -25799, 0, -10318, -943, 0, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_GIRL, 6, 0, 0, 44, 0, 71, -25766, 0, -12292, 3629, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 42, 1, 72, -23546, 0, -13098, 6551, 0, 0
+    sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 42, 1, 115, -25236, 0, -19817, 3809, 0, 0
+    sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 42, 1, 116, -22263, 0, -10976, 1649, 0, 0
+    sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 42, 1, 183, -25799, 0, -10318, -943, 0, 0
     evt_end                 0
 
 .proc main_04
-    sce_em_set              0, 0, ENEMY_ZOMBIEGIRL, 0, 0, 0, 44, 0, 186, -14191, 0, -10263, 1747, 0, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIERANDOM, 0, 0, 0, 42, 1, 187, -26136, 0, -10927, 281, 0, 0
+    sce_em_set              0, 0, ENEMY_ZOMBIE_GIRL, 0, 0, 0, 44, 0, 186, -14191, 0, -10263, 1747, 0, 0
+    sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 42, 1, 187, -26136, 0, -10927, 281, 0, 0
     evt_end                 0
 
 .proc main_05
@@ -139,8 +139,7 @@ off_1166:
     aot_set                 2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16439, -14352, 2710, 1090, 7, 0, 0, 0, 255, 255
     door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23368, -9310, 2000, 3200, 7390, 0, 944, -3136, 0, 12, 0, 0, 15, 4, 0, 0, UNLOCKED, 0
     aot_set                 4, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27156, -26834, 1200, 3370, 7, 0, 0, 0, 255, 255
-    sce_em_set              0, 0, ENEMY_IVYPURPLE, 17, 0, 0, 19, 0, 117, -25182, 0, -11737, 985, 0, 0
-    sce_em_set              0, 1, ENEMY_IVYPURPLE, 17, 0, 0, 19, 0, 118, -23089, 0, -12566, 1773, 0, 0
+    sce_em_set              0, 0, ENEMY_IVY_PURPLE, 17, 0, 0, 19, 0, 117, -25182, 0, -11737, 985, 0, 0
+    sce_em_set              0, 1, ENEMY_IVY_PURPLE, 17, 0, 0, 19, 0, 118, -23089, 0, -12566, 1773, 0, 0
     sce_em_set              0, 2, ENEMY_VINES, 0, 32, 0, 0, 0, 255, -19680, 0, -11273, 150, 0, 0
     evt_end                 0
-    db                      0x48, 0x00

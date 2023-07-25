@@ -1,50 +1,50 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 0F0A:   3B0001310000C356DDEA0807480D07AF0000ABA17008050D0000310000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 22211, -5411, 1800, 3400, -20729, 0, -24149, 2160, 5, 13, 0, 0, 49, 0, 0, 0, UNLOCKED, 0
 0F2A:   680101310000D318C0D1D020B8D9AC2678D3DC1EA8CBD90E00009FAB8F0A05080B00250000000000        door_aot_set_4p         1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 6355, -11840, 8400, -9800, 9900, -11400, 7900, -13400, 3801, 0, -21601, 2703, 5, 8, 11, 0, 37, 0, 0, 0, UNLOCKED, 0
 0F52:   6802013100005039EFB110404CB95C4464B5263E5CAE98A0000030C8B10F05100000290100956100        door_aot_set_4p         2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 14672, -19985, 16400, -18100, 17500, -19100, 15910, -20900, -24424, 0, -14288, 4017, 5, 16, 0, 0, 41, 1, 0, 149, ITEM_UMBRELLAKEYCARD, 0
 0F7A:   3B03013100005C127797C805B20C22B60000A4C597F6050F0100260000000000                        door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 4700, -26761, 1480, 3250, -18910, 0, -14940, -2409, 5, 15, 1, 0, 38, 0, 0, 0, UNLOCKED, 0
 0F9A:   680401310000D318C0D1D020B8D9AC2678D3DC1EA8CBD90E00009FAB8F0A05110B00250000000000        door_aot_set_4p         4, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 6355, -11840, 8400, -9800, 9900, -11400, 7900, -13400, 3801, 0, -21601, 2703, 5, 17, 11, 0, 37, 0, 0, 0, UNLOCKED, 0
 0FC2:   06001000                                                                                if                      0, off_0FD6
-0FC6:   21048E00                                                                                ck                      4, 142, 0
+0FC6:   21048E00                                                                                ck                      FG_GENERAL_1, 142, 0
 0FCA:   4603043103000000FFFF                                                                    aot_reset               3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 0, 0, 255, 255
 0FD4:   08                                                                                      endif
 0FD5:   00                                                                                      nop
 
 off_0FD6:
 0FD6:   06000A00                                                                                if                      0, off_0FE4
-0FDA:   2104A401                                                                                ck                      4, 164, 1
-0FDE:   22010C01                                                                                set                     1, 12, 1
+0FDA:   2104A401                                                                                ck                      FG_GENERAL_1, 164, 1
+0FDE:   22010C01                                                                                set                     FG_GAME, 12, 1
 0FE2:   08                                                                                      endif
 0FE3:   00                                                                                      nop
 
 off_0FE4:
 0FE4:   0100                                                                                    evt_end                 0
-0FE6:   0000                                                                                    db                      0x00, 0x00
 
 .main
-.proc main_00
-102C:   180B                                                                                    gosub                   11
-102E:   1802                                                                                    gosub                   2
-1030:   1805                                                                                    gosub                   5
+.proc main
+102C:   180B                                                                                    gosub                   main_0B
+102E:   1802                                                                                    gosub                   main_02
+1030:   1805                                                                                    gosub                   main_05
 1032:   06000800                                                                                if                      0, off_103E
-1036:   21010100                                                                                ck                      1, 1, 0
-103A:   180A                                                                                    gosub                   10
+1036:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
+103A:   180A                                                                                    gosub                   main_0A
 103C:   08                                                                                      endif
 103D:   00                                                                                      nop
 
 off_103E:
 103E:   0100                                                                                    evt_end                 0
 
-.proc main_01
+.proc aot
 1040:   0100                                                                                    evt_end                 0
 
 .proc main_02
 1042:   2D0000000000000000000A000000C42B0000CAB3000000F60000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 0, 11204, 0, -19510, 0, -2560, 0, 0, 0, 0, 0, 0, 0, 0, 0
 1068:   2C05053100007E36DAA7B0044006FF0018030000                                                aot_set                 5, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 13950, -22566, 1200, 1600, 255, 0, I_GOSUB, main_03, 0, 0
 107C:   06003E00                                                                                if                      0, off_10BE
-1080:   21046000                                                                                ck                      4, 96, 0
+1080:   21046000                                                                                ck                      FG_GENERAL_1, 96, 0
 1084:   670A04310000222B73B31E2DAEB6A438BAAA7E367CA70C000000FFFF                                aot_set_4p              10, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 11042, -19597, 11550, -18770, 14500, -21830, 13950, -22660, 12, 0, 0, 0, 255, 255
 10A0:   2E0400                                                                                  work_set                WK_OBJECT, 0
 10A3:   00                                                                                      nop
@@ -68,9 +68,9 @@ off_10BE:
 
 off_10DC:
 10DC:   06004000                                                                                if                      0, off_1120
-10E0:   21046A01                                                                                ck                      4, 106, 1
+10E0:   21046A01                                                                                ck                      FG_GENERAL_1, 106, 1
 10E4:   06001E00                                                                                if                      0, off_1106
-10E8:   21046000                                                                                ck                      4, 96, 0
+10E8:   21046000                                                                                ck                      FG_GENERAL_1, 96, 0
 10EC:   7501160000000010FE384EF876AD000000FE00000000                                            sce_espr3d_on2          1, 22, 0, 0, 0, 0, 16, 254, 56, 78, 248, 118, 173, 0, 0, 0, 254, 0, 0, 0, 0
 1102:   07001C00                                                                                else                    0, off_111E
 
@@ -88,15 +88,15 @@ off_1120:
 
 .proc main_03
 1122:   0600F200                                                                                if                      0, off_1218
-1126:   21046000                                                                                ck                      4, 96, 0
+1126:   21046000                                                                                ck                      FG_GENERAL_1, 96, 0
 112A:   2B000000FFFF                                                                            message_on              0, 0, 0, 255, 255
 1130:   02                                                                                      evt_next
 1131:   00                                                                                      nop
 1132:   0600D000                                                                                if                      0, off_1206
-1136:   210B1F00                                                                                ck                      11, 31, 0
+1136:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
 113A:   36020A010100000000000000                                                                se_on                   2, 266, 1, 0, 0, 0
 1146:   06001000                                                                                if                      0, off_115A
-114A:   21046A00                                                                                ck                      4, 106, 0
+114A:   21046A00                                                                                ck                      FG_GENERAL_1, 106, 0
 114E:   2B000100FFFF                                                                            message_on              0, 1, 0, 255, 255
 1154:   02                                                                                      evt_next
 1155:   00                                                                                      nop
@@ -107,8 +107,8 @@ off_115A:
 1162:   8B8C4B006400                                                                            nop_8b                  140, 75, 0, 100, 0
 1168:   8A000800AF00                                                                            nop_8a                  0, 8, 0, 175, 0
 116E:   8C00A0003200AF00                                                                        nop_8c                  0, 160, 0, 50, 0, 175, 0
-1176:   22020701                                                                                set                     2, 7, 1
-117A:   22011B01                                                                                set                     1, 27, 1
+1176:   22020701                                                                                set                     FG_STATE, 7, 1
+117A:   22011B01                                                                                set                     FG_GAME, 27, 1
 117E:   460A0000000000000000                                                                    aot_reset               10, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
 1188:   2E0400                                                                                  work_set                WK_OBJECT, 0
 118B:   00                                                                                      nop
@@ -125,7 +125,7 @@ off_115A:
 11C4:   36020B000400000000000000                                                                se_on                   2, 11, 4, 0, 0, 0
 11D0:   04FF1804                                                                                evt_exec                255, I_GOSUB, main_04
 11D4:   0F040800                                                                                while                   4, off_11E0
-11D8:   21050000                                                                                ck                      5, 0, 0
+11D8:   21050000                                                                                ck                      FG_GENERAL_2, 0, 0
 11DC:   02                                                                                      evt_next
 11DD:   00                                                                                      nop
 11DE:   1000                                                                                    ewhile                  0
@@ -138,8 +138,8 @@ off_11E0:
 11EC:   2E0100                                                                                  work_set                WK_PLAYER, 0
 11EF:   00                                                                                      nop
 11F0:   32004D350000E4B0                                                                        pos_set                 0, 13645, 0, -20252
-11F8:   22020700                                                                                set                     2, 7, 0
-11FC:   22011B00                                                                                set                     1, 27, 0
+11F8:   22020700                                                                                set                     FG_STATE, 7, 0
+11FC:   22011B00                                                                                set                     FG_GAME, 27, 0
 1200:   00                                                                                      nop
 1201:   00                                                                                      nop
 
@@ -199,7 +199,7 @@ off_1262:
 1262:   0E00                                                                                    next                    0
 
 off_1264:
-1264:   22046001                                                                                set                     4, 96, 1
+1264:   22046001                                                                                set                     FG_GENERAL_1, 96, 1
 1268:   22200601                                                                                set                     32, 6, 1
 126C:   0D0022000700                                                                            for                     0, off_1294, 7
 1272:   2F07FEFF                                                                                speed_set               7, -2
@@ -250,16 +250,16 @@ off_12CA:
 12CA:   0E00                                                                                    next                    0
 
 off_12CC:
-12CC:   22050001                                                                                set                     5, 0, 1
+12CC:   22050001                                                                                set                     FG_GENERAL_2, 0, 1
 12D0:   3200D007D007D007                                                                        pos_set                 0, 2000, 2000, 2000
 12D8:   0100                                                                                    evt_end                 0
 
 .proc main_05
 12DA:   2C06053100001E189B9266035604FF0018060000                                                aot_set                 6, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 6174, -28005, 870, 1110, 255, 0, I_GOSUB, main_06, 0, 0
 12EE:   06003600                                                                                if                      0, off_1328
-12F2:   21010100                                                                                ck                      1, 1, 0
+12F2:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
 12F6:   06001800                                                                                if                      0, off_1312
-12FA:   21048F01                                                                                ck                      4, 143, 1
+12FA:   21048F01                                                                                ck                      FG_GENERAL_1, 143, 1
 12FE:   640216180000000A7A1C26F86A960000                                                        sce_espr_on2            2, 22, 24, 0, 0, 0, 10, 122, 28, 38, 248, 106, 150, 0, 0
 130E:   07001600                                                                                else                    0, off_1324
 
@@ -273,9 +273,9 @@ off_1324:
 
 off_1328:
 1328:   06003600                                                                                if                      0, off_1362
-132C:   211D0200                                                                                ck                      29, 2, 0
+132C:   211D0200                                                                                ck                      FG_LOCK, 2, 0
 1330:   06001800                                                                                if                      0, off_134C
-1334:   21048F01                                                                                ck                      4, 143, 1
+1334:   21048F01                                                                                ck                      FG_GENERAL_1, 143, 1
 1338:   640216180000000A7A1C26F86A960000                                                        sce_espr_on2            2, 22, 24, 0, 0, 0, 10, 122, 28, 38, 248, 106, 150, 0, 0
 1348:   07001600                                                                                else                    0, off_135E
 
@@ -289,7 +289,7 @@ off_135E:
 
 off_1362:
 1362:   06001800                                                                                if                      0, off_137E
-1366:   21048F01                                                                                ck                      4, 143, 1
+1366:   21048F01                                                                                ck                      FG_GENERAL_1, 143, 1
 136A:   640216080000000C141E30F89C960000                                                        sce_espr_on2            2, 22, 8, 0, 0, 0, 12, 20, 30, 48, 248, 156, 150, 0, 0
 137A:   07001600                                                                                else                    0, off_1390
 
@@ -311,38 +311,38 @@ off_1394:
 
 .proc main_06
 1396:   06001001                                                                                if                      0, off_14AA
-139A:   21010100                                                                                ck                      1, 1, 0
+139A:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
 139E:   2B000400FFFF                                                                            message_on              0, 4, 0, 255, 255
 13A4:   02                                                                                      evt_next
 13A5:   00                                                                                      nop
 13A6:   0600C000                                                                                if                      0, off_146A
-13AA:   21048F00                                                                                ck                      4, 143, 0
+13AA:   21048F00                                                                                ck                      FG_GENERAL_1, 143, 0
 13AE:   2B000500FFFF                                                                            message_on              0, 5, 0, 255, 255
 13B4:   02                                                                                      evt_next
 13B5:   00                                                                                      nop
 13B6:   06009E00                                                                                if                      0, off_1458
-13BA:   210B1F00                                                                                ck                      11, 31, 0
-13BE:   1808                                                                                    gosub                   8
+13BA:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+13BE:   1808                                                                                    gosub                   main_08
 13C0:   06002400                                                                                if                      0, off_13E8
-13C4:   21045B00                                                                                ck                      4, 91, 0
+13C4:   21045B00                                                                                ck                      FG_GENERAL_1, 91, 0
 13C8:   360212000100000000000000                                                                se_on                   2, 18, 1, 0, 0, 0
 13D4:   2B000600FFFF                                                                            message_on              0, 6, 0, 255, 255
 13DA:   02                                                                                      evt_next
 13DB:   00                                                                                      nop
-13DC:   1809                                                                                    gosub                   9
-13DE:   17FFFF007C02                                                                            goto                    255, 255, 0, off_165E
+13DC:   1809                                                                                    gosub                   main_09
+13DE:   17FFFF007C02                                                                            goto                    255, 255, 0, off_165A
 13E4:   07003600                                                                                else                    0, off_141A
 
 off_13E8:
 13E8:   360213000100000000000000                                                                se_on                   2, 19, 1, 0, 0, 0
 13F4:   2B000700FFFF                                                                            message_on              0, 7, 0, 255, 255
 13FA:   02                                                                                      evt_next
-13FB:   221D0201                                                                                set                     29, 2, 1
-13FF:   22048F01                                                                                set                     4, 143, 1
+13FB:   221D0201                                                                                set                     FG_LOCK, 2, 1
+13FF:   22048F01                                                                                set                     FG_GENERAL_1, 143, 1
 1403:   6502                                                                                    sce_espr_kill2          2
 1405:   00                                                                                      nop
 1406:   640216180000000A7A1C26F86A960000                                                        sce_espr_on2            2, 22, 24, 0, 0, 0, 10, 122, 28, 38, 248, 106, 150, 0, 0
-1416:   1809                                                                                    gosub                   9
+1416:   1809                                                                                    gosub                   main_09
 1418:   00                                                                                      nop
 1419:   00                                                                                      nop
 
@@ -351,13 +351,13 @@ off_141A:
 1420:   02                                                                                      evt_next
 1421:   00                                                                                      nop
 1422:   06002000                                                                                if                      0, off_1446
-1426:   210B1F00                                                                                ck                      11, 31, 0
-142A:   1808                                                                                    gosub                   8
+1426:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+142A:   1808                                                                                    gosub                   main_08
 142C:   360212000100000000000000                                                                se_on                   2, 18, 1, 0, 0, 0
 1438:   2B000900FFFF                                                                            message_on              0, 9, 0, 255, 255
 143E:   02                                                                                      evt_next
 143F:   00                                                                                      nop
-1440:   1809                                                                                    gosub                   9
+1440:   1809                                                                                    gosub                   main_09
 1442:   07001200                                                                                else                    0, off_1454
 
 off_1446:
@@ -381,13 +381,13 @@ off_146A:
 1470:   02                                                                                      evt_next
 1471:   00                                                                                      nop
 1472:   06002000                                                                                if                      0, off_1496
-1476:   210B1F00                                                                                ck                      11, 31, 0
-147A:   1808                                                                                    gosub                   8
+1476:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+147A:   1808                                                                                    gosub                   main_08
 147C:   360212000100000000000000                                                                se_on                   2, 18, 1, 0, 0, 0
 1488:   2B000900FFFF                                                                            message_on              0, 9, 0, 255, 255
 148E:   02                                                                                      evt_next
 148F:   00                                                                                      nop
-1490:   1809                                                                                    gosub                   9
+1490:   1809                                                                                    gosub                   main_09
 1492:   07001200                                                                                else                    0, off_14A4
 
 off_1496:
@@ -404,7 +404,7 @@ off_14A6:
 
 off_14AA:
 14AA:   06000E00                                                                                if                      0, off_14BC
-14AE:   21048E00                                                                                ck                      4, 142, 0
+14AE:   21048E00                                                                                ck                      FG_GENERAL_1, 142, 0
 14B2:   2B000400FFFF                                                                            message_on              0, 4, 0, 255, 255
 14B8:   02                                                                                      evt_next
 14B9:   00                                                                                      nop
@@ -413,33 +413,33 @@ off_14AA:
 
 off_14BC:
 14BC:   0600FE00                                                                                if                      0, off_15BE
-14C0:   211D0200                                                                                ck                      29, 2, 0
+14C0:   211D0200                                                                                ck                      FG_LOCK, 2, 0
 14C4:   0600B600                                                                                if                      0, off_157E
-14C8:   21048F00                                                                                ck                      4, 143, 0
+14C8:   21048F00                                                                                ck                      FG_GENERAL_1, 143, 0
 14CC:   2B000500FFFF                                                                            message_on              0, 5, 0, 255, 255
 14D2:   02                                                                                      evt_next
 14D3:   00                                                                                      nop
 14D4:   06009400                                                                                if                      0, off_156C
-14D8:   210B1F00                                                                                ck                      11, 31, 0
-14DC:   1808                                                                                    gosub                   8
+14D8:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+14DC:   1808                                                                                    gosub                   main_08
 14DE:   06001E00                                                                                if                      0, off_1500
-14E2:   21045B00                                                                                ck                      4, 91, 0
+14E2:   21045B00                                                                                ck                      FG_GENERAL_1, 91, 0
 14E6:   360212000100000000000000                                                                se_on                   2, 18, 1, 0, 0, 0
 14F2:   2B000600FFFF                                                                            message_on              0, 6, 0, 255, 255
 14F8:   02                                                                                      evt_next
 14F9:   00                                                                                      nop
-14FA:   1809                                                                                    gosub                   9
+14FA:   1809                                                                                    gosub                   main_09
 14FC:   07003200                                                                                else                    0, off_152E
 
 off_1500:
 1500:   360213000100000000000000                                                                se_on                   2, 19, 1, 0, 0, 0
 150C:   2B000700FFFF                                                                            message_on              0, 7, 0, 255, 255
 1512:   02                                                                                      evt_next
-1513:   22048F01                                                                                set                     4, 143, 1
+1513:   22048F01                                                                                set                     FG_GENERAL_1, 143, 1
 1517:   6502                                                                                    sce_espr_kill2          2
 1519:   00                                                                                      nop
 151A:   640216180000000A7A1C26F86A960000                                                        sce_espr_on2            2, 22, 24, 0, 0, 0, 10, 122, 28, 38, 248, 106, 150, 0, 0
-152A:   1809                                                                                    gosub                   9
+152A:   1809                                                                                    gosub                   main_09
 152C:   00                                                                                      nop
 152D:   00                                                                                      nop
 
@@ -448,13 +448,13 @@ off_152E:
 1534:   02                                                                                      evt_next
 1535:   00                                                                                      nop
 1536:   06002000                                                                                if                      0, off_155A
-153A:   210B1F00                                                                                ck                      11, 31, 0
-153E:   1808                                                                                    gosub                   8
+153A:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+153E:   1808                                                                                    gosub                   main_08
 1540:   360212000100000000000000                                                                se_on                   2, 18, 1, 0, 0, 0
 154C:   2B000900FFFF                                                                            message_on              0, 9, 0, 255, 255
 1552:   02                                                                                      evt_next
 1553:   00                                                                                      nop
-1554:   1809                                                                                    gosub                   9
+1554:   1809                                                                                    gosub                   main_09
 1556:   07001200                                                                                else                    0, off_1568
 
 off_155A:
@@ -478,13 +478,13 @@ off_157E:
 1584:   02                                                                                      evt_next
 1585:   00                                                                                      nop
 1586:   06002000                                                                                if                      0, off_15AA
-158A:   210B1F00                                                                                ck                      11, 31, 0
-158E:   1808                                                                                    gosub                   8
+158A:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+158E:   1808                                                                                    gosub                   main_08
 1590:   360212000100000000000000                                                                se_on                   2, 18, 1, 0, 0, 0
 159C:   2B000900FFFF                                                                            message_on              0, 9, 0, 255, 255
 15A2:   02                                                                                      evt_next
 15A3:   00                                                                                      nop
-15A4:   1809                                                                                    gosub                   9
+15A4:   1809                                                                                    gosub                   main_09
 15A6:   07001200                                                                                else                    0, off_15B8
 
 off_15AA:
@@ -501,25 +501,25 @@ off_15BA:
 
 off_15BE:
 15BE:   06008A00                                                                                if                      0, off_164C
-15C2:   21048F00                                                                                ck                      4, 143, 0
+15C2:   21048F00                                                                                ck                      FG_GENERAL_1, 143, 0
 15C6:   2B000800FFFF                                                                            message_on              0, 8, 0, 255, 255
 15CC:   02                                                                                      evt_next
 15CD:   00                                                                                      nop
 15CE:   06006800                                                                                if                      0, off_163A
-15D2:   210B1F00                                                                                ck                      11, 31, 0
-15D6:   1808                                                                                    gosub                   8
+15D2:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+15D6:   1808                                                                                    gosub                   main_08
 15D8:   06004200                                                                                if                      0, off_161E
-15DC:   21045B01                                                                                ck                      4, 91, 1
+15DC:   21045B01                                                                                ck                      FG_GENERAL_1, 91, 1
 15E0:   360213000100000000000000                                                                se_on                   2, 19, 1, 0, 0, 0
 15EC:   2B000A00FFFF                                                                            message_on              0, 10, 0, 255, 255
 15F2:   02                                                                                      evt_next
-15F3:   22048F01                                                                                set                     4, 143, 1
-15F7:   22048E01                                                                                set                     4, 142, 1
+15F3:   22048F01                                                                                set                     FG_GENERAL_1, 143, 1
+15F7:   22048E01                                                                                set                     FG_GENERAL_1, 142, 1
 15FB:   6502                                                                                    sce_espr_kill2          2
 15FD:   00                                                                                      nop
 15FE:   640216080000000C141E30F89C960000                                                        sce_espr_on2            2, 22, 8, 0, 0, 0, 12, 20, 30, 48, 248, 156, 150, 0, 0
 160E:   4603013122B60000A4C5                                                                    aot_reset               3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 34, 182, 0, 0, 164, 197
-1618:   1809                                                                                    gosub                   9
+1618:   1809                                                                                    gosub                   main_09
 161A:   07001C00                                                                                else                    0, off_1636
 
 off_161E:
@@ -527,7 +527,7 @@ off_161E:
 162A:   2B000600FFFF                                                                            message_on              0, 6, 0, 255, 255
 1630:   02                                                                                      evt_next
 1631:   00                                                                                      nop
-1632:   1809                                                                                    gosub                   9
+1632:   1809                                                                                    gosub                   main_09
 1634:   00                                                                                      nop
 1635:   00                                                                                      nop
 
@@ -560,12 +560,10 @@ off_1658:
 off_165A:
 165A:   2E0100                                                                                  work_set                WK_PLAYER, 0
 165D:   42                                                                                      plc_ret
-
-off_165E:
 165E:   0100                                                                                    evt_end                 0
 
 .proc main_07
-1660:   22020701                                                                                set                     2, 7, 1
+1660:   22020701                                                                                set                     FG_STATE, 7, 1
 1664:   2E0100                                                                                  work_set                WK_PLAYER, 0
 1667:   00                                                                                      nop
 1668:   40000421061AB398                                                                        plc_dest                0, 4, 33, 6662, -26445
@@ -573,7 +571,7 @@ off_165E:
 1674:   02                                                                                      evt_next
 1675:   00                                                                                      nop
 1676:   1204                                                                                    edwhile                 off_167C
-1678:   21052100                                                                                ck                      5, 33, 0
+1678:   21052100                                                                                ck                      FG_GENERAL_2, 33, 0
 
 off_167C:
 167C:   090A0400                                                                                sleep                   10, 4
@@ -582,19 +580,19 @@ off_167C:
 168C:   02                                                                                      evt_next
 168D:   00                                                                                      nop
 168E:   1204                                                                                    edwhile                 off_1694
-1690:   21052100                                                                                ck                      5, 33, 0
+1690:   21052100                                                                                ck                      FG_GENERAL_2, 33, 0
 
 off_1694:
 1694:   340F0704                                                                                member_set              15, 7, 4
-1698:   22020700                                                                                set                     2, 7, 0
+1698:   22020700                                                                                set                     FG_STATE, 7, 0
 169C:   0100                                                                                    evt_end                 0
 
 .proc main_08
-169E:   22020701                                                                                set                     2, 7, 1
+169E:   22020701                                                                                set                     FG_STATE, 7, 1
 16A2:   2E0100                                                                                  work_set                WK_PLAYER, 0
 16A5:   00                                                                                      nop
 16A6:   06001200                                                                                if                      0, off_16BC
-16AA:   21010000                                                                                ck                      1, 0, 0
+16AA:   21010000                                                                                ck                      FG_GAME, F_PLAYER, 0
 16AE:   3F001A00                                                                                plc_motion              0, 26, 0
 16B2:   090A1400                                                                                sleep                   10, 20
 16B6:   66                                                                                      plc_stop
@@ -611,15 +609,15 @@ off_16BC:
 
 off_16C8:
 16C8:   090A0A00                                                                                sleep                   10, 10
-16CC:   22020700                                                                                set                     2, 7, 0
+16CC:   22020700                                                                                set                     FG_STATE, 7, 0
 16D0:   0100                                                                                    evt_end                 0
 
 .proc main_09
-16D2:   22020701                                                                                set                     2, 7, 1
+16D2:   22020701                                                                                set                     FG_STATE, 7, 1
 16D6:   2E0100                                                                                  work_set                WK_PLAYER, 0
 16D9:   00                                                                                      nop
 16DA:   06001200                                                                                if                      0, off_16F0
-16DE:   21010000                                                                                ck                      1, 0, 0
+16DE:   21010000                                                                                ck                      FG_GAME, F_PLAYER, 0
 16E2:   3F001A80                                                                                plc_motion              0, 26, 128
 16E6:   5B46                                                                                    plc_cnt                 70
 16E8:   090A1400                                                                                sleep                   10, 20
@@ -633,21 +631,21 @@ off_16F0:
 16FB:   00                                                                                      nop
 
 off_16FC:
-16FC:   22020700                                                                                set                     2, 7, 0
+16FC:   22020700                                                                                set                     FG_STATE, 7, 0
 1700:   0100                                                                                    evt_end                 0
 
 .proc main_0A
 1702:   06001201                                                                                if                      0, off_1818
 1706:   21220E01                                                                                ck                      34, 14, 1
 170A:   06000801                                                                                if                      0, off_1816
-170E:   21032400                                                                                ck                      3, 36, 0
-1712:   440000470008000000FF98310000B0C3050200000000                                            sce_em_set              0, 0, ENEMY_ANNETTEBIRKIN1, 0, 8, 0, 0, 0, 255, 12696, 0, -15440, 517, 0, 0
+170E:   21032400                                                                                ck                      FG_3, 36, 0
+1712:   440000470008000000FF98310000B0C3050200000000                                            sce_em_set              0, 0, ENEMY_ANNETTEBIRKIN_1, 0, 8, 0, 0, 0, 255, 12696, 0, -15440, 517, 0, 0
 1728:   2E0300                                                                                  work_set                WK_ENEMY, 0
 172B:   00                                                                                      nop
-172C:   3D1000                                                                                  member_copy             16, 0
+172C:   3D1000                                                                                  member_copy             V_TEMP, 0
 172F:   00                                                                                      nop
-1730:   260005100400                                                                            calc                    0, OP_OR, 16, 4
-1736:   350010                                                                                  member_set2             0, 16
+1730:   260005100400                                                                            calc                    0, OP_OR, V_TEMP, 4
+1736:   350010                                                                                  member_set2             0, V_TEMP
 1739:   00                                                                                      nop
 173A:   2D0100000000000000000A0000003632E8EA44C1000000F60000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 0, 12854, -5400, -16060, 0, -2560, 0, 0, 0, 0, 0, 0, 0, 0, 0
 1760:   2D0200000000000000000A000000000000000000000000000000000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -672,7 +670,7 @@ off_1818:
 
 .proc main_0B
 181A:   06001200                                                                                if                      0, off_1830
-181E:   21032400                                                                                ck                      3, 36, 0
+181E:   21032400                                                                                ck                      FG_3, 36, 0
 1822:   46040000000000000000                                                                    aot_reset               4, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
 182C:   07001000                                                                                else                    0, off_183C
 
@@ -794,7 +792,7 @@ off_1980:
 1A1A:   0100                                                                                    evt_end                 0
 
 .proc main_0E
-1A1C:   1815                                                                                    gosub                   21
+1A1C:   1815                                                                                    gosub                   main_15
 1A1E:   02                                                                                      evt_next
 1A1F:   00                                                                                      nop
 1A20:   59000400                                                                                xa_on                   0, 4
@@ -863,7 +861,7 @@ off_1AF2:
 1B0C:   0100                                                                                    evt_end                 0
 
 .proc main_10
-1B0E:   1815                                                                                    gosub                   21
+1B0E:   1815                                                                                    gosub                   main_15
 1B10:   02                                                                                      evt_next
 1B11:   00                                                                                      nop
 1B12:   59000600                                                                                xa_on                   0, 6
@@ -928,7 +926,7 @@ off_1AF2:
 1C18:   0100                                                                                    evt_end                 0
 
 .proc main_12
-1C1A:   1815                                                                                    gosub                   21
+1C1A:   1815                                                                                    gosub                   main_15
 1C1C:   02                                                                                      evt_next
 1C1D:   00                                                                                      nop
 1C1E:   59000800                                                                                xa_on                   0, 8
@@ -1003,7 +1001,7 @@ off_1AF2:
 
 .proc main_15
 1D3C:   06000A00                                                                                if                      0, off_1D4A
-1D40:   21046000                                                                                ck                      4, 96, 0
+1D40:   21046000                                                                                ck                      FG_GENERAL_1, 96, 0
 1D44:   2907                                                                                    cut_chg                 7
 1D46:   07000800                                                                                else                    0, off_1D4E
 
@@ -1019,18 +1017,18 @@ off_1D4E:
 1D50:   2E0100                                                                                  work_set                WK_PLAYER, 0
 1D53:   00                                                                                      nop
 1D54:   3200053B00006EB7                                                                        pos_set                 0, 15109, 0, -18578
-1D5C:   22020701                                                                                set                     2, 7, 1
-1D60:   22011B01                                                                                set                     1, 27, 1
+1D5C:   22020701                                                                                set                     FG_STATE, 7, 1
+1D60:   22011B01                                                                                set                     FG_GAME, 27, 1
 1D64:   04FF1817                                                                                evt_exec                255, I_GOSUB, main_17
 1D68:   090A0A00                                                                                sleep                   10, 10
-1D6C:   180C                                                                                    gosub                   12
-1D6E:   180D                                                                                    gosub                   13
-1D70:   180E                                                                                    gosub                   14
-1D72:   180F                                                                                    gosub                   15
-1D74:   1810                                                                                    gosub                   16
-1D76:   1811                                                                                    gosub                   17
-1D78:   1812                                                                                    gosub                   18
-1D7A:   1813                                                                                    gosub                   19
+1D6C:   180C                                                                                    gosub                   main_0C
+1D6E:   180D                                                                                    gosub                   main_0D
+1D70:   180E                                                                                    gosub                   main_0E
+1D72:   180F                                                                                    gosub                   main_0F
+1D74:   1810                                                                                    gosub                   main_10
+1D76:   1811                                                                                    gosub                   main_11
+1D78:   1812                                                                                    gosub                   main_12
+1D7A:   1813                                                                                    gosub                   main_13
 1D7C:   8B5ABE000000                                                                            nop_8b                  90, 190, 0, 0, 0
 1D82:   8B820A002800                                                                            nop_8b                  130, 10, 0, 40, 0
 1D88:   8B820A005000                                                                            nop_8b                  130, 10, 0, 80, 0
@@ -1039,13 +1037,13 @@ off_1D4E:
 1D9A:   8A000500BB00                                                                            nop_8a                  0, 5, 0, 187, 0
 1DA0:   8BC80A00BB00                                                                            nop_8b                  200, 10, 0, 187, 0
 1DA6:   8C005A002800C500                                                                        nop_8c                  0, 90, 0, 40, 0, 197, 0
-1DAE:   22011D01                                                                                set                     1, 29, 1
+1DAE:   22011D01                                                                                set                     FG_GAME, 29, 1
 1DB2:   510102000000                                                                            sce_bgm_control         1, 2, 0, 0, 0
 1DB8:   510201007F40                                                                            sce_bgm_control         2, 1, 0, 127, 64
 1DBE:   36020D010100000000000000                                                                se_on                   2, 269, 1, 0, 0, 0
 1DCA:   04FF181D                                                                                evt_exec                255, I_GOSUB, main_1D
-1DCE:   1814                                                                                    gosub                   20
-1DD0:   22050101                                                                                set                     5, 1, 1
+1DCE:   1814                                                                                    gosub                   main_14
+1DD0:   22050101                                                                                set                     FG_GENERAL_2, 1, 1
 1DD4:   090A1400                                                                                sleep                   10, 20
 1DD8:   090A0800                                                                                sleep                   10, 8
 1DDC:   090A1E00                                                                                sleep                   10, 30
@@ -1058,14 +1056,14 @@ off_1D4E:
 1DFE:   2906                                                                                    cut_chg                 6
 1E00:   090A1E00                                                                                sleep                   10, 30
 1E04:   090A1E00                                                                                sleep                   10, 30
-1E08:   1815                                                                                    gosub                   21
-1E0A:   22011D00                                                                                set                     1, 29, 0
+1E08:   1815                                                                                    gosub                   main_15
+1E0A:   22011D00                                                                                set                     FG_GAME, 29, 0
 1E0E:   36020E010100000000000000                                                                se_on                   2, 270, 1, 0, 0, 0
 1E1A:   090A3700                                                                                sleep                   10, 55
 1E1E:   2E0100                                                                                  work_set                WK_PLAYER, 0
 1E21:   00                                                                                      nop
 1E22:   400005202A3615BF                                                                        plc_dest                0, 5, 32, 13866, -16619
-1E2A:   1821                                                                                    gosub                   33
+1E2A:   1821                                                                                    gosub                   main_21
 1E2C:   3F010600                                                                                plc_motion              1, 6, 0
 1E30:   090A3200                                                                                sleep                   10, 50
 1E34:   41020000000400012020                                                                    plc_neck                2, 0, 1024, 256, 32, 32
@@ -1083,34 +1081,34 @@ off_1D4E:
 1E88:   090A3C00                                                                                sleep                   10, 60
 1E8C:   4707                                                                                    aot_on                  7
 1E8E:   0F040800                                                                                while                   4, off_1E9A
-1E92:   21011001                                                                                ck                      1, 16, 1
+1E92:   21011001                                                                                ck                      FG_GAME, 16, 1
 1E96:   02                                                                                      evt_next
 1E97:   00                                                                                      nop
 1E98:   1000                                                                                    ewhile                  0
 
 off_1E9A:
-1E9A:   2203A101                                                                                set                     3, 161, 1
+1E9A:   2203A101                                                                                set                     FG_3, 161, 1
 1E9E:   2E0100                                                                                  work_set                WK_PLAYER, 0
 1EA1:   3F0106C0                                                                                plc_motion              1, 6, 192
 1EA5:   5B00                                                                                    plc_cnt                 0
 1EA7:   00                                                                                      nop
 1EA8:   090A1800                                                                                sleep                   10, 24
-1EAC:   181C                                                                                    gosub                   28
+1EAC:   181C                                                                                    gosub                   main_1C
 1EAE:   510001007F40                                                                            sce_bgm_control         0, 1, 0, 127, 64
-1EB4:   1820                                                                                    gosub                   32
+1EB4:   1820                                                                                    gosub                   main_20
 1EB6:   3C01                                                                                    cut_auto                1
-1EB8:   22032401                                                                                set                     3, 36, 1
+1EB8:   22032401                                                                                set                     FG_3, 36, 1
 1EBC:   2E0100                                                                                  work_set                WK_PLAYER, 0
 1EBF:   42                                                                                      plc_ret
-1EC0:   22020700                                                                                set                     2, 7, 0
-1EC4:   22011B00                                                                                set                     1, 27, 0
+1EC0:   22020700                                                                                set                     FG_STATE, 7, 0
+1EC4:   22011B00                                                                                set                     FG_GAME, 27, 0
 1EC8:   0100                                                                                    evt_end                 0
 
 .proc main_17
 1ECA:   2E0300                                                                                  work_set                WK_ENEMY, 0
 1ECD:   00                                                                                      nop
 1ECE:   0F040800                                                                                while                   4, off_1EDA
-1ED2:   21050100                                                                                ck                      5, 1, 0
+1ED2:   21050100                                                                                ck                      FG_GENERAL_2, 1, 0
 1ED6:   02                                                                                      evt_next
 1ED7:   00                                                                                      nop
 1ED8:   1000                                                                                    ewhile                  0
@@ -1144,10 +1142,10 @@ off_1F0A:
 1F32:   0D0014000B00                                                                            for                     0, off_1F4C, 11
 1F38:   30                                                                                      add_speed
 1F39:   31                                                                                      add_aspeed
-1F3A:   3D1010                                                                                  member_copy             16, 16
+1F3A:   3D1010                                                                                  member_copy             V_TEMP, 16
 1F3D:   00                                                                                      nop
-1F3E:   26000010C000                                                                            calc                    0, OP_ADD, 16, 192
-1F44:   351010                                                                                  member_set2             16, 16
+1F3E:   26000010C000                                                                            calc                    0, OP_ADD, V_TEMP, 192
+1F44:   351010                                                                                  member_set2             16, V_TEMP
 1F47:   00                                                                                      nop
 1F48:   02                                                                                      evt_next
 1F49:   00                                                                                      nop
@@ -1156,10 +1154,10 @@ off_1F0A:
 off_1F4C:
 1F4C:   2E0300                                                                                  work_set                WK_ENEMY, 0
 1F4F:   00                                                                                      nop
-1F50:   3D1007                                                                                  member_copy             16, 7
+1F50:   3D1007                                                                                  member_copy             V_TEMP, 7
 1F53:   00                                                                                      nop
-1F54:   260005100001                                                                            calc                    0, OP_OR, 16, 256
-1F5A:   350710                                                                                  member_set2             7, 16
+1F54:   260005100001                                                                            calc                    0, OP_OR, V_TEMP, 256
+1F5A:   350710                                                                                  member_set2             7, V_TEMP
 1F5D:   00                                                                                      nop
 1F5E:   2E0401                                                                                  work_set                WK_OBJECT, 1
 1F61:   00                                                                                      nop
@@ -1269,7 +1267,7 @@ off_204A:
 205C:   0E00                                                                                    next                    0
 
 off_205E:
-205E:   22050301                                                                                set                     5, 3, 1
+205E:   22050301                                                                                set                     FG_GENERAL_2, 3, 1
 2062:   0100                                                                                    evt_end                 0
 
 .proc main_1C
@@ -1303,13 +1301,13 @@ off_205E:
 .proc main_1D
 20EA:   0D001A000600                                                                            for                     0, off_210A, 6
 20F0:   090A0500                                                                                sleep                   10, 5
-20F4:   181E                                                                                    gosub                   30
+20F4:   181E                                                                                    gosub                   main_1E
 20F6:   090A0A00                                                                                sleep                   10, 10
-20FA:   181F                                                                                    gosub                   31
+20FA:   181F                                                                                    gosub                   main_1F
 20FC:   090A1100                                                                                sleep                   10, 17
-2100:   181E                                                                                    gosub                   30
+2100:   181E                                                                                    gosub                   main_1E
 2102:   090A0900                                                                                sleep                   10, 9
-2106:   181F                                                                                    gosub                   31
+2106:   181F                                                                                    gosub                   main_1F
 2108:   0E00                                                                                    next                    0
 
 off_210A:
@@ -1353,7 +1351,7 @@ off_210A:
 220E:   02                                                                                      evt_next
 220F:   00                                                                                      nop
 2210:   1204                                                                                    edwhile                 off_2216
-2212:   21052000                                                                                ck                      5, 32, 0
+2212:   21052000                                                                                ck                      FG_GENERAL_2, 32, 0
 
 off_2216:
 2216:   0100                                                                                    evt_end                 0

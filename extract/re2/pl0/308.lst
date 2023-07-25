@@ -1,20 +1,21 @@
 .version 2
+
 .init
-.proc init_00
+.proc init
 0992:   3B0001310000D80243C5C4094C049A6000006DC3E014011B0F00100100000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 728, -15037, 2500, 1100, 24730, 0, -15507, 5344, 1, 27, 15, 0, 16, 1, 0, 0, UNLOCKED, 0
 09B2:   3B0101310000F8BA07E83408B0047DD5000065E7F00302000000170000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17672, -6137, 2100, 1200, -10883, 0, -6299, 1008, 2, 0, 0, 0, 23, 0, 0, 0, UNLOCKED, 0
 09D2:   0100                                                                                    evt_end                 0
 
 .main
-.proc main_00
-09E0:   1802                                                                                    gosub                   2
-09E2:   1803                                                                                    gosub                   3
+.proc main
+09E0:   1802                                                                                    gosub                   main_02
+09E2:   1803                                                                                    gosub                   main_03
 09E4:   0100                                                                                    evt_end                 0
 
-.proc main_01
+.proc aot
 09E6:   06000800                                                                                if                      0, off_09F2
-09EA:   21010B01                                                                                ck                      1, 11, 1
-09EE:   1803                                                                                    gosub                   3
+09EA:   21010B01                                                                                ck                      FG_GAME, 11, 1
+09EE:   1803                                                                                    gosub                   main_03
 09F0:   08                                                                                      endif
 09F1:   00                                                                                      nop
 
@@ -32,7 +33,7 @@ off_09F2:
 
 .proc main_03
 0A56:   06000E00                                                                                if                      0, off_0A68
-0A5A:   23001A000500                                                                            cmp                     0, 26, CMP_EQ, 5
+0A5A:   23001A000500                                                                            cmp                     0, V_CUT, CMP_EQ, 5
 0A60:   04091804                                                                                evt_exec                9, I_GOSUB, main_04
 0A64:   07000800                                                                                else                    0, off_0A6C
 
@@ -42,19 +43,19 @@ off_0A68:
 0A6B:   00                                                                                      nop
 
 off_0A6C:
-0A6C:   1805                                                                                    gosub                   5
+0A6C:   1805                                                                                    gosub                   main_05
 0A6E:   0100                                                                                    evt_end                 0
 
 .proc main_04
-0A70:   6B01A00F                                                                                light_kido_set          1, 4000
 
-off_0A74:
+off_0A70:
+0A70:   6B01A00F                                                                                light_kido_set          1, 4000
 0A74:   090A0300                                                                                sleep                   10, 3
 0A78:   6B01C409                                                                                light_kido_set          1, 2500
 0A7C:   090A0200                                                                                sleep                   10, 2
 0A80:   6B01AC0D                                                                                light_kido_set          1, 3500
 0A84:   090A0100                                                                                sleep                   10, 1
-0A88:   17FFFF00E8FF                                                                            goto                    255, 255, 0, off_0A74
+0A88:   17FFFF00E8FF                                                                            goto                    255, 255, 0, off_0A70
 0A8E:   0100                                                                                    evt_end                 0
 
 .proc main_05
@@ -108,4 +109,3 @@ off_0B12:
 
 off_0B14:
 0B14:   0100                                                                                    evt_end                 0
-0B16:   1800                                                                                    db                      0x18, 0x00
