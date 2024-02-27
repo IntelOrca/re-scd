@@ -2,19 +2,19 @@
 
 .init
 .proc init
-14A6:   3B0001310000AB9223C21405D007C166000005A47809040103001A0000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27989, -15837, 1300, 2000, 26305, 0, -23547, 2424, 4, 1, 3, 0, 26, 0, 0, 0, UNLOCKED, 0
-14C6:   3B01013100004DE92B98E803340853990000BA9C0000040800001A0000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -5811, -26581, 1000, 2100, -26285, 0, -25414, 0, 4, 8, 0, 0, 26, 0, 0, 0, UNLOCKED, 0
-14E6:   4400001F00000003010844CF000053F31D0800000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 3, 1, 8, -12476, 0, -3245, 2077, 0, 0
-14FC:   4400011F000000030109A0D100005BED790800000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 3, 1, 9, -11872, 0, -4773, 2169, 0, 0
-1512:   4400021F06000003022FDFC70000D7DF380500000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 3, 2, 47, -14369, 0, -8233, 1336, 0, 0
-1528:   4400031F06000003023038D80000FB9D880500000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 6, 0, 0, 3, 2, 48, -10184, 0, -25093, 1416, 0, 0
-153E:   4400041F0440000301FF63E5000014F0000800000000                                            sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 4, 64, 0, 3, 1, 255, -6813, 0, -4076, 2048, 0, 0
-1554:   2E0304                                                                                  work_set                WK_ENEMY, 4
+14A6:   3B0001310000AB9223C21405D007C166000005A47809040103001A0000000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27989, -15837, 1300, 2000, 26305, 0, -23547, 2424, 4, 1, 3, 0, 26, 0, 0, 0, UNLOCKED, 0
+14C6:   3B01013100004DE92B98E803340853990000BA9C0000040800001A0000000000                        door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -5811, -26581, 1000, 2100, -26285, 0, -25414, 0, 4, 8, 0, 0, 26, 0, 0, 0, UNLOCKED, 0
+14E6:   4400001F00000003010844CF000053F31D0800000000                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_RANDOM, 0, AI_DEFAULT, 0, SBK_3, 1, 8, -12476, 0, -3245, 2077, 0, 0
+14FC:   4400011F000000030109A0D100005BED790800000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_RANDOM, 0, AI_DEFAULT, 0, SBK_3, 1, 9, -11872, 0, -4773, 2169, 0, 0
+1512:   4400021F06000003022FDFC70000D7DF380500000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_RANDOM, 6, AI_DEFAULT, 0, SBK_3, 2, 47, -14369, 0, -8233, 1336, 0, 0
+1528:   4400031F06000003023038D80000FB9D880500000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_RANDOM, 6, AI_DEFAULT, 0, SBK_3, 2, 48, -10184, 0, -25093, 1416, 0, 0
+153E:   4400041F0440000301FF63E5000014F0000800000000                                            sce_em_set              0, ID_EM_4, ENEMY_ZOMBIE_RANDOM, 4, AI_40, 0, SBK_3, 1, 255, -6813, 0, -4076, 2048, 0, 0
+1554:   2E0304                                                                                  work_set                WK_ENEMY, ID_EM_4
 1557:   00                                                                                      nop
-1558:   3D1000                                                                                  member_copy             V_TEMP, 0
+1558:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 155B:   00                                                                                      nop
 155C:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-1562:   350010                                                                                  member_set2             0, V_TEMP
+1562:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 1565:   00                                                                                      nop
 1566:   0100                                                                                    evt_end                 0
 
@@ -26,14 +26,14 @@
 1577:   00                                                                                      nop
 1578:   1802                                                                                    gosub                   main_02
 157A:   06004400                                                                                if                      0, off_15C2
-157E:   21001901                                                                                ck                      FG_0, F_DIFFICULT, 1
-1582:   4E0402710000DCE304F11603CC012200010015000201                                            item_aot_set            4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT | SAT_UNDER, 0, 0, -7204, -3836, 790, 460, ITEM_SHOTGUNPARTS, 1, 21, 2, 1
-1598:   2D0200000000000000000A00300030E5000058F2000000080000000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 48, -6864, 0, -3496, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
+157E:   21001901                                                                                ck                      FG_SYSTEM, F_DIFFICULT, 1
+1582:   4E0402710000DCE304F11603CC012200010015000201                                            item_aot_set            ID_AOT_4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT | SAT_UNDER, 0, 0, -7204, -3836, 790, 460, ITEM_SHOTGUNPARTS, 1, 21, ID_OBJ_2, IF_FLOOR
+1598:   2D0200000000000000000A00300030E5000058F2000000080000000000000000000000000000            obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 0, 0, 10, 48, -6864, 0, -3496, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
 15BE:   07004200                                                                                else                    0, off_1600
 
 off_15C2:
-15C2:   4E0402710000DCE304F11603CC012200010015000201                                            item_aot_set            4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT | SAT_UNDER, 0, 0, -7204, -3836, 790, 460, ITEM_SHOTGUNPARTS, 1, 21, 2, 1
-15D8:   2D0200000000000000000A00100030E5000058F2000000080000000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -6864, 0, -3496, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
+15C2:   4E0402710000DCE304F11603CC012200010015000201                                            item_aot_set            ID_AOT_4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT | SAT_UNDER, 0, 0, -7204, -3836, 790, 460, ITEM_SHOTGUNPARTS, 1, 21, ID_OBJ_2, IF_FLOOR
+15D8:   2D0200000000000000000A00100030E5000058F2000000080000000000000000000000000000            obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 0, 0, 10, 16, -6864, 0, -3496, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
 15FE:   00                                                                                      nop
 15FF:   00                                                                                      nop
 
@@ -45,14 +45,14 @@ off_1600:
 
 .proc main_02
 1604:   06004200                                                                                if                      0, off_164A
-1608:   21010301                                                                                ck                      FG_GAME, 3, 1
+1608:   21010301                                                                                ck                      FG_STATUS, 3, 1
 160C:   06002000                                                                                if                      0, off_1630
 1610:   23001B000105                                                                            cmp                     0, V_LAST_RDT, CMP_EQ, 1281
-1616:   4400FF41000C001F00FF59990000C7C3580F00000000                                            sce_em_set              0, 255, ENEMY_ADA_WONG_1, 0, 12, 0, 31, 0, 255, -26279, 0, -15417, 3928, 0, 0
+1616:   4400FF41000C001F00FF59990000C7C3580F00000000                                            sce_em_set              0, ID_EM_255, ENEMY_ADA_WONG_1, 0, AI_04 | AI_08, 0, SBK_31, 0, 255, -26279, 0, -15417, 3928, 0, 0
 162C:   07001C00                                                                                else                    0, off_1648
 
 off_1630:
-1630:   4400FF41000C001F00FF19E80000019E600700000000                                            sce_em_set              0, 255, ENEMY_ADA_WONG_1, 0, 12, 0, 31, 0, 255, -6119, 0, -25087, 1888, 0, 0
+1630:   4400FF41000C001F00FF19E80000019E600700000000                                            sce_em_set              0, ID_EM_255, ENEMY_ADA_WONG_1, 0, AI_04 | AI_08, 0, SBK_31, 0, 255, -6119, 0, -25087, 1888, 0, 0
 1646:   00                                                                                      nop
 1647:   00                                                                                      nop
 

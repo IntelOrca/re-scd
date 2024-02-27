@@ -3,9 +3,9 @@
 .init
 .proc init
 1262:   06002200                                                                                if                      0, off_1288
-1266:   2104FE01                                                                                ck                      FG_GENERAL_1, 254, 1
-126A:   22043600                                                                                set                     FG_GENERAL_1, 54, 0
-126E:   22044100                                                                                set                     FG_GENERAL_1, 65, 0
+1266:   2104FE01                                                                                ck                      FG_COMMON, 254, 1
+126A:   22043600                                                                                set                     FG_COMMON, 54, 0
+126E:   22044100                                                                                set                     FG_COMMON, 65, 0
 1272:   22083200                                                                                set                     FG_ITEM, 50, 0
 1276:   22065800                                                                                set                     FG_ENEMY, 88, 0
 127A:   22065900                                                                                set                     FG_ENEMY, 89, 0
@@ -15,129 +15,129 @@
 1287:   00                                                                                      nop
 
 off_1288:
-1288:   3B00013100007BA002D7640FA604740600003AC3809B011105001B0200000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24453, -10494, 3940, 1190, 1652, 0, -15558, -25728, 1, 17, 5, 0, 27, 2, 0, 0, UNLOCKED, 0
-12A8:   4E0302310000B5B717A4DC050A0A340001003200FF00                                            item_aot_set            3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18507, -23529, 1500, 2570, ITEM_REDCARD, 1, 50, 255, 0
+1288:   3B00013100007BA002D7640FA604740600003AC3809B011105001B0200000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24453, -10494, 3940, 1190, 1652, 0, -15558, -25728, 1, 17, 5, 0, 27, 2, 0, 0, UNLOCKED, 0
+12A8:   4E0302310000B5B717A4DC050A0A340001003200FF00                                            item_aot_set            ID_AOT_3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18507, -23529, 1500, 2570, ITEM_REDCARD, 1, 50, ID_OBJ_255, IF_DEFAULT
 12BE:   06001E03                                                                                if                      0, off_15E0
-12C2:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
+12C2:   21010100                                                                                ck                      FG_STATUS, F_SCENARIO, 0
 12C6:   0600A601                                                                                if                      0, off_1470
-12CA:   21043600                                                                                ck                      FG_GENERAL_1, 54, 0
+12CA:   21043600                                                                                ck                      FG_COMMON, 54, 0
 12CE:   06008000                                                                                if                      0, off_1352
-12D2:   21001900                                                                                ck                      FG_0, F_DIFFICULT, 0
-12D6:   4400011202400003005967A2000095C8C00400000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 2, 64, 0, 3, 0, 89, -23961, 0, -14187, 1216, 0, 0
-12EC:   4400021204400004005A6E9A0000D8B1E00B00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 4, 64, 0, 4, 0, 90, -26002, 0, -20008, 3040, 0, 0
-1302:   4400031204400004006B2FAE00001ECBE00400000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_GUY1, 4, 64, 0, 4, 0, 107, -20945, 0, -13538, 1248, 0, 0
-1318:   2E0301                                                                                  work_set                WK_ENEMY, 1
+12D2:   21001900                                                                                ck                      FG_SYSTEM, F_DIFFICULT, 0
+12D6:   4400011202400003005967A2000095C8C00400000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 2, AI_40, 0, SBK_3, 0, 89, -23961, 0, -14187, 1216, 0, 0
+12EC:   4400021204400004005A6E9A0000D8B1E00B00000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 4, AI_40, 0, SBK_4, 0, 90, -26002, 0, -20008, 3040, 0, 0
+1302:   4400031204400004006B2FAE00001ECBE00400000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_GUY1, 4, AI_40, 0, SBK_4, 0, 107, -20945, 0, -13538, 1248, 0, 0
+1318:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 131B:   00                                                                                      nop
-131C:   3D1000                                                                                  member_copy             V_TEMP, 0
+131C:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 131F:   00                                                                                      nop
 1320:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-1326:   350010                                                                                  member_set2             0, V_TEMP
+1326:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 1329:   00                                                                                      nop
-132A:   2E0302                                                                                  work_set                WK_ENEMY, 2
+132A:   2E0302                                                                                  work_set                WK_ENEMY, ID_EM_2
 132D:   00                                                                                      nop
-132E:   3D1000                                                                                  member_copy             V_TEMP, 0
+132E:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1331:   00                                                                                      nop
 1332:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-1338:   350010                                                                                  member_set2             0, V_TEMP
+1338:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 133B:   00                                                                                      nop
-133C:   2E0303                                                                                  work_set                WK_ENEMY, 3
+133C:   2E0303                                                                                  work_set                WK_ENEMY, ID_EM_3
 133F:   00                                                                                      nop
-1340:   3D1000                                                                                  member_copy             V_TEMP, 0
+1340:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1343:   00                                                                                      nop
 1344:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-134A:   350010                                                                                  member_set2             0, V_TEMP
+134A:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 134D:   00                                                                                      nop
 134E:   0700A600                                                                                else                    0, off_13F4
 
 off_1352:
-1352:   44000112024000030059E09D0000B5C3200600000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 2, 64, 0, 3, 0, 89, -25120, 0, -15435, 1568, 0, 0
-1368:   4400021204400004005A6E9A0000D8B1E00B00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 4, 64, 0, 4, 0, 90, -26002, 0, -20008, 3040, 0, 0
-137E:   4400031204400004006B2FAE00001ECBE00400000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_GUY1, 4, 64, 0, 4, 0, 107, -20945, 0, -13538, 1248, 0, 0
-1394:   440004120440000400D563A30000FCCA500000000000                                            sce_em_set              0, 4, ENEMY_ZOMBIE_GUY1, 4, 64, 0, 4, 0, 213, -23709, 0, -13572, 80, 0, 0
-13AA:   2E0301                                                                                  work_set                WK_ENEMY, 1
+1352:   44000112024000030059E09D0000B5C3200600000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 2, AI_40, 0, SBK_3, 0, 89, -25120, 0, -15435, 1568, 0, 0
+1368:   4400021204400004005A6E9A0000D8B1E00B00000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 4, AI_40, 0, SBK_4, 0, 90, -26002, 0, -20008, 3040, 0, 0
+137E:   4400031204400004006B2FAE00001ECBE00400000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_GUY1, 4, AI_40, 0, SBK_4, 0, 107, -20945, 0, -13538, 1248, 0, 0
+1394:   440004120440000400D563A30000FCCA500000000000                                            sce_em_set              0, ID_EM_4, ENEMY_ZOMBIE_GUY1, 4, AI_40, 0, SBK_4, 0, 213, -23709, 0, -13572, 80, 0, 0
+13AA:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 13AD:   00                                                                                      nop
-13AE:   3D1000                                                                                  member_copy             V_TEMP, 0
+13AE:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 13B1:   00                                                                                      nop
 13B2:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-13B8:   350010                                                                                  member_set2             0, V_TEMP
+13B8:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 13BB:   00                                                                                      nop
-13BC:   2E0302                                                                                  work_set                WK_ENEMY, 2
+13BC:   2E0302                                                                                  work_set                WK_ENEMY, ID_EM_2
 13BF:   00                                                                                      nop
-13C0:   3D1000                                                                                  member_copy             V_TEMP, 0
+13C0:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 13C3:   00                                                                                      nop
 13C4:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-13CA:   350010                                                                                  member_set2             0, V_TEMP
+13CA:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 13CD:   00                                                                                      nop
-13CE:   2E0303                                                                                  work_set                WK_ENEMY, 3
+13CE:   2E0303                                                                                  work_set                WK_ENEMY, ID_EM_3
 13D1:   00                                                                                      nop
-13D2:   3D1000                                                                                  member_copy             V_TEMP, 0
+13D2:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 13D5:   00                                                                                      nop
 13D6:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-13DC:   350010                                                                                  member_set2             0, V_TEMP
+13DC:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 13DF:   00                                                                                      nop
-13E0:   2E0304                                                                                  work_set                WK_ENEMY, 4
+13E0:   2E0304                                                                                  work_set                WK_ENEMY, ID_EM_4
 13E3:   00                                                                                      nop
-13E4:   3D1000                                                                                  member_copy             V_TEMP, 0
+13E4:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 13E7:   00                                                                                      nop
 13E8:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-13EE:   350010                                                                                  member_set2             0, V_TEMP
+13EE:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 13F1:   00                                                                                      nop
 13F2:   00                                                                                      nop
 13F3:   00                                                                                      nop
 
 off_13F4:
-13F4:   440000120A4000030058EF560000C660200C00000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_GUY1, 10, 64, 0, 3, 0, 88, 22255, 0, 24774, 3104, 0, 0
-140A:   440005120240000000FF22A2ECFAC6B3580C00000000                                            sce_em_set              0, 5, ENEMY_ZOMBIE_GUY1, 2, 64, 0, 0, 0, 255, -24030, -1300, -19514, 3160, 0, 0
-1420:   2E0305                                                                                  work_set                WK_ENEMY, 5
+13F4:   440000120A4000030058EF560000C660200C00000000                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_GUY1, 10, AI_40, 0, SBK_3, 0, 88, 22255, 0, 24774, 3104, 0, 0
+140A:   440005120240000000FF22A2ECFAC6B3580C00000000                                            sce_em_set              0, ID_EM_5, ENEMY_ZOMBIE_GUY1, 2, AI_40, 0, SBK_0, 0, 255, -24030, -1300, -19514, 3160, 0, 0
+1420:   2E0305                                                                                  work_set                WK_ENEMY, ID_EM_5
 1423:   00                                                                                      nop
-1424:   3D1000                                                                                  member_copy             V_TEMP, 0
+1424:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1427:   00                                                                                      nop
 1428:   260005100800                                                                            calc                    0, OP_OR, V_TEMP, 8
-142E:   350010                                                                                  member_set2             0, V_TEMP
+142E:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 1431:   00                                                                                      nop
-1432:   2C0103410000F1B2219A740E3818000000000000                                                aot_set                 1, SCE_NORMAL, SAT_PL | SAT_UNDER, 0, 0, -19727, -26079, 3700, 6200, 0, 0, 0, 0, 0, 0
-1446:   2D0100000000000000000A001000E5AAECF822A3000040FC0000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -21787, -1812, -23774, 0, -960, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1432:   2C0103410000F1B2219A740E3818000000000000                                                aot_set                 ID_AOT_1, SCE_NORMAL, SAT_PL | SAT_UNDER, 0, 0, -19727, -26079, 3700, 6200, 0, 0, 0, 0, 0, 0
+1446:   2D0100000000000000000A001000E5AAECF822A3000040FC0000000000000000000000000000            obj_model_set           ID_OBJ_1, 0, 0, 0, 0, 0, 0, 10, 16, -21787, -1812, -23774, 0, -960, 0, 0, 0, 0, 0, 0, 0, 0, 0
 146C:   07001601                                                                                else                    0, off_1582
 
 off_1470:
-1470:   22050301                                                                                set                     FG_GENERAL_2, 3, 1
+1470:   22050301                                                                                set                     FG_ROOM, 3, 1
 1474:   06004A00                                                                                if                      0, off_14C2
-1478:   21001900                                                                                ck                      FG_0, F_DIFFICULT, 0
-147C:   44000112000000030059D09B000067AA9DFC00000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 3, 0, 89, -25648, 0, -21913, -867, 0, 0
-1492:   4400021200000004005A63A60000A1BEF5F900000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 4, 0, 90, -22941, 0, -16735, -1547, 0, 0
-14A8:   4400031200000004006B2A9F0000FEC9B5FD00000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 4, 0, 107, -24790, 0, -13826, -587, 0, 0
+1478:   21001900                                                                                ck                      FG_SYSTEM, F_DIFFICULT, 0
+147C:   44000112000000030059D09B000067AA9DFC00000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_3, 0, 89, -25648, 0, -21913, -867, 0, 0
+1492:   4400021200000004005A63A60000A1BEF5F900000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_4, 0, 90, -22941, 0, -16735, -1547, 0, 0
+14A8:   4400031200000004006B2A9F0000FEC9B5FD00000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_4, 0, 107, -24790, 0, -13826, -587, 0, 0
 14BE:   07005E00                                                                                else                    0, off_151C
 
 off_14C2:
-14C2:   44000112000000030059E09D0000B5C3200600000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 3, 0, 89, -25120, 0, -15435, 1568, 0, 0
-14D8:   4400021200000004005A6E9A0000D8B1E00B00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 4, 0, 90, -26002, 0, -20008, 3040, 0, 0
-14EE:   4400031200000004006B2FAE00001ECBE00400000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 4, 0, 107, -20945, 0, -13538, 1248, 0, 0
-1504:   440004120000000400D563A30000FCCA500000000000                                            sce_em_set              0, 4, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 4, 0, 213, -23709, 0, -13572, 80, 0, 0
+14C2:   44000112000000030059E09D0000B5C3200600000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_3, 0, 89, -25120, 0, -15435, 1568, 0, 0
+14D8:   4400021200000004005A6E9A0000D8B1E00B00000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_4, 0, 90, -26002, 0, -20008, 3040, 0, 0
+14EE:   4400031200000004006B2FAE00001ECBE00400000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_4, 0, 107, -20945, 0, -13538, 1248, 0, 0
+1504:   440004120000000400D563A30000FCCA500000000000                                            sce_em_set              0, ID_EM_4, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_4, 0, 213, -23709, 0, -13572, 80, 0, 0
 151A:   00                                                                                      nop
 151B:   00                                                                                      nop
 
 off_151C:
-151C:   4400001200000003005853AD000022A97DF900000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 3, 0, 88, -21165, 0, -22238, -1667, 0, 0
-1532:   440005120240000000FF22A2ECFAC6B3580C00000000                                            sce_em_set              0, 5, ENEMY_ZOMBIE_GUY1, 2, 64, 0, 0, 0, 255, -24030, -1300, -19514, 3160, 0, 0
-1548:   2E0305                                                                                  work_set                WK_ENEMY, 5
+151C:   4400001200000003005853AD000022A97DF900000000                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_3, 0, 88, -21165, 0, -22238, -1667, 0, 0
+1532:   440005120240000000FF22A2ECFAC6B3580C00000000                                            sce_em_set              0, ID_EM_5, ENEMY_ZOMBIE_GUY1, 2, AI_40, 0, SBK_0, 0, 255, -24030, -1300, -19514, 3160, 0, 0
+1548:   2E0305                                                                                  work_set                WK_ENEMY, ID_EM_5
 154B:   00                                                                                      nop
-154C:   3D1000                                                                                  member_copy             V_TEMP, 0
+154C:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 154F:   00                                                                                      nop
 1550:   260005100800                                                                            calc                    0, OP_OR, V_TEMP, 8
-1556:   350010                                                                                  member_set2             0, V_TEMP
+1556:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 1559:   00                                                                                      nop
-155A:   2D0100000000000000000A001000E5AA000022A300FC00FC0000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -21787, 0, -23774, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
+155A:   2D0100000000000000000A001000E5AA000022A300FC00FC0000000000000000000000000000            obj_model_set           ID_OBJ_1, 0, 0, 0, 0, 0, 0, 10, 16, -21787, 0, -23774, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
 1580:   00                                                                                      nop
 1581:   00                                                                                      nop
 
 off_1582:
 1582:   06002E00                                                                                if                      0, off_15B4
-1586:   21044100                                                                                ck                      FG_GENERAL_1, 65, 0
-158A:   2D0000000000000000000A001000E8B1E4F82DA3000080FC0000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -19992, -1820, -23763, 0, -896, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1586:   21044100                                                                                ck                      FG_COMMON, 65, 0
+158A:   2D0000000000000000000A001000E8B1E4F82DA3000080FC0000000000000000000000000000            obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -19992, -1820, -23763, 0, -896, 0, 0, 0, 0, 0, 0, 0, 0, 0
 15B0:   07002C00                                                                                else                    0, off_15DC
 
 off_15B4:
-15B4:   2D0000000000000000000A001000E8B100002DA300FC00FC0000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -19992, 0, -23763, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
+15B4:   2D0000000000000000000A001000E8B100002DA300FC00FC0000000000000000000000000000            obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -19992, 0, -23763, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
 15DA:   00                                                                                      nop
 15DB:   00                                                                                      nop
 
@@ -145,10 +145,10 @@ off_15DC:
 15DC:   07007E00                                                                                else                    0, off_165A
 
 off_15E0:
-15E0:   440006220000000E00582A9D00002BAEF0E300000000                                            sce_em_set              0, 6, ENEMY_LICKER_RED, 0, 0, 0, 14, 0, 88, -25302, 0, -20949, -7184, 0, 0
-15F6:   440007220205000E00596BA2E0E3BAC0400C00000000                                            sce_em_set              0, 7, ENEMY_LICKER_RED, 2, 5, 0, 14, 0, 89, -23957, -7200, -16198, 3136, 0, 0
-160C:   2D0000000000000000000A001000E8B100002DA300FC00FC0000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -19992, 0, -23763, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1632:   2D0100000000000000000A001000E5AA000022A300FC00FC0000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -21787, 0, -23774, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
+15E0:   440006220000000E00582A9D00002BAEF0E300000000                                            sce_em_set              0, ID_EM_6, ENEMY_LICKER_RED, 0, AI_DEFAULT, 0, SBK_14, 0, 88, -25302, 0, -20949, -7184, 0, 0
+15F6:   440007220205000E00596BA2E0E3BAC0400C00000000                                            sce_em_set              0, ID_EM_7, ENEMY_LICKER_RED, 2, AI_01 | AI_04, 0, SBK_14, 0, 89, -23957, -7200, -16198, 3136, 0, 0
+160C:   2D0000000000000000000A001000E8B100002DA300FC00FC0000000000000000000000000000            obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -19992, 0, -23763, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1632:   2D0100000000000000000A001000E5AA000022A300FC00FC0000000000000000000000000000            obj_model_set           ID_OBJ_1, 0, 0, 0, 0, 0, 0, 10, 16, -21787, 0, -23774, -1024, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
 1658:   00                                                                                      nop
 1659:   00                                                                                      nop
 
@@ -170,10 +170,10 @@ off_165A:
 
 .proc main_03
 1690:   06002600                                                                                if                      0, off_16BA
-1694:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
+1694:   21010100                                                                                ck                      FG_STATUS, F_SCENARIO, 0
 1698:   06001A00                                                                                if                      0, off_16B6
-169C:   21043600                                                                                ck                      FG_GENERAL_1, 54, 0
-16A0:   2C0205310000B5B717A4DC050A0AFF0018050000                                                aot_set                 2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18507, -23529, 1500, 2570, 255, 0, I_GOSUB, main_05, 0, 0
+169C:   21043600                                                                                ck                      FG_COMMON, 54, 0
+16A0:   2C0205310000B5B717A4DC050A0AFF0018050000                                                aot_set                 ID_AOT_2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18507, -23529, 1500, 2570, 255, 0, I_GOSUB, main_05, 0, 0
 16B4:   08                                                                                      endif
 16B5:   00                                                                                      nop
 
@@ -183,7 +183,7 @@ off_16B6:
 off_16BA:
 16BA:   06001A00                                                                                if                      0, off_16D8
 16BE:   21083200                                                                                ck                      FG_ITEM, 50, 0
-16C2:   2C0205310000B5B717A4DC050A0AFF0018060000                                                aot_set                 2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18507, -23529, 1500, 2570, 255, 0, I_GOSUB, main_06, 0, 0
+16C2:   2C0205310000B5B717A4DC050A0AFF0018060000                                                aot_set                 ID_AOT_2, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18507, -23529, 1500, 2570, 255, 0, I_GOSUB, main_06, 0, 0
 16D6:   08                                                                                      endif
 16D7:   00                                                                                      nop
 
@@ -196,12 +196,12 @@ off_16DA:
 
 .proc main_04
 16DC:   0600C200                                                                                if                      0, off_17A2
-16E0:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
+16E0:   21010100                                                                                ck                      FG_STATUS, F_SCENARIO, 0
 16E4:   06001A00                                                                                if                      0, off_1702
-16E8:   21044100                                                                                ck                      FG_GENERAL_1, 65, 0
+16E8:   21044100                                                                                ck                      FG_COMMON, 65, 0
 16EC:   06001000                                                                                if                      0, off_1700
 16F0:   230001000100                                                                            cmp                     0, V_01, CMP_EQ, 1
-16F6:   22044101                                                                                set                     FG_GENERAL_1, 65, 1
+16F6:   22044101                                                                                set                     FG_COMMON, 65, 1
 16FA:   04FF180D                                                                                evt_exec                255, I_GOSUB, main_0D
 16FE:   08                                                                                      endif
 16FF:   00                                                                                      nop
@@ -212,7 +212,7 @@ off_1700:
 
 off_1702:
 1702:   06004E00                                                                                if                      0, off_1754
-1706:   21001900                                                                                ck                      FG_0, F_DIFFICULT, 0
+1706:   21001900                                                                                ck                      FG_SYSTEM, F_DIFFICULT, 0
 170A:   06004200                                                                                if                      0, off_1750
 170E:   21065801                                                                                ck                      FG_ENEMY, 88, 1
 1712:   06003800                                                                                if                      0, off_174E
@@ -222,11 +222,11 @@ off_1702:
 1722:   06002400                                                                                if                      0, off_174A
 1726:   21066B01                                                                                ck                      FG_ENEMY, 107, 1
 172A:   06001A00                                                                                if                      0, off_1748
-172E:   21050300                                                                                ck                      FG_GENERAL_2, 3, 0
+172E:   21050300                                                                                ck                      FG_ROOM, 3, 0
 1732:   06001000                                                                                if                      0, off_1746
-1736:   21050200                                                                                ck                      FG_GENERAL_2, 2, 0
-173A:   22050201                                                                                set                     FG_GENERAL_2, 2, 1
-173E:   510105000000                                                                            sce_bgm_control         1, 5, 0, 0, 0
+1736:   21050200                                                                                ck                      FG_ROOM, 2, 0
+173A:   22050201                                                                                set                     FG_ROOM, 2, 1
+173E:   510105000000                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_FADEOUT, BGM_TYPE_MAIN_VOL, 0, 0
 1744:   08                                                                                      endif
 1745:   00                                                                                      nop
 
@@ -264,11 +264,11 @@ off_1754:
 1770:   21066B01                                                                                ck                      FG_ENEMY, 107, 1
 1774:   2106D501                                                                                ck                      FG_ENEMY, 213, 1
 1778:   06001A00                                                                                if                      0, off_1796
-177C:   21050300                                                                                ck                      FG_GENERAL_2, 3, 0
+177C:   21050300                                                                                ck                      FG_ROOM, 3, 0
 1780:   06001000                                                                                if                      0, off_1794
-1784:   21050200                                                                                ck                      FG_GENERAL_2, 2, 0
-1788:   22050201                                                                                set                     FG_GENERAL_2, 2, 1
-178C:   510105000000                                                                            sce_bgm_control         1, 5, 0, 0, 0
+1784:   21050200                                                                                ck                      FG_ROOM, 2, 0
+1788:   22050201                                                                                set                     FG_ROOM, 2, 1
+178C:   510105000000                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_FADEOUT, BGM_TYPE_MAIN_VOL, 0, 0
 1792:   08                                                                                      endif
 1793:   00                                                                                      nop
 
@@ -304,22 +304,22 @@ off_17A2:
 17A2:   0100                                                                                    evt_end                 0
 
 .proc main_05
-17A4:   22020701                                                                                set                     FG_STATE, 7, 1
+17A4:   22020701                                                                                set                     FG_STOP, 7, 1
 17A8:   06004E00                                                                                if                      0, off_17FA
 17AC:   21083200                                                                                ck                      FG_ITEM, 50, 0
 17B0:   36022801000041B7F8F8D5A9                                                                se_on                   2, 296, 0, -18623, -1800, -22059
-17BC:   4703                                                                                    aot_on                  3
+17BC:   4703                                                                                    aot_on                  ID_AOT_3
 17BE:   02                                                                                      evt_next
 17BF:   00                                                                                      nop
 17C0:   06003400                                                                                if                      0, off_17F8
 17C4:   21083201                                                                                ck                      FG_ITEM, 50, 1
-17C8:   22043601                                                                                set                     FG_GENERAL_1, 54, 1
+17C8:   22043601                                                                                set                     FG_COMMON, 54, 1
 17CC:   2905                                                                                    cut_chg                 5
 17CE:   4B0405                                                                                  cut_replace             4, 5
 17D1:   3C01                                                                                    cut_auto                1
 17D3:   00                                                                                      nop
 17D4:   06000C00                                                                                if                      0, off_17E4
-17D8:   21001900                                                                                ck                      FG_0, F_DIFFICULT, 0
+17D8:   21001900                                                                                ck                      FG_SYSTEM, F_DIFFICULT, 0
 17DC:   04FF1807                                                                                evt_exec                255, I_GOSUB, main_07
 17E0:   07000A00                                                                                else                    0, off_17EA
 
@@ -329,7 +329,7 @@ off_17E4:
 17E9:   00                                                                                      nop
 
 off_17EA:
-17EA:   46020000000000000000                                                                    aot_reset               2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+17EA:   46020000000000000000                                                                    aot_reset               ID_AOT_2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
 17F4:   1802                                                                                    gosub                   main_02
 17F6:   08                                                                                      endif
 17F7:   00                                                                                      nop
@@ -339,193 +339,193 @@ off_17F8:
 17F9:   00                                                                                      nop
 
 off_17FA:
-17FA:   22020700                                                                                set                     FG_STATE, 7, 0
+17FA:   22020700                                                                                set                     FG_STOP, 7, 0
 17FE:   0100                                                                                    evt_end                 0
 
 .proc main_06
-1800:   22020701                                                                                set                     FG_STATE, 7, 1
-1804:   22020201                                                                                set                     FG_STATE, 2, 1
+1800:   22020701                                                                                set                     FG_STOP, 7, 1
+1804:   22020201                                                                                set                     FG_STOP, 2, 1
 1808:   06001600                                                                                if                      0, off_1822
 180C:   21083200                                                                                ck                      FG_ITEM, 50, 0
 1810:   36022801000041B7F8F8D5A9                                                                se_on                   2, 296, 0, -18623, -1800, -22059
-181C:   4703                                                                                    aot_on                  3
+181C:   4703                                                                                    aot_on                  ID_AOT_3
 181E:   02                                                                                      evt_next
 181F:   00                                                                                      nop
 1820:   08                                                                                      endif
 1821:   00                                                                                      nop
 
 off_1822:
-1822:   22020200                                                                                set                     FG_STATE, 2, 0
-1826:   22020700                                                                                set                     FG_STATE, 7, 0
+1822:   22020200                                                                                set                     FG_STOP, 2, 0
+1826:   22020700                                                                                set                     FG_STOP, 7, 0
 182A:   0100                                                                                    evt_end                 0
 
 .proc main_07
-182C:   2E0300                                                                                  work_set                WK_ENEMY, 0
+182C:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 182F:   00                                                                                      nop
-1830:   3D1000                                                                                  member_copy             V_TEMP, 0
+1830:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1833:   00                                                                                      nop
 1834:   260005100800                                                                            calc                    0, OP_OR, V_TEMP, 8
-183A:   350010                                                                                  member_set2             0, V_TEMP
+183A:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 183D:   00                                                                                      nop
-183E:   2E0301                                                                                  work_set                WK_ENEMY, 1
+183E:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 1841:   00                                                                                      nop
-1842:   3D1000                                                                                  member_copy             V_TEMP, 0
+1842:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1845:   00                                                                                      nop
 1846:   26000610FDFF                                                                            calc                    0, OP_AND, V_TEMP, -3
-184C:   350010                                                                                  member_set2             0, V_TEMP
+184C:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 184F:   00                                                                                      nop
-1850:   2E0302                                                                                  work_set                WK_ENEMY, 2
+1850:   2E0302                                                                                  work_set                WK_ENEMY, ID_EM_2
 1853:   00                                                                                      nop
-1854:   3D1000                                                                                  member_copy             V_TEMP, 0
+1854:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1857:   00                                                                                      nop
 1858:   26000610FDFF                                                                            calc                    0, OP_AND, V_TEMP, -3
-185E:   350010                                                                                  member_set2             0, V_TEMP
+185E:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 1861:   00                                                                                      nop
-1862:   2E0303                                                                                  work_set                WK_ENEMY, 3
+1862:   2E0303                                                                                  work_set                WK_ENEMY, ID_EM_3
 1865:   00                                                                                      nop
-1866:   3D1000                                                                                  member_copy             V_TEMP, 0
+1866:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1869:   00                                                                                      nop
 186A:   26000610FDFF                                                                            calc                    0, OP_AND, V_TEMP, -3
-1870:   350010                                                                                  member_set2             0, V_TEMP
+1870:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 1873:   00                                                                                      nop
 1874:   02                                                                                      evt_next
 1875:   00                                                                                      nop
 1876:   04FF180A                                                                                evt_exec                255, I_GOSUB, main_0A
-187A:   2E0300                                                                                  work_set                WK_ENEMY, 0
+187A:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 187D:   00                                                                                      nop
 187E:   320010AA6AFFDCA1                                                                        pos_set                 0, -22000, -150, -24100
-1886:   34170100                                                                                member_set              23, 1, 0
+1886:   34170100                                                                                member_set              M_SCE_FREE0, 1
 188A:   04FF1809                                                                                evt_exec                255, I_GOSUB, main_09
-188E:   2E0301                                                                                  work_set                WK_ENEMY, 1
+188E:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 1891:   00                                                                                      nop
-1892:   3D1007                                                                                  member_copy             V_TEMP, 7
+1892:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 1895:   00                                                                                      nop
 1896:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-189C:   350710                                                                                  member_set2             7, V_TEMP
+189C:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 189F:   00                                                                                      nop
 18A0:   090A0F00                                                                                sleep                   10, 15
-18A4:   510101000000                                                                            sce_bgm_control         1, 1, 0, 0, 0
+18A4:   510101000000                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_MAIN_VOL, 0, 0
 18AA:   090A3C00                                                                                sleep                   10, 60
-18AE:   2E0302                                                                                  work_set                WK_ENEMY, 2
+18AE:   2E0302                                                                                  work_set                WK_ENEMY, ID_EM_2
 18B1:   00                                                                                      nop
-18B2:   3D1007                                                                                  member_copy             V_TEMP, 7
+18B2:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 18B5:   00                                                                                      nop
 18B6:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-18BC:   350710                                                                                  member_set2             7, V_TEMP
+18BC:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 18BF:   00                                                                                      nop
 18C0:   090A3C00                                                                                sleep                   10, 60
-18C4:   2E0303                                                                                  work_set                WK_ENEMY, 3
+18C4:   2E0303                                                                                  work_set                WK_ENEMY, ID_EM_3
 18C7:   00                                                                                      nop
-18C8:   3D1007                                                                                  member_copy             V_TEMP, 7
+18C8:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 18CB:   00                                                                                      nop
 18CC:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-18D2:   350710                                                                                  member_set2             7, V_TEMP
+18D2:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 18D5:   00                                                                                      nop
 18D6:   0100                                                                                    evt_end                 0
 
 .proc main_08
-18D8:   2E0300                                                                                  work_set                WK_ENEMY, 0
+18D8:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 18DB:   00                                                                                      nop
-18DC:   3D1000                                                                                  member_copy             V_TEMP, 0
+18DC:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 18DF:   00                                                                                      nop
 18E0:   260005100800                                                                            calc                    0, OP_OR, V_TEMP, 8
-18E6:   350010                                                                                  member_set2             0, V_TEMP
+18E6:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 18E9:   00                                                                                      nop
-18EA:   2E0301                                                                                  work_set                WK_ENEMY, 1
+18EA:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 18ED:   00                                                                                      nop
-18EE:   3D1000                                                                                  member_copy             V_TEMP, 0
+18EE:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 18F1:   00                                                                                      nop
 18F2:   26000610FDFF                                                                            calc                    0, OP_AND, V_TEMP, -3
-18F8:   350010                                                                                  member_set2             0, V_TEMP
+18F8:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 18FB:   00                                                                                      nop
-18FC:   2E0302                                                                                  work_set                WK_ENEMY, 2
+18FC:   2E0302                                                                                  work_set                WK_ENEMY, ID_EM_2
 18FF:   00                                                                                      nop
-1900:   3D1000                                                                                  member_copy             V_TEMP, 0
+1900:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1903:   00                                                                                      nop
 1904:   26000610FDFF                                                                            calc                    0, OP_AND, V_TEMP, -3
-190A:   350010                                                                                  member_set2             0, V_TEMP
+190A:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 190D:   00                                                                                      nop
-190E:   2E0303                                                                                  work_set                WK_ENEMY, 3
+190E:   2E0303                                                                                  work_set                WK_ENEMY, ID_EM_3
 1911:   00                                                                                      nop
-1912:   3D1000                                                                                  member_copy             V_TEMP, 0
+1912:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1915:   00                                                                                      nop
 1916:   26000610FDFF                                                                            calc                    0, OP_AND, V_TEMP, -3
-191C:   350010                                                                                  member_set2             0, V_TEMP
+191C:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 191F:   00                                                                                      nop
-1920:   2E0304                                                                                  work_set                WK_ENEMY, 4
+1920:   2E0304                                                                                  work_set                WK_ENEMY, ID_EM_4
 1923:   00                                                                                      nop
-1924:   3D1000                                                                                  member_copy             V_TEMP, 0
+1924:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 1927:   00                                                                                      nop
 1928:   26000610FDFF                                                                            calc                    0, OP_AND, V_TEMP, -3
-192E:   350010                                                                                  member_set2             0, V_TEMP
+192E:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 1931:   00                                                                                      nop
 1932:   02                                                                                      evt_next
 1933:   00                                                                                      nop
 1934:   04FF180A                                                                                evt_exec                255, I_GOSUB, main_0A
-1938:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1938:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 193B:   00                                                                                      nop
 193C:   320010AA6AFFDCA1                                                                        pos_set                 0, -22000, -150, -24100
-1944:   34170100                                                                                member_set              23, 1, 0
+1944:   34170100                                                                                member_set              M_SCE_FREE0, 1
 1948:   04FF1809                                                                                evt_exec                255, I_GOSUB, main_09
-194C:   2E0301                                                                                  work_set                WK_ENEMY, 1
+194C:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 194F:   00                                                                                      nop
-1950:   3D1007                                                                                  member_copy             V_TEMP, 7
+1950:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 1953:   00                                                                                      nop
 1954:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-195A:   350710                                                                                  member_set2             7, V_TEMP
+195A:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 195D:   00                                                                                      nop
 195E:   090A0F00                                                                                sleep                   10, 15
-1962:   510101000000                                                                            sce_bgm_control         1, 1, 0, 0, 0
+1962:   510101000000                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_MAIN_VOL, 0, 0
 1968:   090A1E00                                                                                sleep                   10, 30
-196C:   2E0302                                                                                  work_set                WK_ENEMY, 2
+196C:   2E0302                                                                                  work_set                WK_ENEMY, ID_EM_2
 196F:   00                                                                                      nop
-1970:   3D1007                                                                                  member_copy             V_TEMP, 7
+1970:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 1973:   00                                                                                      nop
 1974:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-197A:   350710                                                                                  member_set2             7, V_TEMP
+197A:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 197D:   00                                                                                      nop
 197E:   090A1E00                                                                                sleep                   10, 30
-1982:   2E0303                                                                                  work_set                WK_ENEMY, 3
+1982:   2E0303                                                                                  work_set                WK_ENEMY, ID_EM_3
 1985:   00                                                                                      nop
-1986:   3D1007                                                                                  member_copy             V_TEMP, 7
+1986:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 1989:   00                                                                                      nop
 198A:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-1990:   350710                                                                                  member_set2             7, V_TEMP
+1990:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 1993:   00                                                                                      nop
 1994:   090A1E00                                                                                sleep                   10, 30
-1998:   2E0304                                                                                  work_set                WK_ENEMY, 4
+1998:   2E0304                                                                                  work_set                WK_ENEMY, ID_EM_4
 199B:   00                                                                                      nop
-199C:   3D1007                                                                                  member_copy             V_TEMP, 7
+199C:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 199F:   00                                                                                      nop
 19A0:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-19A6:   350710                                                                                  member_set2             7, V_TEMP
+19A6:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 19A9:   00                                                                                      nop
 19AA:   0100                                                                                    evt_end                 0
 
 .proc main_09
-19AC:   2E0300                                                                                  work_set                WK_ENEMY, 0
+19AC:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 19AF:   00                                                                                      nop
 19B0:   090A1400                                                                                sleep                   10, 20
 19B4:   36030D000300000000000000                                                                se_on                   3, 13, 3, 0, 0, 0
 19C0:   090A5000                                                                                sleep                   10, 80
-19C4:   3D1000                                                                                  member_copy             V_TEMP, 0
+19C4:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 19C7:   00                                                                                      nop
 19C8:   26000610F7FF                                                                            calc                    0, OP_AND, V_TEMP, -9
-19CE:   350010                                                                                  member_set2             0, V_TEMP
+19CE:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 19D1:   00                                                                                      nop
 19D2:   36020D00000011A900003A9F                                                                se_on                   2, 13, 0, -22255, 0, -24774
 19DE:   0D0012002600                                                                            for                     0, off_19F6, 38
-19E4:   3D100C                                                                                  member_copy             V_TEMP, 12
+19E4:   3D100C                                                                                  member_copy             V_TEMP, M_Y_POS
 19E7:   00                                                                                      nop
 19E8:   260000100400                                                                            calc                    0, OP_ADD, V_TEMP, 4
-19EE:   350C10                                                                                  member_set2             12, V_TEMP
+19EE:   350C10                                                                                  member_set2             M_Y_POS, V_TEMP
 19F1:   00                                                                                      nop
 19F2:   02                                                                                      evt_next
 19F3:   00                                                                                      nop
 19F4:   0E00                                                                                    next                    0
 
 off_19F6:
-19F6:   340C0000                                                                                member_set              12, 0, 0
+19F6:   340C0000                                                                                member_set              M_Y_POS, 0
 19FA:   0100                                                                                    evt_end                 0
 
 .proc main_0A
@@ -536,17 +536,17 @@ off_19F6:
 1A14:   0100                                                                                    evt_end                 0
 
 .proc main_0B
-1A16:   2E0401                                                                                  work_set                WK_OBJECT, 1
+1A16:   2E0401                                                                                  work_set                WK_OBJECT, ID_OBJ_1
 1A19:   00                                                                                      nop
 1A1A:   8A0005000000                                                                            nop_8a                  0, 5, 0, 0, 0
 1A20:   8BFA05000000                                                                            nop_8b                  250, 5, 0, 0, 0
 1A26:   8C00FA140A000500                                                                        nop_8c                  0, 250, 20, 10, 0, 5, 0
 1A2E:   24070000                                                                                save                    V_07, 0
 1A32:   0D001E000F00                                                                            for                     0, off_1A56, 15
-1A38:   3D100E                                                                                  member_copy             V_TEMP, 14
+1A38:   3D100E                                                                                  member_copy             V_TEMP, M_X_DIR
 1A3B:   00                                                                                      nop
 1A3C:   27001007                                                                                calc2                   OP_ADD, V_TEMP, V_07
-1A40:   350E10                                                                                  member_set2             14, V_TEMP
+1A40:   350E10                                                                                  member_set2             M_X_DIR, V_TEMP
 1A43:   00                                                                                      nop
 1A44:   251007                                                                                  copy                    V_TEMP, V_07
 1A47:   00                                                                                      nop
@@ -561,14 +561,14 @@ off_1A56:
 1A56:   0100                                                                                    evt_end                 0
 
 .proc main_0C
-1A58:   2E0401                                                                                  work_set                WK_OBJECT, 1
+1A58:   2E0401                                                                                  work_set                WK_OBJECT, ID_OBJ_1
 1A5B:   00                                                                                      nop
 1A5C:   24050000                                                                                save                    V_05, 0
 1A60:   0D001E000700                                                                            for                     0, off_1A84, 7
-1A66:   3D100C                                                                                  member_copy             V_TEMP, 12
+1A66:   3D100C                                                                                  member_copy             V_TEMP, M_Y_POS
 1A69:   00                                                                                      nop
 1A6A:   27001005                                                                                calc2                   OP_ADD, V_TEMP, V_05
-1A6E:   350C10                                                                                  member_set2             12, V_TEMP
+1A6E:   350C10                                                                                  member_set2             M_Y_POS, V_TEMP
 1A71:   00                                                                                      nop
 1A72:   251005                                                                                  copy                    V_TEMP, V_05
 1A75:   00                                                                                      nop
@@ -584,45 +584,45 @@ off_1A84:
 1A90:   8A0005000000                                                                            nop_8a                  0, 5, 0, 0, 0
 1A96:   8BFA05000000                                                                            nop_8b                  250, 5, 0, 0, 0
 1A9C:   8C00FA320A000500                                                                        nop_8c                  0, 250, 50, 10, 0, 5, 0
-1AA4:   340C0000                                                                                member_set              12, 0, 0
-1AA8:   340F00FC                                                                                member_set              15, 0, 252
-1AAC:   340EF6FB                                                                                member_set              14, 246, 251
+1AA4:   340C0000                                                                                member_set              M_Y_POS, 0
+1AA8:   340F00FC                                                                                member_set              M_Y_DIR, -1024
+1AAC:   340EF6FB                                                                                member_set              M_X_DIR, -1034
 1AB0:   02                                                                                      evt_next
 1AB1:   00                                                                                      nop
-1AB2:   340E00FC                                                                                member_set              14, 0, 252
+1AB2:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1AB6:   02                                                                                      evt_next
 1AB7:   00                                                                                      nop
-1AB8:   340E0AFC                                                                                member_set              14, 10, 252
+1AB8:   340E0AFC                                                                                member_set              M_X_DIR, -1014
 1ABC:   02                                                                                      evt_next
 1ABD:   00                                                                                      nop
-1ABE:   340EFBFB                                                                                member_set              14, 251, 251
+1ABE:   340EFBFB                                                                                member_set              M_X_DIR, -1029
 1AC2:   02                                                                                      evt_next
 1AC3:   00                                                                                      nop
-1AC4:   340E00FC                                                                                member_set              14, 0, 252
+1AC4:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1AC8:   02                                                                                      evt_next
 1AC9:   00                                                                                      nop
-1ACA:   340E05FC                                                                                member_set              14, 5, 252
+1ACA:   340E05FC                                                                                member_set              M_X_DIR, -1019
 1ACE:   02                                                                                      evt_next
 1ACF:   00                                                                                      nop
-1AD0:   340EFEFB                                                                                member_set              14, 254, 251
+1AD0:   340EFEFB                                                                                member_set              M_X_DIR, -1026
 1AD4:   02                                                                                      evt_next
 1AD5:   00                                                                                      nop
-1AD6:   340E00FC                                                                                member_set              14, 0, 252
+1AD6:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1ADA:   02                                                                                      evt_next
 1ADB:   00                                                                                      nop
-1ADC:   340E02FC                                                                                member_set              14, 2, 252
+1ADC:   340E02FC                                                                                member_set              M_X_DIR, -1022
 1AE0:   02                                                                                      evt_next
 1AE1:   00                                                                                      nop
-1AE2:   340EFFFB                                                                                member_set              14, 255, 251
+1AE2:   340EFFFB                                                                                member_set              M_X_DIR, -1025
 1AE6:   02                                                                                      evt_next
 1AE7:   00                                                                                      nop
-1AE8:   340E00FC                                                                                member_set              14, 0, 252
+1AE8:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1AEC:   02                                                                                      evt_next
 1AED:   00                                                                                      nop
-1AEE:   340E01FC                                                                                member_set              14, 1, 252
+1AEE:   340E01FC                                                                                member_set              M_X_DIR, -1023
 1AF2:   02                                                                                      evt_next
 1AF3:   00                                                                                      nop
-1AF4:   340E00FC                                                                                member_set              14, 0, 252
+1AF4:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1AF8:   02                                                                                      evt_next
 1AF9:   00                                                                                      nop
 1AFA:   0100                                                                                    evt_end                 0
@@ -639,13 +639,13 @@ off_1A84:
 1B12:   36020A000000D8AEF8F812A6                                                                se_on                   2, 10, 0, -20776, -1800, -23022
 1B1E:   8A0001000000                                                                            nop_8a                  0, 1, 0, 0, 0
 1B24:   8C0096140A000000                                                                        nop_8c                  0, 150, 20, 10, 0, 0, 0
-1B2C:   2E0400                                                                                  work_set                WK_OBJECT, 0
+1B2C:   2E0400                                                                                  work_set                WK_OBJECT, ID_OBJ_0
 1B2F:   00                                                                                      nop
 1B30:   0D0012001400                                                                            for                     0, off_1B48, 20
-1B36:   3D100F                                                                                  member_copy             V_TEMP, 15
+1B36:   3D100F                                                                                  member_copy             V_TEMP, M_Y_DIR
 1B39:   00                                                                                      nop
 1B3A:   260000100A00                                                                            calc                    0, OP_ADD, V_TEMP, 10
-1B40:   350F10                                                                                  member_set2             15, V_TEMP
+1B40:   350F10                                                                                  member_set2             M_Y_DIR, V_TEMP
 1B43:   00                                                                                      nop
 1B44:   02                                                                                      evt_next
 1B45:   00                                                                                      nop
@@ -655,14 +655,14 @@ off_1B48:
 1B48:   0100                                                                                    evt_end                 0
 
 .proc main_0F
-1B4A:   2E0400                                                                                  work_set                WK_OBJECT, 0
+1B4A:   2E0400                                                                                  work_set                WK_OBJECT, ID_OBJ_0
 1B4D:   00                                                                                      nop
 1B4E:   24070000                                                                                save                    V_07, 0
 1B52:   0D001E000F00                                                                            for                     0, off_1B76, 15
-1B58:   3D100E                                                                                  member_copy             V_TEMP, 14
+1B58:   3D100E                                                                                  member_copy             V_TEMP, M_X_DIR
 1B5B:   00                                                                                      nop
 1B5C:   27001007                                                                                calc2                   OP_ADD, V_TEMP, V_07
-1B60:   350E10                                                                                  member_set2             14, V_TEMP
+1B60:   350E10                                                                                  member_set2             M_X_DIR, V_TEMP
 1B63:   00                                                                                      nop
 1B64:   251007                                                                                  copy                    V_TEMP, V_07
 1B67:   00                                                                                      nop
@@ -677,14 +677,14 @@ off_1B76:
 1B76:   0100                                                                                    evt_end                 0
 
 .proc main_10
-1B78:   2E0400                                                                                  work_set                WK_OBJECT, 0
+1B78:   2E0400                                                                                  work_set                WK_OBJECT, ID_OBJ_0
 1B7B:   00                                                                                      nop
 1B7C:   24050000                                                                                save                    V_05, 0
 1B80:   0D001E000600                                                                            for                     0, off_1BA4, 6
-1B86:   3D100C                                                                                  member_copy             V_TEMP, 12
+1B86:   3D100C                                                                                  member_copy             V_TEMP, M_Y_POS
 1B89:   00                                                                                      nop
 1B8A:   27001005                                                                                calc2                   OP_ADD, V_TEMP, V_05
-1B8E:   350C10                                                                                  member_set2             12, V_TEMP
+1B8E:   350C10                                                                                  member_set2             M_Y_POS, V_TEMP
 1B91:   00                                                                                      nop
 1B92:   251005                                                                                  copy                    V_TEMP, V_05
 1B95:   00                                                                                      nop
@@ -700,45 +700,45 @@ off_1BA4:
 1BB0:   8A0003000100                                                                            nop_8a                  0, 3, 0, 1, 0
 1BB6:   8BFA03000100                                                                            nop_8b                  250, 3, 0, 1, 0
 1BBC:   8C0096320A000600                                                                        nop_8c                  0, 150, 50, 10, 0, 6, 0
-1BC4:   340C0000                                                                                member_set              12, 0, 0
-1BC8:   340F00FC                                                                                member_set              15, 0, 252
-1BCC:   340EF6FB                                                                                member_set              14, 246, 251
+1BC4:   340C0000                                                                                member_set              M_Y_POS, 0
+1BC8:   340F00FC                                                                                member_set              M_Y_DIR, -1024
+1BCC:   340EF6FB                                                                                member_set              M_X_DIR, -1034
 1BD0:   02                                                                                      evt_next
 1BD1:   00                                                                                      nop
-1BD2:   340E00FC                                                                                member_set              14, 0, 252
+1BD2:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1BD6:   02                                                                                      evt_next
 1BD7:   00                                                                                      nop
-1BD8:   340E0AFC                                                                                member_set              14, 10, 252
+1BD8:   340E0AFC                                                                                member_set              M_X_DIR, -1014
 1BDC:   02                                                                                      evt_next
 1BDD:   00                                                                                      nop
-1BDE:   340EFBFB                                                                                member_set              14, 251, 251
+1BDE:   340EFBFB                                                                                member_set              M_X_DIR, -1029
 1BE2:   02                                                                                      evt_next
 1BE3:   00                                                                                      nop
-1BE4:   340E00FC                                                                                member_set              14, 0, 252
+1BE4:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1BE8:   02                                                                                      evt_next
 1BE9:   00                                                                                      nop
-1BEA:   340E05FC                                                                                member_set              14, 5, 252
+1BEA:   340E05FC                                                                                member_set              M_X_DIR, -1019
 1BEE:   02                                                                                      evt_next
 1BEF:   00                                                                                      nop
-1BF0:   340EFEFB                                                                                member_set              14, 254, 251
+1BF0:   340EFEFB                                                                                member_set              M_X_DIR, -1026
 1BF4:   02                                                                                      evt_next
 1BF5:   00                                                                                      nop
-1BF6:   340E00FC                                                                                member_set              14, 0, 252
+1BF6:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1BFA:   02                                                                                      evt_next
 1BFB:   00                                                                                      nop
-1BFC:   340E02FC                                                                                member_set              14, 2, 252
+1BFC:   340E02FC                                                                                member_set              M_X_DIR, -1022
 1C00:   02                                                                                      evt_next
 1C01:   00                                                                                      nop
-1C02:   340EFFFB                                                                                member_set              14, 255, 251
+1C02:   340EFFFB                                                                                member_set              M_X_DIR, -1025
 1C06:   02                                                                                      evt_next
 1C07:   00                                                                                      nop
-1C08:   340E00FC                                                                                member_set              14, 0, 252
+1C08:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1C0C:   02                                                                                      evt_next
 1C0D:   00                                                                                      nop
-1C0E:   340E01FC                                                                                member_set              14, 1, 252
+1C0E:   340E01FC                                                                                member_set              M_X_DIR, -1023
 1C12:   02                                                                                      evt_next
 1C13:   00                                                                                      nop
-1C14:   340E00FC                                                                                member_set              14, 0, 252
+1C14:   340E00FC                                                                                member_set              M_X_DIR, -1024
 1C18:   02                                                                                      evt_next
 1C19:   00                                                                                      nop
 1C1A:   0100                                                                                    evt_end                 0

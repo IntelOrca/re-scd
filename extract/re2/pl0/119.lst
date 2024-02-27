@@ -2,22 +2,22 @@
 
 .init
 .proc init
-0C0A:   3B000131000062E103C6D0070807B59E00005C9CF80B00180A000A0100000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7838, -14845, 2000, 1800, -24907, 0, -25508, 3064, 0, 24, 10, 0, 10, 1, 0, 0, UNLOCKED, 0
-0C2A:   3B0101310000DC34EBB098084407A6E3000074FDC00D001A0000300000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 13532, -20245, 2200, 1860, -7258, 0, -652, 3520, 0, 26, 0, 0, 48, 0, 0, 0, UNLOCKED, 0
+0C0A:   3B000131000062E103C6D0070807B59E00005C9CF80B00180A000A0100000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7838, -14845, 2000, 1800, -24907, 0, -25508, 3064, 0, 24, 10, 0, 10, 1, 0, 0, UNLOCKED, 0
+0C2A:   3B0101310000DC34EBB098084407A6E3000074FDC00D001A0000300000000000                        door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 13532, -20245, 2200, 1860, -7258, 0, -652, 3520, 0, 26, 0, 0, 48, 0, 0, 0, UNLOCKED, 0
 0C4A:   0100                                                                                    evt_end                 0
 
 .main
 .proc main
-0C5E:   4400001F0240000003FF86220000A7A5700A00010400                                            sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 2, 64, 0, 0, 3, 255, 8838, 0, -23129, 2672, 256, 4
-0C74:   2E0300                                                                                  work_set                WK_ENEMY, 0
+0C5E:   4400001F0240000003FF86220000A7A5700A00010400                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_RANDOM, 2, AI_40, 0, SBK_0, 3, 255, 8838, 0, -23129, 2672, 256, 4
+0C74:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 0C77:   00                                                                                      nop
-0C78:   3D1000                                                                                  member_copy             V_TEMP, 0
+0C78:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 0C7B:   00                                                                                      nop
 0C7C:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-0C82:   350010                                                                                  member_set2             0, V_TEMP
+0C82:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 0C85:   00                                                                                      nop
 0C86:   06001600                                                                                if                      0, off_0CA0
-0C8A:   21049800                                                                                ck                      FG_GENERAL_1, 152, 0
+0C8A:   21049800                                                                                ck                      FG_COMMON, 152, 0
 0C8E:   1803                                                                                    gosub                   main_03
 0C90:   61020100                                                                                cut_be_set              2, 1, 0
 0C94:   61020301                                                                                cut_be_set              2, 3, 1
@@ -40,20 +40,20 @@ off_0CB0:
 
 .proc aot
 0CB8:   06001400                                                                                if                      0, off_0CD0
-0CBC:   21049800                                                                                ck                      FG_GENERAL_1, 152, 0
+0CBC:   21049800                                                                                ck                      FG_COMMON, 152, 0
 0CC0:   23001A000400                                                                            cmp                     0, V_CUT, CMP_EQ, 4
-0CC6:   22050001                                                                                set                     FG_GENERAL_2, 0, 1
+0CC6:   22050001                                                                                set                     FG_ROOM, 0, 1
 0CCA:   04FF1805                                                                                evt_exec                255, I_GOSUB, main_05
 0CCE:   08                                                                                      endif
 0CCF:   00                                                                                      nop
 
 off_0CD0:
 0CD0:   06004200                                                                                if                      0, off_0D16
-0CD4:   21050001                                                                                ck                      FG_GENERAL_2, 0, 1
-0CD8:   21050100                                                                                ck                      FG_GENERAL_2, 1, 0
+0CD4:   21050001                                                                                ck                      FG_ROOM, 0, 1
+0CD8:   21050100                                                                                ck                      FG_ROOM, 1, 0
 0CDC:   06001800                                                                                if                      0, off_0CF8
 0CE0:   23001A000100                                                                            cmp                     0, V_CUT, CMP_EQ, 1
-0CE6:   22050101                                                                                set                     FG_GENERAL_2, 1, 1
+0CE6:   22050101                                                                                set                     FG_ROOM, 1, 1
 0CEA:   4B0402                                                                                  cut_replace             4, 2
 0CED:   61020101                                                                                cut_be_set              2, 1, 1
 0CF1:   61020300                                                                                cut_be_set              2, 3, 0
@@ -64,7 +64,7 @@ off_0CD0:
 off_0CF8:
 0CF8:   06001800                                                                                if                      0, off_0D14
 0CFC:   23001A000300                                                                            cmp                     0, V_CUT, CMP_EQ, 3
-0D02:   22050101                                                                                set                     FG_GENERAL_2, 1, 1
+0D02:   22050101                                                                                set                     FG_ROOM, 1, 1
 0D06:   4B0402                                                                                  cut_replace             4, 2
 0D09:   61020101                                                                                cut_be_set              2, 1, 1
 0D0D:   61020300                                                                                cut_be_set              2, 3, 0
@@ -78,7 +78,7 @@ off_0D14:
 
 off_0D16:
 0D16:   06000800                                                                                if                      0, off_0D22
-0D1A:   21010B01                                                                                ck                      FG_GAME, 11, 1
+0D1A:   21010B01                                                                                ck                      FG_STATUS, 11, 1
 0D1E:   1802                                                                                    gosub                   main_02
 0D20:   08                                                                                      endif
 0D21:   00                                                                                      nop
@@ -89,37 +89,37 @@ off_0D22:
 .proc main_02
 0D24:   131A8400                                                                                switch                  26, off_0DAC
 0D28:   140014000000                                                                            case                    0, off_0D42, 0
-0D2E:   510000010141                                                                            sce_bgm_control         0, 0, 1, 1, 65
-0D34:   510000023D41                                                                            sce_bgm_control         0, 0, 2, 61, 65
-0D3A:   510000033341                                                                            sce_bgm_control         0, 0, 3, 51, 65
+0D2E:   510000010141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
+0D34:   510000023D41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 61, 65
+0D3A:   510000033341                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 51, 65
 0D40:   1A00                                                                                    break                   0
 
 off_0D42:
 0D42:   140014000100                                                                            case                    0, off_0D5C, 1
-0D48:   510000010141                                                                            sce_bgm_control         0, 0, 1, 1, 65
-0D4E:   510000023D41                                                                            sce_bgm_control         0, 0, 2, 61, 65
-0D54:   510000033341                                                                            sce_bgm_control         0, 0, 3, 51, 65
+0D48:   510000010141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
+0D4E:   510000023D41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 61, 65
+0D54:   510000033341                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 51, 65
 0D5A:   1A00                                                                                    break                   0
 
 off_0D5C:
 0D5C:   140014000200                                                                            case                    0, off_0D76, 2
-0D62:   510000010141                                                                            sce_bgm_control         0, 0, 1, 1, 65
-0D68:   510000023D41                                                                            sce_bgm_control         0, 0, 2, 61, 65
-0D6E:   510000033341                                                                            sce_bgm_control         0, 0, 3, 51, 65
+0D62:   510000010141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
+0D68:   510000023D41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 61, 65
+0D6E:   510000033341                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 51, 65
 0D74:   1A00                                                                                    break                   0
 
 off_0D76:
 0D76:   140014000300                                                                            case                    0, off_0D90, 3
-0D7C:   510000010141                                                                            sce_bgm_control         0, 0, 1, 1, 65
-0D82:   510000023D41                                                                            sce_bgm_control         0, 0, 2, 61, 65
-0D88:   510000033341                                                                            sce_bgm_control         0, 0, 3, 51, 65
+0D7C:   510000010141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
+0D82:   510000023D41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 61, 65
+0D88:   510000033341                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 51, 65
 0D8E:   1A00                                                                                    break                   0
 
 off_0D90:
 0D90:   140014000400                                                                            case                    0, off_0DAA, 4
-0D96:   510000010141                                                                            sce_bgm_control         0, 0, 1, 1, 65
-0D9C:   510000023D41                                                                            sce_bgm_control         0, 0, 2, 61, 65
-0DA2:   510000033341                                                                            sce_bgm_control         0, 0, 3, 51, 65
+0D96:   510000010141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
+0D9C:   510000023D41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 61, 65
+0DA2:   510000033341                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 51, 65
 0DA8:   1A00                                                                                    break                   0
 
 off_0DAA:
@@ -129,35 +129,35 @@ off_0DAC:
 0DAC:   0100                                                                                    evt_end                 0
 
 .proc main_03
-0DAE:   4400011F4840000701A46F290000A0A6F00600000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 72, 64, 0, 7, 1, 164, 10607, 0, -22880, 1776, 0, 0
-0DC4:   4400021F4840002900A5482300005CAB600400000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 72, 64, 0, 41, 0, 165, 9032, 0, -21668, 1120, 0, 0
-0DDA:   4400031F4840000702A67D1B000036A9F00000000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 72, 64, 0, 7, 2, 166, 7037, 0, -22218, 240, 0, 0
-0DF0:   4400041F4840002900A75F2200009AA1700E00000000                                            sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 72, 64, 0, 41, 0, 167, 8799, 0, -24166, 3696, 0, 0
+0DAE:   4400011F4840000701A46F290000A0A6F00600000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_RANDOM, 72, AI_40, 0, SBK_7, 1, 164, 10607, 0, -22880, 1776, 0, 0
+0DC4:   4400021F4840002900A5482300005CAB600400000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_RANDOM, 72, AI_40, 0, SBK_41, 0, 165, 9032, 0, -21668, 1120, 0, 0
+0DDA:   4400031F4840000702A67D1B000036A9F00000000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_RANDOM, 72, AI_40, 0, SBK_7, 2, 166, 7037, 0, -22218, 240, 0, 0
+0DF0:   4400041F4840002900A75F2200009AA1700E00000000                                            sce_em_set              0, ID_EM_4, ENEMY_ZOMBIE_RANDOM, 72, AI_40, 0, SBK_41, 0, 167, 8799, 0, -24166, 3696, 0, 0
 0E06:   0100                                                                                    evt_end                 0
 
 .proc main_04
-0E08:   4400011F4000000701A43F2C00002CA3A00800000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 64, 0, 0, 7, 1, 164, 11327, 0, -23764, 2208, 0, 0
-0E1E:   4400021F4000002900A5771B00000AB0A00500000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 64, 0, 0, 41, 0, 165, 7031, 0, -20470, 1440, 0, 0
-0E34:   4400031F4000000702A699FE000043AEC00600000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 64, 0, 0, 7, 2, 166, -359, 0, -20925, 1728, 0, 0
-0E4A:   4400041F4000002900A77B0A0000EDA550FC00000000                                            sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 64, 0, 0, 41, 0, 167, 2683, 0, -23059, -944, 0, 0
+0E08:   4400011F4000000701A43F2C00002CA3A00800000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_RANDOM, 64, AI_DEFAULT, 0, SBK_7, 1, 164, 11327, 0, -23764, 2208, 0, 0
+0E1E:   4400021F4000002900A5771B00000AB0A00500000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_RANDOM, 64, AI_DEFAULT, 0, SBK_41, 0, 165, 7031, 0, -20470, 1440, 0, 0
+0E34:   4400031F4000000702A699FE000043AEC00600000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_RANDOM, 64, AI_DEFAULT, 0, SBK_7, 2, 166, -359, 0, -20925, 1728, 0, 0
+0E4A:   4400041F4000002900A77B0A0000EDA550FC00000000                                            sce_em_set              0, ID_EM_4, ENEMY_ZOMBIE_RANDOM, 64, AI_DEFAULT, 0, SBK_41, 0, 167, 2683, 0, -23059, -944, 0, 0
 0E60:   0100                                                                                    evt_end                 0
 
 .proc main_05
-0E62:   22049801                                                                                set                     FG_GENERAL_1, 152, 1
+0E62:   22049801                                                                                set                     FG_COMMON, 152, 1
 0E66:   090A0A00                                                                                sleep                   10, 10
-0E6A:   2E0304                                                                                  work_set                WK_ENEMY, 4
+0E6A:   2E0304                                                                                  work_set                WK_ENEMY, ID_EM_4
 0E6D:   00                                                                                      nop
 0E6E:   1806                                                                                    gosub                   main_06
 0E70:   090A1400                                                                                sleep                   10, 20
-0E74:   2E0302                                                                                  work_set                WK_ENEMY, 2
+0E74:   2E0302                                                                                  work_set                WK_ENEMY, ID_EM_2
 0E77:   00                                                                                      nop
 0E78:   1806                                                                                    gosub                   main_06
 0E7A:   090A3200                                                                                sleep                   10, 50
-0E7E:   2E0303                                                                                  work_set                WK_ENEMY, 3
+0E7E:   2E0303                                                                                  work_set                WK_ENEMY, ID_EM_3
 0E81:   00                                                                                      nop
 0E82:   1806                                                                                    gosub                   main_06
 0E84:   090A1400                                                                                sleep                   10, 20
-0E88:   2E0301                                                                                  work_set                WK_ENEMY, 1
+0E88:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 0E8B:   00                                                                                      nop
 0E8C:   1806                                                                                    gosub                   main_06
 0E8E:   090A5A00                                                                                sleep                   10, 90
@@ -165,26 +165,27 @@ off_0DAC:
 0E94:   0100                                                                                    evt_end                 0
 
 .proc main_06
-0E96:   34020100                                                                                member_set              2, 1, 0
-0E9A:   34030800                                                                                member_set              3, 8, 0
-0E9E:   34040300                                                                                member_set              4, 3, 0
-0EA2:   34050000                                                                                member_set              5, 0, 0
-0EA6:   3D1007                                                                                  member_copy             V_TEMP, 7
+0E96:   34020100                                                                                member_set              M_ROUTINE0, 1
+0E9A:   34030800                                                                                member_set              M_ROUTINE1, 8
+0E9E:   34040300                                                                                member_set              M_ROUTINE2, 3
+0EA2:   34050000                                                                                member_set              M_ROUTINE3, 0
+0EA6:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 0EA9:   00                                                                                      nop
 0EAA:   26000610FFBF                                                                            calc                    0, OP_AND, V_TEMP, -16385
-0EB0:   350710                                                                                  member_set2             7, V_TEMP
+0EB0:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 0EB3:   00                                                                                      nop
 0EB4:   0100                                                                                    evt_end                 0
 
 .proc main_07
 0EB6:   02                                                                                      evt_next
-0EB7:   2E0300                                                                                  work_set                WK_ENEMY, 0
+0EB7:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 0EBA:   66                                                                                      plc_stop
 0EBB:   00                                                                                      nop
 0EBC:   0100                                                                                    evt_end                 0
 
 .proc main_08
 0EBE:   02                                                                                      evt_next
-0EBF:   2E0300                                                                                  work_set                WK_ENEMY, 0
-0EC2:   60030010BFBF4605460500000000                                                            kage_set                3, 0, 16, 191, 191, 70, 5, 70, 5, 0, 0, 0, 0
+0EBF:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
+0EC2:   60030010BFBF4605460500000000                                                            kage_set                3, 0, 16, 191, 191, 1350, 1350, 0, 0
 0ED0:   0100                                                                                    evt_end                 0
+0ED2:   0070                                                                                    db                      0x00, 0x70

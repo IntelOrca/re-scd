@@ -2,23 +2,23 @@
 
 .init
 .proc init
-    door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 20000, 20000, 0, 0, -703, 0, -17020, 816, 0, 7, 3, 0, 14, 5, 0, 0, UNLOCKED, 0
-    door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -11422, -18315, 1800, 1800, -4696, 0, -1380, 560, 0, 9, 0, 0, 7, 1, 0, 0, UNLOCKED, 0
-    aot_set                 2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21840, -21955, 1350, 1620, 0, 0, 0, 0, 0, 255
-    aot_set                 3, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -21840, -21955, 1350, 1620, 10, 0, ITEM_VALVEHANDLE, 0, aot, 0
-    aot_set                 4, SCE_STATUS, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 20000, 20000, 0, 0, -703, 0, -17020, 816, 0, 7, 3, 0, 14, 5, 0, 0, UNLOCKED, 0
+    door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -11422, -18315, 1800, 1800, -4696, 0, -1380, 560, 0, 9, 0, 0, 7, 1, 0, 0, UNLOCKED, 0
+    aot_set                 ID_AOT_2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21840, -21955, 1350, 1620, ID_MSG_0, 0, 0, 0, 0, 255
+    aot_set                 ID_AOT_3, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -21840, -21955, 1350, 1620, 10, 0, ITEM_VALVEHANDLE, 0, aot, 0
+    aot_set                 ID_AOT_4, SCE_STATUS, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     aot_set_4p              12, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25794, -15338, -25280, -5800, -16240, -3500, -22990, -20090, 2, 0, 0, 0, 0, 255
     evt_end                 0
 
 .main
 .proc main
     if                      0, off_1A2E
-    ck                      FG_GAME, F_SCENARIO, 1
+    ck                      FG_STATUS, F_SCENARIO, 1
     if                      0, off_1A0E
     cmp                     0, V_LAST_RDT, CMP_EQ, 263
     if                      0, off_1A0C
-    ck                      FG_GENERAL_1, 179, 0
-    set                     FG_GENERAL_2, 5, 1
+    ck                      FG_COMMON, 179, 0
+    set                     FG_ROOM, 5, 1
     evt_exec                255, I_GOSUB, main_02
     endif
     nop
@@ -29,10 +29,10 @@ off_1A0C:
 
 off_1A0E:
     if                      0, off_1A2C
-    ck                      FG_GENERAL_1, 0, 1
+    ck                      FG_COMMON, 0, 1
     if                      0, off_1A2A
-    ck                      FG_GENERAL_1, 181, 0
-    aot_reset               1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_0E, 0, 0
+    ck                      FG_COMMON, 181, 0
+    aot_reset               ID_AOT_1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_0E, 0, 0
     endif
     nop
 
@@ -46,19 +46,19 @@ off_1A2C:
 
 off_1A2E:
     if                      0, off_1AC8
-    ck                      FG_GENERAL_1, 0, 0
-    obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0
-    aot_set                 6, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20961, -17944, 1800, 1800, 0, 0, 0, 0, 0, 0
-    aot_set                 7, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -21787, -19536, 1800, 1800, 0, 0, 0, 0, 0, 0
-    aot_set                 8, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20851, -18867, 1800, 1800, 0, 0, 0, 0, 0, 0
-    aot_set                 9, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20558, -17337, 1800, 1800, 0, 0, 0, 0, 0, 0
-    aot_set                 10, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20944, -16400, 1800, 1800, 0, 0, 0, 0, 0, 0
+    ck                      FG_COMMON, 0, 0
+    obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_6, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20961, -17944, 1800, 1800, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_7, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -21787, -19536, 1800, 1800, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_8, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20851, -18867, 1800, 1800, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_9, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20558, -17337, 1800, 1800, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_10, SCE_DAMAGE, SAT_PL | SAT_UNDER, 0, 0, -20944, -16400, 1800, 1800, 0, 0, 0, 0, 0, 0
     evt_exec                255, I_GOSUB, main_0F
     else                    0, off_1AF2
 
 off_1AC8:
-    aot_reset               2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, 0, 0, 0, 255
-    aot_reset               3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    aot_reset               ID_AOT_2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, ID_MSG_1, 0, 0, 0, 0, 255
+    aot_reset               ID_AOT_3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     sca_id_set              9, 0, 0
     sca_id_set              16, 0, 0
     cut_be_set              5, 1, 0
@@ -68,22 +68,22 @@ off_1AC8:
     nop
 
 off_1AF2:
-    aot_set                 11, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -5530, -4687, 1800, 1100, 255, 0, I_GOSUB, main_0D, 0, 0
+    aot_set                 ID_AOT_11, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -5530, -4687, 1800, 1100, 255, 0, I_GOSUB, main_0D, 0, 0
     if                      0, off_1B86
-    ck                      FG_0, F_DIFFICULT, 1
+    ck                      FG_SYSTEM, F_DIFFICULT, 1
     if                      0, off_1B38
-    ck                      FG_GAME, F_SCENARIO, 0
-    item_aot_set_4p         5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25048, -17910, -24130, -15260, -21500, -16600, -22610, -19310, ITEM_HANDGUNAMMO, 15, 213, 255, 0
+    ck                      FG_STATUS, F_SCENARIO, 0
+    item_aot_set_4p         ID_AOT_5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25048, -17910, -24130, -15260, -21500, -16600, -22610, -19310, ITEM_HANDGUNAMMO, 15, 213, 255, 0
     else                    0, off_1B84
 
 off_1B38:
     if                      0, off_1B62
-    ck                      FG_GAME, F_PLAYER, 0
-    item_aot_set_4p         5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25048, -17910, -24130, -15260, -21500, -16600, -22610, -19310, ITEM_SHOTGUNAMMO, 7, 213, 255, 0
+    ck                      FG_STATUS, F_PLAYER, 0
+    item_aot_set_4p         ID_AOT_5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25048, -17910, -24130, -15260, -21500, -16600, -22610, -19310, ITEM_SHOTGUNAMMO, 7, 213, 255, 0
     else                    0, off_1B82
 
 off_1B62:
-    item_aot_set_4p         5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25048, -17910, -24130, -15260, -21500, -16600, -22610, -19310, ITEM_ACIDROUNDS, 6, 213, 255, 0
+    item_aot_set_4p         ID_AOT_5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25048, -17910, -24130, -15260, -21500, -16600, -22610, -19310, ITEM_ACIDROUNDS, 6, 213, 255, 0
     nop
     nop
 
@@ -101,7 +101,7 @@ off_1B86:
 
 .proc aot
     if                      0, off_1BE2
-    ck                      FG_GENERAL_1, 0, 0
+    ck                      FG_COMMON, 0, 0
     if                      0, off_1BA4
     cmp                     0, V_USED_ITEM, CMP_EQ, 50
     evt_exec                255, I_GOSUB, main_06
@@ -112,8 +112,8 @@ off_1BA4:
     switch                  26, off_1BDE
     case                    0, off_1BC2, 3
     if                      0, off_1BC0
-    ck                      FG_GENERAL_2, 0, 0
-    set                     FG_GENERAL_2, 0, 1
+    ck                      FG_ROOM, 0, 0
+    set                     FG_ROOM, 0, 1
     evt_exec                255, I_GOSUB, main_04
     endif
     nop
@@ -124,8 +124,8 @@ off_1BC0:
 off_1BC2:
     case                    0, off_1BDC, 6
     if                      0, off_1BDA
-    ck                      FG_GENERAL_2, 0, 0
-    set                     FG_GENERAL_2, 0, 1
+    ck                      FG_ROOM, 0, 0
+    set                     FG_ROOM, 0, 1
     evt_exec                255, I_GOSUB, main_04
     endif
     nop
@@ -143,8 +143,8 @@ off_1BE2:
     switch                  26, off_1C1C
     case                    0, off_1C00, 3
     if                      0, off_1BFE
-    ck                      FG_GENERAL_2, 0, 0
-    set                     FG_GENERAL_2, 0, 1
+    ck                      FG_ROOM, 0, 0
+    set                     FG_ROOM, 0, 1
     evt_exec                255, I_GOSUB, main_05
     endif
     nop
@@ -155,8 +155,8 @@ off_1BFE:
 off_1C00:
     case                    0, off_1C1A, 6
     if                      0, off_1C18
-    ck                      FG_GENERAL_2, 0, 0
-    set                     FG_GENERAL_2, 0, 1
+    ck                      FG_ROOM, 0, 0
+    set                     FG_ROOM, 0, 1
     evt_exec                255, I_GOSUB, main_05
     endif
     nop
@@ -175,93 +175,93 @@ off_1C1E:
     evt_end                 0
 
 .proc main_02
-    set                     FG_GENERAL_1, 179, 1
-    set                     FG_GAME, 9, 1
-    set                     FG_STATE, 7, 1
+    set                     FG_COMMON, 179, 1
+    set                     FG_STATUS, 9, 1
+    set                     FG_STOP, 7, 1
     evt_next
-    sce_bgm_control         0, 0, 1, 1, 49
-    sce_bgm_control         0, 0, 2, 1, 64
-    sce_bgm_control         0, 0, 3, 1, 35
-    sce_bgm_control         0, 0, 4, 1, 50
-    sce_bgm_control         0, 4, 0, 1, 65
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 49
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 1, 35
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 1, 50
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_PAUSE, BGM_TYPE_MAIN_VOL, 1, 65
     nop
     sce_fade_set            2, 2, 7, 0, 254
     movie_on                8
     sce_fade_adjust         2, 255, 127
     evt_next
-    set                     FG_GENERAL_2, 5, 0
+    set                     FG_ROOM, 5, 0
     nop
     sleep                   10, 63
-    sce_bgm_control         0, 3, 0, 128, 65
-    set                     FG_STATE, 7, 0
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_RESTART, BGM_TYPE_MAIN_VOL, 128, 65
+    set                     FG_STOP, 7, 0
     evt_end                 0
 
 .proc main_03
     evt_next
     nop
     while                   4, off_1C7C
-    ck                      FG_GENERAL_2, 5, 1
+    ck                      FG_ROOM, 5, 1
     evt_next
     nop
     ewhile                  0
 
 off_1C7C:
     if                      0, off_1D6E
-    ck                      FG_GENERAL_1, 0, 0
+    ck                      FG_COMMON, 0, 0
     switch                  26, off_1D6A
     case                    0, off_1CA8, 0
-    sce_bgm_control         0, 0, 1, 73, 49
-    sce_bgm_control         0, 0, 2, 58, 64
-    sce_bgm_control         0, 0, 3, 30, 35
-    sce_bgm_control         0, 0, 4, 10, 50
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 73, 49
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 58, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 35
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 10, 50
     break                   0
 
 off_1CA8:
     case                    0, off_1CC8, 1
-    sce_bgm_control         0, 0, 1, 93, 49
-    sce_bgm_control         0, 0, 2, 50, 80
-    sce_bgm_control         0, 0, 3, 30, 100
-    sce_bgm_control         0, 0, 4, 15, 30
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 93, 49
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 50, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 100
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 15, 30
     break                   0
 
 off_1CC8:
     case                    0, off_1CE8, 2
-    sce_bgm_control         0, 0, 1, 102, 70
-    sce_bgm_control         0, 0, 2, 60, 80
-    sce_bgm_control         0, 0, 3, 30, 64
-    sce_bgm_control         0, 0, 4, 10, 3
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 102, 70
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 60, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 10, 3
     break                   0
 
 off_1CE8:
     case                    0, off_1D08, 3
-    sce_bgm_control         0, 0, 1, 110, 64
-    sce_bgm_control         0, 0, 2, 60, 80
-    sce_bgm_control         0, 0, 3, 30, 127
-    sce_bgm_control         0, 0, 4, 10, 3
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 110, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 60, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 127
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 10, 3
     break                   0
 
 off_1D08:
     case                    0, off_1D28, 4
-    sce_bgm_control         0, 0, 1, 111, 125
-    sce_bgm_control         0, 0, 2, 70, 80
-    sce_bgm_control         0, 0, 3, 30, 34
-    sce_bgm_control         0, 0, 4, 10, 3
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 111, 125
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 70, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 34
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 10, 3
     break                   0
 
 off_1D28:
     case                    0, off_1D48, 5
-    sce_bgm_control         0, 0, 1, 98, 77
-    sce_bgm_control         0, 0, 2, 60, 80
-    sce_bgm_control         0, 0, 3, 30, 34
-    sce_bgm_control         0, 0, 4, 10, 3
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 98, 77
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 60, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 34
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 10, 3
     break                   0
 
 off_1D48:
     case                    0, off_1D68, 6
-    sce_bgm_control         0, 0, 1, 127, 85
-    sce_bgm_control         0, 0, 2, 60, 80
-    sce_bgm_control         0, 0, 3, 30, 34
-    sce_bgm_control         0, 0, 4, 10, 3
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 127, 85
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 60, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 34
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 10, 3
     break                   0
 
 off_1D68:
@@ -271,48 +271,48 @@ off_1D6A:
     else                    0, off_1E0E
 
 off_1D6E:
-    sce_bgm_control         0, 0, 1, 1, 0
-    sce_bgm_control         0, 0, 4, 1, 0
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 0
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, 4, 1, 0
     switch                  26, off_1E0C
     case                    0, off_1D92, 9
-    sce_bgm_control         0, 0, 2, 58, 64
-    sce_bgm_control         0, 0, 3, 30, 35
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 58, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 35
     break                   0
 
 off_1D92:
     case                    0, off_1DA6, 10
-    sce_bgm_control         0, 0, 2, 50, 80
-    sce_bgm_control         0, 0, 3, 30, 100
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 50, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 100
     break                   0
 
 off_1DA6:
     case                    0, off_1DBA, 11
-    sce_bgm_control         0, 0, 2, 60, 80
-    sce_bgm_control         0, 0, 3, 30, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 60, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 64
     break                   0
 
 off_1DBA:
     case                    0, off_1DCE, 12
-    sce_bgm_control         0, 0, 2, 60, 80
-    sce_bgm_control         0, 0, 3, 30, 127
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 60, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 127
     break                   0
 
 off_1DCE:
     case                    0, off_1DE2, 13
-    sce_bgm_control         0, 0, 2, 70, 80
-    sce_bgm_control         0, 0, 3, 30, 34
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 70, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 34
     break                   0
 
 off_1DE2:
     case                    0, off_1DF6, 14
-    sce_bgm_control         0, 0, 2, 75, 80
-    sce_bgm_control         0, 0, 3, 30, 34
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 75, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 34
     break                   0
 
 off_1DF6:
     case                    0, off_1E0A, 15
-    sce_bgm_control         0, 0, 2, 60, 80
-    sce_bgm_control         0, 0, 3, 30, 34
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 60, 80
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 30, 34
     break                   0
 
 off_1E0A:
@@ -327,7 +327,7 @@ off_1E0E:
     evt_next
     nop
     edwhile                 off_1E1A
-    ck                      FG_GAME, 11, 0
+    ck                      FG_STATUS, 11, 0
 
 off_1E1A:
     goto                    255, 255, 0, off_1C7C
@@ -351,40 +351,40 @@ off_1E30:
     next                    0
 
 off_1E44:
-    set                     FG_GENERAL_2, 0, 0
+    set                     FG_ROOM, 0, 0
     evt_end                 0
 
 .proc main_05
     light_kido_set          1, 0
-    set                     FG_GENERAL_2, 0, 0
+    set                     FG_ROOM, 0, 0
     evt_end                 0
 
 .proc main_06
-    set                     FG_GENERAL_2, 1, 0
+    set                     FG_ROOM, 1, 0
     evt_exec                255, I_GOSUB, main_07
-    aot_reset               3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    aot_reset               ID_AOT_3, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     do                      0, off_1E74
     sleep                   10, 1
     edwhile                 off_1E74
-    ck                      FG_GENERAL_2, 1, 0
+    ck                      FG_ROOM, 1, 0
 
 off_1E74:
     evt_end                 0
 
 .proc main_07
-    set                     FG_STATE, 7, 1
-    set                     FG_GAME, 27, 1
-    aot_reset               2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    aot_reset               6, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    aot_reset               7, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    aot_reset               8, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    aot_reset               9, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-    aot_reset               10, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    set                     FG_STOP, 7, 1
+    set                     FG_STATUS, 27, 1
+    aot_reset               ID_AOT_2, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    aot_reset               ID_AOT_6, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    aot_reset               ID_AOT_7, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    aot_reset               ID_AOT_8, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    aot_reset               ID_AOT_9, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+    aot_reset               ID_AOT_10, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
     evt_next
-    set                     FG_GENERAL_2, 2, 0
+    set                     FG_ROOM, 2, 0
     nop
     evt_exec                255, I_GOSUB, main_08
-    set                     FG_GENERAL_2, 3, 0
+    set                     FG_ROOM, 3, 0
     evt_exec                255, I_GOSUB, main_09
     sleep                   10, 10
     sca_id_set              9, 0, 0
@@ -394,7 +394,7 @@ off_1E74:
     evt_next
     nop
     edwhile                 off_1EE8
-    ck                      FG_GENERAL_2, 2, 0
+    ck                      FG_ROOM, 2, 0
 
 off_1EE8:
     cut_chg                 5
@@ -403,7 +403,7 @@ off_1EE8:
     nop_8a                  0, 5, 0, 10, 0
     nop_8c                  0, 200, 240, 15, 0, 0, 0
     se_on                   2, 267, 0, -18762, -2800, -21034
-    sce_bgm_control         1, 1, 1, 80, 64
+    sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_PROG0_VOL, 80, 64
     sce_espr_on             0, 4378, 0, 8192, -27100, -11900, -20000, 0
     sleep                   10, 7
     sce_espr_on             0, 4378, 0, 8192, -27100, -11900, -20000, 0
@@ -437,7 +437,7 @@ off_1EE8:
     nop
     sce_espr_on             0, 36, 0, 9216, -21905, -1600, -17300, 0
     sleep                   10, 30
-    sce_bgm_control         1, 5, 0, 0, 0
+    sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_FADEOUT, BGM_TYPE_MAIN_VOL, 0, 0
     sleep                   10, 60
     cut_chg                 8
     sleep                   10, 90
@@ -446,28 +446,28 @@ off_1EE8:
     sce_espr_kill           35, 0, 0, 0
     sce_espr_kill           36, 0, 0, 0
     sleep                   10, 100
-    set                     FG_GENERAL_1, 0, 1
+    set                     FG_COMMON, 0, 1
     if                      0, off_2072
-    ck                      FG_GAME, F_SCENARIO, 1
-    aot_reset               1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_0E, 0, 0
+    ck                      FG_STATUS, F_SCENARIO, 1
+    aot_reset               ID_AOT_1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_0E, 0, 0
     endif
     nop
 
 off_2072:
-    aot_reset               2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, 0, 0, 0, 255
+    aot_reset               ID_AOT_2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, ID_MSG_1, 0, 0, 0, 0, 255
     cut_chg                 15
-    set                     FG_GAME, 27, 0
+    set                     FG_STATUS, 27, 0
     evt_exec                255, I_GOSUB, main_0C
     sleep                   10, 20
     cut_auto                1
-    set                     FG_STATE, 7, 0
-    set                     FG_GENERAL_2, 1, 1
-    aot_on                  4
+    set                     FG_STOP, 7, 0
+    set                     FG_ROOM, 1, 1
+    aot_on                  ID_AOT_4
     sleep                   10, 1
     if                      0, off_20CC
-    ck                      FG_GAME, F_SCENARIO, 0
+    ck                      FG_STATUS, F_SCENARIO, 0
     if                      0, off_20BE
-    ck                      FG_GAME, F_PLAYER, 0
+    ck                      FG_STATUS, F_PLAYER, 0
     sce_bgmtbl_set          0, 8, 1, 65280, 0
     sce_bgmtbl_set          0, 10, 1, 255, 0
     else                    0, off_20C8
@@ -482,7 +482,7 @@ off_20C8:
 
 off_20CC:
     if                      0, off_20F0
-    ck                      FG_GAME, F_PLAYER, 0
+    ck                      FG_STATUS, F_PLAYER, 0
     sce_bgmtbl_set          0, 8, 1, 65280, 0
     sce_bgmtbl_set          0, 9, 1, 1822, 64
     sce_bgmtbl_set          0, 10, 1, 255, 0
@@ -499,14 +499,14 @@ off_2102:
     nop
 
 off_2104:
-    set                     FG_GENERAL_2, 3, 1
+    set                     FG_ROOM, 3, 1
     evt_end                 0
 
 .proc main_08
     work_set                WK_PLAYER, 0
     nop
     if                      0, off_2122
-    ck                      FG_GAME, F_PLAYER, 1
+    ck                      FG_STATUS, F_PLAYER, 1
     pos_set                 0, -19920, 0, -21250
     else                    0, off_212C
 
@@ -516,10 +516,10 @@ off_2122:
     nop
 
 off_212C:
-    member_set              15, 0, 8
+    member_set              M_Y_DIR, 2048
     sleep                   10, 20
     if                      0, off_2144
-    ck                      FG_GAME, F_PLAYER, 1
+    ck                      FG_STATUS, F_PLAYER, 1
     plc_motion              0, 15, 0
     else                    0, off_214A
 
@@ -531,7 +531,7 @@ off_2144:
 off_214A:
     sleep                   10, 30
     if                      0, off_215E
-    ck                      FG_GAME, F_PLAYER, 1
+    ck                      FG_STATUS, F_PLAYER, 1
     plc_motion              0, 16, 0
     else                    0, off_2164
 
@@ -546,7 +546,7 @@ off_2164:
     sleep                   10, 22
     for                     0, off_21AA, 2
     if                      0, off_218E
-    ck                      FG_GAME, F_PLAYER, 1
+    ck                      FG_STATUS, F_PLAYER, 1
     plc_motion              0, 17, 0
     else                    0, off_2194
 
@@ -562,7 +562,7 @@ off_2194:
     next                    0
 
 off_21AA:
-    set                     FG_GENERAL_2, 2, 1
+    set                     FG_ROOM, 2, 1
     for                     0, off_21CE, 2
     plc_motion              0, 17, 0
     sleep                   10, 18
@@ -592,7 +592,7 @@ off_21CE:
     evt_end                 0
 
 .proc main_09
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     nop
     pos_set                 0, -20880, -1800, -21245
     sleep                   10, 20
@@ -667,7 +667,7 @@ off_22CC:
 
 off_22CE:
     while                   4, off_22DA
-    ck                      FG_GENERAL_2, 3, 0
+    ck                      FG_ROOM, 3, 0
     evt_next
     nop
     ewhile                  0
@@ -739,26 +739,26 @@ off_2398:
 
 .proc main_0D
     if                      0, off_24CA
-    ck                      FG_GENERAL_1, 0, 0
-    sce_bgm_control         0, 0, 1, 1, 64
+    ck                      FG_COMMON, 0, 0
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 64
     endif
     nop
 
 off_24CA:
-    aot_on                  0
+    aot_on                  ID_AOT_0
     evt_end                 0
 
 .proc main_0E
-    set                     FG_GAME, 27, 1
-    set                     FG_STATE, 7, 1
-    set                     FG_GENERAL_1, 181, 1
+    set                     FG_STATUS, 27, 1
+    set                     FG_STOP, 7, 1
+    set                     FG_COMMON, 181, 1
     sleep                   10, 8
     work_set                WK_PLAYER, 0
     nop
     sleep                   10, 10
     plc_dest                0, 9, 4, -10550, -18550
     while                   4, off_24FA
-    ck                      FG_GENERAL_2, 4, 0
+    ck                      FG_ROOM, 4, 0
     evt_next
     nop
     ewhile                  0
@@ -781,26 +781,26 @@ off_250E:
     next                    0
 
 off_2524:
-    sce_bgm_control         0, 4, 0, 1, 65
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_PAUSE, BGM_TYPE_MAIN_VOL, 1, 65
     sce_fade_set            2, 2, 7, 0, 248
     movie_on                9
     sleep                   10, 1
-    sce_bgm_control         0, 3, 0, 128, 65
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_RESTART, BGM_TYPE_MAIN_VOL, 128, 65
     plc_motion              0, 18, 192
     plc_cnt                 10
     sleep                   10, 9
     plc_neck                0, 0, 0, 0, 10, 10
     sleep                   10, 30
-    set                     FG_GAME, 27, 0
-    set                     FG_STATE, 7, 0
-    aot_reset               1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 168, 237, 0, 0, 156, 250
+    set                     FG_STATUS, 27, 0
+    set                     FG_STOP, 7, 0
+    aot_reset               ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 168, 237, 0, 0, 156, 250
     plc_ret
     nop
     evt_end                 0
 
 .proc main_0F
     while                   4, off_2576
-    ck                      FG_GENERAL_2, 5, 1
+    ck                      FG_ROOM, 5, 1
     evt_next
     nop
     ewhile                  0

@@ -2,21 +2,21 @@
 
 proc init
 {
-    door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 10803, -9738, 5080, 3830, -13695, -1800, -26187, -904, 1, 0, 0, 1, 12, 0, 0, 0, UNLOCKED, 0);
-    aot_set(1, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -26272, -22795, 4280, 1900, 0, 0, 0, 0, 0, 255);
-    aot_set(2, SCE_NORMAL, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 10831, -28151, 4340, 2550, 0, 0, 0, 0, 0, 0);
-    aot_set(3, SCE_NORMAL, SAT_EM | SAT_UNDER, 3, 0, -26066, -23500, 2450, 1570, 0, 0, 0, 0, 0, 0);
-    aot_set(4, SCE_NORMAL, SAT_EM | SAT_UNDER, 3, 0, 21862, -18667, 6900, 8800, 0, 0, 0, 0, 0, 0);
-    if (ck(FG_0, F_DIFFICULT, 1))
+    door_aot_se(ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 10803, -9738, 5080, 3830, -13695, -1800, -26187, -904, 1, 0, 0, 1, 12, 0, 0, 0, UNLOCKED, 0);
+    aot_set(ID_AOT_1, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -26272, -22795, 4280, 1900, ID_MSG_0, 0, 0, 0, 0, 255);
+    aot_set(ID_AOT_2, SCE_NORMAL, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 10831, -28151, 4340, 2550, 0, 0, 0, 0, 0, 0);
+    aot_set(ID_AOT_3, SCE_NORMAL, SAT_EM | SAT_UNDER, 3, 0, -26066, -23500, 2450, 1570, 0, 0, 0, 0, 0, 0);
+    aot_set(ID_AOT_4, SCE_NORMAL, SAT_EM | SAT_UNDER, 3, 0, 21862, -18667, 6900, 8800, 0, 0, 0, 0, 0, 0);
+    if (ck(FG_SYSTEM, F_DIFFICULT, 1))
     {
-        item_aot_set(5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 25562, -16667, 1840, 3500, ITEM_HERBG, 1, 211, 255, 0);
+        item_aot_set(ID_AOT_5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, 25562, -16667, 1840, 3500, ITEM_HERBG, 1, 211, ID_OBJ_255, IF_DEFAULT);
     }
 }
 
 proc main
 {
     main_02();
-    if (ck(FG_GENERAL_2, 18, 0))
+    if (ck(FG_ROOM, 18, 0))
     {
         main_10();
         fork main_03;
@@ -33,7 +33,7 @@ proc main
         fork main_12;
         fork main_14;
     }
-    set(13, 5, 0);
+    set(FG_PBF00, 5, 0);
     fork main_07;
 }
 
@@ -43,13 +43,13 @@ proc aot
 
 proc main_02
 {
-    set(FG_GENERAL_2, 18, 1);
+    set(FG_ROOM, 18, 1);
     save(V_04, 0);
     repeat (255)
     {
         if (work_copy(4, 2, 0) && ck(FG_ITEM, 0, 1))
         {
-            set(FG_GENERAL_2, 18, 0);
+            set(FG_ROOM, 18, 0);
         }
         copy(V_TEMP, V_04);
         calc(0, OP_ADD, V_TEMP, 1);
@@ -58,34 +58,34 @@ proc main_02
     save(V_04, 0);
     repeat (255)
     {
-        if (work_copy(4, 2, 0) && ck(34, 0, 1))
+        if (work_copy(4, 2, 0) && ck(FG_ITEM_2, 0, 1))
         {
-            set(FG_GENERAL_2, 18, 0);
+            set(FG_ROOM, 18, 0);
         }
         copy(V_TEMP, V_04);
         calc(0, OP_ADD, V_TEMP, 1);
         copy(V_04, V_TEMP);
     }
-    if (ck(FG_GAME, F_EASY, 1))
+    if (ck(FG_STATUS, F_EASY, 1))
     {
-        set(FG_GENERAL_2, 18, 0);
+        set(FG_ROOM, 18, 0);
     }
     else
     {
-        if (ck(FG_GAME, F_SCENARIO, 0))
+        if (ck(FG_STATUS, F_SCENARIO, 0))
         {
-            if (ck(FG_GENERAL_2, 18, 1))
+            if (ck(FG_ROOM, 18, 1))
             {
-                set(FG_LOCK, 17, 1);
+                set(FG_ZAPPING, 17, 1);
             }
         }
-        if (ck(FG_LOCK, 17, 1))
+        if (ck(FG_ZAPPING, 17, 1))
         {
-            set(FG_GENERAL_2, 18, 1);
+            set(FG_ROOM, 18, 1);
         }
         if (ck(FG_ENEMY, 195, 1))
         {
-            set(FG_GENERAL_2, 18, 0);
+            set(FG_ROOM, 18, 0);
         }
     }
 }
@@ -93,21 +93,21 @@ proc main_02
 proc main_03
 {
     sleep(10, 5);
-    work_set(WK_ENEMY, 3);
-    member_copy(V_TEMP, 7);
+    work_set(WK_ENEMY, ID_EM_3);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_AND, V_TEMP, -16385);
-    member_set2(7, V_TEMP);
+    member_set2(M_TYPE, V_TEMP);
     evt_next();
     if (cmp(0, V_CUT, CMP_EQ, 0))
     {
-        if (ck(FG_GENERAL_2, 9, 0))
+        if (ck(FG_ROOM, 9, 0))
         {
-            work_set(WK_ENEMY, 1);
+            work_set(WK_ENEMY, ID_EM_1);
             if (member_cmp(0, 2, 5, 7, 0))
             {
                 if (member_cmp(0, 9, 0, 3, 0))
                 {
-                    if (cmp(0, V_1D, CMP_GE, 32000))
+                    if (cmp(0, V_RNG, CMP_GE, 32000))
                     {
                         fork main_04;
                     }
@@ -121,36 +121,36 @@ proc main_03
 
 proc main_04
 {
-    work_set(WK_ENEMY, 1);
-    set(FG_GENERAL_2, 9, 1);
-    member_set(23, 0, 140);
+    work_set(WK_ENEMY, ID_EM_1);
+    set(FG_ROOM, 9, 1);
+    member_set(M_SCE_FREE0, -29696);
     evt_next();
-    member_copy(V_TEMP, 23);
+    member_copy(V_TEMP, M_SCE_FREE0);
     calc(0, OP_AND, V_TEMP, 32767);
-    member_set2(23, V_TEMP);
+    member_set2(M_SCE_FREE0, V_TEMP);
 }
 
 proc main_05
 {
 
 off_38B0:
-    work_set(WK_ENEMY, 1);
-    if (ck(FG_GENERAL_2, 9, 1))
+    work_set(WK_ENEMY, ID_EM_1);
+    if (ck(FG_ROOM, 9, 1))
     {
         if (member_cmp(0, 24, 6, 0, 128))
         {
             se_on(2, 266, 259, 0, 0, 0);
-            if (ck(FG_GENERAL_2, 11, 0))
+            if (ck(FG_ROOM, 11, 0))
             {
-                set(FG_GENERAL_2, 11, 1);
-                set(13, 2, 1);
-                set(13, 5, 0);
+                set(FG_ROOM, 11, 1);
+                set(FG_PBF00, 2, 1);
+                set(FG_PBF00, 5, 0);
             }
             else
             {
-                set(FG_GENERAL_2, 11, 0);
-                set(13, 2, 0);
-                set(13, 5, 1);
+                set(FG_ROOM, 11, 0);
+                set(FG_PBF00, 2, 0);
+                set(FG_PBF00, 5, 1);
             }
         }
         if (member_cmp(0, 24, 6, 0, 64))
@@ -158,9 +158,9 @@ off_38B0:
         }
         else
         {
-            set(FG_GENERAL_2, 9, 0);
+            set(FG_ROOM, 9, 0);
         }
-        member_set(24, 0, 0);
+        member_set(M_SCE_FREE1, 0);
     }
     evt_next();
     goto off_38B0;
@@ -174,38 +174,38 @@ off_391E:
     {
     case 4:
     case 5:
-        if (ck(FG_GENERAL_2, 1, 0))
+        if (ck(FG_ROOM, 1, 0))
         {
-            set(FG_GENERAL_2, 1, 1);
-            set(FG_GENERAL_2, 3, 0);
+            set(FG_ROOM, 1, 1);
+            set(FG_ROOM, 3, 0);
             main_08();
         }
         break;
     case 1:
     case 10:
     case 11:
-        if (ck(FG_GENERAL_2, 2, 0))
+        if (ck(FG_ROOM, 2, 0))
         {
-            set(FG_GENERAL_2, 2, 1);
-            set(FG_GENERAL_2, 3, 0);
+            set(FG_ROOM, 2, 1);
+            set(FG_ROOM, 3, 0);
             main_09();
         }
-        if (ck(FG_GENERAL_2, 17, 0))
+        if (ck(FG_ROOM, 17, 0))
         {
-            set(FG_GENERAL_2, 17, 1);
+            set(FG_ROOM, 17, 1);
             main_0C();
         }
         break;
     case 0:
-        if (ck(FG_GENERAL_2, 2, 0))
+        if (ck(FG_ROOM, 2, 0))
         {
-            set(FG_GENERAL_2, 2, 1);
-            set(FG_GENERAL_2, 3, 0);
+            set(FG_ROOM, 2, 1);
+            set(FG_ROOM, 3, 0);
             main_09();
         }
-        if (ck(FG_GENERAL_2, 17, 1))
+        if (ck(FG_ROOM, 17, 1))
         {
-            set(FG_GENERAL_2, 17, 0);
+            set(FG_ROOM, 17, 0);
             main_0B();
         }
         break;
@@ -216,21 +216,21 @@ off_391E:
     case 13:
     case 14:
     case 15:
-        if (ck(FG_GENERAL_2, 2, 0))
+        if (ck(FG_ROOM, 2, 0))
         {
-            set(FG_GENERAL_2, 2, 1);
-            set(FG_GENERAL_2, 3, 0);
+            set(FG_ROOM, 2, 1);
+            set(FG_ROOM, 3, 0);
             main_09();
         }
         break;
     case 2:
     case 3:
     case 6:
-        if (ck(FG_GENERAL_2, 3, 0))
+        if (ck(FG_ROOM, 3, 0))
         {
-            set(FG_GENERAL_2, 3, 1);
-            set(FG_GENERAL_2, 1, 0);
-            set(FG_GENERAL_2, 2, 0);
+            set(FG_ROOM, 3, 1);
+            set(FG_ROOM, 1, 0);
+            set(FG_ROOM, 2, 0);
             main_0A();
         }
         break;
@@ -246,9 +246,9 @@ off_3A20:
     switch (V_CUT)
     {
     case 0:
-        sce_bgm_control(0, 0, 1, 1, 65);
-        sce_bgm_control(0, 0, 2, 58, 65);
-        sce_bgm_control(0, 0, 3, 85, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 58, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 85, 65);
         break;
     case 1:
     case 2:
@@ -256,112 +256,112 @@ off_3A20:
     case 4:
     case 5:
     case 6:
-        sce_bgm_control(0, 0, 3, 60, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 60, 65);
         break;
     case 7:
-        sce_bgm_control(0, 0, 3, 74, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 74, 65);
         break;
     case 8:
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     case 9:
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     case 10:
-        sce_bgm_control(0, 0, 1, 1, 65);
-        sce_bgm_control(0, 0, 2, 58, 65);
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 58, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     case 11:
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     case 12:
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     case 13:
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     case 14:
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     case 15:
-        sce_bgm_control(0, 0, 3, 24, 65);
+        sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 24, 65);
         break;
     }
     do
     {
         evt_next();
-    } while (ck(FG_GAME, 11, 0));
+    } while (ck(FG_STATUS, 11, 0));
     goto off_3A20;
 }
 
 proc main_08
 {
-    if (ck(FG_GENERAL_2, 21, 0))
+    if (ck(FG_ROOM, 21, 0))
     {
-        work_set(WK_ENEMY, 0);
-        member_set(12, 0, 131);
-        member_copy(V_TEMP, 0);
+        work_set(WK_ENEMY, ID_EM_0);
+        member_set(M_Y_POS, -32000);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_OR, V_TEMP, 1024);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_OR, V_TEMP, 8);
-        member_set2(1, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_BE_FLAG, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_OR, V_TEMP, -32768);
-        member_set2(7, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_TYPE, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_OR, V_TEMP, 16384);
-        member_set2(7, V_TEMP);
+        member_set2(M_TYPE, V_TEMP);
     }
-    if (ck(FG_GENERAL_2, 22, 0))
+    if (ck(FG_ROOM, 22, 0))
     {
-        work_set(WK_ENEMY, 5);
-        member_set(12, 0, 131);
-        member_copy(V_TEMP, 0);
+        work_set(WK_ENEMY, ID_EM_5);
+        member_set(M_Y_POS, -32000);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_OR, V_TEMP, 1024);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_OR, V_TEMP, 8);
-        member_set2(1, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_BE_FLAG, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_OR, V_TEMP, -32768);
-        member_set2(7, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_TYPE, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_OR, V_TEMP, 16384);
-        member_set2(7, V_TEMP);
+        member_set2(M_TYPE, V_TEMP);
     }
 }
 
 proc main_09
 {
-    if (ck(FG_GENERAL_2, 21, 0))
+    if (ck(FG_ROOM, 21, 0))
     {
-        work_set(WK_ENEMY, 0);
-        member_set(12, 232, 234);
-        member_copy(V_TEMP, 0);
+        work_set(WK_ENEMY, ID_EM_0);
+        member_set(M_Y_POS, -5400);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_AND, V_TEMP, -1025);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_AND, V_TEMP, -9);
-        member_set2(1, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_BE_FLAG, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_AND, V_TEMP, 16383);
-        member_set2(7, V_TEMP);
+        member_set2(M_TYPE, V_TEMP);
     }
-    if (ck(FG_GENERAL_2, 22, 0))
+    if (ck(FG_ROOM, 22, 0))
     {
-        work_set(WK_ENEMY, 5);
-        member_set(12, 232, 234);
-        member_copy(V_TEMP, 0);
+        work_set(WK_ENEMY, ID_EM_5);
+        member_set(M_Y_POS, -5400);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_AND, V_TEMP, -1025);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_AND, V_TEMP, -9);
-        member_set2(1, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_BE_FLAG, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_AND, V_TEMP, 16383);
-        member_set2(7, V_TEMP);
+        member_set2(M_TYPE, V_TEMP);
     }
 }
 
@@ -369,217 +369,217 @@ proc main_0A
 {
     if (cmp(0, V_CUT, CMP_EQ, 6))
     {
-        if (ck(FG_GENERAL_2, 21, 0))
+        if (ck(FG_ROOM, 21, 0))
         {
-            work_set(WK_ENEMY, 0);
+            work_set(WK_ENEMY, ID_EM_0);
             if (member_cmp(0, 9, 0, 4, 0))
             {
-                member_set(12, 232, 234);
-                member_copy(V_TEMP, 0);
+                member_set(M_Y_POS, -5400);
+                member_copy(V_TEMP, M_POINTER);
                 calc(0, OP_AND, V_TEMP, -1025);
-                member_set2(0, V_TEMP);
-                member_copy(V_TEMP, 1);
+                member_set2(M_POINTER, V_TEMP);
+                member_copy(V_TEMP, M_BE_FLAG);
                 calc(0, OP_AND, V_TEMP, -9);
-                member_set2(1, V_TEMP);
-                member_copy(V_TEMP, 7);
+                member_set2(M_BE_FLAG, V_TEMP);
+                member_copy(V_TEMP, M_TYPE);
                 calc(0, OP_AND, V_TEMP, 16383);
-                member_set2(7, V_TEMP);
+                member_set2(M_TYPE, V_TEMP);
             }
             else
             {
-                member_set(12, 0, 131);
-                member_copy(V_TEMP, 0);
+                member_set(M_Y_POS, -32000);
+                member_copy(V_TEMP, M_POINTER);
                 calc(0, OP_OR, V_TEMP, 1024);
-                member_set2(0, V_TEMP);
-                member_copy(V_TEMP, 1);
+                member_set2(M_POINTER, V_TEMP);
+                member_copy(V_TEMP, M_BE_FLAG);
                 calc(0, OP_OR, V_TEMP, 8);
-                member_set2(1, V_TEMP);
-                member_copy(V_TEMP, 7);
+                member_set2(M_BE_FLAG, V_TEMP);
+                member_copy(V_TEMP, M_TYPE);
                 calc(0, OP_OR, V_TEMP, -32768);
-                member_set2(7, V_TEMP);
-                member_copy(V_TEMP, 7);
+                member_set2(M_TYPE, V_TEMP);
+                member_copy(V_TEMP, M_TYPE);
                 calc(0, OP_OR, V_TEMP, 16384);
-                member_set2(7, V_TEMP);
+                member_set2(M_TYPE, V_TEMP);
             }
         }
-        if (ck(FG_GENERAL_2, 22, 0))
+        if (ck(FG_ROOM, 22, 0))
         {
-            work_set(WK_ENEMY, 5);
+            work_set(WK_ENEMY, ID_EM_5);
             if (member_cmp(0, 9, 0, 4, 0))
             {
-                member_set(12, 232, 234);
-                member_copy(V_TEMP, 0);
+                member_set(M_Y_POS, -5400);
+                member_copy(V_TEMP, M_POINTER);
                 calc(0, OP_AND, V_TEMP, -1025);
-                member_set2(0, V_TEMP);
-                member_copy(V_TEMP, 1);
+                member_set2(M_POINTER, V_TEMP);
+                member_copy(V_TEMP, M_BE_FLAG);
                 calc(0, OP_AND, V_TEMP, -9);
-                member_set2(1, V_TEMP);
-                member_copy(V_TEMP, 7);
+                member_set2(M_BE_FLAG, V_TEMP);
+                member_copy(V_TEMP, M_TYPE);
                 calc(0, OP_AND, V_TEMP, 16383);
-                member_set2(7, V_TEMP);
+                member_set2(M_TYPE, V_TEMP);
             }
             else
             {
-                member_set(12, 0, 131);
-                member_copy(V_TEMP, 0);
+                member_set(M_Y_POS, -32000);
+                member_copy(V_TEMP, M_POINTER);
                 calc(0, OP_OR, V_TEMP, 1024);
-                member_set2(0, V_TEMP);
-                member_copy(V_TEMP, 1);
+                member_set2(M_POINTER, V_TEMP);
+                member_copy(V_TEMP, M_BE_FLAG);
                 calc(0, OP_OR, V_TEMP, 8);
-                member_set2(1, V_TEMP);
-                member_copy(V_TEMP, 7);
+                member_set2(M_BE_FLAG, V_TEMP);
+                member_copy(V_TEMP, M_TYPE);
                 calc(0, OP_OR, V_TEMP, -32768);
-                member_set2(7, V_TEMP);
-                member_copy(V_TEMP, 7);
+                member_set2(M_TYPE, V_TEMP);
+                member_copy(V_TEMP, M_TYPE);
                 calc(0, OP_OR, V_TEMP, 16384);
-                member_set2(7, V_TEMP);
+                member_set2(M_TYPE, V_TEMP);
             }
         }
     }
     else
     {
-        if (ck(FG_GENERAL_2, 21, 0))
+        if (ck(FG_ROOM, 21, 0))
         {
-            work_set(WK_ENEMY, 0);
-            member_set(12, 232, 234);
-            member_copy(V_TEMP, 0);
+            work_set(WK_ENEMY, ID_EM_0);
+            member_set(M_Y_POS, -5400);
+            member_copy(V_TEMP, M_POINTER);
             calc(0, OP_AND, V_TEMP, -1025);
-            member_set2(0, V_TEMP);
-            member_copy(V_TEMP, 1);
+            member_set2(M_POINTER, V_TEMP);
+            member_copy(V_TEMP, M_BE_FLAG);
             calc(0, OP_AND, V_TEMP, -9);
-            member_set2(1, V_TEMP);
-            member_copy(V_TEMP, 7);
+            member_set2(M_BE_FLAG, V_TEMP);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_AND, V_TEMP, 16383);
-            member_set2(7, V_TEMP);
+            member_set2(M_TYPE, V_TEMP);
         }
-        if (ck(FG_GENERAL_2, 22, 0))
+        if (ck(FG_ROOM, 22, 0))
         {
-            work_set(WK_ENEMY, 5);
-            member_set(12, 232, 234);
-            member_copy(V_TEMP, 0);
+            work_set(WK_ENEMY, ID_EM_5);
+            member_set(M_Y_POS, -5400);
+            member_copy(V_TEMP, M_POINTER);
             calc(0, OP_AND, V_TEMP, -1025);
-            member_set2(0, V_TEMP);
-            member_copy(V_TEMP, 1);
+            member_set2(M_POINTER, V_TEMP);
+            member_copy(V_TEMP, M_BE_FLAG);
             calc(0, OP_AND, V_TEMP, -9);
-            member_set2(1, V_TEMP);
-            member_copy(V_TEMP, 7);
+            member_set2(M_BE_FLAG, V_TEMP);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_AND, V_TEMP, 16383);
-            member_set2(7, V_TEMP);
+            member_set2(M_TYPE, V_TEMP);
         }
     }
 }
 
 proc main_0B
 {
-    work_set(WK_ENEMY, 1);
-    member_set(12, 232, 234);
-    member_copy(V_TEMP, 0);
+    work_set(WK_ENEMY, ID_EM_1);
+    member_set(M_Y_POS, -5400);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_AND, V_TEMP, -1025);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_AND, V_TEMP, -9);
-    member_set2(1, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_BE_FLAG, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_AND, V_TEMP, 16383);
-    member_set2(7, V_TEMP);
-    work_set(WK_ENEMY, 2);
-    member_set(12, 232, 234);
-    member_copy(V_TEMP, 0);
+    member_set2(M_TYPE, V_TEMP);
+    work_set(WK_ENEMY, ID_EM_2);
+    member_set(M_Y_POS, -5400);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_AND, V_TEMP, -1025);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_AND, V_TEMP, -9);
-    member_set2(1, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_BE_FLAG, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_AND, V_TEMP, 16383);
-    member_set2(7, V_TEMP);
-    work_set(WK_ENEMY, 3);
-    member_set(12, 232, 234);
-    member_copy(V_TEMP, 0);
+    member_set2(M_TYPE, V_TEMP);
+    work_set(WK_ENEMY, ID_EM_3);
+    member_set(M_Y_POS, -5400);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_AND, V_TEMP, -1025);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_AND, V_TEMP, -9);
-    member_set2(1, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_BE_FLAG, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_AND, V_TEMP, 16383);
-    member_set2(7, V_TEMP);
-    if (ck(FG_GENERAL_2, 16, 1))
+    member_set2(M_TYPE, V_TEMP);
+    if (ck(FG_ROOM, 16, 1))
     {
-        work_set(WK_ENEMY, 4);
-        member_set(12, 232, 234);
-        member_copy(V_TEMP, 0);
+        work_set(WK_ENEMY, ID_EM_4);
+        member_set(M_Y_POS, -5400);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_AND, V_TEMP, -1025);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_AND, V_TEMP, -9);
-        member_set2(1, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_BE_FLAG, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_AND, V_TEMP, 16383);
-        member_set2(7, V_TEMP);
+        member_set2(M_TYPE, V_TEMP);
     }
 }
 
 proc main_0C
 {
-    work_set(WK_ENEMY, 1);
-    member_set(12, 0, 131);
-    member_copy(V_TEMP, 0);
+    work_set(WK_ENEMY, ID_EM_1);
+    member_set(M_Y_POS, -32000);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_OR, V_TEMP, 8);
-    member_set2(1, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_BE_FLAG, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_OR, V_TEMP, 16384);
-    member_set2(7, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_TYPE, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_OR, V_TEMP, -32768);
-    member_set2(7, V_TEMP);
-    work_set(WK_ENEMY, 2);
-    member_set(12, 0, 131);
-    member_copy(V_TEMP, 0);
+    member_set2(M_TYPE, V_TEMP);
+    work_set(WK_ENEMY, ID_EM_2);
+    member_set(M_Y_POS, -32000);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_OR, V_TEMP, 8);
-    member_set2(1, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_BE_FLAG, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_OR, V_TEMP, 16384);
-    member_set2(7, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_TYPE, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_OR, V_TEMP, -32768);
-    member_set2(7, V_TEMP);
-    work_set(WK_ENEMY, 3);
-    member_set(12, 0, 131);
-    member_copy(V_TEMP, 0);
+    member_set2(M_TYPE, V_TEMP);
+    work_set(WK_ENEMY, ID_EM_3);
+    member_set(M_Y_POS, -32000);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_OR, V_TEMP, 8);
-    member_set2(1, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_BE_FLAG, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_OR, V_TEMP, 16384);
-    member_set2(7, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_TYPE, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_OR, V_TEMP, -32768);
-    member_set2(7, V_TEMP);
-    if (ck(FG_GENERAL_2, 16, 1))
+    member_set2(M_TYPE, V_TEMP);
+    if (ck(FG_ROOM, 16, 1))
     {
-        work_set(WK_ENEMY, 4);
-        member_set(12, 0, 131);
-        member_copy(V_TEMP, 0);
+        work_set(WK_ENEMY, ID_EM_4);
+        member_set(M_Y_POS, -32000);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_OR, V_TEMP, 1024);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_OR, V_TEMP, 8);
-        member_set2(1, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_BE_FLAG, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_OR, V_TEMP, 16384);
-        member_set2(7, V_TEMP);
-        member_copy(V_TEMP, 7);
+        member_set2(M_TYPE, V_TEMP);
+        member_copy(V_TEMP, M_TYPE);
         calc(0, OP_OR, V_TEMP, -32768);
-        member_set2(7, V_TEMP);
+        member_set2(M_TYPE, V_TEMP);
     }
 }
 
@@ -592,95 +592,95 @@ proc main_0D
 
 proc main_0E
 {
-    work_set(WK_ENEMY, 6);
+    work_set(WK_ENEMY, ID_EM_6);
     if (member_cmp(0, 2, 5, 7, 0))
     {
-        member_set(7, 6, 0);
-        member_copy(V_TEMP, 0);
+        member_set(M_TYPE, 6);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_AND, V_TEMP, -1025);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_AND, V_TEMP, -9);
-        member_set2(1, V_TEMP);
+        member_set2(M_BE_FLAG, V_TEMP);
     }
-    work_set(WK_ENEMY, 7);
+    work_set(WK_ENEMY, ID_EM_7);
     if (member_cmp(0, 2, 5, 7, 0))
     {
-        member_set(7, 6, 0);
-        member_copy(V_TEMP, 0);
+        member_set(M_TYPE, 6);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_AND, V_TEMP, -1025);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_AND, V_TEMP, -9);
-        member_set2(1, V_TEMP);
+        member_set2(M_BE_FLAG, V_TEMP);
     }
-    work_set(WK_ENEMY, 8);
+    work_set(WK_ENEMY, ID_EM_8);
     if (member_cmp(0, 2, 5, 7, 0))
     {
-        member_set(7, 6, 0);
-        member_copy(V_TEMP, 0);
+        member_set(M_TYPE, 6);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_AND, V_TEMP, -1025);
-        member_set2(0, V_TEMP);
-        member_copy(V_TEMP, 1);
+        member_set2(M_POINTER, V_TEMP);
+        member_copy(V_TEMP, M_BE_FLAG);
         calc(0, OP_AND, V_TEMP, -9);
-        member_set2(1, V_TEMP);
+        member_set2(M_BE_FLAG, V_TEMP);
     }
     do
     {
         sleep(10, 1);
     } while (cmp(0, V_CUT, CMP_EQ, 15));
-    work_set(WK_ENEMY, 6);
-    member_copy(V_TEMP, 0);
+    work_set(WK_ENEMY, ID_EM_6);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_OR, V_TEMP, 8);
-    member_set2(1, V_TEMP);
-    work_set(WK_ENEMY, 7);
-    member_copy(V_TEMP, 0);
+    member_set2(M_BE_FLAG, V_TEMP);
+    work_set(WK_ENEMY, ID_EM_7);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_OR, V_TEMP, 8);
-    member_set2(1, V_TEMP);
-    work_set(WK_ENEMY, 8);
-    member_copy(V_TEMP, 0);
+    member_set2(M_BE_FLAG, V_TEMP);
+    work_set(WK_ENEMY, ID_EM_8);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 1);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_OR, V_TEMP, 8);
-    member_set2(1, V_TEMP);
+    member_set2(M_BE_FLAG, V_TEMP);
 }
 
 proc main_0F
 {
-    sce_em_set(0, 0, ENEMY_ZOMBIE_BRAD, 6, 16, 0, 2, 0, 195, -2915, 0, -14478, 4000, 0, 0);
-    item_aot_set(31, SCE_ITEM, SAT_EM | SAT_MANUAL | SAT_FRONT, 0, 194, -1000, -1000, 2000, 2000, ITEM_SPECIALKEY, 1, 156, 255, 1);
-    sce_em_set(0, 1, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 2, 0, 255, -24137, -5400, -25367, 3061, 0, 0);
-    sce_em_set(0, 2, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 1, 1, 255, -26445, -5400, -29095, 3024, 0, 0);
-    sce_em_set(0, 3, ENEMY_ZOMBIE_RANDOM, 2, 80, 3, 2, 3, 255, -26877, -5400, -25065, 3223, 0, 0);
+    sce_em_set(0, ID_EM_0, ENEMY_ZOMBIE_BRAD, 6, AI_10, 0, SBK_2, 0, 195, -2915, 0, -14478, 4000, 0, 0);
+    item_aot_set(ID_AOT_31, SCE_ITEM, SAT_EM | SAT_MANUAL | SAT_FRONT, 0, 194, -1000, -1000, 2000, 2000, ITEM_SPECIALKEY, 1, 156, ID_OBJ_255, IF_FLOOR);
+    sce_em_set(0, ID_EM_1, ENEMY_ZOMBIE_RANDOM, 6, AI_10, 3, SBK_2, 0, 255, -24137, -5400, -25367, 3061, 0, 0);
+    sce_em_set(0, ID_EM_2, ENEMY_ZOMBIE_RANDOM, 6, AI_10, 3, SBK_1, 1, 255, -26445, -5400, -29095, 3024, 0, 0);
+    sce_em_set(0, ID_EM_3, ENEMY_ZOMBIE_RANDOM, 2, AI_10 | AI_40, 3, SBK_2, 3, 255, -26877, -5400, -25065, 3223, 0, 0);
 }
 
 proc main_10
 {
-    sce_em_set(0, 1, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 2, 0, 255, -24137, -5400, -25367, 3061, 0, 0);
-    sce_em_set(0, 2, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 1, 0, 255, -26445, -5400, -29095, 3024, 0, 0);
-    sce_em_set(0, 3, ENEMY_ZOMBIE_RANDOM, 2, 80, 3, 2, 3, 255, -23577, -5400, -26265, 3831, 0, 0);
-    sce_em_set(0, 4, ENEMY_ZOMBIE_RANDOM, 6, 16, 3, 1, 0, 255, -25425, -5400, -28865, 3224, 0, 0);
-    set(FG_GENERAL_2, 16, 1);
-    sce_em_set(0, 0, ENEMY_ZOMBIE_RANDOM, 64, 0, 3, 1, 0, 56, -10880, -5400, -20763, 2015, 0, 0);
-    sce_em_set(0, 5, ENEMY_ZOMBIE_RANDOM, 70, 0, 3, 2, 0, 60, -1148, -5400, -22749, 2138, 0, 0);
+    sce_em_set(0, ID_EM_1, ENEMY_ZOMBIE_RANDOM, 6, AI_10, 3, SBK_2, 0, 255, -24137, -5400, -25367, 3061, 0, 0);
+    sce_em_set(0, ID_EM_2, ENEMY_ZOMBIE_RANDOM, 6, AI_10, 3, SBK_1, 0, 255, -26445, -5400, -29095, 3024, 0, 0);
+    sce_em_set(0, ID_EM_3, ENEMY_ZOMBIE_RANDOM, 2, AI_10 | AI_40, 3, SBK_2, 3, 255, -23577, -5400, -26265, 3831, 0, 0);
+    sce_em_set(0, ID_EM_4, ENEMY_ZOMBIE_RANDOM, 6, AI_10, 3, SBK_1, 0, 255, -25425, -5400, -28865, 3224, 0, 0);
+    set(FG_ROOM, 16, 1);
+    sce_em_set(0, ID_EM_0, ENEMY_ZOMBIE_RANDOM, 64, AI_DEFAULT, 3, SBK_1, 0, 56, -10880, -5400, -20763, 2015, 0, 0);
+    sce_em_set(0, ID_EM_5, ENEMY_ZOMBIE_RANDOM, 70, AI_DEFAULT, 3, SBK_2, 0, 60, -1148, -5400, -22749, 2138, 0, 0);
     if (ck(FG_ENEMY, 56, 1))
     {
-        set(FG_GENERAL_2, 21, 1);
+        set(FG_ROOM, 21, 1);
     }
     if (ck(FG_ENEMY, 60, 1))
     {
-        set(FG_GENERAL_2, 22, 1);
+        set(FG_ROOM, 22, 1);
     }
-    sce_em_set(0, 6, ENEMY_ZOMBIE_RANDOM, 6, 128, 3, 1, 0, 255, 13105, -5400, -30139, 3160, 0, 0);
-    sce_em_set(0, 7, ENEMY_ZOMBIE_RANDOM, 6, 128, 3, 2, 0, 255, 15615, -5400, -29673, 2138, 0, 0);
-    sce_em_set(0, 8, ENEMY_ZOMBIE_RANDOM, 6, 128, 3, 1, 0, 255, 18947, -5400, -30341, 2138, 0, 0);
+    sce_em_set(0, ID_EM_6, ENEMY_ZOMBIE_RANDOM, 6, AI_INACTIVE, 3, SBK_1, 0, 255, 13105, -5400, -30139, 3160, 0, 0);
+    sce_em_set(0, ID_EM_7, ENEMY_ZOMBIE_RANDOM, 6, AI_INACTIVE, 3, SBK_2, 0, 255, 15615, -5400, -29673, 2138, 0, 0);
+    sce_em_set(0, ID_EM_8, ENEMY_ZOMBIE_RANDOM, 6, AI_INACTIVE, 3, SBK_1, 0, 255, 18947, -5400, -30341, 2138, 0, 0);
 }
 
 proc main_11
@@ -695,9 +695,9 @@ off_41F8:
         {
             if (ck(FG_ENEMY, 60, 1))
             {
-                if (ck(FG_GENERAL_2, 0, 0))
+                if (ck(FG_ROOM, 0, 0))
                 {
-                    set(FG_GENERAL_2, 0, 1);
+                    set(FG_ROOM, 0, 1);
                     fork main_0D;
                 }
             }
@@ -755,55 +755,55 @@ off_4298:
     case 6:
     case 4:
     case 5:
-        if (ck(FG_GENERAL_2, 1, 0))
+        if (ck(FG_ROOM, 1, 0))
         {
-            set(FG_GENERAL_2, 1, 1);
-            set(FG_GENERAL_2, 2, 0);
-            work_set(WK_ENEMY, 0);
-            member_set(12, 0, 0);
-            member_copy(V_TEMP, 0);
+            set(FG_ROOM, 1, 1);
+            set(FG_ROOM, 2, 0);
+            work_set(WK_ENEMY, ID_EM_0);
+            member_set(M_Y_POS, 0);
+            member_copy(V_TEMP, M_POINTER);
             calc(0, OP_AND, V_TEMP, -1025);
-            member_set2(0, V_TEMP);
-            member_copy(V_TEMP, 1);
+            member_set2(M_POINTER, V_TEMP);
+            member_copy(V_TEMP, M_BE_FLAG);
             calc(0, OP_AND, V_TEMP, -9);
-            member_set2(1, V_TEMP);
-            member_copy(V_TEMP, 7);
+            member_set2(M_BE_FLAG, V_TEMP);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_AND, V_TEMP, 16383);
-            member_set2(7, V_TEMP);
+            member_set2(M_TYPE, V_TEMP);
         }
         break;
     case 0:
-        if (ck(FG_GENERAL_2, 17, 1))
+        if (ck(FG_ROOM, 17, 1))
         {
-            set(FG_GENERAL_2, 17, 0);
+            set(FG_ROOM, 17, 0);
             main_0B();
         }
-        if (ck(FG_GENERAL_2, 2, 0))
+        if (ck(FG_ROOM, 2, 0))
         {
-            set(FG_GENERAL_2, 2, 1);
-            set(FG_GENERAL_2, 1, 0);
-            work_set(WK_ENEMY, 0);
-            member_set(12, 0, 131);
-            member_copy(V_TEMP, 0);
+            set(FG_ROOM, 2, 1);
+            set(FG_ROOM, 1, 0);
+            work_set(WK_ENEMY, ID_EM_0);
+            member_set(M_Y_POS, -32000);
+            member_copy(V_TEMP, M_POINTER);
             calc(0, OP_OR, V_TEMP, 1024);
-            member_set2(0, V_TEMP);
-            member_copy(V_TEMP, 1);
+            member_set2(M_POINTER, V_TEMP);
+            member_copy(V_TEMP, M_BE_FLAG);
             calc(0, OP_OR, V_TEMP, 8);
-            member_set2(1, V_TEMP);
-            member_copy(V_TEMP, 7);
+            member_set2(M_BE_FLAG, V_TEMP);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_OR, V_TEMP, -32768);
-            member_set2(7, V_TEMP);
-            member_copy(V_TEMP, 7);
+            member_set2(M_TYPE, V_TEMP);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_OR, V_TEMP, 16384);
-            member_set2(7, V_TEMP);
+            member_set2(M_TYPE, V_TEMP);
         }
         break;
     case 1:
     case 10:
     case 11:
-        if (ck(FG_GENERAL_2, 17, 0))
+        if (ck(FG_ROOM, 17, 0))
         {
-            set(FG_GENERAL_2, 17, 1);
+            set(FG_ROOM, 17, 1);
             main_0C();
         }
     case 7:
@@ -813,24 +813,24 @@ off_4298:
     case 13:
     case 14:
     case 15:
-        if (ck(FG_GENERAL_2, 2, 0))
+        if (ck(FG_ROOM, 2, 0))
         {
-            set(FG_GENERAL_2, 2, 1);
-            set(FG_GENERAL_2, 1, 0);
-            work_set(WK_ENEMY, 0);
-            member_set(12, 0, 131);
-            member_copy(V_TEMP, 0);
+            set(FG_ROOM, 2, 1);
+            set(FG_ROOM, 1, 0);
+            work_set(WK_ENEMY, ID_EM_0);
+            member_set(M_Y_POS, -32000);
+            member_copy(V_TEMP, M_POINTER);
             calc(0, OP_OR, V_TEMP, 1024);
-            member_set2(0, V_TEMP);
-            member_copy(V_TEMP, 1);
+            member_set2(M_POINTER, V_TEMP);
+            member_copy(V_TEMP, M_BE_FLAG);
             calc(0, OP_OR, V_TEMP, 8);
-            member_set2(1, V_TEMP);
-            member_copy(V_TEMP, 7);
+            member_set2(M_BE_FLAG, V_TEMP);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_OR, V_TEMP, -32768);
-            member_set2(7, V_TEMP);
-            member_copy(V_TEMP, 7);
+            member_set2(M_TYPE, V_TEMP);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_OR, V_TEMP, 16384);
-            member_set2(7, V_TEMP);
+            member_set2(M_TYPE, V_TEMP);
         }
         break;
     }
@@ -840,10 +840,10 @@ off_4298:
 
 proc main_14
 {
-    if (ck(FG_ENEMY, 195, 1) && ck(FG_GENERAL_2, 20, 0))
+    if (ck(FG_ENEMY, 195, 1) && ck(FG_ROOM, 20, 0))
     {
-        set(FG_GENERAL_2, 20, 1);
-        aot_reset(31, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 83, 0, 1, 0, 156, 0);
+        set(FG_ROOM, 20, 1);
+        aot_reset(ID_AOT_31, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 83, 0, 1, 0, 156, 0);
     }
     evt_next();
     goto off_4416;

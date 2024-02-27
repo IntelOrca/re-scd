@@ -2,24 +2,24 @@
 
 .init
 .proc init
-1526:   3B000131040021E3E1973408540BDDF3000000CFF8FF020A05001F0100000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -7391, -26655, 2100, 2900, -3107, 0, -12544, -8, 2, 10, 5, 0, 31, 1, 0, 0, UNLOCKED, 0
-1546:   3B0101310500F59603C65208300722B1E0E33BA761FC03010004060100000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, -26891, -14845, 2130, 1840, -20190, -7200, -22725, -927, 3, 1, 0, 4, 6, 1, 0, 0, UNLOCKED, 0
-1566:   3B02013101000CA28FC6D00708075EBC000050A757FD03010800060100000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -24052, -14705, 2000, 1800, -17314, 0, -22704, -681, 3, 1, 8, 0, 6, 1, 0, 0, UNLOCKED, 0
+1526:   3B000131040021E3E1973408540BDDF3000000CFF8FF020A05001F0100000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -7391, -26655, 2100, 2900, -3107, 0, -12544, -8, 2, 10, 5, 0, 31, 1, 0, 0, UNLOCKED, 0
+1546:   3B0101310500F59603C65208300722B1E0E33BA761FC03010004060100000000                        door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, -26891, -14845, 2130, 1840, -20190, -7200, -22725, -927, 3, 1, 0, 4, 6, 1, 0, 0, UNLOCKED, 0
+1566:   3B02013101000CA28FC6D00708075EBC000050A757FD03010800060100000000                        door_aot_se             ID_AOT_2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, -24052, -14705, 2000, 1800, -17314, 0, -22704, -681, 3, 1, 8, 0, 6, 1, 0, 0, UNLOCKED, 0
 1586:   06004400                                                                                if                      0, off_15CE
-158A:   21010001                                                                                ck                      FG_GAME, F_PLAYER, 1
+158A:   21010001                                                                                ck                      FG_STATUS, F_PLAYER, 1
 158E:   06002E00                                                                                if                      0, off_15C0
-1592:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
+1592:   21010100                                                                                ck                      FG_STATUS, F_SCENARIO, 0
 1596:   2E0100                                                                                  work_set                WK_PLAYER, 0
 1599:   00                                                                                      nop
 159A:   06001200                                                                                if                      0, off_15B0
 159E:   3E0006000F00                                                                            member_cmp              0, 6, 0, 15, 0
-15A4:   221E0201                                                                                set                     30, 2, 1
-15A8:   221E0301                                                                                set                     30, 3, 1
+15A4:   221E0201                                                                                set                     FG_RBJ_SET, 2, 1
+15A8:   221E0301                                                                                set                     FG_RBJ_SET, 3, 1
 15AC:   07000E00                                                                                else                    0, off_15BA
 
 off_15B0:
-15B0:   221E0001                                                                                set                     30, 0, 1
-15B4:   221E0101                                                                                set                     30, 1, 1
+15B0:   221E0001                                                                                set                     FG_RBJ_SET, 0, 1
+15B4:   221E0101                                                                                set                     FG_RBJ_SET, 1, 1
 15B8:   00                                                                                      nop
 15B9:   00                                                                                      nop
 
@@ -29,8 +29,8 @@ off_15BA:
 15BC:   07001000                                                                                else                    0, off_15CC
 
 off_15C0:
-15C0:   221E0001                                                                                set                     30, 0, 1
-15C4:   221E0101                                                                                set                     30, 1, 1
+15C0:   221E0001                                                                                set                     FG_RBJ_SET, 0, 1
+15C4:   221E0101                                                                                set                     FG_RBJ_SET, 1, 1
 15C8:   6C                                                                                      rbj_reset
 15C9:   00                                                                                      nop
 15CA:   00                                                                                      nop
@@ -50,10 +50,10 @@ off_15CE:
 15E6:   06005400                                                                                if                      0, off_163E
 15EA:   3E0011020400                                                                            member_cmp              0, 17, 2, 4, 0
 15F0:   06004800                                                                                if                      0, off_163C
-15F4:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
-15F8:   440000120000042400013FC5E0E35A98200D00000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_GUY1, 0, 0, 4, 36, 0, 1, -15041, -7200, -26534, 3360, 0, 0
-160E:   4400011200000424000256A0E0E3B4A1900600000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 0, 0, 4, 36, 0, 2, -24490, -7200, -24140, 1680, 0, 0
-1624:   44000212060004240003C8B3E0E3C3A16F1400000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 6, 0, 4, 36, 0, 3, -19512, -7200, -24125, 5231, 0, 0
+15F4:   21010101                                                                                ck                      FG_STATUS, F_SCENARIO, 1
+15F8:   440000120000042400013FC5E0E35A98200D00000000                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 4, SBK_36, 0, 1, -15041, -7200, -26534, 3360, 0, 0
+160E:   4400011200000424000256A0E0E3B4A1900600000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 4, SBK_36, 0, 2, -24490, -7200, -24140, 1680, 0, 0
+1624:   44000212060004240003C8B3E0E3C3A16F1400000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 6, AI_DEFAULT, 4, SBK_36, 0, 3, -19512, -7200, -24125, 5231, 0, 0
 163A:   08                                                                                      endif
 163B:   00                                                                                      nop
 
@@ -63,11 +63,11 @@ off_163C:
 
 off_163E:
 163E:   5D04                                                                                    mizu_div_set            4
-1640:   2D0001820404000002000A001A0084955CE066A4000000F40000000000000000000000000000            obj_model_set           0, 1, 130, 4, 4, 0, 2, 10, 26, -27260, -8100, -23450, 0, -3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1666:   2D0101820404000003000A001A00F8D57CFC66A4000000000000000000000000000000000000            obj_model_set           1, 1, 130, 4, 4, 0, 3, 10, 26, -10760, -900, -23450, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-168C:   2D0200000000040000000A00100088DCF4E828A6000000F40000000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 4, 0, 10, 16, -9080, -5900, -23000, 0, -3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
-16B2:   2C03074B0400B0964C96584D100E5CE000000000                                                aot_set                 3, SCE_WATER, SAT_PL | SAT_EM | SAT_OB | SAT_UNDER, 4, 0, -26960, -27060, 19800, 3600, 92, 224, 0, 0, 0, 0
-16C6:   2C04074B000028CEFA9C141E2C337CFC00000000                                                aot_set                 4, SCE_WATER, SAT_PL | SAT_EM | SAT_OB | SAT_UNDER, 0, 0, -12760, -25350, 7700, 13100, 124, 252, 0, 0, 0, 0
+1640:   2D0001820404000002000A001A0084955CE066A4000000F40000000000000000000000000000            obj_model_set           ID_OBJ_0, 1, 130, 4, 4, 0, 2, 10, 26, -27260, -8100, -23450, 0, -3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1666:   2D0101820404000003000A001A00F8D57CFC66A4000000000000000000000000000000000000            obj_model_set           ID_OBJ_1, 1, 130, 4, 4, 0, 3, 10, 26, -10760, -900, -23450, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+168C:   2D0200000000040000000A00100088DCF4E828A6000000F40000000000000000000000000000            obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 4, 0, 10, 16, -9080, -5900, -23000, 0, -3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
+16B2:   2C03074B0400B0964C96584D100E5CE000000000                                                aot_set                 ID_AOT_3, SCE_WATER, SAT_PL | SAT_EM | SAT_OB | SAT_UNDER, 4, 0, -26960, -27060, 19800, 3600, 92, 224, 0, 0, 0, 0
+16C6:   2C04074B000028CEFA9C141E2C337CFC00000000                                                aot_set                 ID_AOT_4, SCE_WATER, SAT_PL | SAT_EM | SAT_OB | SAT_UNDER, 0, 0, -12760, -25350, 7700, 13100, 124, 252, 0, 0, 0, 0
 16DA:   2E0100                                                                                  work_set                WK_PLAYER, 0
 16DD:   00                                                                                      nop
 16DE:   06000E00                                                                                if                      0, off_16F0
@@ -89,7 +89,7 @@ off_16F6:
 16FE:   0100                                                                                    evt_end                 0
 
 .proc main_02
-1700:   2C1F04310400AD8C8695540B901A0300000000FF                                                aot_set                 31, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -29523, -27258, 2900, 6800, 3, 0, 0, 0, 0, 255
+1700:   2C1F04310400AD8C8695540B901A0300000000FF                                                aot_set                 ID_AOT_31, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 4, 0, -29523, -27258, 2900, 6800, ID_MSG_3, 0, 0, 0, 0, 255
 1714:   0100                                                                                    evt_end                 0
 
 .proc main_03
@@ -102,72 +102,72 @@ off_1717:
 
 off_1722:
 1722:   140014000A00                                                                            case                    0, off_173C, 10
-1728:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-172E:   51000002651F                                                                            sce_bgm_control         0, 0, 2, 101, 31
-1734:   510100010141                                                                            sce_bgm_control         1, 0, 1, 1, 65
+1728:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+172E:   51000002651F                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 101, 31
+1734:   510100010141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
 173A:   1A00                                                                                    break                   0
 
 off_173C:
 173C:   140014000100                                                                            case                    0, off_1756, 1
-1742:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-1748:   510000026533                                                                            sce_bgm_control         0, 0, 2, 101, 51
-174E:   510100010141                                                                            sce_bgm_control         1, 0, 1, 1, 65
+1742:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+1748:   510000026533                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 101, 51
+174E:   510100010141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
 1754:   1A00                                                                                    break                   0
 
 off_1756:
 1756:   140014000200                                                                            case                    0, off_1770, 2
-175C:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-1762:   510000024741                                                                            sce_bgm_control         0, 0, 2, 71, 65
-1768:   510100010141                                                                            sce_bgm_control         1, 0, 1, 1, 65
+175C:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+1762:   510000024741                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 71, 65
+1768:   510100010141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
 176E:   1A00                                                                                    break                   0
 
 off_1770:
 1770:   140014000300                                                                            case                    0, off_178A, 3
-1776:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-177C:   510000024751                                                                            sce_bgm_control         0, 0, 2, 71, 81
-1782:   510100010141                                                                            sce_bgm_control         1, 0, 1, 1, 65
+1776:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+177C:   510000024751                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 71, 81
+1782:   510100010141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
 1788:   1A00                                                                                    break                   0
 
 off_178A:
 178A:   140014000400                                                                            case                    0, off_17A4, 4
-1790:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-1796:   510000023D80                                                                            sce_bgm_control         0, 0, 2, 61, 128
-179C:   510100010141                                                                            sce_bgm_control         1, 0, 1, 1, 65
+1790:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+1796:   510000023D80                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 61, 128
+179C:   510100010141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 1, 65
 17A2:   1A00                                                                                    break                   0
 
 off_17A4:
 17A4:   140014000500                                                                            case                    0, off_17BE, 5
-17AA:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-17B0:   510000020141                                                                            sce_bgm_control         0, 0, 2, 1, 65
-17B6:   510100014741                                                                            sce_bgm_control         1, 0, 1, 71, 65
+17AA:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+17B0:   510000020141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+17B6:   510100014741                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 71, 65
 17BC:   1A00                                                                                    break                   0
 
 off_17BE:
 17BE:   140014000600                                                                            case                    0, off_17D8, 6
-17C4:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-17CA:   510000020141                                                                            sce_bgm_control         0, 0, 2, 1, 65
-17D0:   510100013341                                                                            sce_bgm_control         1, 0, 1, 51, 65
+17C4:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+17CA:   510000020141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+17D0:   510100013341                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 51, 65
 17D6:   1A00                                                                                    break                   0
 
 off_17D8:
 17D8:   140014000700                                                                            case                    0, off_17F2, 7
-17DE:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-17E4:   510000020141                                                                            sce_bgm_control         0, 0, 2, 1, 65
-17EA:   510100012941                                                                            sce_bgm_control         1, 0, 1, 41, 65
+17DE:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+17E4:   510000020141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+17EA:   510100012941                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 41, 65
 17F0:   1A00                                                                                    break                   0
 
 off_17F2:
 17F2:   140014000800                                                                            case                    0, off_180C, 8
-17F8:   510000015B41                                                                            sce_bgm_control         0, 0, 1, 91, 65
-17FE:   510000020141                                                                            sce_bgm_control         0, 0, 2, 1, 65
-1804:   510100012915                                                                            sce_bgm_control         1, 0, 1, 41, 21
+17F8:   510000015B41                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+17FE:   510000020141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+1804:   510100012915                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 41, 21
 180A:   1A00                                                                                    break                   0
 
 off_180C:
 180C:   140014000900                                                                            case                    0, off_1826, 9
-1812:   510000014741                                                                            sce_bgm_control         0, 0, 1, 71, 65
-1818:   510000020141                                                                            sce_bgm_control         0, 0, 2, 1, 65
-181E:   510100011541                                                                            sce_bgm_control         1, 0, 1, 21, 65
+1812:   510000014741                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 71, 65
+1818:   510000020141                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+181E:   510100011541                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 21, 65
 1824:   1A00                                                                                    break                   0
 
 off_1826:
@@ -178,7 +178,7 @@ off_1828:
 182C:   02                                                                                      evt_next
 182D:   00                                                                                      nop
 182E:   1204                                                                                    edwhile                 off_1834
-1830:   21010B00                                                                                ck                      FG_GAME, 11, 0
+1830:   21010B00                                                                                ck                      FG_STATUS, 11, 0
 
 off_1834:
 1834:   17FFFF00E3FE                                                                            goto                    255, 255, 0, off_1717
@@ -194,79 +194,79 @@ off_183D:
 
 off_1848:
 1848:   140014000A00                                                                            case                    0, off_1862, 10
-184E:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-1854:   51010002651F                                                                            sce_bgm_control         1, 0, 2, 101, 31
-185A:   510100030141                                                                            sce_bgm_control         1, 0, 3, 1, 65
+184E:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+1854:   51010002651F                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 101, 31
+185A:   510100030141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 1, 65
 1860:   1A00                                                                                    break                   0
 
 off_1862:
 1862:   140014000100                                                                            case                    0, off_187C, 1
-1868:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-186E:   510100026533                                                                            sce_bgm_control         1, 0, 2, 101, 51
-1874:   510100030141                                                                            sce_bgm_control         1, 0, 3, 1, 65
+1868:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+186E:   510100026533                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 101, 51
+1874:   510100030141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 1, 65
 187A:   1A00                                                                                    break                   0
 
 off_187C:
 187C:   140014000200                                                                            case                    0, off_1896, 2
-1882:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-1888:   510100024751                                                                            sce_bgm_control         1, 0, 2, 71, 81
-188E:   510100030141                                                                            sce_bgm_control         1, 0, 3, 1, 65
+1882:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+1888:   510100024751                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 71, 81
+188E:   510100030141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 1, 65
 1894:   1A00                                                                                    break                   0
 
 off_1896:
 1896:   140014000300                                                                            case                    0, off_18B0, 3
-189C:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-18A2:   510100024751                                                                            sce_bgm_control         1, 0, 2, 71, 81
-18A8:   510100030141                                                                            sce_bgm_control         1, 0, 3, 1, 65
+189C:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+18A2:   510100024751                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 71, 81
+18A8:   510100030141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 1, 65
 18AE:   1A00                                                                                    break                   0
 
 off_18B0:
 18B0:   140014000400                                                                            case                    0, off_18CA, 4
-18B6:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-18BC:   510100023D80                                                                            sce_bgm_control         1, 0, 2, 61, 128
-18C2:   510100030141                                                                            sce_bgm_control         1, 0, 3, 1, 65
+18B6:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+18BC:   510100023D80                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 61, 128
+18C2:   510100030141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 1, 65
 18C8:   1A00                                                                                    break                   0
 
 off_18CA:
 18CA:   140014000400                                                                            case                    0, off_18E4, 4
-18D0:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-18D6:   510100020141                                                                            sce_bgm_control         1, 0, 2, 1, 65
-18DC:   510100034741                                                                            sce_bgm_control         1, 0, 3, 71, 65
+18D0:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+18D6:   510100020141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+18DC:   510100034741                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 71, 65
 18E2:   1A00                                                                                    break                   0
 
 off_18E4:
 18E4:   140014000500                                                                            case                    0, off_18FE, 5
-18EA:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-18F0:   510100020141                                                                            sce_bgm_control         1, 0, 2, 1, 65
-18F6:   510100034741                                                                            sce_bgm_control         1, 0, 3, 71, 65
+18EA:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+18F0:   510100020141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+18F6:   510100034741                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 71, 65
 18FC:   1A00                                                                                    break                   0
 
 off_18FE:
 18FE:   140014000600                                                                            case                    0, off_1918, 6
-1904:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-190A:   510100020141                                                                            sce_bgm_control         1, 0, 2, 1, 65
-1910:   510100033341                                                                            sce_bgm_control         1, 0, 3, 51, 65
+1904:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+190A:   510100020141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+1910:   510100033341                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 51, 65
 1916:   1A00                                                                                    break                   0
 
 off_1918:
 1918:   140014000700                                                                            case                    0, off_1932, 7
-191E:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-1924:   510100020141                                                                            sce_bgm_control         1, 0, 2, 1, 65
-192A:   510100032941                                                                            sce_bgm_control         1, 0, 3, 41, 65
+191E:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+1924:   510100020141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+192A:   510100032941                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 41, 65
 1930:   1A00                                                                                    break                   0
 
 off_1932:
 1932:   140014000800                                                                            case                    0, off_194C, 8
-1938:   510100015B41                                                                            sce_bgm_control         1, 0, 1, 91, 65
-193E:   510100020141                                                                            sce_bgm_control         1, 0, 2, 1, 65
-1944:   510100032915                                                                            sce_bgm_control         1, 0, 3, 41, 21
+1938:   510100015B41                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 91, 65
+193E:   510100020141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+1944:   510100032915                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 41, 21
 194A:   1A00                                                                                    break                   0
 
 off_194C:
 194C:   140014000900                                                                            case                    0, off_1966, 9
-1952:   510100014741                                                                            sce_bgm_control         1, 0, 1, 71, 65
-1958:   510100020141                                                                            sce_bgm_control         1, 0, 2, 1, 65
-195E:   510100031541                                                                            sce_bgm_control         1, 0, 3, 21, 65
+1952:   510100014741                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 71, 65
+1958:   510100020141                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 1, 65
+195E:   510100031541                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_NOP, BGM_TYPE_PROG2_VOL, 21, 65
 1964:   1A00                                                                                    break                   0
 
 off_1966:
@@ -277,7 +277,7 @@ off_1968:
 196C:   02                                                                                      evt_next
 196D:   00                                                                                      nop
 196E:   1204                                                                                    edwhile                 off_1974
-1970:   21010B00                                                                                ck                      FG_GAME, 11, 0
+1970:   21010B00                                                                                ck                      FG_STATUS, 11, 0
 
 off_1974:
 1974:   17FFFF00C9FE                                                                            goto                    255, 255, 0, off_183D
@@ -310,8 +310,9 @@ off_1974:
 1A3E:   0100                                                                                    evt_end                 0
 
 .proc main_08
-1A40:   2D0300000000040000000A001000769DD8DCE7BA000000000000000000000000000000000000            obj_model_set           3, 0, 0, 0, 0, 4, 0, 10, 16, -25226, -9000, -17689, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1A66:   4E0502310500769DE7BAF005DC0528000100BA000301                                            item_aot_set            5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, -25226, -17689, 1520, 1500, ITEM_HERBB, 1, 186, 3, 1
-1A7C:   2D0400000000040000000A001000769DD8DC0BB5000000000000000000000000000000000000            obj_model_set           4, 0, 0, 0, 0, 4, 0, 10, 16, -25226, -9000, -19189, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1AA2:   4E0602310500769D0BB5F005DC0528000100BB000401                                            item_aot_set            6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, -25226, -19189, 1520, 1500, ITEM_HERBB, 1, 187, 4, 1
+1A40:   2D0300000000040000000A001000769DD8DCE7BA000000000000000000000000000000000000            obj_model_set           ID_OBJ_3, 0, 0, 0, 0, 4, 0, 10, 16, -25226, -9000, -17689, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1A66:   4E0502310500769DE7BAF005DC0528000100BA000301                                            item_aot_set            ID_AOT_5, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, -25226, -17689, 1520, 1500, ITEM_HERBB, 1, 186, ID_OBJ_3, IF_FLOOR
+1A7C:   2D0400000000040000000A001000769DD8DC0BB5000000000000000000000000000000000000            obj_model_set           ID_OBJ_4, 0, 0, 0, 0, 4, 0, 10, 16, -25226, -9000, -19189, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1AA2:   4E0602310500769D0BB5F005DC0528000100BB000401                                            item_aot_set            ID_AOT_6, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, -25226, -19189, 1520, 1500, ITEM_HERBB, 1, 187, ID_OBJ_4, IF_FLOOR
 1AB8:   0100                                                                                    evt_end                 0
+1ABA:   9808                                                                                    db                      0x98, 0x08

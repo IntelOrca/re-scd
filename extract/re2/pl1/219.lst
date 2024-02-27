@@ -2,65 +2,66 @@
 
 .init
 .proc init
-095A:   3B0001310000A0139DA9B004080724AF00008CF10000011603001C0000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 5024, -22115, 1200, 1800, -20700, 0, -3700, 0, 1, 22, 3, 0, 28, 0, 0, 0, UNLOCKED, 0
-097A:   3B0201310000A8E3E9D00807B0043CC400001CDA000C011A00001A0100000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7256, -12055, 1800, 1200, -15300, 0, -9700, 3072, 1, 26, 0, 0, 26, 1, 0, 0, UNLOCKED, 0
+095A:   3B0001310000A0139DA9B004080724AF00008CF10000011603001C0000000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 5024, -22115, 1200, 1800, -20700, 0, -3700, 0, 1, 22, 3, 0, 28, 0, 0, 0, UNLOCKED, 0
+097A:   3B0201310000A8E3E9D00807B0043CC400001CDA000C011A00001A0100000000                        door_aot_se             ID_AOT_2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -7256, -12055, 1800, 1200, -15300, 0, -9700, 3072, 1, 26, 0, 0, 26, 1, 0, 0, UNLOCKED, 0
 099A:   06001C00                                                                                if                      0, off_09BA
-099E:   21010601                                                                                ck                      FG_GAME, F_BONUS, 1
-09A2:   2C03043100003A9817C16009B00404000000FFFF                                                aot_set                 3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26566, -16105, 2400, 1200, 4, 0, 0, 0, 255, 255
+099E:   21010601                                                                                ck                      FG_STATUS, F_BONUS, 1
+09A2:   2C03043100003A9817C16009B00404000000FFFF                                                aot_set                 ID_AOT_3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26566, -16105, 2400, 1200, ID_MSG_4, 0, 0, 0, 255, 255
 09B6:   07002600                                                                                else                    0, off_09DC
 
 off_09BA:
-09BA:   3B03013100003A9817C16009B004F49D0000BEBF000402010000140000000000                        door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26566, -16105, 2400, 1200, -25100, 0, -16450, 1024, 2, 1, 0, 0, 20, 0, 0, 0, UNLOCKED, 0
+09BA:   3B03013100003A9817C16009B004F49D0000BEBF000402010000140000000000                        door_aot_se             ID_AOT_3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26566, -16105, 2400, 1200, -25100, 0, -16450, 1024, 2, 1, 0, 0, 20, 0, 0, 0, UNLOCKED, 0
 09DA:   00                                                                                      nop
 09DB:   00                                                                                      nop
 
 off_09DC:
 09DC:   0100                                                                                    evt_end                 0
+09DE:   1A13                                                                                    db                      0x1A, 0x13
 
 .main
 .proc main
 09E4:   06008C00                                                                                if                      0, off_0A74
-09E8:   21010601                                                                                ck                      FG_GAME, F_BONUS, 1
-09EC:   4400001F86000005005FF0D200007DCC9F0000000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_RANDOM, 134, 0, 0, 5, 0, 95, -11536, 0, -13187, 159, 0, 0
-0A02:   4400011F0000000500608BFE00003DAC5D0A00000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 5, 0, 96, -373, 0, -21443, 2653, 0, 0
-0A18:   4400021F03200005008CA0E90000C7B6900D00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_RANDOM, 3, 32, 0, 5, 0, 140, -5728, 0, -18745, 3472, 0, 0
-0A2E:   4400031F0120000500941CEE0000DCBA400C00000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_RANDOM, 1, 32, 0, 5, 0, 148, -4580, 0, -17700, 3136, 0, 0
-0A44:   4400041F0000000500A1F40800002AABF80B00000000                                            sce_em_set              0, 4, ENEMY_ZOMBIE_RANDOM, 0, 0, 0, 5, 0, 161, 2292, 0, -21718, 3064, 0, 0
-0A5A:   4400051F8600000500A28ACF000021C8A80F00000000                                            sce_em_set              0, 5, ENEMY_ZOMBIE_RANDOM, 134, 0, 0, 5, 0, 162, -12406, 0, -14303, 4008, 0, 0
+09E8:   21010601                                                                                ck                      FG_STATUS, F_BONUS, 1
+09EC:   4400001F86000005005FF0D200007DCC9F0000000000                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_RANDOM, 134, AI_DEFAULT, 0, SBK_5, 0, 95, -11536, 0, -13187, 159, 0, 0
+0A02:   4400011F0000000500608BFE00003DAC5D0A00000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_RANDOM, 0, AI_DEFAULT, 0, SBK_5, 0, 96, -373, 0, -21443, 2653, 0, 0
+0A18:   4400021F03200005008CA0E90000C7B6900D00000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_RANDOM, 3, AI_20, 0, SBK_5, 0, 140, -5728, 0, -18745, 3472, 0, 0
+0A2E:   4400031F0120000500941CEE0000DCBA400C00000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_RANDOM, 1, AI_20, 0, SBK_5, 0, 148, -4580, 0, -17700, 3136, 0, 0
+0A44:   4400041F0000000500A1F40800002AABF80B00000000                                            sce_em_set              0, ID_EM_4, ENEMY_ZOMBIE_RANDOM, 0, AI_DEFAULT, 0, SBK_5, 0, 161, 2292, 0, -21718, 3064, 0, 0
+0A5A:   4400051F8600000500A28ACF000021C8A80F00000000                                            sce_em_set              0, ID_EM_5, ENEMY_ZOMBIE_RANDOM, 134, AI_DEFAULT, 0, SBK_5, 0, 162, -12406, 0, -14303, 4008, 0, 0
 0A70:   0100                                                                                    evt_end                 0
 0A72:   08                                                                                      endif
 0A73:   00                                                                                      nop
 
 off_0A74:
-0A74:   2D0100000000000000000A001000709AC0F92CCF000000000000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -26000, -1600, -12500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-0A9A:   4E040231000088969CCD080708074600010075000100                                            item_aot_set            4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27000, -12900, 1800, 1800, ITEM_FILMC, 1, 117, 1, 0
-0AB0:   2C0A04310000489030C60807780502000000FFFF                                                aot_set                 10, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28600, -14800, 1800, 1400, 2, 0, 0, 0, 255, 255
+0A74:   2D0100000000000000000A001000709AC0F92CCF000000000000000000000000000000000000            obj_model_set           ID_OBJ_1, 0, 0, 0, 0, 0, 0, 10, 16, -26000, -1600, -12500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+0A9A:   4E040231000088969CCD080708074600010075000100                                            item_aot_set            ID_AOT_4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27000, -12900, 1800, 1800, ITEM_FILMC, 1, 117, ID_OBJ_1, IF_DEFAULT
+0AB0:   2C0A04310000489030C60807780502000000FFFF                                                aot_set                 ID_AOT_10, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28600, -14800, 1800, 1400, ID_MSG_2, 0, 0, 0, 255, 255
 0AC4:   06008400                                                                                if                      0, off_0B4C
 0AC8:   21087701                                                                                ck                      FG_ITEM, 119, 1
-0ACC:   440000120540000000FF38CD000044CB8C0A00000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_GUY1, 5, 64, 0, 0, 0, 255, -13000, 0, -13500, 2700, 0, 0
-0AE2:   440001120740000000FF1AF900005FAECF0100000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 7, 64, 0, 0, 0, 255, -1766, 0, -20897, 463, 0, 0
-0AF8:   2E0300                                                                                  work_set                WK_ENEMY, 0
+0ACC:   440000120540000000FF38CD000044CB8C0A00000000                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_GUY1, 5, AI_40, 0, SBK_0, 0, 255, -13000, 0, -13500, 2700, 0, 0
+0AE2:   440001120740000000FF1AF900005FAECF0100000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 7, AI_40, 0, SBK_0, 0, 255, -1766, 0, -20897, 463, 0, 0
+0AF8:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 0AFB:   00                                                                                      nop
-0AFC:   3D1000                                                                                  member_copy             V_TEMP, 0
+0AFC:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 0AFF:   00                                                                                      nop
 0B00:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-0B06:   350010                                                                                  member_set2             0, V_TEMP
+0B06:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 0B09:   00                                                                                      nop
-0B0A:   2E0301                                                                                  work_set                WK_ENEMY, 1
+0B0A:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 0B0D:   00                                                                                      nop
-0B0E:   3D1000                                                                                  member_copy             V_TEMP, 0
+0B0E:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 0B11:   00                                                                                      nop
 0B12:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-0B18:   350010                                                                                  member_set2             0, V_TEMP
+0B18:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 0B1B:   00                                                                                      nop
-0B1C:   440002200500000C00781EC90000CFC7600F00000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_DOG, 5, 0, 0, 12, 0, 120, -14050, 0, -14385, 3936, 0, 0
-0B32:   440003200500000C009291F3000000AB080F00000000                                            sce_em_set              0, 3, ENEMY_ZOMBIE_DOG, 5, 0, 0, 12, 0, 146, -3183, 0, -21760, 3848, 0, 0
+0B1C:   440002200500000C00781EC90000CFC7600F00000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_DOG, 5, AI_DEFAULT, 0, SBK_12, 0, 120, -14050, 0, -14385, 3936, 0, 0
+0B32:   440003200500000C009291F3000000AB080F00000000                                            sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_DOG, 5, AI_DEFAULT, 0, SBK_12, 0, 146, -3183, 0, -21760, 3848, 0, 0
 0B48:   07004800                                                                                else                    0, off_0B90
 
 off_0B4C:
-0B4C:   4400001206000005007992E7000005BB800200000000                                            sce_em_set              0, 0, ENEMY_ZOMBIE_GUY1, 6, 0, 0, 5, 0, 121, -6254, 0, -17659, 640, 0, 0
-0B62:   4400011206000005007A5FCB000026C9E0FD00000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 6, 0, 0, 5, 0, 122, -13473, 0, -14042, -544, 0, 0
-0B78:   4400021206000005007B98AA000043D0E70500000000                                            sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 6, 0, 0, 5, 0, 123, -21864, 0, -12221, 1511, 0, 0
+0B4C:   4400001206000005007992E7000005BB800200000000                                            sce_em_set              0, ID_EM_0, ENEMY_ZOMBIE_GUY1, 6, AI_DEFAULT, 0, SBK_5, 0, 121, -6254, 0, -17659, 640, 0, 0
+0B62:   4400011206000005007A5FCB000026C9E0FD00000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 6, AI_DEFAULT, 0, SBK_5, 0, 122, -13473, 0, -14042, -544, 0, 0
+0B78:   4400021206000005007B98AA000043D0E70500000000                                            sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 6, AI_DEFAULT, 0, SBK_5, 0, 123, -21864, 0, -12221, 1511, 0, 0
 0B8E:   00                                                                                      nop
 0B8F:   00                                                                                      nop
 

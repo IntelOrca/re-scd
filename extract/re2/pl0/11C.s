@@ -2,29 +2,29 @@
 
 .init
 .proc init
-    door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -5530, -4687, 1800, 1100, -703, 0, -17020, 816, 0, 7, 3, 0, 14, 5, 0, 0, UNLOCKED, 0
-    door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -11422, -18315, 1800, 1800, -4696, 0, -1380, 560, 0, 9, 0, 0, 7, 1, 0, 0, UNLOCKED, 0
+    door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -5530, -4687, 1800, 1100, -703, 0, -17020, 816, 0, 7, 3, 0, 14, 5, 0, 0, UNLOCKED, 0
+    door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -11422, -18315, 1800, 1800, -4696, 0, -1380, 560, 0, 9, 0, 0, 7, 1, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
 .proc main
-    obj_model_set           0, 0, 0, 0, 0, 0, 0, 26, 0, -32000, -18000, -26000, 0, -512, 192, 0, 0, 0, 0, 0, 0, 0, 0
-    obj_model_set           1, 0, 0, 0, 0, 49152, 0, 26, 6, 0, -540, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    obj_model_set           2, 0, 0, 0, 0, 49152, 0, 26, 6, -15120, -36, 180, 3072, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0
-    work_set                WK_OBJECT, 2
+    obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 26, 0, -32000, -18000, -26000, 0, -512, 192, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           ID_OBJ_1, 0, 0, 0, 0, 49152, 0, 26, 6, 0, -540, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 49152, 0, 26, 6, -15120, -36, 180, 3072, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0
+    work_set                WK_OBJECT, ID_OBJ_2
     nop
-    member_copy             V_TEMP, 1
-    nop
-    calc                    0, OP_OR, V_TEMP, 8
-    member_set2             1, V_TEMP
-    nop
-    obj_model_set           3, 0, 0, 0, 0, 0, 0, 10, 0, 12314, -300, 16638, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    work_set                WK_OBJECT, 3
-    nop
-    member_copy             V_TEMP, 1
+    member_copy             V_TEMP, M_BE_FLAG
     nop
     calc                    0, OP_OR, V_TEMP, 8
-    member_set2             1, V_TEMP
+    member_set2             M_BE_FLAG, V_TEMP
+    nop
+    obj_model_set           ID_OBJ_3, 0, 0, 0, 0, 0, 0, 10, 0, 12314, -300, 16638, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    work_set                WK_OBJECT, ID_OBJ_3
+    nop
+    member_copy             V_TEMP, M_BE_FLAG
+    nop
+    calc                    0, OP_OR, V_TEMP, 8
+    member_set2             M_BE_FLAG, V_TEMP
     nop
     evt_exec                255, I_GOSUB, main_02
     evt_end                 0
@@ -33,14 +33,14 @@
     evt_end                 0
 
 .proc main_02
-    set                     FG_STATE, 7, 1
-    set                     FG_GAME, 27, 1
+    set                     FG_STOP, 7, 1
+    set                     FG_STATUS, 27, 1
     cut_chg                 4
     cut_auto                1
     work_set                WK_PLAYER, 0
     nop
     pos_set                 0, 15742, 0, 9841
-    member_set              15, 128, 9
+    member_set              M_Y_DIR, 2432
     evt_next
     plc_motion              0, 16, 0
     nop
@@ -54,12 +54,12 @@
     gosub                   main_0D
     plc_motion              1, 6, 0
     sleep                   10, 24
-    work_set                WK_OBJECT, 3
+    work_set                WK_OBJECT, ID_OBJ_3
     nop
-    member_copy             V_TEMP, 1
+    member_copy             V_TEMP, M_BE_FLAG
     nop
     calc                    0, OP_AND, V_TEMP, -9
-    member_set2             1, V_TEMP
+    member_set2             M_BE_FLAG, V_TEMP
     nop
     work_set                WK_PLAYER, 0
     nop
@@ -71,12 +71,12 @@
     plc_dest                0, 7, 32, 13176, 14458
     gosub                   main_0D
     sleep                   10, 10
-    work_set                WK_OBJECT, 3
+    work_set                WK_OBJECT, ID_OBJ_3
     nop
-    member_copy             V_TEMP, 1
+    member_copy             V_TEMP, M_BE_FLAG
     nop
     calc                    0, OP_OR, V_TEMP, 8
-    member_set2             1, V_TEMP
+    member_set2             M_BE_FLAG, V_TEMP
     nop
     se_on                   2, 266, 1, 0, 0, 0
     sce_espr_on             0, 4391, 0, 2560, 12314, -300, 16638, 0
@@ -89,7 +89,7 @@
     sleep                   10, 40
     plc_neck                2, 0, -512, -512, 38, 38
     sleep                   10, 30
-    sce_bgm_control         1, 1, 0, 0, 22
+    sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_MAIN_VOL, 0, 22
     sleep                   10, 10
     plc_dest                0, 5, 32, 11931, 17057
     gosub                   main_0D
@@ -97,13 +97,13 @@
     gosub                   main_0D
     gosub                   main_03
     cut_chg                 11
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     nop
-    member_set              12, 224, 177
+    member_set              M_Y_POS, -20000
     work_set                WK_PLAYER, 0
     nop
     pos_set                 0, 12557, 0, 18010
-    member_set              15, 208, 9
+    member_set              M_Y_DIR, 2512
     plc_motion              0, 15, 64
     plc_cnt                 1
     sleep                   10, 95
@@ -112,7 +112,7 @@
     nop
     evt_exec                255, I_GOSUB, main_06
     sleep                   10, 120
-    sce_bgm_control         1, 5, 0, 0, 22
+    sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_FADEOUT, BGM_TYPE_MAIN_VOL, 0, 22
     sce_fade_set            0, 2, 7, 0, 2
     sleep                   10, 59
     for                     0, off_0B78, 10
@@ -124,10 +124,10 @@
 off_0B78:
     work_set                WK_PLAYER, 0
     nop
-    member_copy             V_TEMP, 1
+    member_copy             V_TEMP, M_BE_FLAG
     nop
     calc                    0, OP_OR, V_TEMP, 8
-    member_set2             1, V_TEMP
+    member_set2             M_BE_FLAG, V_TEMP
     nop
     cut_chg                 12
     for                     0, off_0B9A, 60
@@ -142,9 +142,9 @@ off_0B9A:
     evt_exec                255, I_GOSUB, main_07
     sleep                   10, 130
     sce_fade_set            0, 2, 7, 17, 1
-    sce_bgm_control         0, 5, 0, 91, 65
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_FADEOUT, BGM_TYPE_MAIN_VOL, 91, 65
     sleep                   10, 119
-    set                     FG_0, 10, 1
+    set                     FG_SYSTEM, 10, 1
 
 off_0BC0:
     sce_fade_adjust         0, 255, 127
@@ -159,7 +159,7 @@ off_0BC0:
     evt_exec                255, I_GOSUB, main_09
     evt_exec                255, I_GOSUB, main_0A
     cut_chg                 9
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     nop
     speed_set               0, 500
     speed_set               2, 500
@@ -180,7 +180,7 @@ off_0BF6:
 
 off_0C0A:
     cut_chg                 7
-    member_set              12, 184, 192
+    member_set              M_Y_POS, -16200
     for                     0, off_0C1C, 20
     add_speed
     add_aspeed
@@ -208,17 +208,17 @@ off_0C2C:
     next                    0
 
 off_0C40:
-    work_set                WK_OBJECT, 2
+    work_set                WK_OBJECT, ID_OBJ_2
     nop
-    member_copy             V_TEMP, 1
+    member_copy             V_TEMP, M_BE_FLAG
     nop
     calc                    0, OP_AND, V_TEMP, -9
-    member_set2             1, V_TEMP
+    member_set2             M_BE_FLAG, V_TEMP
     nop
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     cut_chg                 8
     nop
-    member_set              12, 200, 206
+    member_set              M_Y_POS, -12600
     speed_set               8, -2
     speed_set               6, -2
     for                     0, off_0C70, 100
@@ -287,7 +287,7 @@ off_0CD8:
     evt_end                 0
 
 .proc main_04
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     nop
     speed_set               4, 1
     speed_set               10, 1
@@ -348,7 +348,7 @@ off_0D5C:
     evt_end                 0
 
 .proc main_05
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     nop
     speed_set               4, -1
     speed_set               10, -1
@@ -401,9 +401,9 @@ off_0DB8:
     evt_end                 0
 
 .proc main_06
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     nop
-    member_set              12, 200, 206
+    member_set              M_Y_POS, -12600
     speed_set               1, 40
     for                     0, off_0DD2, 180
     add_speed
@@ -416,7 +416,7 @@ off_0DD2:
     evt_end                 0
 
 .proc main_07
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
     nop
     se_on                   2, 13, 4, 0, 0, 0
     pos_set                 0, -32000, -10000, -32000
@@ -465,17 +465,17 @@ off_0E54:
     evt_end                 0
 
 .proc main_08
-    work_set                WK_OBJECT, 2
+    work_set                WK_OBJECT, ID_OBJ_2
     nop
-    member_copy             V_TEMP, 1
+    member_copy             V_TEMP, M_BE_FLAG
     nop
     calc                    0, OP_OR, V_TEMP, 8
-    member_set2             1, V_TEMP
+    member_set2             M_BE_FLAG, V_TEMP
     nop
     evt_end                 0
 
 .proc main_09
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
 
 off_0E6D:
     nop
@@ -555,7 +555,7 @@ off_0F10:
     evt_end                 0
 
 .proc main_0A
-    work_set                WK_OBJECT, 0
+    work_set                WK_OBJECT, ID_OBJ_0
 
 off_0F1B:
     nop
@@ -644,7 +644,7 @@ off_0FAC:
     evt_end                 0
 
 .proc main_0B
-    work_set                WK_OBJECT, 1
+    work_set                WK_OBJECT, ID_OBJ_1
     nop
     speed_set               4, 512
 
@@ -655,7 +655,7 @@ off_0FBC:
     evt_end                 0
 
 .proc main_0C
-    work_set                WK_OBJECT, 2
+    work_set                WK_OBJECT, ID_OBJ_2
     nop
     speed_set               4, 512
 
@@ -670,7 +670,8 @@ off_0FCE:
     evt_next
     nop
     edwhile                 off_0FE4
-    ck                      FG_GENERAL_2, 32, 0
+    ck                      FG_ROOM, 32, 0
 
 off_0FE4:
     evt_end                 0
+    db                      0x04, 0x07

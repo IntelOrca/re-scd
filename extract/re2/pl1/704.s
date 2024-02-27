@@ -2,26 +2,26 @@
 
 .init
 .proc init
-    door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 20065, -25080, 1800, 3400, -26380, 0, -23095, 0, 6, 3, 4, 0, 42, 2, 0, 0, UNLOCKED, 0
+    door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 20065, -25080, 1800, 3400, -26380, 0, -23095, 0, 6, 3, 4, 0, 42, 2, 0, 0, UNLOCKED, 0
     evt_end                 0
 
 .main
 .proc main
-    aot_set                 7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27300, -21820, 14500, 2500, 0, 0, 0, 0, 255, 255
-    aot_set                 8, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26960, -27175, 2200, 7600, 0, 0, 0, 0, 255, 255
-    aot_set                 9, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26960, -27175, 10500, 2500, 0, 0, 0, 0, 255, 255
-    aot_set                 1, SCE_FLAG_CHG, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 1480, -27995, 2100, 9000, 5, 0, ITEM_KNIFE, 0, aot, 0
+    aot_set                 ID_AOT_7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27300, -21820, 14500, 2500, ID_MSG_0, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_8, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26960, -27175, 2200, 7600, ID_MSG_0, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_9, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26960, -27175, 10500, 2500, ID_MSG_0, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_1, SCE_FLAG_CHG, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 1480, -27995, 2100, 9000, 5, 0, ITEM_KNIFE, 0, aot, 0
     if                      0, off_129E
-    ck                      FG_GENERAL_1, 137, 1
-    aot_set                 10, SCE_FLAG_CHG, SAT_PL | SAT_UNDER, 0, 0, -32400, -29800, -7136, 16000, 1, 0, ITEM_EXPLOSIVEROUNDS, main, main, 0
-    sce_em_set              0, 0, ENEMY_36, 0, 128, 0, 39, 0, 255, -32000, 0, -32000, 0, 0, 0
-    sce_em_set              0, 1, ENEMY_37, 1, 0, 0, 39, 0, 255, -32000, 0, -32000, 0, 0, 0
-    sce_em_set              0, 2, ENEMY_37, 0, 0, 0, 39, 0, 255, -32000, 0, -32000, 0, 0, 0
-    sce_em_set              0, 3, ENEMY_37, 0, 0, 0, 39, 0, 255, -32000, 0, -32000, 0, 0, 0
-    sce_em_set              0, 4, ENEMY_37, 0, 0, 0, 39, 0, 255, -32000, 0, -32000, 0, 0, 0
-    obj_model_set           2, 0, 0, 0, 0, 0, 0, 128, 0, -11990, -4800, -23470, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    obj_model_set           3, 0, 0, 0, 0, 0, 0, 10, 0, -32000, 0, -32000, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    obj_model_set           4, 0, 0, 0, 0, 0, 0, 10, 0, -32000, 0, -32000, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ck                      FG_COMMON, 137, 1
+    aot_set                 ID_AOT_10, SCE_FLAG_CHG, SAT_PL | SAT_UNDER, 0, 0, -32400, -29800, -7136, 16000, 1, 0, ITEM_EXPLOSIVEROUNDS, main, main, 0
+    sce_em_set              0, ID_EM_0, ENEMY_36, 0, AI_INACTIVE, 0, SBK_39, 0, 255, -32000, 0, -32000, 0, 0, 0
+    sce_em_set              0, ID_EM_1, ENEMY_37, 1, AI_DEFAULT, 0, SBK_39, 0, 255, -32000, 0, -32000, 0, 0, 0
+    sce_em_set              0, ID_EM_2, ENEMY_37, 0, AI_DEFAULT, 0, SBK_39, 0, 255, -32000, 0, -32000, 0, 0, 0
+    sce_em_set              0, ID_EM_3, ENEMY_37, 0, AI_DEFAULT, 0, SBK_39, 0, 255, -32000, 0, -32000, 0, 0, 0
+    sce_em_set              0, ID_EM_4, ENEMY_37, 0, AI_DEFAULT, 0, SBK_39, 0, 255, -32000, 0, -32000, 0, 0, 0
+    obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 0, 0, 128, 0, -11990, -4800, -23470, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           ID_OBJ_3, 0, 0, 0, 0, 0, 0, 10, 0, -32000, 0, -32000, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           ID_OBJ_4, 0, 0, 0, 0, 0, 0, 10, 0, -32000, 0, -32000, 0, 3072, 0, 0, 0, 0, 0, 0, 0, 0, 0
     cut_replace             3, 8
     cut_replace             2, 13
     evt_exec                9, I_GOSUB, main_02
@@ -29,23 +29,23 @@
     else                    0, off_1388
 
 off_129E:
-    obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -25200, -1440, -23050, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    aot_set                 4, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25475, -24452, 1800, 3800, 0, 0, 1, 0, 0, 0
+    obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -25200, -1440, -23050, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_4, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25475, -24452, 1800, 3800, 0, 0, 1, 0, 0, 0
     if                      0, off_12F8
-    ck                      FG_GAME, 4, 0
-    aot_set                 5, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22835, -21810, 1800, 1800, 14, 0, 0, 0, 0, 0
+    ck                      FG_STATUS, 4, 0
+    aot_set                 ID_AOT_5, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22835, -21810, 1800, 1800, 14, 0, 0, 0, 0, 0
     else                    0, off_130E
 
 off_12F8:
-    aot_set                 6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22835, -21810, 1800, 1800, 2, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22835, -21810, 1800, 1800, ID_MSG_2, 0, 0, 0, 255, 255
     nop
     nop
 
 off_130E:
-    obj_model_set           5, 0, 0, 0, 0, 0, 0, 10, 16, -22175, -1700, -21200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    obj_model_set           6, 0, 0, 0, 0, 0, 0, 10, 16, -22675, 0, -24655, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22835, -21810, 1800, 1800, ITEM_INKRIBBON, 3, 78, 5, 0
-    item_aot_set            3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23335, -25710, 1500, 1400, ITEM_PLATFORMKEY, 1, 79, 6, 193
+    obj_model_set           ID_OBJ_5, 0, 0, 0, 0, 0, 0, 10, 16, -22175, -1700, -21200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    obj_model_set           ID_OBJ_6, 0, 0, 0, 0, 0, 0, 10, 16, -22675, 0, -24655, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    item_aot_set            ID_AOT_2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22835, -21810, 1800, 1800, ITEM_INKRIBBON, 3, 78, ID_OBJ_5, IF_DEFAULT
+    item_aot_set            ID_AOT_3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23335, -25710, 1500, 1400, ITEM_PLATFORMKEY, 1, 79, ID_OBJ_6, IF_GLINT_BLUE | IF_FLOOR
     nop
     nop
 
@@ -56,7 +56,7 @@ off_1388:
     evt_end                 0
 
 .proc main_02
-    aot_reset               1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, 1, 0, 1, 0
+    aot_reset               ID_AOT_1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 5, 0, 1, 0, 1, 0
     work_set                WK_PLAYER, 0
     nop
     do                      0, off_13A8
@@ -70,7 +70,7 @@ off_13A8:
     evt_end                 0
 
 .proc main_03
-    work_set                WK_OBJECT, 2
+    work_set                WK_OBJECT, ID_OBJ_2
     nop
     speed_set               1, 100
     speed_set               0, 400
@@ -78,10 +78,10 @@ off_13A8:
     for                     0, off_13D8, 2
     add_speed
     add_aspeed
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 60
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     evt_next
     nop
@@ -93,10 +93,10 @@ off_13D8:
     for                     0, off_13FA, 7
     add_speed
     add_aspeed
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 60
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     evt_next
     nop
@@ -107,10 +107,10 @@ off_13FA:
     speed_set               0, 300
     speed_set               1, -246
     for                     0, off_1426, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 300
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -119,10 +119,10 @@ off_13FA:
 off_1426:
     speed_set               1, -186
     for                     0, off_1442, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 248
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -133,10 +133,10 @@ off_1442:
     speed_set               1, 0
     while                   6, off_1466
     member_cmp              0, 11, 4, 52, 234
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 248
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -148,10 +148,10 @@ off_1466:
     speed_set               1, -200
     se_on                   2, 11, 516, 0, 0, 0
     for                     0, off_1496, 2
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 56
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -161,10 +161,10 @@ off_1496:
     speed_set               1, -150
     speed_set               0, -180
     for                     0, off_14B6, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 56
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -174,10 +174,10 @@ off_14B6:
     speed_set               1, -100
     speed_set               0, -160
     for                     0, off_14D6, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 56
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -186,10 +186,10 @@ off_14B6:
 off_14D6:
     speed_set               1, -50
     speed_set               0, -140
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 56
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     nop
@@ -197,12 +197,12 @@ off_14D6:
     speed_set               0, -100
     speed_set               1, 50
     speed_set               2, -10
-    member_set              12, 60, 246
+    member_set              M_Y_POS, -2500
     for                     0, off_151A, 2
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 30
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -213,10 +213,10 @@ off_151A:
     speed_set               1, 100
     speed_set               2, -30
     for                     0, off_153E, 4
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 30
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -227,10 +227,10 @@ off_153E:
     speed_set               1, 150
     speed_set               2, -50
     for                     0, off_1562, 4
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 32
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -238,7 +238,7 @@ off_153E:
 
 off_1562:
     speed_set               1, 200
-    member_set              16, 0, 8
+    member_set              M_Z_DIR, 2048
     for                     0, off_1574, 7
     add_speed
     evt_next
@@ -250,10 +250,10 @@ off_1574:
     speed_set               2, 0
     speed_set               1, -40
     for                     0, off_15A4, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 20
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -262,10 +262,10 @@ off_1574:
 off_15A4:
     speed_set               1, -20
     for                     0, off_15C0, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 10
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -288,10 +288,10 @@ off_15CE:
 off_15DC:
     speed_set               1, 20
     for                     0, off_15F8, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 10
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
@@ -300,65 +300,65 @@ off_15DC:
 off_15F8:
     speed_set               1, 40
     for                     0, off_1614, 3
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 20
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     add_speed
     evt_next
     next                    0
 
 off_1614:
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 20
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     sleep                   10, 2
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 20
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     sleep                   10, 2
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 20
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     sleep                   10, 2
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 20
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     sleep                   10, 2
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 10
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     evt_next
     nop
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 10
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     evt_next
     nop
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_SUB, V_TEMP, 10
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     evt_next
     nop
-    member_copy             V_TEMP, 16
+    member_copy             V_TEMP, M_Z_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 10
-    member_set2             16, V_TEMP
+    member_set2             M_Z_DIR, V_TEMP
     nop
     evt_next
     nop
@@ -410,8 +410,8 @@ off_16C4:
     evt_end                 0
 
 .proc main_06
-    set                     FG_STATE, 7, 1
-    set                     FG_GAME, 27, 1
+    set                     FG_STOP, 7, 1
+    set                     FG_STATUS, 27, 1
     cut_auto                0
     cut_chg                 3
     evt_kill                6
@@ -421,10 +421,10 @@ off_16C4:
     dir_set                 0, 0, 2048, 0
     evt_exec                7, I_GOSUB, main_03
     gosub                   main_0D
-    work_set                WK_ENEMY, 1
+    work_set                WK_ENEMY, ID_EM_1
     nop
     pos_set                 0, -12800, -7800, -23570
-    member_set              23, 1, 0
+    member_set              M_SCE_FREE0, 1
     work_set                WK_PLAYER, 0
     nop
     plc_neck                2, 0, 0, -100, 30, 30
@@ -432,10 +432,10 @@ off_16C4:
     sleep                   10, 12
     plc_motion              11, 1, 16
     sleep                   10, 20
-    member_copy             V_TEMP, 12
+    member_copy             V_TEMP, M_Y_POS
     nop
     calc                    0, OP_SUB, V_TEMP, 20
-    member_set2             12, V_TEMP
+    member_set2             M_Y_POS, V_TEMP
     nop
     plc_stop
     work_set                WK_PLAYER, 0
@@ -450,20 +450,20 @@ off_16C4:
     cut_chg                 4
     work_set                WK_PLAYER, 0
     nop
-    member_copy             V_TEMP, 11
+    member_copy             V_TEMP, M_X_POS
     nop
     calc                    0, OP_SUB, V_TEMP, 300
-    member_set2             11, V_TEMP
+    member_set2             M_X_POS, V_TEMP
     nop
     dir_set                 0, 0, 2900, 0
     plc_motion              10, 18, 0
     sleep                   10, 12
     plc_motion              12, 1, 4
     do                      0, off_1856
-    member_copy             V_TEMP, 15
+    member_copy             V_TEMP, M_Y_DIR
     nop
     calc                    0, OP_ADD, V_TEMP, 150
-    member_set2             15, V_TEMP
+    member_set2             M_Y_DIR, V_TEMP
     nop
     evt_next
     nop
@@ -471,18 +471,18 @@ off_16C4:
     member_cmp              0, 15, 4, 0, 16
 
 off_1856:
-    member_set              15, 0, 0
-    aot_reset               0, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 1, 0, 0, 0, 255, 255
+    member_set              M_Y_DIR, 0
+    aot_reset               ID_AOT_0, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, ID_MSG_1, 0, 0, 0, 255, 255
     cut_be_set              6, 2, 1
     cut_be_set              6, 3, 0
-    work_set                WK_OBJECT, 2
+    work_set                WK_OBJECT, ID_OBJ_2
     nop
     pos_set                 0, -32000, 0, -32000
     work_set                WK_PLAYER, 0
     plc_stop
     pos_set                 0, -3800, 0, -23570
     dir_set                 0, 0, 0, 0
-    set                     FG_GAME, 4, 0
+    set                     FG_STATUS, 4, 0
     cut_auto                0
     cut_chg                 9
     evt_exec                7, I_GOSUB, main_09
@@ -498,7 +498,7 @@ off_1856:
     evt_next
     nop
     edwhile                 off_18C4
-    ck                      FG_GENERAL_2, 32, 0
+    ck                      FG_ROOM, 32, 0
 
 off_18C4:
     work_set                WK_PLAYER, 0
@@ -506,18 +506,18 @@ off_18C4:
     nop
     plc_neck                2, 0, -512, 128, 100, 16
     sleep                   10, 11
-    work_set                WK_ENEMY, 0
+    work_set                WK_ENEMY, ID_EM_0
     nop
-    member_set              23, 1, 0
-    member_set              7, 0, 0
+    member_set              M_SCE_FREE0, 1
+    member_set              M_TYPE, 0
     evt_next
     work_set                WK_PLAYER, 0
     plc_motion              0, 15, 128
     plc_cnt                 11
     sleep                   10, 11
-    sce_bgm_control         0, 0, 1, 80, 64
-    sce_bgm_control         0, 0, 2, 80, 64
-    sce_bgm_control         1, 1, 0, 128, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 80, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 80, 64
+    sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_MAIN_VOL, 128, 64
     plc_motion              12, 1, 4
     sleep                   10, 60
     work_set                WK_PLAYER, 0
@@ -551,19 +551,19 @@ off_18C4:
     pos_set                 0, 14850, 0, -23570
     dir_set                 0, 0, 2048, 0
     plc_ret
-    set                     FG_GAME, 4, 1
+    set                     FG_STATUS, 4, 1
     cut_auto                1
-    set                     FG_STATE, 7, 0
-    set                     FG_GAME, 27, 0
+    set                     FG_STOP, 7, 0
+    set                     FG_STATUS, 27, 0
     nop
     evt_exec                5, I_GOSUB, main_07
     evt_end                 0
 
 .proc main_07
     do                      0, off_19B2
-    work_set                WK_ENEMY, 0
+    work_set                WK_ENEMY, ID_EM_0
     nop
-    member_copy             V_TEMP, 23
+    member_copy             V_TEMP, M_SCE_FREE0
     nop
     calc                    0, OP_AND, V_TEMP, 2
     copy                    V_04, V_TEMP
@@ -574,10 +574,10 @@ off_18C4:
     cmp                     0, V_04, CMP_NE, 2
 
 off_19B2:
-    set                     FG_STATE, 7, 1
-    set                     FG_GAME, 27, 1
-    set                     FG_GAME, 4, 0
-    sce_bgm_control         1, 5, 0, 0, 0
+    set                     FG_STOP, 7, 1
+    set                     FG_STATUS, 27, 1
+    set                     FG_STATUS, 4, 0
+    sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_FADEOUT, BGM_TYPE_MAIN_VOL, 0, 0
     work_set                WK_PLAYER, 0
     plc_motion              2, 2, 4
     evt_next
@@ -586,7 +586,7 @@ off_19B2:
     work_set                WK_PLAYER, 0
     nop
     pos_set                 0, -32000, 0, -32000
-    work_set                WK_ENEMY, 0
+    work_set                WK_ENEMY, ID_EM_0
     nop
     pos_set                 0, 9000, 0, -23570
     evt_next
@@ -597,7 +597,7 @@ off_19B2:
     wsleeping
     evt_next
     cut_chg                 6
-    work_set                WK_ENEMY, 0
+    work_set                WK_ENEMY, ID_EM_0
     pos_set                 0, 11000, 0, -23570
     evt_next
     nop
@@ -606,10 +606,10 @@ off_19B2:
     wsleep
     wsleeping
     cut_chg                 7
-    work_set                WK_ENEMY, 1
+    work_set                WK_ENEMY, ID_EM_1
     nop
     pos_set                 0, -32000, 0, -32000
-    work_set                WK_ENEMY, 3
+    work_set                WK_ENEMY, ID_EM_3
     nop
     pos_set                 0, -32000, 0, -32000
     work_set                WK_PLAYER, 0
@@ -637,19 +637,19 @@ off_19B2:
     sleep                   10, 14
     sleep                   10, 30
     sleep                   10, 59
-    sce_bgm_control         1, 2, 0, 0, 0
-    set                     FG_GENERAL_1, 191, 1
+    sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_STOP, BGM_TYPE_MAIN_VOL, 0, 0
+    set                     FG_COMMON, 191, 1
     evt_exec                2, I_GOSUB, main_08
     sca_id_set              13, 0, 128
     sca_id_set              14, 0, 128
     sca_id_set              15, 0, 128
     sca_id_set              16, 0, 128
-    aot_reset               0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 244, 152, 0, 0, 201, 165
+    aot_reset               ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 244, 152, 0, 0, 201, 165
     evt_exec                6, I_GOSUB, main_0F
     plc_ret
-    set                     FG_GAME, 4, 1
-    set                     FG_STATE, 7, 0
-    set                     FG_GAME, 27, 0
+    set                     FG_STATUS, 4, 1
+    set                     FG_STOP, 7, 0
+    set                     FG_STATUS, 27, 0
     nop
     evt_end                 0
 
@@ -664,9 +664,9 @@ off_19B2:
     copy                    V_08, V_TEMP
     nop
     work_copy               8, 4, 0
-    sce_bgm_control         0, 0, 1, 0, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG0_VOL, 0, 64
     work_copy               8, 4, 0
-    sce_bgm_control         0, 0, 2, 0, 64
+    sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_NOP, BGM_TYPE_PROG1_VOL, 0, 64
     edwhile                 off_1B1E
     cmp                     0, V_08, CMP_LT, 128
 
@@ -682,38 +682,38 @@ off_1B1E:
 .proc main_0A
     evt_kill                3
     evt_kill                4
-    work_set                WK_OBJECT, 3
+    work_set                WK_OBJECT, ID_OBJ_3
     nop
     pos_set                 0, -32000, 0, -32000
-    work_set                WK_OBJECT, 4
+    work_set                WK_OBJECT, ID_OBJ_4
     nop
     pos_set                 0, -32000, 0, -32000
     evt_end                 0
 
 .proc main_0B
-    work_set                WK_OBJECT, 3
+    work_set                WK_OBJECT, ID_OBJ_3
     nop
     pos_set                 0, 0, -4400, -16800
     dir_set                 0, 3072, 3072, 1024
 
 off_1B60:
-    work_set                WK_OBJECT, 3
+    work_set                WK_OBJECT, ID_OBJ_3
     nop
     if                      0, off_1B7C
     member_cmp              0, 11, 4, 224, 177
-    work_set                WK_OBJECT, 3
+    work_set                WK_OBJECT, ID_OBJ_3
     nop
     pos_set                 0, 0, -4400, -16800
     endif
     nop
 
 off_1B7C:
-    work_set                WK_OBJECT, 3
+    work_set                WK_OBJECT, ID_OBJ_3
     nop
-    member_copy             V_TEMP, 11
+    member_copy             V_TEMP, M_X_POS
     nop
     calc                    0, OP_SUB, V_TEMP, 1000
-    member_set2             11, V_TEMP
+    member_set2             M_X_POS, V_TEMP
     nop
     evt_next
     nop
@@ -721,29 +721,29 @@ off_1B7C:
     evt_end                 0
 
 .proc main_0C
-    work_set                WK_OBJECT, 4
+    work_set                WK_OBJECT, ID_OBJ_4
     nop
     pos_set                 0, 0, -4400, -16800
     dir_set                 0, 3072, 3072, 1024
 
 off_1BAC:
-    work_set                WK_OBJECT, 4
+    work_set                WK_OBJECT, ID_OBJ_4
     nop
     if                      0, off_1BC8
     member_cmp              0, 11, 4, 224, 177
-    work_set                WK_OBJECT, 4
+    work_set                WK_OBJECT, ID_OBJ_4
     nop
     pos_set                 0, 0, -4400, -16800
     endif
     nop
 
 off_1BC8:
-    work_set                WK_OBJECT, 4
+    work_set                WK_OBJECT, ID_OBJ_4
     nop
-    member_copy             V_TEMP, 11
+    member_copy             V_TEMP, M_X_POS
     nop
     calc                    0, OP_SUB, V_TEMP, 1000
-    member_set2             11, V_TEMP
+    member_set2             M_X_POS, V_TEMP
     nop
     evt_next
     nop
@@ -775,3 +775,4 @@ off_1C1A:
     sleep                   10, 52
     goto                    255, 255, 0, off_1C1A
     evt_end                 0
+    db                      0x00, 0x00

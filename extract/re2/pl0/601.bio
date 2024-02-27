@@ -2,66 +2,66 @@
 
 proc init
 {
-    door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -18650, 0, -1220, 0, 5, 2, 4, 0, 39, 0, 0, 0, UNLOCKED, 0);
-    door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -20920, 0, -18400, 0, 5, 6, 6, 0, 39, 0, 0, 0, UNLOCKED, 0);
-    door_aot_se(2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -1430, 0, -6160, 1024, 6, 0, 5, 0, 39, 0, 0, 0, UNLOCKED, 0);
+    door_aot_se(ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -18650, 0, -1220, 0, 5, 2, 4, 0, 39, 0, 0, 0, UNLOCKED, 0);
+    door_aot_se(ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -20920, 0, -18400, 0, 5, 6, 6, 0, 39, 0, 0, 0, UNLOCKED, 0);
+    door_aot_se(ID_AOT_2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, -1430, 0, -6160, 1024, 6, 0, 5, 0, 39, 0, 0, 0, UNLOCKED, 0);
 }
 
 proc main
 {
-    if (ck(FG_GENERAL_1, 130, 1))
+    if (ck(FG_COMMON, 130, 1))
     {
-        set(FG_GENERAL_1, 154, 1);
+        set(FG_COMMON, 154, 1);
     }
-    if (ck(FG_3, 193, 0))
+    if (ck(FG_SCENARIO, 193, 0))
     {
-        aot_set(3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20570, -26610, 1800, 1500, 9, 0, I_GOSUB, main_06, 0, 0);
+        aot_set(ID_AOT_3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20570, -26610, 1800, 1500, 9, 0, I_GOSUB, main_06, 0, 0);
         if (keep_item_ck(ITEM_MASTERKEY))
         {
-            if (ck(FG_GENERAL_1, 139, 0))
+            if (ck(FG_COMMON, 139, 0))
             {
-                aot_set(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_1A, 0, 0);
-                aot_set(6, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 10, 0, ITEM_MASTERKEY, 0, aot, 0);
+                aot_set(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_1A, 0, 0);
+                aot_set(ID_AOT_6, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 10, 0, ITEM_MASTERKEY, 0, aot, 0);
                 evt_exec(3, I_GOSUB, main_1B);
             }
             else
             {
-                aot_set(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_14, 0, 0);
+                aot_set(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_14, 0, 0);
             }
         }
         else
         {
-            aot_set(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_0D, 0, 0);
+            aot_set(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 8, 0, I_GOSUB, main_0D, 0, 0);
         }
         if (cmp(0, V_LAST_RDT, CMP_EQ, 1542))
         {
-            aot_reset(0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+            aot_reset(ID_AOT_0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
         }
         else
         {
-            aot_reset(1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+            aot_reset(ID_AOT_1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
         }
-        aot_reset(2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        aot_reset(ID_AOT_2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
         main_07();
     }
     else
     {
-        aot_set(3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20570, -26610, 1800, 1500, 1, 0, 0, 0, 255, 255);
-        if (ck(FG_GENERAL_1, 139, 0))
+        aot_set(ID_AOT_3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20570, -26610, 1800, 1500, ID_MSG_1, 0, 0, 0, 255, 255);
+        if (ck(FG_COMMON, 139, 0))
         {
-            aot_set(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 9, 0, I_GOSUB, main_1A, 0, 0);
-            aot_set(6, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 10, 0, ITEM_MASTERKEY, 0, aot, 0);
+            aot_set(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 9, 0, I_GOSUB, main_1A, 0, 0);
+            aot_set(ID_AOT_6, SCE_FLAG_CHG, SAT_PL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 10, 0, ITEM_MASTERKEY, 0, aot, 0);
             evt_exec(3, I_GOSUB, main_1B);
         }
         else
         {
-            aot_set(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 9, 0, I_GOSUB, main_17, 0, 0);
+            aot_set(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27385, -24450, 1400, 1900, 9, 0, I_GOSUB, main_17, 0, 0);
         }
-        aot_set(5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, 6, 0, 0, 0, 255, 255);
-        aot_reset(0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        aot_reset(1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        aot_reset(2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        sce_em_set(0, 255, ENEMY_SHERRY_JACKET, 0, 0, 0, 0, 0, 255, -23520, 900, -20829, 3072, 257, 84);
+        aot_set(ID_AOT_5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20870, -25250, 1800, 3900, ID_MSG_6, 0, 0, 0, 255, 255);
+        aot_reset(ID_AOT_0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        aot_reset(ID_AOT_1, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        aot_reset(ID_AOT_2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        sce_em_set(0, ID_EM_255, ENEMY_SHERRY_JACKET, 0, AI_DEFAULT, 0, SBK_0, 0, 255, -23520, 900, -20829, 3072, 257, 84);
         main_07();
         evt_exec(8, I_GOSUB, main_19);
     }
@@ -75,8 +75,8 @@ proc aot
 
 proc main_02
 {
-    set(FG_STATE, 7, 1);
-    set(FG_GAME, 27, 1);
+    set(FG_STOP, 7, 1);
+    set(FG_STATUS, 27, 1);
     cut_chg(3);
     work_set(WK_PLAYER, 0);
     pos_set(0, -23780, 0, -23470);
@@ -95,11 +95,11 @@ proc main_02
     sleep(10, 20);
     if (cmp(0, V_LAST_RDT, CMP_EQ, 1542))
     {
-        aot_reset(0, SCE_DOOR, SAT_PL | SAT_FRONT, 38, 183, 0, 0, 60, 251);
+        aot_reset(ID_AOT_0, SCE_DOOR, SAT_PL | SAT_FRONT, 38, 183, 0, 0, 60, 251);
     }
     else
     {
-        aot_reset(1, SCE_DOOR, SAT_PL | SAT_FRONT, 72, 174, 0, 0, 32, 184);
+        aot_reset(ID_AOT_1, SCE_DOOR, SAT_PL | SAT_FRONT, 72, 174, 0, 0, 32, 184);
     }
     plc_dest(0, 4, 32, -20000, -23470);
 }
@@ -358,12 +358,12 @@ proc main_06
     sce_espr3d_on(0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0);
     sce_espr3d_on(0, 1046, 0, 2048, -20520, -2592, -25704, 0, 1024, 0, 0);
     cut_chg(1);
-    message_on(0, 0, 0, 255, 239);
+    message_on(0, ID_MSG_0, 0, 255, 239);
     evt_next();
-    if (ck(FG_INPUT, F_QUESTION, 0))
+    if (ck(FG_MESSAGE, F_QUESTION, 0))
     {
-        aot_reset(3, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        set(FG_STATE, 7, 1);
+        aot_reset(ID_AOT_3, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        set(FG_STOP, 7, 1);
         se_on(2, 12, 1, 0, 0, 0);
         sce_espr_kill(22, 4, 0, 0);
         if (cmp(0, V_LAST_RDT, CMP_EQ, 1542))
@@ -384,7 +384,7 @@ proc main_06
             sce_espr3d_on(0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0);
             sce_espr3d_on(0, 1046, 0, 2048, -20520, -2754, -25704, 0, 1024, 0, 0);
         }
-        set(FG_STATE, 7, 0);
+        set(FG_STOP, 7, 0);
         sleep(10, 20);
         evt_exec(2, I_GOSUB, main_02);
     }
@@ -433,7 +433,7 @@ proc main_0A
 
 proc main_0B
 {
-    set(FG_GENERAL_1, 139, 1);
+    set(FG_COMMON, 139, 1);
     sce_espr_kill(44, 1, 0, 0);
     sleep(10, 20);
     sce_espr_on(0, 2092, 0, 596, -26370, -2947, -23340, 0);
@@ -451,7 +451,7 @@ proc main_0C
 {
     if (cmp(0, V_CUT, CMP_EQ, 0))
     {
-        if (ck(FG_GENERAL_2, 0, 0))
+        if (ck(FG_ROOM, 0, 0))
         {
             main_08();
         }
@@ -459,13 +459,13 @@ proc main_0C
         {
             main_0A();
         }
-        set(FG_GENERAL_2, 0, 0);
+        set(FG_ROOM, 0, 0);
     }
     else
     {
-        if (ck(FG_GENERAL_2, 0, 0))
+        if (ck(FG_ROOM, 0, 0))
         {
-            if (ck(FG_GENERAL_1, 139, 0))
+            if (ck(FG_COMMON, 139, 0))
             {
                 main_07();
             }
@@ -473,7 +473,7 @@ proc main_0C
             {
                 main_09();
             }
-            set(FG_GENERAL_2, 0, 1);
+            set(FG_ROOM, 0, 1);
         }
     }
 }
@@ -483,7 +483,7 @@ proc main_0D
     cut_auto(0);
     cut_chg(2);
     evt_next();
-    message_on(0, 2, 0, 255, 239);
+    message_on(0, ID_MSG_2, 0, 255, 239);
     evt_next();
     cut_chg(4);
     cut_auto(1);
@@ -715,11 +715,11 @@ proc main_13
 proc main_14
 {
     cut_chg(2);
-    message_on(0, 5, 0, 255, 239);
+    message_on(0, ID_MSG_5, 0, 255, 239);
     evt_next();
     cut_chg(0);
     cut_auto(1);
-    set(FG_STATE, 7, 0);
+    set(FG_STOP, 7, 0);
 }
 
 proc main_15
@@ -744,13 +744,13 @@ proc main_16
 proc main_17
 {
     cut_chg(2);
-    message_on(0, 4, 0, 255, 239);
+    message_on(0, ID_MSG_4, 0, 255, 239);
     evt_next();
-    if (ck(FG_INPUT, F_QUESTION, 0))
+    if (ck(FG_MESSAGE, F_QUESTION, 0))
     {
-        aot_reset(4, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        set(FG_GAME, 27, 1);
-        set(FG_STATE, 7, 1);
+        aot_reset(ID_AOT_4, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        set(FG_STATUS, 27, 1);
+        set(FG_STOP, 7, 1);
         se_on(2, 12, 1, 0, 0, 0);
         work_set(WK_PLAYER, 0);
         pos_set(0, -23690, 0, -23700);
@@ -771,7 +771,7 @@ proc main_17
         main_16();
         main_05();
         sleep(10, 20);
-        aot_reset(2, SCE_DOOR, SAT_PL | SAT_FRONT, 106, 250, 0, 0, 240, 231);
+        aot_reset(ID_AOT_2, SCE_DOOR, SAT_PL | SAT_FRONT, 106, 250, 0, 0, 240, 231);
         work_set(WK_PLAYER, 0);
         plc_motion(10, 15, 0);
         work_set(WK_SPLAYER, 0);
@@ -782,7 +782,7 @@ proc main_17
         cut_chg(0);
         cut_auto(1);
         evt_kill(7);
-        set(FG_STATE, 7, 0);
+        set(FG_STOP, 7, 0);
     }
 }
 
@@ -792,18 +792,18 @@ proc main_18
 off_11EE:
     evt_next();
     work_set(WK_SPLAYER, 0);
-    member_copy(V_TEMP, 0);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 8);
     calc(0, OP_OR, V_TEMP, 2);
-    member_set2(0, V_TEMP);
+    member_set2(M_POINTER, V_TEMP);
     super_on(0, 64, 0, 97, 1, 0, 0, 39, 0, 0, 0, 0, 0, 0, 0);
     goto off_11EE;
 }
 
 proc main_19
 {
-    set(FG_STATE, 7, 1);
-    set(FG_GAME, 27, 1);
+    set(FG_STOP, 7, 1);
+    set(FG_STATUS, 27, 1);
     work_set(WK_PLAYER, 0);
     pos_set(0, -23360, 0, -22000);
     dir_set(0, 0, 3072, 0);
@@ -812,8 +812,8 @@ proc main_19
     plc_motion(1, 6, 128);
     sleep(10, 25);
     plc_ret();
-    set(FG_STATE, 7, 0);
-    set(FG_GAME, 27, 0);
+    set(FG_STOP, 7, 0);
+    set(FG_STATUS, 27, 0);
 }
 
 proc main_1A
@@ -821,27 +821,27 @@ proc main_1A
     cut_chg(2);
     evt_exec(7, I_GOSUB, main_0E);
     evt_next();
-    message_on(0, 2, 0, 255, 239);
+    message_on(0, ID_MSG_2, 0, 255, 239);
     evt_next();
-    message_on(0, 3, 0, 255, 239);
+    message_on(0, ID_MSG_3, 0, 255, 239);
     evt_next();
-    if (ck(FG_INPUT, F_QUESTION, 0))
+    if (ck(FG_MESSAGE, F_QUESTION, 0))
     {
-        set(FG_STATE, 7, 1);
+        set(FG_STOP, 7, 1);
         sce_item_ck_lost(ITEM_MASTERKEY, 1);
         se_on(2, 10, 1, 0, 0, 0);
         main_0B();
         sleep(10, 110);
-        aot_reset(6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        if (ck(FG_3, 193, 0))
+        aot_reset(ID_AOT_6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        if (ck(FG_SCENARIO, 193, 0))
         {
-            aot_reset(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_14, 0, 0);
+            aot_reset(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_14, 0, 0);
             evt_kill(7);
             evt_chain(0, 24, 20);
         }
         else
         {
-            aot_reset(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_17, 0, 0);
+            aot_reset(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_17, 0, 0);
             evt_chain(0, 24, 23);
         }
     }
@@ -855,13 +855,13 @@ proc main_1A
 
 proc main_1B
 {
-    if (ck(FG_GENERAL_1, 139, 0))
+    if (ck(FG_COMMON, 139, 0))
     {
         do
         {
             evt_next();
         } while (cmp(0, V_USED_ITEM, CMP_NE, 98));
-        set(FG_STATE, 7, 1);
+        set(FG_STOP, 7, 1);
         cut_chg(2);
         evt_exec(7, I_GOSUB, main_0E);
         evt_next();
@@ -869,16 +869,16 @@ proc main_1B
         se_on(2, 10, 1, 0, 0, 0);
         main_0B();
         sleep(10, 110);
-        aot_reset(6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        if (ck(FG_3, 193, 0))
+        aot_reset(ID_AOT_6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        if (ck(FG_SCENARIO, 193, 0))
         {
-            aot_reset(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_14, 0, 0);
+            aot_reset(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_14, 0, 0);
             evt_kill(7);
             evt_chain(0, 24, 20);
         }
         else
         {
-            aot_reset(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_17, 0, 0);
+            aot_reset(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 6, 0, I_GOSUB, main_17, 0, 0);
             evt_chain(0, 24, 23);
         }
     }

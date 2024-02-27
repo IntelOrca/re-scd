@@ -2,24 +2,24 @@
 
 .init
 .proc init
-1272:   3B0001310000949649C20807D007EC0600001DC6000805140000250000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26988, -15799, 1800, 2000, 1772, 0, -14819, 2048, 5, 20, 0, 0, 37, 0, 0, 0, UNLOCKED, 0
-1292:   3B0101310000F4BE6A95540B40069EC700009B0CF00305160600250000000000                        door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16652, -27286, 2900, 1600, -14434, 0, 3227, 1008, 5, 22, 6, 0, 37, 0, 0, 0, UNLOCKED, 0
+1272:   3B0001310000949649C20807D007EC0600001DC6000805140000250000000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26988, -15799, 1800, 2000, 1772, 0, -14819, 2048, 5, 20, 0, 0, 37, 0, 0, 0, UNLOCKED, 0
+1292:   3B0101310000F4BE6A95540B40069EC700009B0CF00305160600250000000000                        door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16652, -27286, 2900, 1600, -14434, 0, 3227, 1008, 5, 22, 6, 0, 37, 0, 0, 0, UNLOCKED, 0
 12B2:   0100                                                                                    evt_end                 0
 
 .main
 .proc main
 12D4:   180D                                                                                    gosub                   main_0D
 12D6:   06009E00                                                                                if                      0, off_1378
-12DA:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
+12DA:   21010101                                                                                ck                      FG_STATUS, F_SCENARIO, 1
 12DE:   06009200                                                                                if                      0, off_1374
-12E2:   21222B01                                                                                ck                      34, 43, 1
-12E6:   21038500                                                                                ck                      FG_3, 133, 0
+12E2:   21222B01                                                                                ck                      FG_ITEM_2, 43, 1
+12E6:   21038500                                                                                ck                      FG_SCENARIO, 133, 0
 12EA:   67050541000094AD6CEE12B7D8F50CCCD8DC10C398D6FF0018030000                                aot_set_4p              5, SCE_EVENT, SAT_PL | SAT_UNDER, 0, 0, -21100, -4500, -18670, -2600, -13300, -9000, -15600, -10600, 255, 0, I_GOSUB, main_03, 0, 0
-1306:   440000470048000000FF0000E0B10000DC0502030400                                            sce_em_set              0, 0, ENEMY_ANNETTEBIRKIN_1, 0, 72, 0, 0, 0, 255, 0, -20000, 0, 1500, 770, 4
-131C:   4400FF4F00400A0000FF90CF000058B2000402030400                                            sce_em_set              0, 255, ENEMY_SHERRY_JACKET, 0, 64, 10, 0, 0, 255, -12400, 0, -19880, 1024, 770, 4
-1332:   4400012A07400A1280FFEDCF000016C2000400000000                                            sce_em_set              0, 1, ENEMY_TYRANT_1, 7, 64, 10, 18, 128, 255, -12307, 0, -15850, 1024, 0, 0
-1348:   2D0F00000000000000000A001200B0C1DBE433C0C00340030007000000000000000000000000            obj_model_set           15, 0, 0, 0, 0, 0, 0, 10, 18, -15952, -6949, -16333, 960, 832, 1792, 0, 0, 0, 0, 0, 0, 0, 0
-136E:   22038601                                                                                set                     FG_3, 134, 1
+1306:   440000470048000000FF0000E0B10000DC0502030400                                            sce_em_set              0, ID_EM_0, ENEMY_ANNETTEBIRKIN_1, 0, AI_08 | AI_40, 0, SBK_0, 0, 255, 0, -20000, 0, 1500, 770, 4
+131C:   4400FF4F00400A0000FF90CF000058B2000402030400                                            sce_em_set              0, ID_EM_255, ENEMY_SHERRY_JACKET, 0, AI_40, 10, SBK_0, 0, 255, -12400, 0, -19880, 1024, 770, 4
+1332:   4400012A07400A1280FFEDCF000016C2000400000000                                            sce_em_set              0, ID_EM_1, ENEMY_TYRANT_1, 7, AI_40, 10, SBK_18, 128, 255, -12307, 0, -15850, 1024, 0, 0
+1348:   2D0F00000000000000000A001200B0C1DBE433C0C00340030007000000000000000000000000            obj_model_set           ID_OBJ_15, 0, 0, 0, 0, 0, 0, 10, 18, -15952, -6949, -16333, 960, 832, 1792, 0, 0, 0, 0, 0, 0, 0, 0
+136E:   22038601                                                                                set                     FG_SCENARIO, 134, 1
 1372:   08                                                                                      endif
 1373:   00                                                                                      nop
 
@@ -28,21 +28,21 @@ off_1374:
 
 off_1378:
 1378:   0600BE00                                                                                if                      0, off_143A
-137C:   21034301                                                                                ck                      FG_3, 67, 1
-1380:   21038400                                                                                ck                      FG_3, 132, 0
-1384:   2C0505410000FA9704CF0E1A7206FF0018020000                                                aot_set                 5, SCE_EVENT, SAT_PL | SAT_UNDER, 0, 0, -26630, -12540, 6670, 1650, 255, 0, I_GOSUB, main_02, 0, 0
-1398:   440000500040030000FF03F3E8EAEBF0FA0702030400                                            sce_em_set              0, 0, ENEMY_LEON_KENNEDY_RPD, 0, 64, 3, 0, 0, 255, -3325, -5400, -3861, 2042, 770, 4
-13AE:   2E0300                                                                                  work_set                WK_ENEMY, 0
+137C:   21034301                                                                                ck                      FG_SCENARIO, 67, 1
+1380:   21038400                                                                                ck                      FG_SCENARIO, 132, 0
+1384:   2C0505410000FA9704CF0E1A7206FF0018020000                                                aot_set                 ID_AOT_5, SCE_EVENT, SAT_PL | SAT_UNDER, 0, 0, -26630, -12540, 6670, 1650, 255, 0, I_GOSUB, main_02, 0, 0
+1398:   440000500040030000FF03F3E8EAEBF0FA0702030400                                            sce_em_set              0, ID_EM_0, ENEMY_LEON_KENNEDY_RPD, 0, AI_40, 3, SBK_0, 0, 255, -3325, -5400, -3861, 2042, 770, 4
+13AE:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 13B1:   00                                                                                      nop
-13B2:   3D1000                                                                                  member_copy             V_TEMP, 0
+13B2:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 13B5:   00                                                                                      nop
 13B6:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
 13BC:   260005100800                                                                            calc                    0, OP_OR, V_TEMP, 8
-13C2:   350010                                                                                  member_set2             0, V_TEMP
+13C2:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 13C5:   00                                                                                      nop
-13C6:   2D0D00000000000000000A0010000000E0B1000080010000C00E000000000000000000000000            obj_model_set           13, 0, 0, 0, 0, 0, 0, 10, 16, 0, -20000, 0, 384, 0, 3776, 0, 0, 0, 0, 0, 0, 0, 0
-13EC:   2D0E00000000000000000A0010000000E0B1000080010000C00E000000000000000000000000            obj_model_set           14, 0, 0, 0, 0, 0, 0, 10, 16, 0, -20000, 0, 384, 0, 3776, 0, 0, 0, 0, 0, 0, 0, 0
-1412:   2D0F00000000000000000A001200F0EDF7D5C8EBC0FBC0FC0007000000000000000000000000            obj_model_set           15, 0, 0, 0, 0, 0, 0, 10, 18, -4624, -10761, -5176, -1088, -832, 1792, 0, 0, 0, 0, 0, 0, 0, 0
+13C6:   2D0D00000000000000000A0010000000E0B1000080010000C00E000000000000000000000000            obj_model_set           ID_OBJ_13, 0, 0, 0, 0, 0, 0, 10, 16, 0, -20000, 0, 384, 0, 3776, 0, 0, 0, 0, 0, 0, 0, 0
+13EC:   2D0E00000000000000000A0010000000E0B1000080010000C00E000000000000000000000000            obj_model_set           ID_OBJ_14, 0, 0, 0, 0, 0, 0, 10, 16, 0, -20000, 0, 384, 0, 3776, 0, 0, 0, 0, 0, 0, 0, 0
+1412:   2D0F00000000000000000A001200F0EDF7D5C8EBC0FBC0FC0007000000000000000000000000            obj_model_set           ID_OBJ_15, 0, 0, 0, 0, 0, 0, 10, 18, -4624, -10761, -5176, -1088, -832, 1792, 0, 0, 0, 0, 0, 0, 0, 0
 1438:   08                                                                                      endif
 1439:   00                                                                                      nop
 
@@ -52,9 +52,9 @@ off_143A:
 
 off_143C:
 143C:   06004400                                                                                if                      0, off_1484
-1440:   21038600                                                                                ck                      FG_3, 134, 0
+1440:   21038600                                                                                ck                      FG_SCENARIO, 134, 0
 1444:   06002200                                                                                if                      0, off_146A
-1448:   2104A500                                                                                ck                      FG_GENERAL_1, 165, 0
+1448:   2104A500                                                                                ck                      FG_COMMON, 165, 0
 144C:   6706053100008A8F04DE569BF4E8B8A794DF589ED0D5FF00180E0000                                aot_set_4p              6, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28790, -8700, -25770, -5900, -22600, -8300, -25000, -10800, 255, 0, I_GOSUB, main_0E, 0, 0
 1468:   08                                                                                      endif
 1469:   00                                                                                      nop
@@ -75,11 +75,11 @@ off_14A2:
 14A4:   0100                                                                                    evt_end                 0
 
 .proc main_02
-14A6:   22038401                                                                                set                     FG_3, 132, 1
-14AA:   46050000000000000000                                                                    aot_reset               5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+14A6:   22038401                                                                                set                     FG_SCENARIO, 132, 1
+14AA:   46050000000000000000                                                                    aot_reset               ID_AOT_5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
 14B4:   2E0100                                                                                  work_set                WK_PLAYER, 0
-14B7:   22020701                                                                                set                     FG_STATE, 7, 1
-14BB:   22011B01                                                                                set                     FG_GAME, 27, 1
+14B7:   22020701                                                                                set                     FG_STOP, 7, 1
+14BB:   22011B01                                                                                set                     FG_STATUS, 27, 1
 14BF:   00                                                                                      nop
 14C0:   36020D010000D4B348F45CF9                                                                se_on                   2, 269, 0, -19500, -3000, -1700
 14CC:   090A0A00                                                                                sleep                   10, 10
@@ -97,7 +97,7 @@ off_14A2:
 1519:   00                                                                                      nop
 151A:   40000920909DECE1                                                                        plc_dest                0, 9, 32, -25200, -7700
 1522:   1808                                                                                    gosub                   main_08
-1524:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1524:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1527:   3F001B00                                                                                plc_motion              0, 27, 0
 152B:   00                                                                                      nop
 152C:   090A1E00                                                                                sleep                   10, 30
@@ -125,13 +125,13 @@ off_14A2:
 15A8:   090A1400                                                                                sleep                   10, 20
 15AC:   59001D00                                                                                xa_on                   0, 29
 15B0:   090A0200                                                                                sleep                   10, 2
-15B4:   2B0007000000                                                                            message_on              0, 7, 0, 0, 0
+15B4:   2B0007000000                                                                            message_on              0, ID_MSG_7, 0, 0, 0
 15BA:   0B                                                                                      wsleep
 15BB:   0C                                                                                      wsleeping
 15BC:   04FF180C                                                                                evt_exec                255, I_GOSUB, main_0C
 15C0:   090A0500                                                                                sleep                   10, 5
 15C4:   290B                                                                                    cut_chg                 11
-15C6:   2E0300                                                                                  work_set                WK_ENEMY, 0
+15C6:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 15C9:   00                                                                                      nop
 15CA:   090A1400                                                                                sleep                   10, 20
 15CE:   3F002201                                                                                plc_motion              0, 34, 1
@@ -142,14 +142,14 @@ off_14A2:
 15E8:   090A1400                                                                                sleep                   10, 20
 15EC:   59001E00                                                                                xa_on                   0, 30
 15F0:   090A0200                                                                                sleep                   10, 2
-15F4:   2B0008000000                                                                            message_on              0, 8, 0, 0, 0
+15F4:   2B0008000000                                                                            message_on              0, ID_MSG_8, 0, 0, 0
 15FA:   0B                                                                                      wsleep
 15FB:   0C                                                                                      wsleeping
 15FC:   090A0500                                                                                sleep                   10, 5
 1600:   59001F00                                                                                xa_on                   0, 31
 1604:   090A0200                                                                                sleep                   10, 2
-1608:   2B0009000000                                                                            message_on              0, 9, 0, 0, 0
-160E:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1608:   2B0009000000                                                                            message_on              0, ID_MSG_9, 0, 0, 0
+160E:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1611:   00                                                                                      nop
 1612:   090A0A00                                                                                sleep                   10, 10
 1616:   090A0A00                                                                                sleep                   10, 10
@@ -165,8 +165,8 @@ off_14A2:
 1648:   090A0500                                                                                sleep                   10, 5
 164C:   59002200                                                                                xa_on                   0, 34
 1650:   090A0200                                                                                sleep                   10, 2
-1654:   2B000C000000                                                                            message_on              0, 12, 0, 0, 0
-165A:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1654:   2B000C000000                                                                            message_on              0, ID_MSG_12, 0, 0, 0
+165A:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 165D:   00                                                                                      nop
 165E:   41000000000000004040                                                                    plc_neck                0, 0, 0, 0, 64, 64
 1668:   0B                                                                                      wsleep
@@ -175,14 +175,14 @@ off_14A2:
 166C:   090A0500                                                                                sleep                   10, 5
 1670:   59002000                                                                                xa_on                   0, 32
 1674:   090A0200                                                                                sleep                   10, 2
-1678:   2B000A000000                                                                            message_on              0, 10, 0, 0, 0
+1678:   2B000A000000                                                                            message_on              0, ID_MSG_10, 0, 0, 0
 167E:   0B                                                                                      wsleep
 167F:   0C                                                                                      wsleeping
 1680:   2906                                                                                    cut_chg                 6
 1682:   090A0500                                                                                sleep                   10, 5
 1686:   59002100                                                                                xa_on                   0, 33
 168A:   090A0200                                                                                sleep                   10, 2
-168E:   2B000B000000                                                                            message_on              0, 11, 0, 0, 0
+168E:   2B000B000000                                                                            message_on              0, ID_MSG_11, 0, 0, 0
 1694:   0B                                                                                      wsleep
 1695:   0C                                                                                      wsleeping
 1696:   2E0100                                                                                  work_set                WK_PLAYER, 0
@@ -192,40 +192,40 @@ off_14A2:
 16A2:   090A1400                                                                                sleep                   10, 20
 16A6:   36020B010100000000000000                                                                se_on                   2, 267, 1, 0, 0, 0
 16B2:   090A1400                                                                                sleep                   10, 20
-16B6:   2E040D                                                                                  work_set                WK_OBJECT, 13
+16B6:   2E040D                                                                                  work_set                WK_OBJECT, ID_OBJ_13
 16B9:   00                                                                                      nop
 16BA:   4900C0FB0000C0F8                                                                        super_reset             0, -1088, 0, -1856
 16C2:   32000000E0B10000                                                                        pos_set                 0, 0, -20000, 0
-16CA:   2E040F                                                                                  work_set                WK_OBJECT, 15
+16CA:   2E040F                                                                                  work_set                WK_OBJECT, ID_OBJ_15
 16CD:   00                                                                                      nop
 16CE:   32000000E0B10000                                                                        pos_set                 0, 0, -20000, 0
 16D6:   2901                                                                                    cut_chg                 1
 16D8:   2E0100                                                                                  work_set                WK_PLAYER, 0
 16DB:   42                                                                                      plc_ret
-16DC:   22020700                                                                                set                     FG_STATE, 7, 0
-16E0:   22011B00                                                                                set                     FG_GAME, 27, 0
+16DC:   22020700                                                                                set                     FG_STOP, 7, 0
+16E0:   22011B00                                                                                set                     FG_STATUS, 27, 0
 16E4:   3C01                                                                                    cut_auto                1
-16E6:   22050101                                                                                set                     FG_GENERAL_2, 1, 1
+16E6:   22050101                                                                                set                     FG_ROOM, 1, 1
 16EA:   0100                                                                                    evt_end                 0
 
 .proc main_03
-16EC:   510002016440                                                                            sce_bgm_control         0, 2, 1, 100, 64
-16F2:   510002026440                                                                            sce_bgm_control         0, 2, 2, 100, 64
-16F8:   510002036440                                                                            sce_bgm_control         0, 2, 3, 100, 64
-16FE:   510101016440                                                                            sce_bgm_control         1, 1, 1, 100, 64
-1704:   510101026440                                                                            sce_bgm_control         1, 1, 2, 100, 64
-170A:   510101036440                                                                            sce_bgm_control         1, 1, 3, 100, 64
-1710:   22038501                                                                                set                     FG_3, 133, 1
-1714:   46050000000000000000                                                                    aot_reset               5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
-171E:   22020701                                                                                set                     FG_STATE, 7, 1
-1722:   22011B01                                                                                set                     FG_GAME, 27, 1
-1726:   2E0300                                                                                  work_set                WK_ENEMY, 0
+16EC:   510002016440                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_STOP, BGM_TYPE_PROG0_VOL, 100, 64
+16F2:   510002026440                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_STOP, BGM_TYPE_PROG1_VOL, 100, 64
+16F8:   510002036440                                                                            sce_bgm_control         BGM_CHANNEL_MAIN, BGM_OP_STOP, BGM_TYPE_PROG2_VOL, 100, 64
+16FE:   510101016440                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_PROG0_VOL, 100, 64
+1704:   510101026440                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_PROG1_VOL, 100, 64
+170A:   510101036440                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_PROG2_VOL, 100, 64
+1710:   22038501                                                                                set                     FG_SCENARIO, 133, 1
+1714:   46050000000000000000                                                                    aot_reset               ID_AOT_5, SCE_AUTO, SAT_AUTO, 0, 0, 0, 0, 0, 0
+171E:   22020701                                                                                set                     FG_STOP, 7, 1
+1722:   22011B01                                                                                set                     FG_STATUS, 27, 1
+1726:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1729:   00                                                                                      nop
-172A:   3D1000                                                                                  member_copy             V_TEMP, 0
+172A:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 172D:   00                                                                                      nop
 172E:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
 1734:   260005100800                                                                            calc                    0, OP_OR, V_TEMP, 8
-173A:   350010                                                                                  member_set2             0, V_TEMP
+173A:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 173D:   00                                                                                      nop
 173E:   3200AAD80000D2E7                                                                        pos_set                 0, -10070, 0, -6190
 1746:   3300000034080000                                                                        dir_set                 0, 0, 2100, 0
@@ -240,25 +240,25 @@ off_14A2:
 177A:   090A0500                                                                                sleep                   10, 5
 177E:   3F000D00                                                                                plc_motion              0, 13, 0
 1782:   090A1900                                                                                sleep                   10, 25
-1786:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1786:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1789:   3F0A2500                                                                                plc_motion              10, 37, 0
 178D:   00                                                                                      nop
 178E:   090A3C00                                                                                sleep                   10, 60
 1792:   2907                                                                                    cut_chg                 7
 1794:   2E0100                                                                                  work_set                WK_PLAYER, 0
 1797:   3F001700                                                                                plc_motion              0, 23, 0
-179B:   2E0300                                                                                  work_set                WK_ENEMY, 0
+179B:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 179E:   32002DD30000F8E6                                                                        pos_set                 0, -11475, 0, -6408
 17A6:   33000000280A0000                                                                        dir_set                 0, 0, 2600, 0
 17AE:   090A0500                                                                                sleep                   10, 5
 17B2:   59002900                                                                                xa_on                   0, 41
 17B6:   090A0200                                                                                sleep                   10, 2
-17BA:   2B0001000000                                                                            message_on              0, 1, 0, 0, 0
+17BA:   2B0001000000                                                                            message_on              0, ID_MSG_1, 0, 0, 0
 17C0:   0B                                                                                      wsleep
 17C1:   0C                                                                                      wsleeping
 17C2:   59002300                                                                                xa_on                   0, 35
 17C6:   090A0200                                                                                sleep                   10, 2
-17CA:   2B0002000000                                                                            message_on              0, 2, 0, 0, 0
+17CA:   2B0002000000                                                                            message_on              0, ID_MSG_2, 0, 0, 0
 17D0:   3F002600                                                                                plc_motion              0, 38, 0
 17D4:   0B                                                                                      wsleep
 17D5:   0C                                                                                      wsleeping
@@ -275,7 +275,7 @@ off_14A2:
 180C:   090A1E00                                                                                sleep                   10, 30
 1810:   59002400                                                                                xa_on                   0, 36
 1814:   090A0200                                                                                sleep                   10, 2
-1818:   2B0003000000                                                                            message_on              0, 3, 0, 0, 0
+1818:   2B0003000000                                                                            message_on              0, ID_MSG_3, 0, 0, 0
 181E:   3F001100                                                                                plc_motion              0, 17, 0
 1822:   090A1900                                                                                sleep                   10, 25
 1826:   3F001400                                                                                plc_motion              0, 20, 0
@@ -284,21 +284,21 @@ off_14A2:
 1832:   0B                                                                                      wsleep
 1833:   0C                                                                                      wsleeping
 1834:   2901                                                                                    cut_chg                 1
-1836:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1836:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1839:   00                                                                                      nop
 183A:   3300000058070000                                                                        dir_set                 0, 0, 1880, 0
 1842:   090A0500                                                                                sleep                   10, 5
 1846:   59002500                                                                                xa_on                   0, 37
 184A:   090A0200                                                                                sleep                   10, 2
-184E:   2B0004000000                                                                            message_on              0, 4, 0, 0, 0
+184E:   2B0004000000                                                                            message_on              0, ID_MSG_4, 0, 0, 0
 1854:   090A0F00                                                                                sleep                   10, 15
-1858:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1858:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 185B:   00                                                                                      nop
-185C:   3D1000                                                                                  member_copy             V_TEMP, 0
+185C:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 185F:   00                                                                                      nop
 1860:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
 1866:   260005100800                                                                            calc                    0, OP_OR, V_TEMP, 8
-186C:   350010                                                                                  member_set2             0, V_TEMP
+186C:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 186F:   00                                                                                      nop
 1870:   4000052188AF6AE6                                                                        plc_dest                0, 5, 33, -20600, -6550
 1878:   090A0500                                                                                sleep                   10, 5
@@ -310,7 +310,7 @@ off_14A2:
 188B:   0C                                                                                      wsleeping
 188C:   04FF1804                                                                                evt_exec                255, I_GOSUB, main_04
 1890:   2906                                                                                    cut_chg                 6
-1892:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1892:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1895:   3F001F00                                                                                plc_motion              0, 31, 0
 1899:   00                                                                                      nop
 189A:   090A0500                                                                                sleep                   10, 5
@@ -323,7 +323,7 @@ off_14A2:
 18B6:   3F001F00                                                                                plc_motion              0, 31, 0
 18BA:   090A0500                                                                                sleep                   10, 5
 18BE:   2906                                                                                    cut_chg                 6
-18C0:   2E0300                                                                                  work_set                WK_ENEMY, 0
+18C0:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 18C3:   00                                                                                      nop
 18C4:   4101589EE0B152EA4040                                                                    plc_neck                1, -25000, -20000, -5550, 64, 64
 18CE:   090A0A00                                                                                sleep                   10, 10
@@ -342,13 +342,13 @@ off_14A2:
 18FE:   090A0500                                                                                sleep                   10, 5
 1902:   59002600                                                                                xa_on                   0, 38
 1906:   090A0200                                                                                sleep                   10, 2
-190A:   2B0005000000                                                                            message_on              0, 5, 0, 0, 0
+190A:   2B0005000000                                                                            message_on              0, ID_MSG_5, 0, 0, 0
 1910:   0B                                                                                      wsleep
 1911:   0C                                                                                      wsleeping
 1912:   290A                                                                                    cut_chg                 10
-1914:   2E0301                                                                                  work_set                WK_ENEMY, 1
+1914:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 1917:   00                                                                                      nop
-1918:   34170100                                                                                member_set              23, 1, 0
+1918:   34170100                                                                                member_set              M_SCE_FREE0, 1
 191C:   2E02FF                                                                                  work_set                WK_SPLAYER, 255
 191F:   00                                                                                      nop
 1920:   33000000000C0000                                                                        dir_set                 0, 0, 3072, 0
@@ -357,16 +357,16 @@ off_14A2:
 1934:   4000072220D18896                                                                        plc_dest                0, 7, 34, -12000, -27000
 193C:   090A3200                                                                                sleep                   10, 50
 1940:   2906                                                                                    cut_chg                 6
-1942:   2E0301                                                                                  work_set                WK_ENEMY, 1
+1942:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 1945:   00                                                                                      nop
-1946:   34170200                                                                                member_set              23, 2, 0
+1946:   34170200                                                                                member_set              M_SCE_FREE0, 2
 194A:   090A0500                                                                                sleep                   10, 5
 194E:   59002700                                                                                xa_on                   0, 39
 1952:   0B                                                                                      wsleep
 1953:   0C                                                                                      wsleeping
 1954:   8000                                                                                    se_vol                  0
 1956:   2901                                                                                    cut_chg                 1
-1958:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1958:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 195B:   00                                                                                      nop
 195C:   41000000000000004040                                                                    plc_neck                0, 0, 0, 0, 64, 64
 1966:   40000521D0D5B6EA                                                                        plc_dest                0, 5, 33, -10800, -5450
@@ -379,9 +379,9 @@ off_14A2:
 198A:   3F001000                                                                                plc_motion              0, 16, 0
 198E:   59002900                                                                                xa_on                   0, 41
 1992:   090A0200                                                                                sleep                   10, 2
-1996:   2B0001000000                                                                            message_on              0, 1, 0, 0, 0
+1996:   2B0001000000                                                                            message_on              0, ID_MSG_1, 0, 0, 0
 199C:   090A0F00                                                                                sleep                   10, 15
-19A0:   2E0300                                                                                  work_set                WK_ENEMY, 0
+19A0:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 19A3:   3F001900                                                                                plc_motion              0, 25, 0
 19A7:   00                                                                                      nop
 19A8:   090A1400                                                                                sleep                   10, 20
@@ -391,7 +391,7 @@ off_14A2:
 19AF:   0C                                                                                      wsleeping
 19B0:   59002800                                                                                xa_on                   0, 40
 19B4:   090A0200                                                                                sleep                   10, 2
-19B8:   2B0006000000                                                                            message_on              0, 6, 0, 0, 0
+19B8:   2B0006000000                                                                            message_on              0, ID_MSG_6, 0, 0, 0
 19BE:   0B                                                                                      wsleep
 19BF:   0C                                                                                      wsleeping
 19C0:   66                                                                                      plc_stop
@@ -403,17 +403,17 @@ off_14A2:
 19D8:   090A3200                                                                                sleep                   10, 50
 19DC:   2E0100                                                                                  work_set                WK_PLAYER, 0
 19DF:   42                                                                                      plc_ret
-19E0:   22020700                                                                                set                     FG_STATE, 7, 0
-19E4:   22011B00                                                                                set                     FG_GAME, 27, 0
+19E0:   22020700                                                                                set                     FG_STOP, 7, 0
+19E4:   22011B00                                                                                set                     FG_STATUS, 27, 0
 19E8:   3C01                                                                                    cut_auto                1
-19EA:   22050101                                                                                set                     FG_GENERAL_2, 1, 1
-19EE:   2E0301                                                                                  work_set                WK_ENEMY, 1
+19EA:   22050101                                                                                set                     FG_ROOM, 1, 1
+19EE:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 19F1:   00                                                                                      nop
 19F2:   32000000E0B10000                                                                        pos_set                 0, 0, -20000, 0
 19FA:   2E02FF                                                                                  work_set                WK_SPLAYER, 255
 19FD:   00                                                                                      nop
 19FE:   32000000E0B10000                                                                        pos_set                 0, 0, -20000, 0
-1A06:   2E040F                                                                                  work_set                WK_OBJECT, 15
+1A06:   2E040F                                                                                  work_set                WK_OBJECT, ID_OBJ_15
 1A09:   00                                                                                      nop
 1A0A:   32000000E0B10000                                                                        pos_set                 0, 0, -20000, 0
 1A12:   0100                                                                                    evt_end                 0
@@ -429,7 +429,7 @@ off_14A2:
 1A50:   0100                                                                                    evt_end                 0
 
 .proc main_05
-1A52:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1A52:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1A55:   00                                                                                      nop
 1A56:   40000521E4DA62DF                                                                        plc_dest                0, 5, 33, -9500, -8350
 1A5E:   180A                                                                                    gosub                   main_0A
@@ -437,13 +437,13 @@ off_14A2:
 1A68:   0100                                                                                    evt_end                 0
 
 .proc main_06
-1A6A:   2E040D                                                                                  work_set                WK_OBJECT, 13
+1A6A:   2E040D                                                                                  work_set                WK_OBJECT, ID_OBJ_13
 1A6D:   00                                                                                      nop
 1A6E:   4800408E2000DA001200C0FB0000C0F8                                                        super_set               0, 64, 142, 32, 218, 18, -1088, 0, -1856
 1A7E:   0100                                                                                    evt_end                 0
 
 .proc main_07
-1A80:   2E040E                                                                                  work_set                WK_OBJECT, 14
+1A80:   2E040E                                                                                  work_set                WK_OBJECT, ID_OBJ_14
 1A83:   00                                                                                      nop
 1A84:   4800828E2000DA001200C0FB0000C0F8                                                        super_set               0, 130, 142, 32, 218, 18, -1088, 0, -1856
 1A94:   0100                                                                                    evt_end                 0
@@ -453,7 +453,7 @@ off_14A2:
 1A9A:   02                                                                                      evt_next
 1A9B:   00                                                                                      nop
 1A9C:   1204                                                                                    edwhile                 off_1AA2
-1A9E:   21052000                                                                                ck                      FG_GENERAL_2, 32, 0
+1A9E:   21052000                                                                                ck                      FG_ROOM, 32, 0
 
 off_1AA2:
 1AA2:   0100                                                                                    evt_end                 0
@@ -463,7 +463,7 @@ off_1AA2:
 1AA8:   02                                                                                      evt_next
 1AA9:   00                                                                                      nop
 1AAA:   1204                                                                                    edwhile                 off_1AB0
-1AAC:   21052100                                                                                ck                      FG_GENERAL_2, 33, 0
+1AAC:   21052100                                                                                ck                      FG_ROOM, 33, 0
 
 off_1AB0:
 1AB0:   0100                                                                                    evt_end                 0
@@ -473,7 +473,7 @@ off_1AB0:
 1AB6:   02                                                                                      evt_next
 1AB7:   00                                                                                      nop
 1AB8:   1204                                                                                    edwhile                 off_1ABE
-1ABA:   21052100                                                                                ck                      FG_GENERAL_2, 33, 0
+1ABA:   21052100                                                                                ck                      FG_ROOM, 33, 0
 
 off_1ABE:
 1ABE:   0100                                                                                    evt_end                 0
@@ -483,7 +483,7 @@ off_1ABE:
 1AC4:   02                                                                                      evt_next
 1AC5:   00                                                                                      nop
 1AC6:   1204                                                                                    edwhile                 off_1ACC
-1AC8:   21052200                                                                                ck                      FG_GENERAL_2, 34, 0
+1AC8:   21052200                                                                                ck                      FG_ROOM, 34, 0
 
 off_1ACC:
 1ACC:   0100                                                                                    evt_end                 0
@@ -574,48 +574,48 @@ off_1BD4:
 1BD4:   02                                                                                      evt_next
 1BD5:   00                                                                                      nop
 1BD6:   1204                                                                                    edwhile                 off_1BDC
-1BD8:   21050100                                                                                ck                      FG_GENERAL_2, 1, 0
+1BD8:   21050100                                                                                ck                      FG_ROOM, 1, 0
 
 off_1BDC:
 1BDC:   0100                                                                                    evt_end                 0
 
 .proc main_0D
-1BDE:   2D000082010F000000000A0012007AA934E129E6000000020000000000000000000000000000            obj_model_set           0, 0, 130, 1, 15, 0, 0, 10, 18, -22150, -7884, -6615, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1C04:   2D010082010F000000000A001200D2A5B0EF2CE2000000020000000000000000000000000000            obj_model_set           1, 0, 130, 1, 15, 0, 0, 10, 18, -23086, -4176, -7636, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1C2A:   2D020082020F000000000A001200F7A9B0EF52E6000000020000000000000000000000000000            obj_model_set           2, 0, 130, 2, 15, 0, 0, 10, 18, -22025, -4176, -6574, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1C50:   2D030082010F000000000A001200789DDCEAE0D9000000020000000000000000000000000000            obj_model_set           3, 0, 130, 1, 15, 0, 0, 10, 18, -25224, -5412, -9760, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1C76:   2D040082020F000000000A0012005EA1D6EAF5DD000000020000000000000000000000000000            obj_model_set           4, 0, 130, 2, 15, 0, 0, 10, 18, -24226, -5418, -8715, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1C9C:   2D050082010F000000000A001200B4A566F412E2000000020000000000000000000000000000            obj_model_set           5, 0, 130, 1, 15, 0, 0, 10, 18, -23116, -2970, -7662, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1CC2:   2D060082010F000000000A00120099A107E6FCDD000000020000000000000000000000000000            obj_model_set           6, 0, 130, 1, 15, 0, 0, 10, 18, -24167, -6649, -8708, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1CE8:   2D070082010F000000000A001200D09D66F412DA000000020000000000000000000000000000            obj_model_set           7, 0, 130, 1, 15, 0, 0, 10, 18, -25136, -2970, -9710, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1D0E:   2D080082010F000000000A001200F4AD66F453EA000000020000000000000000000000000000            obj_model_set           8, 0, 130, 1, 15, 0, 0, 10, 18, -21004, -2970, -5549, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1D34:   2D090082010F000000000A001200D4ADDCEA46EA000000020000000000000000000000000000            obj_model_set           9, 0, 130, 1, 15, 0, 0, 10, 18, -21036, -5412, -5562, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1D5A:   2D0A0082010F000000000A001200DEA9FCE520E6000000020000000000000000000000000000            obj_model_set           10, 0, 130, 1, 15, 0, 0, 10, 18, -22050, -6660, -6624, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1D80:   2D0B00000000000000000A001000A2A74DFA48B8000000FC0000000000000000000000000000            obj_model_set           11, 0, 0, 0, 0, 0, 0, 10, 16, -22622, -1459, -18360, 0, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1DA6:   2C0309310000379B04BA7C0646050B0000000000                                                aot_set                 3, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25801, -17916, 1660, 1350, 11, 0, 0, 0, 0, 0
-1DBA:   2C020A31000088A3A7BC3E0878050B000C000000                                                aot_set                 2, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23672, -17241, 2110, 1400, 11, 0, 12, 0, 0, 0
+1BDE:   2D000082010F000000000A0012007AA934E129E6000000020000000000000000000000000000            obj_model_set           ID_OBJ_0, 0, 130, 1, 15, 0, 0, 10, 18, -22150, -7884, -6615, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1C04:   2D010082010F000000000A001200D2A5B0EF2CE2000000020000000000000000000000000000            obj_model_set           ID_OBJ_1, 0, 130, 1, 15, 0, 0, 10, 18, -23086, -4176, -7636, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1C2A:   2D020082020F000000000A001200F7A9B0EF52E6000000020000000000000000000000000000            obj_model_set           ID_OBJ_2, 0, 130, 2, 15, 0, 0, 10, 18, -22025, -4176, -6574, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1C50:   2D030082010F000000000A001200789DDCEAE0D9000000020000000000000000000000000000            obj_model_set           ID_OBJ_3, 0, 130, 1, 15, 0, 0, 10, 18, -25224, -5412, -9760, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1C76:   2D040082020F000000000A0012005EA1D6EAF5DD000000020000000000000000000000000000            obj_model_set           ID_OBJ_4, 0, 130, 2, 15, 0, 0, 10, 18, -24226, -5418, -8715, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1C9C:   2D050082010F000000000A001200B4A566F412E2000000020000000000000000000000000000            obj_model_set           ID_OBJ_5, 0, 130, 1, 15, 0, 0, 10, 18, -23116, -2970, -7662, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1CC2:   2D060082010F000000000A00120099A107E6FCDD000000020000000000000000000000000000            obj_model_set           ID_OBJ_6, 0, 130, 1, 15, 0, 0, 10, 18, -24167, -6649, -8708, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1CE8:   2D070082010F000000000A001200D09D66F412DA000000020000000000000000000000000000            obj_model_set           ID_OBJ_7, 0, 130, 1, 15, 0, 0, 10, 18, -25136, -2970, -9710, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1D0E:   2D080082010F000000000A001200F4AD66F453EA000000020000000000000000000000000000            obj_model_set           ID_OBJ_8, 0, 130, 1, 15, 0, 0, 10, 18, -21004, -2970, -5549, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1D34:   2D090082010F000000000A001200D4ADDCEA46EA000000020000000000000000000000000000            obj_model_set           ID_OBJ_9, 0, 130, 1, 15, 0, 0, 10, 18, -21036, -5412, -5562, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1D5A:   2D0A0082010F000000000A001200DEA9FCE520E6000000020000000000000000000000000000            obj_model_set           ID_OBJ_10, 0, 130, 1, 15, 0, 0, 10, 18, -22050, -6660, -6624, 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1D80:   2D0B00000000000000000A001000A2A74DFA48B8000000FC0000000000000000000000000000            obj_model_set           ID_OBJ_11, 0, 0, 0, 0, 0, 0, 10, 16, -22622, -1459, -18360, 0, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1DA6:   2C0309310000379B04BA7C0646050B0000000000                                                aot_set                 ID_AOT_3, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25801, -17916, 1660, 1350, 11, 0, 0, 0, 0, 0
+1DBA:   2C020A31000088A3A7BC3E0878050B000C000000                                                aot_set                 ID_AOT_2, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23672, -17241, 2110, 1400, 11, 0, 12, 0, 0, 0
 1DCE:   0100                                                                                    evt_end                 0
 
 .proc main_0E
-1DD0:   22020701                                                                                set                     FG_STATE, 7, 1
-1DD4:   2B000000FFEF                                                                            message_on              0, 0, 0, 255, 239
+1DD0:   22020701                                                                                set                     FG_STOP, 7, 1
+1DD4:   2B000000FFEF                                                                            message_on              0, ID_MSG_0, 0, 255, 239
 1DDA:   090A0100                                                                                sleep                   10, 1
 1DDE:   06006600                                                                                if                      0, off_1E48
-1DE2:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+1DE2:   210B1F00                                                                                ck                      FG_MESSAGE, F_QUESTION, 0
 1DE6:   36020A010400000000000000                                                                se_on                   2, 266, 4, 0, 0, 0
 1DF2:   06001200                                                                                if                      0, off_1E08
-1DF6:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
-1DFA:   22210D01                                                                                set                     33, 13, 1
-1DFE:   22210E01                                                                                set                     33, 14, 1
-1E02:   22210F01                                                                                set                     33, 15, 1
+1DF6:   21010101                                                                                ck                      FG_STATUS, F_SCENARIO, 1
+1DFA:   22210D01                                                                                set                     FG_MAP_I, 13, 1
+1DFE:   22210E01                                                                                set                     FG_MAP_I, 14, 1
+1E02:   22210F01                                                                                set                     FG_MAP_I, 15, 1
 1E06:   08                                                                                      endif
 1E07:   00                                                                                      nop
 
 off_1E08:
-1E08:   22211001                                                                                set                     33, 16, 1
-1E0C:   22211101                                                                                set                     33, 17, 1
+1E08:   22211001                                                                                set                     FG_MAP_I, 16, 1
+1E0C:   22211101                                                                                set                     FG_MAP_I, 17, 1
 1E10:   06001200                                                                                if                      0, off_1E26
-1E14:   21010101                                                                                ck                      FG_GAME, F_SCENARIO, 1
+1E14:   21010101                                                                                ck                      FG_STATUS, F_SCENARIO, 1
 1E18:   22230D01                                                                                set                     35, 13, 1
 1E1C:   22230E01                                                                                set                     35, 14, 1
 1E20:   22230F01                                                                                set                     35, 15, 1
@@ -625,36 +625,36 @@ off_1E08:
 off_1E26:
 1E26:   22231001                                                                                set                     35, 16, 1
 1E2A:   22231101                                                                                set                     35, 17, 1
-1E2E:   2204A501                                                                                set                     FG_GENERAL_1, 165, 1
-1E32:   46060031000000000000                                                                    aot_reset               6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
-1E3C:   2B000E00FFEF                                                                            message_on              0, 14, 0, 255, 239
+1E2E:   2204A501                                                                                set                     FG_COMMON, 165, 1
+1E32:   46060031000000000000                                                                    aot_reset               ID_AOT_6, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0
+1E3C:   2B000E00FFEF                                                                            message_on              0, ID_MSG_14, 0, 255, 239
 1E42:   090A0100                                                                                sleep                   10, 1
 1E46:   08                                                                                      endif
 1E47:   00                                                                                      nop
 
 off_1E48:
-1E48:   22020700                                                                                set                     FG_STATE, 7, 0
+1E48:   22020700                                                                                set                     FG_STOP, 7, 0
 1E4C:   0100                                                                                    evt_end                 0
 
 .proc main_0F
-1E4E:   22020701                                                                                set                     FG_STATE, 7, 1
-1E52:   2B000F00FFEF                                                                            message_on              0, 15, 0, 255, 239
+1E4E:   22020701                                                                                set                     FG_STOP, 7, 1
+1E52:   2B000F00FFEF                                                                            message_on              0, ID_MSG_15, 0, 255, 239
 1E58:   090A0100                                                                                sleep                   10, 1
 1E5C:   06002E00                                                                                if                      0, off_1E8E
-1E60:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
+1E60:   210B1F00                                                                                ck                      FG_MESSAGE, F_QUESTION, 0
 1E64:   36020A010400000000000000                                                                se_on                   2, 266, 4, 0, 0, 0
-1E70:   2204A401                                                                                set                     FG_GENERAL_1, 164, 1
+1E70:   2204A401                                                                                set                     FG_COMMON, 164, 1
 1E74:   06000A00                                                                                if                      0, off_1E82
-1E78:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
-1E7C:   221D0E01                                                                                set                     FG_LOCK, 14, 1
+1E78:   21010100                                                                                ck                      FG_STATUS, F_SCENARIO, 0
+1E7C:   221D0E01                                                                                set                     FG_ZAPPING, 14, 1
 1E80:   08                                                                                      endif
 1E81:   00                                                                                      nop
 
 off_1E82:
-1E82:   4607043110000000FFEF                                                                    aot_reset               7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 16, 0, 0, 0, 255, 239
+1E82:   4607043110000000FFEF                                                                    aot_reset               ID_AOT_7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, ID_MSG_16, 0, 0, 0, 255, 239
 1E8C:   08                                                                                      endif
 1E8D:   00                                                                                      nop
 
 off_1E8E:
-1E8E:   22020700                                                                                set                     FG_STATE, 7, 0
+1E8E:   22020700                                                                                set                     FG_STOP, 7, 0
 1E92:   0100                                                                                    evt_end                 0

@@ -2,14 +2,14 @@
 
 proc init
 {
-    door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22884, -21968, 4300, 1800, 14320, 0, -20070, 3072, 4, 1, 1, 0, 44, 1, 0, 0, UNLOCKED, 0);
-    set(FG_GENERAL_1, 103, 1);
+    door_aot_se(ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22884, -21968, 4300, 1800, 14320, 0, -20070, 3072, 4, 1, 1, 0, 44, 1, 0, 0, UNLOCKED, 0);
+    set(FG_COMMON, 103, 1);
 }
 
 proc main
 {
-    obj_model_set(0, 0, 0, 0, 0, 0, 0, 10, 0, -32000, 0, -25100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-    aot_set(2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -15610, -23910, 1800, 2200, 0, 0, 0, 0, 255, 255);
+    obj_model_set(ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 0, -32000, 0, -25100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    aot_set(ID_AOT_2, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -15610, -23910, 1800, 2200, ID_MSG_0, 0, 0, 0, 255, 255);
     save(V_04, 0);
     save(V_05, 0);
     save(V_06, 0);
@@ -18,30 +18,30 @@ proc main
     save(V_09, 0);
     save(V_0A, 0);
     save(V_0B, 0);
-    if (ck(FG_3, 192, 0))
+    if (ck(FG_SCENARIO, 192, 0))
     {
-        sce_em_set(0, 255, ENEMY_ADA_WONG_1, 0, 8, 0, 0, 0, 255, -20650, 0, -23060, 437, 0, 0);
-        sce_em_set(0, 0, ENEMY_BIRKIN_2, 2, 0, 0, 35, 0, 24, -20000, -5000, -24000, 0, 0, 0);
-        aot_reset(0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 52, 175, 0, 0, 230, 174);
-        aot_set(3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22884, -21968, 4300, 1800, 1, 0, 0, 0, 255, 255);
+        sce_em_set(0, ID_EM_255, ENEMY_ADA_WONG_1, 0, AI_08, 0, SBK_0, 0, 255, -20650, 0, -23060, 437, 0, 0);
+        sce_em_set(0, ID_EM_0, ENEMY_BIRKIN_2, 2, AI_DEFAULT, 0, SBK_35, 0, 24, -20000, -5000, -24000, 0, 0, 0);
+        aot_reset(ID_AOT_0, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 52, 175, 0, 0, 230, 174);
+        aot_set(ID_AOT_3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -22884, -21968, 4300, 1800, ID_MSG_1, 0, 0, 0, 255, 255);
         fork main_02;
     }
     else
     {
-        sce_em_set(0, 255, ENEMY_ADA_WONG_1, 0, 4, 0, 31, 0, 255, -20650, 0, -23060, 437, 0, 0);
+        sce_em_set(0, ID_EM_255, ENEMY_ADA_WONG_1, 0, AI_04, 0, SBK_31, 0, 255, -20650, 0, -23060, 437, 0, 0);
     }
-    set(13, 1, 0);
-    set(13, 2, 0);
-    set(13, 3, 0);
-    set(13, 4, 0);
-    set(13, 5, 0);
-    set(13, 6, 0);
-    set(14, 5, 0);
-    set(14, 6, 0);
-    set(14, 7, 0);
-    set(14, 8, 0);
-    set(14, 9, 0);
-    set(14, 10, 0);
+    set(FG_PBF00, 1, 0);
+    set(FG_PBF00, 2, 0);
+    set(FG_PBF00, 3, 0);
+    set(FG_PBF00, 4, 0);
+    set(FG_PBF00, 5, 0);
+    set(FG_PBF00, 6, 0);
+    set(FG_PBF01, 5, 0);
+    set(FG_PBF01, 6, 0);
+    set(FG_PBF01, 7, 0);
+    set(FG_PBF01, 8, 0);
+    set(FG_PBF01, 9, 0);
+    set(FG_PBF01, 10, 0);
 }
 
 proc aot
@@ -51,8 +51,8 @@ proc aot
 
 proc main_02
 {
-    set(FG_STATE, 7, 1);
-    set(FG_GAME, 27, 1);
+    set(FG_STOP, 7, 1);
+    set(FG_STATUS, 27, 1);
     work_set(WK_PLAYER, 0);
     pos_set(0, -19720, 0, -22800);
     dir_set(0, 0, 150, 0);
@@ -67,7 +67,7 @@ proc main_02
     {
         evt_next();
     } while (cmp(0, V_04, CMP_NE, 2));
-    sce_bgm_control(0, 1, 0, 0, 0);
+    sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_START, BGM_TYPE_MAIN_VOL, 0, 0);
     main_1E();
     fork main_20;
     cut_chg(0);
@@ -79,14 +79,14 @@ proc main_02
     copy(V_TEMP, V_04);
     calc(0, OP_ADD, V_TEMP, 1);
     copy(V_04, V_TEMP);
-    work_set(WK_ENEMY, 0);
-    member_set(23, 18, 0);
+    work_set(WK_ENEMY, ID_EM_0);
+    member_set(M_SCE_FREE0, 18);
     evt_next();
-    member_copy(V_TEMP, 23);
+    member_copy(V_TEMP, M_SCE_FREE0);
     calc(0, OP_AND, V_TEMP, 240);
-    member_set2(23, V_TEMP);
+    member_set2(M_SCE_FREE0, V_TEMP);
     sleep(10, 7);
-    sce_bgm_control(1, 1, 0, 0, 0);
+    sce_bgm_control(BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_MAIN_VOL, 0, 0);
     save(V_07, 2);
     se_on(2, 11, 0, -16020, -4500, -23040);
     fork main_0D;
@@ -96,49 +96,49 @@ proc main_02
         evt_next();
     } while (cmp(0, V_04, CMP_NE, 3));
     cut_auto(0);
-    set(FG_GENERAL_2, 5, 1);
+    set(FG_ROOM, 5, 1);
     cut_chg(1);
     work_set(WK_PLAYER, 0);
     nop_8c(0, 150, 50, 35, 0, 0, 0);
     nop_8c(0, 150, 50, 20, 0, 15, 0);
     plc_neck(2, 0, 0, -300, 0, 60);
     plc_motion(10, 15, 0);
-    member_copy(V_TEMP, 12);
+    member_copy(V_TEMP, M_Y_POS);
     calc(0, OP_SUB, V_TEMP, 34);
-    member_set2(12, V_TEMP);
+    member_set2(M_Y_POS, V_TEMP);
     repeat (40)
     {
-        member_copy(V_TEMP, 11);
+        member_copy(V_TEMP, M_X_POS);
         calc(0, OP_SUB, V_TEMP, 15);
-        member_set2(11, V_TEMP);
+        member_set2(M_X_POS, V_TEMP);
         evt_next();
     }
     plc_ret();
     cut_auto(1);
     fork main_19;
-    set(FG_STATE, 7, 0);
-    set(FG_GAME, 27, 0);
+    set(FG_STOP, 7, 0);
+    set(FG_STATUS, 27, 0);
     evt_next();
     main_07();
-    set(FG_STATE, 7, 1);
-    set(FG_GAME, 27, 1);
+    set(FG_STOP, 7, 1);
+    set(FG_STATUS, 27, 1);
     work_set(WK_PLAYER, 0);
     plc_motion(2, 2, 4);
     evt_next();
     cut_auto(0);
-    if (ck(FG_GENERAL_2, 4, 1) && ck(FG_GENERAL_2, 8, 1))
+    if (ck(FG_ROOM, 4, 1) && ck(FG_ROOM, 8, 1))
     {
         cut_chg(4);
     }
     else
     {
-        if (ck(FG_GENERAL_2, 4, 1))
+        if (ck(FG_ROOM, 4, 1))
         {
             cut_chg(6);
         }
         else
         {
-            if (ck(FG_GENERAL_2, 8, 1))
+            if (ck(FG_ROOM, 8, 1))
             {
                 cut_chg(5);
             }
@@ -161,40 +161,40 @@ proc main_02
     do
     {
         evt_next();
-    } while (ck(FG_GENERAL_2, 32, 0));
+    } while (ck(FG_ROOM, 32, 0));
     plc_neck(1, -16605, 0, -26092, 50, 50);
-    set(FG_GENERAL_2, 2, 1);
+    set(FG_ROOM, 2, 1);
     plc_neck(2, 0, 0, 0, 50, 50);
     sleep(10, 30);
     fork main_05;
-    work_set(WK_ENEMY, 0);
-    member_set(23, 50, 0);
-    set(FG_GENERAL_2, 9, 1);
+    work_set(WK_ENEMY, ID_EM_0);
+    member_set(M_SCE_FREE0, 50);
+    set(FG_ROOM, 9, 1);
     evt_next();
-    member_copy(V_TEMP, 23);
+    member_copy(V_TEMP, M_SCE_FREE0);
     calc(0, OP_AND, V_TEMP, 240);
-    member_set2(23, V_TEMP);
+    member_set2(M_SCE_FREE0, V_TEMP);
     sleep(10, 7);
     se_on(3, 0, 3, 0, 0, 0);
     sleep(10, 30);
     work_set(WK_PLAYER, 0);
     plc_neck(1, -16020, -4500, -23040, 50, 50);
-    work_set(WK_ENEMY, 0);
+    work_set(WK_ENEMY, ID_EM_0);
     do
     {
         evt_next();
     } while (member_cmp(0, 23, 5, 32, 0));
-    set(FG_GENERAL_2, 9, 0);
+    set(FG_ROOM, 9, 0);
     work_set(WK_PLAYER, 0);
     plc_neck(2, 0, 480, -320, 240, 160);
     sleep(10, 20);
-    set(FG_GENERAL_2, 10, 1);
-    sce_bgm_control(1, 5, 0, 0, 0);
+    set(FG_ROOM, 10, 1);
+    sce_bgm_control(BGM_CHANNEL_SUB0, BGM_OP_FADEOUT, BGM_TYPE_MAIN_VOL, 0, 0);
     cut_chg(1);
     work_set(WK_PLAYER, 0);
     pos_set(0, -18600, 0, -23355);
     dir_set(0, 0, 150, 0);
-    member_copy(V_TEMP, 7);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_AND, V_TEMP, 4095);
     copy(V_0B, V_TEMP);
     if (cmp(0, V_0B, CMP_NE, 0))
@@ -249,20 +249,20 @@ proc main_02
     main_21();
     fork main_18;
     sce_bgmtbl_set(0, 0, 5, 65308, 0);
-    sce_bgm_control(0, 2, 1, 0, 0);
+    sce_bgm_control(BGM_CHANNEL_MAIN, BGM_OP_STOP, BGM_TYPE_PROG0_VOL, 0, 0);
     se_on(2, 12, 1, 0, 0, 0);
     sleep(10, 30);
-    aot_reset(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 240, 55, 0, 0, 154, 177);
-    aot_reset(2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-    set(FG_3, 192, 1);
+    aot_reset(ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 240, 55, 0, 0, 154, 177);
+    aot_reset(ID_AOT_2, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+    set(FG_SCENARIO, 192, 1);
     cut_auto(1);
     sleep(10, 15);
     work_set(WK_PLAYER, 0);
     plc_ret();
     work_set(WK_SPLAYER, 0);
     splc_ret();
-    set(FG_STATE, 7, 0);
-    set(FG_GAME, 27, 0);
+    set(FG_STOP, 7, 0);
+    set(FG_STATUS, 27, 0);
 }
 
 proc main_03
@@ -274,7 +274,7 @@ proc main_03
     do
     {
         evt_next();
-    } while (ck(FG_GENERAL_2, 32, 0));
+    } while (ck(FG_ROOM, 32, 0));
     plc_neck(2, 0, 0, 200, 0, 30);
     sleep(10, 20);
     copy(V_TEMP, V_04);
@@ -291,7 +291,7 @@ proc main_04
     do
     {
         evt_next();
-    } while (ck(FG_GENERAL_2, 33, 0));
+    } while (ck(FG_ROOM, 33, 0));
     plc_neck(2, 0, -240, 0, 30, 0);
     sleep(10, 20);
     copy(V_TEMP, V_04);
@@ -308,19 +308,19 @@ proc main_04
     sleep(10, 20);
     se_on(2, 14, 2, 0, 0, 0);
     sleep(10, 10);
-    member_copy(V_TEMP, 11);
+    member_copy(V_TEMP, M_X_POS);
     calc(0, OP_ADD, V_TEMP, 4096);
-    member_set2(11, V_TEMP);
-    member_copy(V_TEMP, 13);
+    member_set2(M_X_POS, V_TEMP);
+    member_copy(V_TEMP, M_Z_POS);
     calc(0, OP_SUB, V_TEMP, 200);
-    member_set2(13, V_TEMP);
+    member_set2(M_Z_POS, V_TEMP);
     dir_set(0, 0, 2600, 0);
     plc_motion(0, 23, 0);
     sleep(10, 79);
     plc_motion(0, 25, 0);
-    member_copy(V_TEMP, 0);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_ADD, V_TEMP, 4);
-    member_set2(0, V_TEMP);
+    member_set2(M_POINTER, V_TEMP);
     sleep(10, 40);
     plc_motion(2, 2, 4);
     plc_neck(2, 0, 0, -512, 0, 30);
@@ -330,7 +330,7 @@ proc main_04
     plc_neck(2, 0, -512, -512, 10, 0);
     sleep(10, 40);
     plc_neck(5, 3, 0, 0, 0, 0);
-    member_copy(V_TEMP, 15);
+    member_copy(V_TEMP, M_Y_DIR);
     calc(0, OP_ADD, V_TEMP, 1300);
     copy(V_0A, V_TEMP);
     repeat (4)
@@ -341,7 +341,7 @@ proc main_04
         plc_motion(2, 9, 0);
         repeat (5)
         {
-            if (ck(FG_GENERAL_2, 9, 0))
+            if (ck(FG_ROOM, 9, 0))
             {
                 goto off_1C4C;
             }
@@ -350,13 +350,13 @@ proc main_04
         plc_motion(2, 13, 4);
         repeat (30)
         {
-            if (ck(FG_GENERAL_2, 9, 0))
+            if (ck(FG_ROOM, 9, 0))
             {
                 goto off_1C4C;
             }
             evt_next();
         }
-        if (ck(FG_GENERAL_2, 9, 1))
+        if (ck(FG_ROOM, 9, 1))
         {
             main_0A();
             sleep(10, 4);
@@ -384,14 +384,14 @@ proc main_05
     do
     {
         evt_next();
-    } while (ck(FG_GENERAL_2, 9, 0));
+    } while (ck(FG_ROOM, 9, 0));
     main_0A();
     sleep(10, 4);
     sce_espr_on(0, 0, 197, 8192, -720, 360, 0, 0);
     main_09();
     sleep(10, 4);
     sce_espr_on(0, 0, 198, 8192, -720, -360, 0, 0);
-    if (ck(FG_GENERAL_2, 4, 1))
+    if (ck(FG_ROOM, 4, 1))
     {
         cut_chg(3);
     }
@@ -402,7 +402,7 @@ proc main_05
     main_09();
     sleep(10, 4);
     sce_espr_on(0, 0, 199, 8192, -720, -360, 0, 0);
-    work_set(WK_ENEMY, 0);
+    work_set(WK_ENEMY, ID_EM_0);
     sce_parts_down(7, 220, 10, 20, 0, 100, 0, 10, 0, 0, 0, 0, 4, 0, 12);
     sce_espr_on(0, 768, 197, 8192, -720, 360, 0, 0);
     work_set(WK_SPLAYER, 0);
@@ -495,21 +495,21 @@ off_1E4C:
         calc(0, OP_AND, V_TEMP, 15);
         copy(V_07, V_TEMP);
         main_0C();
-        work_set(WK_ENEMY, 0);
-        member_set2(23, V_06);
-        member_copy(V_09, 23);
-        member_copy(V_TEMP, 23);
+        work_set(WK_ENEMY, ID_EM_0);
+        member_set2(M_SCE_FREE0, V_06);
+        member_copy(V_09, M_SCE_FREE0);
+        member_copy(V_TEMP, M_SCE_FREE0);
         calc(0, OP_AND, V_TEMP, 15);
         copy(V_05, V_TEMP);
         copy(V_TEMP, V_05);
         calc(0, OP_ADD, V_TEMP, 1);
         copy(V_0B, V_TEMP);
-        set(FG_GENERAL_2, 9, 1);
+        set(FG_ROOM, 9, 1);
         sleep(10, 8);
         copy(V_TEMP, V_05);
         calc(0, OP_ADD, V_TEMP, 3);
         copy(V_05, V_TEMP);
-        if (work_copy(5, 2, 0) && ck(FG_GENERAL_2, 0, 0))
+        if (work_copy(5, 2, 0) && ck(FG_ROOM, 0, 0))
         {
             se_on(2, 11, 3, 0, 0, 0);
             copy(V_TEMP, V_06);
@@ -518,20 +518,20 @@ off_1E4C:
             fork main_0D;
             main_0F();
             work_copy(5, 2, 0);
-            set(FG_GENERAL_2, 0, 1);
+            set(FG_ROOM, 0, 1);
         }
         else
         {
             se_on(3, 0, 3, 0, 0, 0);
         }
-        member_copy(V_TEMP, 23);
+        member_copy(V_TEMP, M_SCE_FREE0);
         calc(0, OP_AND, V_TEMP, 240);
-        member_set2(23, V_TEMP);
+        member_set2(M_SCE_FREE0, V_TEMP);
         do
         {
             evt_next();
         } while (member_cmp(0, 23, 5, 0, 0));
-        set(FG_GENERAL_2, 9, 0);
+        set(FG_ROOM, 9, 0);
     }
 }
 
@@ -572,7 +572,7 @@ proc main_08
     do
     {
         evt_next();
-    } while (ck(FG_GENERAL_2, 33, 0));
+    } while (ck(FG_ROOM, 33, 0));
     save(V_0B, 0);
 }
 
@@ -860,59 +860,59 @@ proc main_11
 
 proc main_12
 {
-    if (ck(FG_GENERAL_2, 3, 1))
+    if (ck(FG_ROOM, 3, 1))
     {
-        set(14, 2, 0);
-        set(14, 10, 1);
+        set(FG_PBF01, 2, 0);
+        set(FG_PBF01, 10, 1);
     }
 }
 
 proc main_13
 {
-    if (ck(FG_GENERAL_2, 4, 1))
+    if (ck(FG_ROOM, 4, 1))
     {
-        set(14, 4, 0);
-        set(14, 5, 1);
-        set(14, 7, 1);
+        set(FG_PBF01, 4, 0);
+        set(FG_PBF01, 5, 1);
+        set(FG_PBF01, 7, 1);
     }
 }
 
 proc main_14
 {
-    if (ck(FG_GENERAL_2, 5, 1))
+    if (ck(FG_ROOM, 5, 1))
     {
-        set(13, 5, 1);
-        set(13, 6, 1);
+        set(FG_PBF00, 5, 1);
+        set(FG_PBF00, 6, 1);
     }
 }
 
 proc main_15
 {
-    if (ck(FG_GENERAL_2, 6, 1))
+    if (ck(FG_ROOM, 6, 1))
     {
-        set(14, 1, 0);
-        set(14, 9, 1);
+        set(FG_PBF01, 1, 0);
+        set(FG_PBF01, 9, 1);
     }
 }
 
 proc main_16
 {
-    if (ck(FG_GENERAL_2, 7, 1))
+    if (ck(FG_ROOM, 7, 1))
     {
-        set(14, 3, 0);
-        set(14, 6, 1);
-        set(14, 8, 1);
+        set(FG_PBF01, 3, 0);
+        set(FG_PBF01, 6, 1);
+        set(FG_PBF01, 8, 1);
     }
 }
 
 proc main_17
 {
-    if (ck(FG_GENERAL_2, 8, 1))
+    if (ck(FG_ROOM, 8, 1))
     {
-        set(13, 1, 1);
-        set(13, 2, 1);
-        set(13, 3, 1);
-        set(13, 4, 1);
+        set(FG_PBF00, 1, 1);
+        set(FG_PBF00, 2, 1);
+        set(FG_PBF00, 3, 1);
+        set(FG_PBF00, 4, 1);
     }
 }
 
@@ -946,30 +946,30 @@ proc main_19
     {
         if (cmp(0, V_CUT, CMP_EQ, 1))
         {
-            member_copy(V_TEMP, 1);
+            member_copy(V_TEMP, M_BE_FLAG);
             calc(0, OP_OR, V_TEMP, 8);
-            member_set2(1, V_TEMP);
+            member_set2(M_BE_FLAG, V_TEMP);
         }
         else
         {
-            member_copy(V_TEMP, 1);
+            member_copy(V_TEMP, M_BE_FLAG);
             calc(0, OP_AND, V_TEMP, -9);
-            member_set2(1, V_TEMP);
+            member_set2(M_BE_FLAG, V_TEMP);
         }
         evt_next();
-    } while (ck(FG_GENERAL_2, 10, 0));
-    member_copy(V_TEMP, 1);
+    } while (ck(FG_ROOM, 10, 0));
+    member_copy(V_TEMP, M_BE_FLAG);
     calc(0, OP_AND, V_TEMP, -9);
-    member_set2(1, V_TEMP);
+    member_set2(M_BE_FLAG, V_TEMP);
 }
 
 proc main_1A
 {
-    work_set(WK_OBJECT, 0);
+    work_set(WK_OBJECT, ID_OBJ_0);
     pos_set(0, 800, 0, -25100);
     fork main_1C;
     main_24();
-    work_set(WK_OBJECT, 0);
+    work_set(WK_OBJECT, ID_OBJ_0);
     se_on(2, 15, 4, 0, 0, 0);
     speed_set(0, 100);
     repeat (67)
@@ -1004,20 +1004,20 @@ proc main_1B
     pos_set(0, -32000, -32000, -32000);
     work_set(WK_SPLAYER, 0);
     pos_set(0, -32000, -32000, -31000);
-    member_copy(V_TEMP, 7);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_ADD, V_TEMP, -32768);
-    member_set2(7, V_TEMP);
+    member_set2(M_TYPE, V_TEMP);
     main_1A();
     sce_fade_set(0, 2, 7, 255, 241);
-    work_set(WK_OBJECT, 0);
+    work_set(WK_OBJECT, ID_OBJ_0);
     pos_set(0, -32000, -32000, -32000);
     work_set(WK_SPLAYER, 0);
-    member_copy(V_TEMP, 0);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_SUB, V_TEMP, 4);
-    member_set2(0, V_TEMP);
-    member_copy(V_TEMP, 7);
+    member_set2(M_POINTER, V_TEMP);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_SUB, V_TEMP, -32768);
-    member_set2(7, V_TEMP);
+    member_set2(M_TYPE, V_TEMP);
 }
 
 proc main_1C
@@ -1026,8 +1026,8 @@ proc main_1C
     save(V_0B, 0);
     do
     {
-        work_set(WK_OBJECT, 0);
-        member_copy(V_TEMP, 11);
+        work_set(WK_OBJECT, ID_OBJ_0);
+        member_copy(V_TEMP, M_X_POS);
         calc(0, OP_SUB, V_TEMP, 16000);
         copy(V_05, V_TEMP);
         light_kido_set(0, 20000);
@@ -1049,11 +1049,11 @@ proc main_1C
 
 proc main_1D
 {
-    work_set(WK_OBJECT, 0);
+    work_set(WK_OBJECT, ID_OBJ_0);
     pos_set(0, -2800, 0, -13300);
     fork main_1F;
     main_23();
-    work_set(WK_OBJECT, 0);
+    work_set(WK_OBJECT, ID_OBJ_0);
     se_on(2, 17, 4, 0, 0, 0);
     speed_set(0, 80);
     repeat (10)
@@ -1088,17 +1088,17 @@ proc main_1E
     pos_set(0, -32000, -32000, -32000);
     work_set(WK_SPLAYER, 0);
     pos_set(0, -32000, -32000, -31000);
-    member_copy(V_TEMP, 7);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_ADD, V_TEMP, -32768);
-    member_set2(7, V_TEMP);
+    member_set2(M_TYPE, V_TEMP);
     main_1D();
     sce_fade_set(0, 2, 7, 255, 241);
-    work_set(WK_OBJECT, 0);
+    work_set(WK_OBJECT, ID_OBJ_0);
     pos_set(0, -32000, -32000, -32000);
     work_set(WK_SPLAYER, 0);
-    member_copy(V_TEMP, 7);
+    member_copy(V_TEMP, M_TYPE);
     calc(0, OP_SUB, V_TEMP, -32768);
-    member_set2(7, V_TEMP);
+    member_set2(M_TYPE, V_TEMP);
 }
 
 proc main_1F
@@ -1107,8 +1107,8 @@ proc main_1F
     save(V_0B, 0);
     do
     {
-        work_set(WK_OBJECT, 0);
-        member_copy(V_TEMP, 11);
+        work_set(WK_OBJECT, ID_OBJ_0);
+        member_copy(V_TEMP, M_X_POS);
         calc(0, OP_SUB, V_TEMP, 16000);
         copy(V_05, V_TEMP);
         light_kido_set(0, 20000);
@@ -1132,7 +1132,7 @@ proc main_1F
 
 proc main_20
 {
-    while (ck(FG_GENERAL_2, 2, 0))
+    while (ck(FG_ROOM, 2, 0))
     {
         nop_8c(0, 100, 0, 20, 0, 20, 0);
         nop_8c(0, 100, 0, 10, 0, 40, 0);

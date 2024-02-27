@@ -3,31 +3,31 @@
 .init
 .proc init
 1242:   06001200                                                                                if                      0, off_1258
-1246:   2104FE01                                                                                ck                      FG_GENERAL_1, 254, 1
-124A:   22043900                                                                                set                     FG_GENERAL_1, 57, 0
+1246:   2104FE01                                                                                ck                      FG_COMMON, 254, 1
+124A:   22043900                                                                                set                     FG_COMMON, 57, 0
 124E:   22066200                                                                                set                     FG_ENEMY, 98, 0
-1252:   22043A00                                                                                set                     FG_GENERAL_1, 58, 0
+1252:   22043A00                                                                                set                     FG_COMMON, 58, 0
 1256:   08                                                                                      endif
 1257:   00                                                                                      nop
 
 off_1258:
-1258:   3B0201310300D0D8BEB6280A640536C70000BFBFA19F02000300160400000000                        door_aot_se             2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -10032, -18754, 2600, 1380, -14538, 0, -16449, -24671, 2, 0, 3, 0, 22, 4, 0, 0, UNLOCKED, 0
-1278:   3B0301310300F6B2E408460AC206B5BEF8F807BD40FC020A0001160400000000                        door_aot_se             3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -19722, 2276, 2630, 1730, -16715, -1800, -17145, -960, 2, 10, 0, 1, 22, 4, 0, 0, UNLOCKED, 0
-1298:   2D0000000000030000000A00100060B7E8EA530B000000040000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 3, 0, 10, 16, -18592, -5400, 2899, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1258:   3B0201310300D0D8BEB6280A640536C70000BFBFA19F02000300160400000000                        door_aot_se             ID_AOT_2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -10032, -18754, 2600, 1380, -14538, 0, -16449, -24671, 2, 0, 3, 0, 22, 4, 0, 0, UNLOCKED, 0
+1278:   3B0301310300F6B2E408460AC206B5BEF8F807BD40FC020A0001160400000000                        door_aot_se             ID_AOT_3, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -19722, 2276, 2630, 1730, -16715, -1800, -17145, -960, 2, 10, 0, 1, 22, 4, 0, 0, UNLOCKED, 0
+1298:   2D0000000000030000000A00100060B7E8EA530B000000040000000000000000000000000000            obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 3, 0, 10, 16, -18592, -5400, 2899, 0, 1024, 0, 0, 0, 0, 0, 0, 0, 0, 0
 12BE:   0100                                                                                    evt_end                 0
 
 .main
 .proc main
 12CC:   1802                                                                                    gosub                   main_02
-12CE:   510101000000                                                                            sce_bgm_control         1, 1, 0, 0, 0
+12CE:   510101000000                                                                            sce_bgm_control         BGM_CHANNEL_SUB0, BGM_OP_START, BGM_TYPE_MAIN_VOL, 0, 0
 12D4:   0100                                                                                    evt_end                 0
 
 .proc aot
 12D6:   0100                                                                                    evt_end                 0
 
 .proc main_02
-12D8:   2C0005310300D0D8BEB6280A6405FF0018040000                                                aot_set                 0, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -10032, -18754, 2600, 1380, 255, 0, I_GOSUB, main_04, 0, 0
-12EC:   2C0105310300F6B2E408460AC206FF0018050000                                                aot_set                 1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -19722, 2276, 2630, 1730, 255, 0, I_GOSUB, main_05, 0, 0
+12D8:   2C0005310300D0D8BEB6280A6405FF0018040000                                                aot_set                 ID_AOT_0, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -10032, -18754, 2600, 1380, 255, 0, I_GOSUB, main_04, 0, 0
+12EC:   2C0105310300F6B2E408460AC206FF0018050000                                                aot_set                 ID_AOT_1, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 3, 0, -19722, 2276, 2630, 1730, 255, 0, I_GOSUB, main_05, 0, 0
 1300:   0100                                                                                    evt_end                 0
 
 .proc main_03
@@ -41,12 +41,12 @@ off_1258:
 134E:   0100                                                                                    evt_end                 0
 
 .proc main_04
-1350:   2B000200FFFF                                                                            message_on              0, 2, 0, 255, 255
+1350:   2B000200FFFF                                                                            message_on              0, ID_MSG_2, 0, 255, 255
 1356:   02                                                                                      evt_next
 1357:   00                                                                                      nop
 1358:   06000800                                                                                if                      0, off_1364
-135C:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
-1360:   4702                                                                                    aot_on                  2
+135C:   210B1F00                                                                                ck                      FG_MESSAGE, F_QUESTION, 0
+1360:   4702                                                                                    aot_on                  ID_AOT_2
 1362:   08                                                                                      endif
 1363:   00                                                                                      nop
 
@@ -54,12 +54,12 @@ off_1364:
 1364:   0100                                                                                    evt_end                 0
 
 .proc main_05
-1366:   2B000200FFFF                                                                            message_on              0, 2, 0, 255, 255
+1366:   2B000200FFFF                                                                            message_on              0, ID_MSG_2, 0, 255, 255
 136C:   02                                                                                      evt_next
 136D:   00                                                                                      nop
 136E:   06000800                                                                                if                      0, off_137A
-1372:   210B1F00                                                                                ck                      FG_INPUT, F_QUESTION, 0
-1376:   4703                                                                                    aot_on                  3
+1372:   210B1F00                                                                                ck                      FG_MESSAGE, F_QUESTION, 0
+1376:   4703                                                                                    aot_on                  ID_AOT_3
 1378:   08                                                                                      endif
 1379:   00                                                                                      nop
 

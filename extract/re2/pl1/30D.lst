@@ -2,24 +2,25 @@
 
 .init
 .proc init
-023E:   3B000131000068CD3ABD84032008BAF40000FCDB000002070100080000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -12952, -17094, 900, 2080, -2886, 0, -9220, 0, 2, 7, 1, 0, 8, 0, 0, 0, UNLOCKED, 0
-025E:   2C02093100005CBB70C874099037040000000000                                                aot_set                 2, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17572, -14224, 2420, 14224, 4, 0, 0, 0, 0, 0
-0272:   2C030A3100000EB976B870084A0B000001000000                                                aot_set                 3, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18162, -18314, 2160, 2890, 0, 0, 1, 0, 0, 0
-0286:   2D0000000000000000000A00100058BA4DFA4BBE000000000000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -17832, -1459, -16821, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+023E:   3B000131000068CD3ABD84032008BAF40000FCDB000002070100080000000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -12952, -17094, 900, 2080, -2886, 0, -9220, 0, 2, 7, 1, 0, 8, 0, 0, 0, UNLOCKED, 0
+025E:   2C02093100005CBB70C874099037040000000000                                                aot_set                 ID_AOT_2, SCE_SAVE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17572, -14224, 2420, 14224, 4, 0, 0, 0, 0, 0
+0272:   2C030A3100000EB976B870084A0B000001000000                                                aot_set                 ID_AOT_3, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -18162, -18314, 2160, 2890, 0, 0, 1, 0, 0, 0
+0286:   2D0000000000000000000A00100058BA4DFA4BBE000000000000000000000000000000000000            obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -17832, -1459, -16821, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 02AC:   06000800                                                                                if                      0, off_02B8
-02B0:   2104FE01                                                                                ck                      FG_GENERAL_1, 254, 1
+02B0:   2104FE01                                                                                ck                      FG_COMMON, 254, 1
 02B4:   2901                                                                                    cut_chg                 1
 02B6:   08                                                                                      endif
 02B7:   00                                                                                      nop
 
 off_02B8:
 02B8:   0100                                                                                    evt_end                 0
+02BA:   0000                                                                                    db                      0x00, 0x00
 
 .main
 .proc main
 02C4:   1802                                                                                    gosub                   main_02
-02C6:   4E01023100005CBB70C8740990371E0003008C000200                                            item_aot_set            1, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17572, -14224, 2420, 14224, ITEM_INKRIBBON, 3, 140, 2, 0
-02DC:   2D0200000000000000000A00100041C0E0FCCBCA000000000000000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -16319, -800, -13621, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+02C6:   4E01023100005CBB70C8740990371E0003008C000200                                            item_aot_set            ID_AOT_1, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -17572, -14224, 2420, 14224, ITEM_INKRIBBON, 3, 140, ID_OBJ_2, IF_DEFAULT
+02DC:   2D0200000000000000000A00100041C0E0FCCBCA000000000000000000000000000000000000            obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 0, 0, 10, 16, -16319, -800, -13621, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 0302:   0100                                                                                    evt_end                 0
 
 .proc aot
@@ -27,9 +28,9 @@ off_02B8:
 
 .proc main_02
 0306:   06001400                                                                                if                      0, off_031E
-030A:   21038100                                                                                ck                      FG_3, 129, 0
-030E:   22038001                                                                                set                     FG_3, 128, 1
-0312:   46000531FF0018030000                                                                    aot_reset               0, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_03, 0, 0
+030A:   21038100                                                                                ck                      FG_SCENARIO, 129, 0
+030E:   22038001                                                                                set                     FG_SCENARIO, 128, 1
+0312:   46000531FF0018030000                                                                    aot_reset               ID_AOT_0, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_03, 0, 0
 031C:   08                                                                                      endif
 031D:   00                                                                                      nop
 
@@ -37,7 +38,8 @@ off_031E:
 031E:   0100                                                                                    evt_end                 0
 
 .proc main_03
-0320:   24200F00                                                                                save                    V_20, 15
-0324:   46000131BAF40000FCDB                                                                    aot_reset               0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 186, 244, 0, 0, 252, 219
-032E:   4700                                                                                    aot_on                  0
+0320:   24200F00                                                                                save                    V_NEXT_PLD, 15
+0324:   46000131BAF40000FCDB                                                                    aot_reset               ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 186, 244, 0, 0, 252, 219
+032E:   4700                                                                                    aot_on                  ID_AOT_0
 0330:   0100                                                                                    evt_end                 0
+0332:   FE01                                                                                    db                      0xFE, 0x01

@@ -3,46 +3,47 @@
 .init
 .proc init
     if                      0, off_0BBE
-    ck                      FG_GAME, F_BONUS, 1
+    ck                      FG_STATUS, F_BONUS, 1
     evt_end                 0
     endif
     nop
 
 off_0BBE:
     sca_id_set              15, 0, 0
-    door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14981, -23528, 1760, 4400, -24654, 0, -17018, -8248, 1, 0, 2, 0, 13, 2, 0, 0, UNLOCKED, 0
-    door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27925, -26794, 1630, 2090, 4348, 0, -16776, 2080, 1, 4, 0, 0, 9, 1, 0, 0, UNLOCKED, 0
-    aot_set                 10, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16441, -27028, 3660, 3300, 0, 0, 1, 0, 0, 0
-    obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -14471, -1446, -25361, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    aot_set                 8, SCE_HIKIDASHI, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26631, -18161, 2500, 1800, 1, 0, 9, 0, 6, 0
-    item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20320, -26780, 2720, 1400, ITEM_6B, 1, 94, 2, 0
-    obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -18965, -650, -26103, 0, 1728, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    aot_set                 3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20001, -17361, 6500, 1820, 0, 0, 0, 0, 255, 255
-    aot_set                 4, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21831, -17061, 1840, 1600, 1, 0, 0, 0, 255, 255
-    aot_set                 5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27907, -19677, 1340, 2420, 3, 0, 0, 0, 255, 255
-    aot_set                 6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26067, -27677, 1970, 1240, 4, 0, 0, 0, 255, 255
-    aot_set                 7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20612, -22364, 2010, 1660, 5, 0, 0, 0, 255, 255
-    aot_set                 7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23041, -26921, 800, 5220, 7, 0, 0, 0, 255, 255
+    door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14981, -23528, 1760, 4400, -24654, 0, -17018, -8248, 1, 0, 2, 0, 13, 2, 0, 0, UNLOCKED, 0
+    door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27925, -26794, 1630, 2090, 4348, 0, -16776, 2080, 1, 4, 0, 0, 9, 1, 0, 0, UNLOCKED, 0
+    aot_set                 ID_AOT_10, SCE_ITEMBOX, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -16441, -27028, 3660, 3300, 0, 0, 1, 0, 0, 0
+    obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -14471, -1446, -25361, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_8, SCE_HIKIDASHI, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26631, -18161, 2500, 1800, 1, 0, 9, 0, 6, 0
+    item_aot_set            ID_AOT_2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20320, -26780, 2720, 1400, ITEM_POLICEMEMORANDUM, 1, 94, ID_OBJ_2, IF_DEFAULT
+    obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 0, 0, 10, 16, -18965, -650, -26103, 0, 1728, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    aot_set                 ID_AOT_3, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20001, -17361, 6500, 1820, ID_MSG_0, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_4, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21831, -17061, 1840, 1600, ID_MSG_1, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_5, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27907, -19677, 1340, 2420, ID_MSG_3, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_6, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26067, -27677, 1970, 1240, ID_MSG_4, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -20612, -22364, 2010, 1660, ID_MSG_5, 0, 0, 0, 255, 255
+    aot_set                 ID_AOT_7, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23041, -26921, 800, 5220, ID_MSG_7, 0, 0, 0, 255, 255
     evt_end                 0
+    db                      0x00, 0x00
 
 .main
 .proc main
     if                      0, off_0D2E
-    ck                      FG_GAME, F_BONUS, 1
+    ck                      FG_STATUS, F_BONUS, 1
     gosub                   main_0B
     evt_end                 0
     endif
     nop
 
 off_0D2E:
-    item_aot_set            9, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 10, 10, ITEM_FAIDSPRAY, 1, 92, 3, 0
-    obj_model_set           3, 0, 0, 0, 0, 1, 0, 10, 48, -25765, -1250, -17753, -1024, 0, 1280, 0, 0, 0, 0, 0, 0, 0, 0
+    item_aot_set            ID_AOT_9, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 10, 10, ITEM_FAIDSPRAY, 1, 92, ID_OBJ_3, IF_DEFAULT
+    obj_model_set           ID_OBJ_3, 0, 0, 0, 0, 1, 0, 10, 48, -25765, -1250, -17753, -1024, 0, 1280, 0, 0, 0, 0, 0, 0, 0, 0
     gosub                   main_02
     evt_end                 0
 
 .proc aot
     if                      0, off_0D7A
-    ck                      FG_GAME, F_BONUS, 1
+    ck                      FG_STATUS, F_BONUS, 1
     evt_end                 0
     endif
     nop
@@ -53,11 +54,11 @@ off_0D7A:
 
 .proc main_02
     if                      0, off_0DBA
-    ck                      FG_GAME, F_SCENARIO, 0
+    ck                      FG_STATUS, F_SCENARIO, 0
     if                      0, off_0DB6
-    ck                      FG_GENERAL_1, 5, 0
-    sce_em_set              0, 0, ENEMY_LICKER_RED, 2, 68, 0, 14, 0, 24, -22183, -3640, -28187, 1904, 0, 0
-    work_set                WK_ENEMY, 0
+    ck                      FG_COMMON, 5, 0
+    sce_em_set              0, ID_EM_0, ENEMY_LICKER_RED, 2, AI_04 | AI_40, 0, SBK_14, 0, 24, -22183, -3640, -28187, 1904, 0, 0
+    work_set                WK_ENEMY, ID_EM_0
     nop
     save                    V_04, 28784
     save                    V_05, 112
@@ -71,15 +72,15 @@ off_0DB6:
 
 off_0DBA:
     if                      0, off_0DF2
-    ck                      FG_0, F_DIFFICULT, 0
-    sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 0, 32, 0, 42, 0, 117, -23968, 0, -22913, -2283, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 6, 0, 0, 43, 0, 118, -19262, 0, -24778, -589, 0, 0
+    ck                      FG_SYSTEM, F_DIFFICULT, 0
+    sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 0, AI_20, 0, SBK_42, 0, 117, -23968, 0, -22913, -2283, 0, 0
+    sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 6, AI_DEFAULT, 0, SBK_43, 0, 118, -19262, 0, -24778, -589, 0, 0
     else                    0, off_0E36
 
 off_0DF2:
-    sce_em_set              0, 1, ENEMY_ZOMBIE_GUY1, 0, 0, 0, 42, 0, 117, -25702, 0, -19265, 139, 0, 0
-    sce_em_set              0, 2, ENEMY_ZOMBIE_GUY1, 0, 32, 0, 43, 0, 118, -24155, 0, -23363, 1877, 0, 0
-    sce_em_set              0, 3, ENEMY_ZOMBIE_GUY1, 6, 0, 0, 43, 0, 212, -19862, 0, -24968, -701, 0, 0
+    sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_GUY1, 0, AI_DEFAULT, 0, SBK_42, 0, 117, -25702, 0, -19265, 139, 0, 0
+    sce_em_set              0, ID_EM_2, ENEMY_ZOMBIE_GUY1, 0, AI_20, 0, SBK_43, 0, 118, -24155, 0, -23363, 1877, 0, 0
+    sce_em_set              0, ID_EM_3, ENEMY_ZOMBIE_GUY1, 6, AI_DEFAULT, 0, SBK_43, 0, 212, -19862, 0, -24968, -701, 0, 0
     nop
     nop
 
@@ -92,12 +93,12 @@ off_0E38:
 
 .proc main_03
     if                      0, off_0E5C
-    ck                      FG_GAME, F_SCENARIO, 0
+    ck                      FG_STATUS, F_SCENARIO, 0
     if                      0, off_0E5A
     cmp                     0, V_CUT, CMP_EQ, 4
-    ck                      FG_GENERAL_1, 5, 0
+    ck                      FG_COMMON, 5, 0
     evt_exec                255, I_GOSUB, main_04
-    set                     FG_GENERAL_1, 5, 1
+    set                     FG_COMMON, 5, 1
     endif
     nop
 
@@ -109,9 +110,9 @@ off_0E5C:
     evt_end                 0
 
 .proc main_04
-    work_set                WK_ENEMY, 0
+    work_set                WK_ENEMY, ID_EM_0
     nop
-    member_set              23, 1, 0
+    member_set              M_SCE_FREE0, 1
     save                    V_07, 0
     while                   6, off_0EE0
     cmp                     0, V_07, CMP_NE, 45
@@ -165,9 +166,9 @@ off_0ECE:
 
 off_0EE0:
     gosub                   main_08
-    work_set                WK_ENEMY, 0
+    work_set                WK_ENEMY, ID_EM_0
     nop
-    member_set              23, 1, 0
+    member_set              M_SCE_FREE0, 1
     evt_end                 0
 
 .proc main_05
@@ -249,10 +250,10 @@ off_0F22:
     evt_end                 0
 
 .proc main_0B
-    door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14981, -23528, 1760, 4400, -24654, 0, -17018, -8248, 1, 0, 2, 0, 13, 2, 0, 0, UNLOCKED, 0
-    door_aot_se             1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27925, -26794, 1630, 2090, 4348, 0, -16776, 2080, 1, 4, 0, 0, 9, 1, 0, 0, UNLOCKED, 0
-    obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -14471, -1446, -25361, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    sce_em_set              0, 0, ENEMY_BABY_SPIDER, 0, 0, 0, 0, 0, 255, -15781, 0, -26161, 400, 0, 0
-    sce_em_set              0, 1, ENEMY_SPIDER, 0, 0, 0, 16, 0, 115, -25303, 0, -24816, 2997, 0, 0
-    sce_em_set              0, 2, ENEMY_SPIDER, 0, 0, 0, 16, 0, 116, -23836, 0, -19643, 3931, 0, 0
+    door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -14981, -23528, 1760, 4400, -24654, 0, -17018, -8248, 1, 0, 2, 0, 13, 2, 0, 0, UNLOCKED, 0
+    door_aot_se             ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27925, -26794, 1630, 2090, 4348, 0, -16776, 2080, 1, 4, 0, 0, 9, 1, 0, 0, UNLOCKED, 0
+    obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -14471, -1446, -25361, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    sce_em_set              0, ID_EM_0, ENEMY_BABY_SPIDER, 0, AI_DEFAULT, 0, SBK_0, 0, 255, -15781, 0, -26161, 400, 0, 0
+    sce_em_set              0, ID_EM_1, ENEMY_SPIDER, 0, AI_DEFAULT, 0, SBK_16, 0, 115, -25303, 0, -24816, 2997, 0, 0
+    sce_em_set              0, ID_EM_2, ENEMY_SPIDER, 0, AI_DEFAULT, 0, SBK_16, 0, 116, -23836, 0, -19643, 3931, 0, 0
     evt_end                 0

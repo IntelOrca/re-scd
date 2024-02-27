@@ -2,34 +2,34 @@
 
 proc init
 {
-    if (ck(FG_GAME, F_SCENARIO, 1))
+    if (ck(FG_STATUS, F_SCENARIO, 1))
     {
-        door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13964, -27818, 3100, 2900, -15153, -7200, -14054, -2496, 3, 1, 2, 4, 40, 4, 0, 0, UNLOCKED, 0);
+        door_aot_se(ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13964, -27818, 3100, 2900, -15153, -7200, -14054, -2496, 3, 1, 2, 4, 40, 4, 0, 0, UNLOCKED, 0);
     }
     else
     {
-        if (ck(FG_GAME, F_PLAYER, 1))
+        if (ck(FG_STATUS, F_PLAYER, 1))
         {
-            door_aot_se(0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13964, -27818, 3100, 2900, -15153, -7200, -14054, -2496, 3, 1, 2, 4, 40, 4, 0, 0, UNLOCKED, 0);
+            door_aot_se(ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13964, -27818, 3100, 2900, -15153, -7200, -14054, -2496, 3, 1, 2, 4, 40, 4, 0, 0, UNLOCKED, 0);
         }
     }
-    if (ck(FG_GAME, F_SCENARIO, 1))
+    if (ck(FG_STATUS, F_SCENARIO, 1))
     {
-        door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13810, -410, 3400, 3730, -25717, -7200, -24522, 3416, 3, 3, 3, 4, 40, 4, 0, 0, UNLOCKED, 0);
+        door_aot_se(ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13810, -410, 3400, 3730, -25717, -7200, -24522, 3416, 3, 3, 3, 4, 40, 4, 0, 0, UNLOCKED, 0);
     }
     else
     {
-        if (ck(FG_GAME, F_PLAYER, 0))
+        if (ck(FG_STATUS, F_PLAYER, 0))
         {
-            door_aot_se(1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13810, -410, 3400, 3730, -25717, -7200, -24522, 3416, 3, 3, 3, 4, 40, 4, 0, 0, UNLOCKED, 0);
+            door_aot_se(ID_AOT_1, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_UNDER, 0, 0, -13810, -410, 3400, 3730, -25717, -7200, -24522, 3416, 3, 3, 3, 4, 40, 4, 0, 0, UNLOCKED, 0);
         }
     }
-    door_aot_se(2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28293, -11634, 1800, 2800, -10014, -1800, -14098, 2048, 3, 5, 6, 1, 35, 0, 0, 0, UNLOCKED, 0);
+    door_aot_se(ID_AOT_2, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -28293, -11634, 1800, 2800, -10014, -1800, -14098, 2048, 3, 5, 6, 1, 35, 0, 0, 0, UNLOCKED, 0);
 }
 
 proc main
 {
-    set(FG_GENERAL_1, 32, 0);
+    set(FG_COMMON, 32, 0);
     main_06();
     main_04();
     main_02();
@@ -43,27 +43,27 @@ proc aot
 
 proc main_02
 {
-    if (ck(FG_GAME, F_SCENARIO, 1))
+    if (ck(FG_STATUS, F_SCENARIO, 1))
     {
-        if (ck(FG_GENERAL_1, 31, 0))
+        if (ck(FG_COMMON, 31, 0))
         {
-            aot_set(3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -13845, -13798, 1500, 1740, 255, 0, I_GOSUB, main_12, 0, 0);
-            sce_em_set(0, 0, ENEMY_LEON_KENNEDY_RPD, 0, 1, 0, 0, 0, 255, -13033, 250, -12848, 0, 273, 20);
-            work_set(WK_ENEMY, 0);
-            member_copy(V_TEMP, 0);
+            aot_set(ID_AOT_3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -13845, -13798, 1500, 1740, 255, 0, I_GOSUB, main_12, 0, 0);
+            sce_em_set(0, ID_EM_0, ENEMY_LEON_KENNEDY_RPD, 0, AI_01, 0, SBK_0, 0, 255, -13033, 250, -12848, 0, 273, 20);
+            work_set(WK_ENEMY, ID_EM_0);
+            member_copy(V_TEMP, M_POINTER);
             calc(0, OP_OR, V_TEMP, 4);
             calc(0, OP_OR, V_TEMP, 8);
-            member_set2(0, V_TEMP);
-            if (ck(FG_GENERAL_1, 62, 0))
+            member_set2(M_POINTER, V_TEMP);
+            if (ck(FG_COMMON, 62, 0))
             {
-                set(FG_GENERAL_1, 62, 1);
+                set(FG_COMMON, 62, 1);
                 fork main_11;
             }
         }
     }
     else
     {
-        set(FG_GENERAL_1, 62, 1);
+        set(FG_COMMON, 62, 1);
     }
 }
 
@@ -83,69 +83,69 @@ proc main_04
 {
     if (ck(FG_ITEM, 162, 0))
     {
-        aot_set(4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23641, -12378, 1300, 1140, 255, 0, I_GOSUB, main_05, 0, 0);
-        obj_model_set(2, 0, 0, 0, 0, 0, 0, 10, 16, -22814, -2350, -11768, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        aot_set(ID_AOT_4, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23641, -12378, 1300, 1140, 255, 0, I_GOSUB, main_05, 0, 0);
+        obj_model_set(ID_OBJ_2, 0, 0, 0, 0, 0, 0, 10, 16, -22814, -2350, -11768, -1024, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 }
 
 proc main_05
 {
-    message_on(0, 10, 0, 255, 255);
+    message_on(0, ID_MSG_10, 0, 255, 255);
     evt_next();
-    if (ck(FG_INPUT, F_QUESTION, 0))
+    if (ck(FG_MESSAGE, F_QUESTION, 0))
     {
         set(FG_ITEM, 162, 1);
-        set(33, 7, 1);
-        set(33, 8, 1);
-        work_set(WK_OBJECT, 2);
+        set(FG_MAP_I, 7, 1);
+        set(FG_MAP_I, 8, 1);
+        work_set(WK_OBJECT, ID_OBJ_2);
         pos_set(0, 0, 0, 0);
-        aot_reset(4, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
-        message_on(0, 11, 0, 255, 255);
+        aot_reset(ID_AOT_4, SCE_AUTO, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, 0, 0, 0, 0);
+        message_on(0, ID_MSG_11, 0, 255, 255);
         evt_next();
     }
 }
 
 proc main_06
 {
-    if (ck(FG_GAME, F_SCENARIO, 1))
+    if (ck(FG_STATUS, F_SCENARIO, 1))
     {
-        obj_model_set(0, 0, 0, 0, 0, 4, 0, 2, 16, -12170, 0, 830, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(ID_OBJ_0, 0, 0, 0, 0, 4, 0, 2, 16, -12170, 0, 830, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
     else
     {
-        if (ck(FG_GAME, F_PLAYER, 0))
+        if (ck(FG_STATUS, F_PLAYER, 0))
         {
-            obj_model_set(0, 0, 0, 0, 0, 4, 0, 2, 16, -12170, 0, 830, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            obj_model_set(ID_OBJ_0, 0, 0, 0, 0, 4, 0, 2, 16, -12170, 0, 830, 0, 2048, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
-    if (ck(FG_GAME, F_SCENARIO, 1))
+    if (ck(FG_STATUS, F_SCENARIO, 1))
     {
-        obj_model_set(1, 0, 0, 0, 0, 4, 0, 2, 16, -12220, 0, -26273, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        obj_model_set(ID_OBJ_1, 0, 0, 0, 0, 4, 0, 2, 16, -12220, 0, -26273, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
     else
     {
-        if (ck(FG_GAME, F_PLAYER, 1))
+        if (ck(FG_STATUS, F_PLAYER, 1))
         {
-            obj_model_set(1, 0, 0, 0, 0, 4, 0, 2, 16, -12220, 0, -26273, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            obj_model_set(ID_OBJ_1, 0, 0, 0, 0, 4, 0, 2, 16, -12220, 0, -26273, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         }
     }
 }
 
 proc main_07
 {
-    set(FG_STATE, 7, 1);
+    set(FG_STOP, 7, 1);
     fork main_0B;
     fork main_08;
     fork main_09;
-    if (ck(FG_GAME, 3, 1))
+    if (ck(FG_STATUS, 3, 1))
     {
         fork main_0A;
     }
     else
     {
-        if (ck(FG_GAME, F_PLAYER, 0))
+        if (ck(FG_STATUS, F_PLAYER, 0))
         {
-            if (ck(FG_GENERAL_1, 62, 0))
+            if (ck(FG_COMMON, 62, 0))
             {
                 fork main_0A;
             }
@@ -153,54 +153,54 @@ proc main_07
     }
     main_15();
     sleep(10, 5);
-    set(FG_STATE, 7, 0);
+    set(FG_STOP, 7, 0);
 }
 
 proc main_08
 {
-    work_set(WK_OBJECT, 0);
-    member_set(12, 160, 246);
+    work_set(WK_OBJECT, ID_OBJ_0);
+    member_set(M_Y_POS, -2400);
     main_10();
 }
 
 proc main_09
 {
     work_set(WK_PLAYER, 0);
-    member_copy(V_TEMP, 0);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
+    member_set2(M_POINTER, V_TEMP);
     pos_set(0, -12455, -2400, 355);
-    member_set(15, 72, 3);
+    member_set(M_Y_DIR, 840);
     main_10();
-    if (ck(FG_GENERAL_2, 1, 1))
+    if (ck(FG_ROOM, 1, 1))
     {
-        member_copy(V_TEMP, 0);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_SUB, V_TEMP, 1024);
-        member_set2(0, V_TEMP);
+        member_set2(M_POINTER, V_TEMP);
     }
 }
 
 proc main_0A
 {
     work_set(WK_SPLAYER, 0);
-    if (ck(FG_GAME, F_PLAYER, 0))
+    if (ck(FG_STATUS, F_PLAYER, 0))
     {
-        if (ck(FG_GENERAL_1, 62, 0))
+        if (ck(FG_COMMON, 62, 0))
         {
-            work_set(WK_ENEMY, 0);
+            work_set(WK_ENEMY, ID_EM_0);
         }
     }
-    member_copy(V_TEMP, 0);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
+    member_set2(M_POINTER, V_TEMP);
     pos_set(0, -11762, -2400, 952);
-    member_set(15, 72, 4);
+    member_set(M_Y_DIR, 1096);
     main_10();
-    if (ck(FG_GENERAL_2, 1, 1))
+    if (ck(FG_ROOM, 1, 1))
     {
-        member_copy(V_TEMP, 0);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_SUB, V_TEMP, 1024);
-        member_set2(0, V_TEMP);
+        member_set2(M_POINTER, V_TEMP);
     }
 }
 
@@ -214,57 +214,57 @@ proc main_0B
 
 proc main_0C
 {
-    set(FG_STATE, 7, 1);
+    set(FG_STOP, 7, 1);
     fork main_0B;
     fork main_0D;
     fork main_0E;
-    if (ck(FG_GAME, 3, 1))
+    if (ck(FG_STATUS, 3, 1))
     {
         fork main_0F;
     }
     main_15();
     sleep(10, 5);
-    set(FG_STATE, 7, 0);
+    set(FG_STOP, 7, 0);
 }
 
 proc main_0D
 {
-    work_set(WK_OBJECT, 1);
-    member_set(12, 160, 246);
+    work_set(WK_OBJECT, ID_OBJ_1);
+    member_set(M_Y_POS, -2400);
     main_10();
 }
 
 proc main_0E
 {
     work_set(WK_PLAYER, 0);
-    member_copy(V_TEMP, 0);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
+    member_set2(M_POINTER, V_TEMP);
     pos_set(0, -11738, -2400, -26035);
-    member_set(15, 75, 11);
+    member_set(M_Y_DIR, 2891);
     main_10();
-    if (ck(FG_GENERAL_2, 1, 1))
+    if (ck(FG_ROOM, 1, 1))
     {
-        member_copy(V_TEMP, 0);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_SUB, V_TEMP, 1024);
-        member_set2(0, V_TEMP);
+        member_set2(M_POINTER, V_TEMP);
     }
 }
 
 proc main_0F
 {
     work_set(WK_SPLAYER, 0);
-    member_copy(V_TEMP, 0);
+    member_copy(V_TEMP, M_POINTER);
     calc(0, OP_OR, V_TEMP, 1024);
-    member_set2(0, V_TEMP);
+    member_set2(M_POINTER, V_TEMP);
     pos_set(0, -12501, -2400, -26478);
-    member_set(15, 107, 12);
+    member_set(M_Y_DIR, 3179);
     main_10();
-    if (ck(FG_GENERAL_2, 1, 1))
+    if (ck(FG_ROOM, 1, 1))
     {
-        member_copy(V_TEMP, 0);
+        member_copy(V_TEMP, M_POINTER);
         calc(0, OP_SUB, V_TEMP, 1024);
-        member_set2(0, V_TEMP);
+        member_set2(M_POINTER, V_TEMP);
     }
 }
 
@@ -314,28 +314,28 @@ proc main_10
         add_speed();
         evt_next();
     }
-    member_copy(V_TEMP, 12);
+    member_copy(V_TEMP, M_Y_POS);
     calc(0, OP_SUB, V_TEMP, 10);
-    member_set2(12, V_TEMP);
+    member_set2(M_Y_POS, V_TEMP);
     sleep(10, 5);
-    member_copy(V_TEMP, 12);
+    member_copy(V_TEMP, M_Y_POS);
     calc(0, OP_ADD, V_TEMP, 35);
-    member_set2(12, V_TEMP);
-    set(FG_GENERAL_2, 1, 1);
+    member_set2(M_Y_POS, V_TEMP);
+    set(FG_ROOM, 1, 1);
 }
 
 proc main_11
 {
     main_15();
     cut_chg(4);
-    set(FG_STATE, 7, 1);
+    set(FG_STOP, 7, 1);
     sleep(10, 10);
-    set(FG_GAME, 27, 1);
-    work_set(WK_ENEMY, 0);
-    member_copy(V_TEMP, 11);
+    set(FG_STATUS, 27, 1);
+    work_set(WK_ENEMY, ID_EM_0);
+    member_copy(V_TEMP, M_X_POS);
     calc(0, OP_ADD, V_TEMP, 500);
     copy(V_04, V_TEMP);
-    member_copy(V_TEMP, 13);
+    member_copy(V_TEMP, M_Z_POS);
     calc(0, OP_SUB, V_TEMP, 1000);
     copy(V_05, V_TEMP);
     plc_motion(0, 17, 20);
@@ -360,7 +360,7 @@ proc main_11
     evt_next();
     xa_on(0, 5);
     sleep(10, 2);
-    message_on(0, 2, 0, 0, 0);
+    message_on(0, ID_MSG_2, 0, 0, 0);
     work_set(WK_PLAYER, 0);
     plc_motion(1, 6, 0);
     sleep(10, 30);
@@ -376,8 +376,8 @@ proc main_11
     wsleeping();
     xa_on(0, 6);
     sleep(10, 2);
-    message_on(0, 3, 0, 0, 0);
-    work_set(WK_ENEMY, 0);
+    message_on(0, ID_MSG_3, 0, 0, 0);
+    work_set(WK_ENEMY, ID_EM_0);
     plc_neck(2, 0, -512, 512, 35, 20);
     sleep(10, 40);
     plc_neck(2, 0, 512, 512, 35, 30);
@@ -399,7 +399,7 @@ proc main_11
     wsleeping();
     xa_on(0, 7);
     sleep(10, 2);
-    message_on(0, 4, 0, 0, 0);
+    message_on(0, ID_MSG_4, 0, 0, 0);
     plc_motion(0, 16, 0);
     sleep(10, 30);
     plc_stop();
@@ -424,7 +424,7 @@ proc main_11
     wsleeping();
     xa_on(0, 8);
     sleep(10, 2);
-    message_on(0, 5, 0, 0, 0);
+    message_on(0, ID_MSG_5, 0, 0, 0);
     plc_motion(0, 16, 16);
     sleep(10, 40);
     plc_neck(3, 1, 0, 0, 32, 32);
@@ -432,7 +432,7 @@ proc main_11
     wsleeping();
     xa_on(0, 9);
     sleep(10, 2);
-    message_on(0, 6, 0, 0, 0);
+    message_on(0, ID_MSG_6, 0, 0, 0);
     work_set(WK_PLAYER, 0);
     work_copy(5, 10, 1);
     work_copy(4, 2, 1);
@@ -445,8 +445,8 @@ proc main_11
     wsleeping();
     xa_on(0, 10);
     sleep(10, 2);
-    message_on(0, 7, 0, 0, 0);
-    work_set(WK_ENEMY, 0);
+    message_on(0, ID_MSG_7, 0, 0, 0);
+    work_set(WK_ENEMY, ID_EM_0);
     plc_neck(2, 0, -512, 0, 40, 40);
     sleep(10, 8);
     plc_neck(2, 0, 512, 0, 40, 40);
@@ -463,7 +463,7 @@ proc main_11
     wsleeping();
     work_set(WK_PLAYER, 0);
     plc_neck(3, 1, 0, 0, 50, 80);
-    work_set(WK_ENEMY, 0);
+    work_set(WK_ENEMY, ID_EM_0);
     plc_motion(0, 17, 20);
     plc_neck(2, 0, 0, 128, 20, 20);
     sleep(10, 40);
@@ -473,22 +473,22 @@ proc main_11
     plc_motion(1, 6, 128);
     plc_neck(6, 0, 0, 0, 80, 80);
     sleep(10, 20);
-    set(FG_GENERAL_1, 68, 1);
+    set(FG_COMMON, 68, 1);
     work_set(WK_PLAYER, 0);
     plc_ret();
-    set(FG_STATE, 7, 0);
-    set(FG_GAME, 27, 0);
+    set(FG_STOP, 7, 0);
+    set(FG_STATUS, 27, 0);
 }
 
 proc main_12
 {
-    set(FG_STATE, 7, 1);
-    set(FG_GAME, 27, 1);
+    set(FG_STOP, 7, 1);
+    set(FG_STATUS, 27, 1);
     sleep(10, 10);
     xa_on(0, 10);
     sleep(10, 2);
-    message_on(0, 7, 0, 0, 0);
-    work_set(WK_ENEMY, 0);
+    message_on(0, ID_MSG_7, 0, 0, 0);
+    work_set(WK_ENEMY, ID_EM_0);
     plc_neck(2, 0, -256, 0, 120, 80);
     sleep(10, 15);
     plc_neck(2, 0, 256, 0, 40, 40);
@@ -499,21 +499,21 @@ proc main_12
     sleep(10, 20);
     wsleep();
     wsleeping();
-    set(FG_STATE, 7, 0);
-    set(FG_GAME, 27, 0);
+    set(FG_STOP, 7, 0);
+    set(FG_STATUS, 27, 0);
 }
 
 proc main_13
 {
-    if (ck(FG_GAME, 3, 1))
+    if (ck(FG_STATUS, 3, 1))
     {
-        sce_em_set(0, 255, ENEMY_SHERRY_PENDANT, 0, 4, 0, 32, 0, 255, -26106, 0, -9647, 116, 0, 0);
-        if (ck(FG_GAME, F_SCENARIO, 1))
+        sce_em_set(0, ID_EM_255, ENEMY_SHERRY_PENDANT, 0, AI_04, 0, SBK_32, 0, 255, -26106, 0, -9647, 116, 0, 0);
+        if (ck(FG_STATUS, F_SCENARIO, 1))
         {
             work_set(WK_SPLAYER, 0);
-            member_copy(V_TEMP, 7);
+            member_copy(V_TEMP, M_TYPE);
             calc(0, OP_OR, V_TEMP, 2048);
-            member_set2(7, V_TEMP);
+            member_set2(M_TYPE, V_TEMP);
         }
     }
 }
@@ -523,7 +523,7 @@ proc main_14
     do
     {
         evt_next();
-    } while (ck(FG_GENERAL_2, 35, 0));
+    } while (ck(FG_ROOM, 35, 0));
 }
 
 proc main_15
@@ -531,6 +531,6 @@ proc main_15
     do
     {
         evt_next();
-    } while (ck(FG_GENERAL_2, 1, 0));
-    set(FG_GENERAL_2, 1, 0);
+    } while (ck(FG_ROOM, 1, 0));
+    set(FG_ROOM, 1, 0);
 }

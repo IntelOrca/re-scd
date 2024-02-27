@@ -2,36 +2,36 @@
 
 .init
 .proc init
-127A:   3B0001310000109973CCFC0826070A9E000094E6B80D010F0600180000000000                        door_aot_se             0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26352, -13197, 2300, 1830, -25078, 0, -6508, 3512, 1, 15, 6, 0, 24, 0, 0, 0, UNLOCKED, 0
+127A:   3B0001310000109973CCFC0826070A9E000094E6B80D010F0600180000000000                        door_aot_se             ID_AOT_0, SCE_DOOR, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26352, -13197, 2300, 1830, -25078, 0, -6508, 3512, 1, 15, 6, 0, 24, 0, 0, 0, UNLOCKED, 0
 129A:   0100                                                                                    evt_end                 0
 
 .main
 .proc main
 12A8:   1803                                                                                    gosub                   main_03
 12AA:   06004400                                                                                if                      0, off_12F2
-12AE:   21010100                                                                                ck                      FG_GAME, F_SCENARIO, 0
-12B2:   2D0100000000000000000A001000FC99F8F845A20000C0060000000000000000000000000000            obj_model_set           1, 0, 0, 0, 0, 0, 0, 10, 16, -26116, -1800, -23995, 0, 1728, 0, 0, 0, 0, 0, 0, 0, 0, 0
-12D8:   4E0202310000A497C19EE8036C070500080055000100                                            item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26716, -24895, 1000, 1900, ITEM_MAGNUM, 8, 85, 1, 0
+12AE:   21010100                                                                                ck                      FG_STATUS, F_SCENARIO, 0
+12B2:   2D0100000000000000000A001000FC99F8F845A20000C0060000000000000000000000000000            obj_model_set           ID_OBJ_1, 0, 0, 0, 0, 0, 0, 10, 16, -26116, -1800, -23995, 0, 1728, 0, 0, 0, 0, 0, 0, 0, 0, 0
+12D8:   4E0202310000A497C19EE8036C070500080055000100                                            item_aot_set            ID_AOT_2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26716, -24895, 1000, 1900, ITEM_MAGNUM, 8, 85, ID_OBJ_1, IF_DEFAULT
 12EE:   07004200                                                                                else                    0, off_1330
 
 off_12F2:
-12F2:   2D0200000000000000000A001000FC99F8F845A20000C0060000000000000000000000000000            obj_model_set           2, 0, 0, 0, 0, 0, 0, 10, 16, -26116, -1800, -23995, 0, 1728, 0, 0, 0, 0, 0, 0, 0, 0, 0
-1318:   4E0202310000A497C19EE8036C0716000800550002A0                                            item_aot_set            2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26716, -24895, 1000, 1900, ITEM_MAGNUMAMMO, 8, 85, 2, 160
+12F2:   2D0200000000000000000A001000FC99F8F845A20000C0060000000000000000000000000000            obj_model_set           ID_OBJ_2, 0, 0, 0, 0, 0, 0, 10, 16, -26116, -1800, -23995, 0, 1728, 0, 0, 0, 0, 0, 0, 0, 0, 0
+1318:   4E0202310000A497C19EE8036C0716000800550002A0                                            item_aot_set            ID_AOT_2, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26716, -24895, 1000, 1900, ITEM_MAGNUMAMMO, 8, 85, ID_OBJ_2, IF_GLINT_GRAY
 132E:   00                                                                                      nop
 132F:   00                                                                                      nop
 
 off_1330:
-1330:   4E0302310000609AFDAD78057805150007005700FF00                                            item_aot_set            3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26016, -20995, 1400, 1400, ITEM_SHOTGUNAMMO, 7, 87, 255, 0
+1330:   4E0302310000609AFDAD78057805150007005700FF00                                            item_aot_set            ID_AOT_3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -26016, -20995, 1400, 1400, ITEM_SHOTGUNAMMO, 7, 87, ID_OBJ_255, IF_DEFAULT
 1346:   06001000                                                                                if                      0, off_135A
 134A:   21085700                                                                                ck                      FG_ITEM, 87, 0
-134E:   46030531FF0018020000                                                                    aot_reset               3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_02, 0, 0
+134E:   46030531FF0018020000                                                                    aot_reset               ID_AOT_3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_02, 0, 0
 1358:   08                                                                                      endif
 1359:   00                                                                                      nop
 
 off_135A:
 135A:   06001C00                                                                                if                      0, off_137A
-135E:   21001901                                                                                ck                      FG_0, F_DIFFICULT, 1
-1362:   4E04023100006BA1D7B9E80340061E000300DB00FF00                                            item_aot_set            4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24213, -17961, 1000, 1600, ITEM_INKRIBBON, 3, 219, 255, 0
+135E:   21001901                                                                                ck                      FG_SYSTEM, F_DIFFICULT, 1
+1362:   4E04023100006BA1D7B9E80340061E000300DB00FF00                                            item_aot_set            ID_AOT_4, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -24213, -17961, 1000, 1600, ITEM_INKRIBBON, 3, 219, ID_OBJ_255, IF_DEFAULT
 1378:   08                                                                                      endif
 1379:   00                                                                                      nop
 
@@ -43,14 +43,14 @@ off_137A:
 137E:   0100                                                                                    evt_end                 0
 
 .proc main_02
-1380:   46030231150007005700                                                                    aot_reset               3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 21, 0, 7, 0, 87, 0
+1380:   46030231150007005700                                                                    aot_reset               ID_AOT_3, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 21, 0, 7, 0, 87, 0
 138A:   360228010100000000000000                                                                se_on                   2, 296, 1, 0, 0, 0
-1396:   4703                                                                                    aot_on                  3
+1396:   4703                                                                                    aot_on                  ID_AOT_3
 1398:   02                                                                                      evt_next
 1399:   00                                                                                      nop
 139A:   06001000                                                                                if                      0, off_13AE
 139E:   21085700                                                                                ck                      FG_ITEM, 87, 0
-13A2:   46030531FF0018020000                                                                    aot_reset               3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_02, 0, 0
+13A2:   46030531FF0018020000                                                                    aot_reset               ID_AOT_3, SCE_EVENT, SAT_PL | SAT_MANUAL | SAT_FRONT, 255, 0, I_GOSUB, main_02, 0, 0
 13AC:   08                                                                                      endif
 13AD:   00                                                                                      nop
 
@@ -58,37 +58,37 @@ off_13AE:
 13AE:   0100                                                                                    evt_end                 0
 
 .proc main_03
-13B0:   440001100240000000FF97A300000DA2470F00000000                                            sce_em_set              0, 1, ENEMY_ZOMBIE_COP, 2, 64, 0, 0, 0, 255, -23657, 0, -24051, 3911, 0, 0
-13C6:   2E0301                                                                                  work_set                WK_ENEMY, 1
+13B0:   440001100240000000FF97A300000DA2470F00000000                                            sce_em_set              0, ID_EM_1, ENEMY_ZOMBIE_COP, 2, AI_40, 0, SBK_0, 0, 255, -23657, 0, -24051, 3911, 0, 0
+13C6:   2E0301                                                                                  work_set                WK_ENEMY, ID_EM_1
 13C9:   00                                                                                      nop
-13CA:   3D1000                                                                                  member_copy             V_TEMP, 0
+13CA:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 13CD:   00                                                                                      nop
 13CE:   260005100400                                                                            calc                    0, OP_OR, V_TEMP, 4
-13D4:   350010                                                                                  member_set2             0, V_TEMP
+13D4:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 13D7:   00                                                                                      nop
-13D8:   3D1000                                                                                  member_copy             V_TEMP, 0
+13D8:   3D1000                                                                                  member_copy             V_TEMP, M_POINTER
 13DB:   00                                                                                      nop
 13DC:   260005100200                                                                            calc                    0, OP_OR, V_TEMP, 2
-13E2:   350010                                                                                  member_set2             0, V_TEMP
+13E2:   350010                                                                                  member_set2             M_POINTER, V_TEMP
 13E5:   00                                                                                      nop
-13E6:   2D0000000000000000000A001000A69FC8FB059C00003F030000000000000000000000000000            obj_model_set           0, 0, 0, 0, 0, 0, 0, 10, 16, -24666, -1080, -25595, 0, 831, 0, 0, 0, 0, 0, 0, 0, 0, 0
-140C:   4E0102310000809DD99A1405B004770001005B000000                                            item_aot_set            1, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25216, -25895, 1300, 1200, ITEM_77, 1, 91, 0, 0
+13E6:   2D0000000000000000000A001000A69FC8FB059C00003F030000000000000000000000000000            obj_model_set           ID_OBJ_0, 0, 0, 0, 0, 0, 0, 10, 16, -24666, -1080, -25595, 0, 831, 0, 0, 0, 0, 0, 0, 0, 0, 0
+140C:   4E0102310000809DD99A1405B004770001005B000000                                            item_aot_set            ID_AOT_1, SCE_ITEM, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -25216, -25895, 1300, 1200, ITEM_WATCHMANDIARY, 1, 91, ID_OBJ_0, IF_DEFAULT
 1422:   0100                                                                                    evt_end                 0
 
 .proc main_04
 1424:   671904310000F7AB32CB17AF1ACF83B65ECCFFB27EC50000000000FF                                aot_set_4p              25, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -21513, -13518, -20713, -12518, -18813, -13218, -19713, -14978, 0, 0, 0, 0, 0, 255
 1440:   671C043100005FA3909FDFA0E8A13DA7AEA445A974A20200000000FF                                aot_set_4p              28, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -23713, -24688, -24353, -24088, -22723, -23378, -22203, -23948, 2, 0, 0, 0, 0, 255
-145C:   2C1D04310000179604B83C0F540B0300000000FF                                                aot_set                 29, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27113, -18428, 3900, 2900, 3, 0, 0, 0, 0, 255
-1470:   2C1E04310000179636AE9C183C050400000000FF                                                aot_set                 30, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27113, -20938, 6300, 1340, 4, 0, 0, 0, 0, 255
+145C:   2C1D04310000179604B83C0F540B0300000000FF                                                aot_set                 ID_AOT_29, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27113, -18428, 3900, 2900, ID_MSG_3, 0, 0, 0, 0, 255
+1470:   2C1E04310000179636AE9C183C050400000000FF                                                aot_set                 ID_AOT_30, SCE_MESSAGE, SAT_PL | SAT_MANUAL | SAT_FRONT, 0, 0, -27113, -20938, 6300, 1340, ID_MSG_4, 0, 0, 0, 0, 255
 1484:   0100                                                                                    evt_end                 0
 
 .proc main_05
-1486:   2E0300                                                                                  work_set                WK_ENEMY, 0
+1486:   2E0300                                                                                  work_set                WK_ENEMY, ID_EM_0
 1489:   00                                                                                      nop
-148A:   3D1007                                                                                  member_copy             V_TEMP, 7
+148A:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 148D:   00                                                                                      nop
 148E:   260005100080                                                                            calc                    0, OP_OR, V_TEMP, -32768
-1494:   350710                                                                                  member_set2             7, V_TEMP
+1494:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 1497:   00                                                                                      nop
 1498:   0F060A00                                                                                while                   6, off_14A6
 149C:   23001A050300                                                                            cmp                     0, V_CUT, CMP_NE, 3
@@ -98,10 +98,11 @@ off_13AE:
 
 off_14A6:
 14A6:   320058AF000038BE                                                                        pos_set                 0, -20648, 0, -16840
-14AE:   3D1007                                                                                  member_copy             V_TEMP, 7
+14AE:   3D1007                                                                                  member_copy             V_TEMP, M_TYPE
 14B1:   00                                                                                      nop
 14B2:   26000610FF7F                                                                            calc                    0, OP_AND, V_TEMP, 32767
-14B8:   350710                                                                                  member_set2             7, V_TEMP
+14B8:   350710                                                                                  member_set2             M_TYPE, V_TEMP
 14BB:   00                                                                                      nop
 14BC:   360302010300000000000000                                                                se_on                   3, 258, 3, 0, 0, 0
 14C8:   0100                                                                                    evt_end                 0
+14CA:   0020                                                                                    db                      0x00, 0x20
